@@ -7,9 +7,9 @@ import SoldierSearchingCard from '@/components/search/SoldierSearchingCard'
 import React from 'react'
 
 export default function page() {
-	return (
-		<div>
-			<p>cementery</p>
-		</div>
-	)
+  return (
+    <div>
+      <p>cementery</p>
+    </div>
+  )
 }

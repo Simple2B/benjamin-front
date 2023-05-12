@@ -6,11 +6,11 @@ type IIconButtonProps = {
 }
 
 const IconButton = ({iconName, className}: IIconButtonProps) => {
-	return (
-		<div className={`${className} inline-flex items-center justify-center`}>
-			<img src={`/images/icons/${iconName}.svg`}  />
-		</div>
-	)
+  return (
+    <div className={`${className} inline-flex items-center justify-center`}>
+      <img src={`/images/icons/${iconName}.svg`}  />
+    </div>
+  )
 }
 
 export default IconButton;
