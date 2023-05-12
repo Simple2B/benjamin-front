@@ -7,6 +7,27 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        turquoise: {
+          50: '#A6DDE9',   
+          100: '#2693AB'       
+        },
+        grey: {
+          10: '#FAFAFB',
+          20: '#808EAB',
+          30: '#B6B9C1'
+        },
+        indigo:{     
+          50: '#1A2850',
+          100: '#0C1831'
+        },
+        blue: {
+          DEFAULT: '#2693AB',
+        },
+        width:{
+          '350': '21.5rem'
+        }
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
