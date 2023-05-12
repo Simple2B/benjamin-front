@@ -7,9 +7,9 @@ type ISoldierProfileProps = {
 
 const SoldierProfile = ({photo, name}: ISoldierProfileProps) => {
 	return (
-		<div className='w-[140px]'>
+		<div className='w-36'>
 			<img 
-				className='w-[140px] h-[132px] rounded-lg bg-grey-30' 
+				className='w-36 h-32 rounded-lg bg-grey-30' 
 				src={photo}
 				alt="Soldier" 
 			/>

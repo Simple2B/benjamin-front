@@ -55,7 +55,7 @@ const AudioPlayer = ({audioSourse}: IAudioPlayerProps) => {
 		return `${formattedMinutes}:${formattedSeconds}`;
 	};  
 	return (
-		<div className="flex items-center gap-1 justify-evenly p-2 px-1.5 w-[366px]">
+		<div className="flex items-center gap-1 justify-evenly p-2 px-1.5 w-96">
 			<div onClick={togglePlay}>
 				{isPlaying ? <IconPause /> :<IconPlay />}       
 			</div>            

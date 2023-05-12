@@ -10,7 +10,7 @@ type ICementryInfoProps = {
 
 const AdditionalInfo = (props: ICementryInfoProps) => {  
 	return (
-		<div className='w-[366px] bg-grey-10 p-4 rounded-lg'>
+		<div className='w-96 bg-grey-10 p-4 rounded-lg'>
 			<h2 className='font-semibold'>Additional info</h2>
 			{Object.entries(props).map(([key, value])=>{
 				return(
