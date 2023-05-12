@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import IconPlay from './icons/iconPlay';
-import IconPause from './icons/iconPause';
+import IconButton from './IconButton';
+import { ICONS_NAME } from './IconButton.constants';
 
 type IAudioPlayerProps = {
 	audioSourse: string
@@ -57,7 +57,10 @@ const AudioPlayer = ({audioSourse}: IAudioPlayerProps) => {
 	return (
 		<div className="flex items-center gap-1 justify-evenly p-2 px-1.5 w-96">
 			<div onClick={togglePlay}>
-				{isPlaying ? <IconPause /> :<IconPlay />}       
+				{isPlaying ? 
+					<IconButton iconName={ICONS_NAME.pause} className={'h-6 w-6'}/> 
+					: 
+					<IconButton iconName={ICONS_NAME.play} className={'h-6 w-6'}/>}       
 			</div>            
 			<p className='text-xs text-grey-20'>{formatTime(currentTime)}</p>
 			<input
@@ -77,7 +80,7 @@ const AudioPlayer = ({audioSourse}: IAudioPlayerProps) => {
 				src={audioSourse}
 				onTimeUpdate={handleTimeUpdate}
 			/>
-			<p className='text-xs text-grey-20'>{formatTime(duration) ?? '0:00'}</p>
+			<p className='text-xs text-grey-20'>{formatTime(duration)}</p>
 		</div>
 	);
 };
