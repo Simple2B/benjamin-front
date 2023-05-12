@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 type ISoldierSearchingCard = {
 	name: string,
@@ -16,7 +16,7 @@ const SoldierSearchingCard = ({name, number, place}: ISoldierSearchingCard) => {
         <p>{place}</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SoldierSearchingCard
+export default SoldierSearchingCard;

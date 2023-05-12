@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 type IIconButtonProps = {
   iconName: string,
@@ -10,7 +10,7 @@ const IconButton = ({iconName, className}: IIconButtonProps) => {
     <div className={`${className} inline-flex items-center justify-center`}>
       <img src={`/images/icons/${iconName}.svg`}  />
     </div>
-  )
-}
+  );
+};
 
 export default IconButton;

@@ -17,15 +17,15 @@ const AudioPlayer = ({audioSourse}: IAudioPlayerProps) => {
 
   const togglePlay = () => {
     const audio = audioRef.current;
-    if(!audio) return
-    {isPlaying ? audio.pause() : audio.play()}
+    if(!audio) return;
+    {isPlaying ? audio.pause() : audio.play();}
     setIsPlaying(!isPlaying);
     
   };
 
   const handleTimeUpdate = () => {
     const audio = audioRef.current;
-    if (!audio) return
+    if (!audio) return;
 
     setCurrentTime(audio.currentTime);
 
@@ -36,11 +36,11 @@ const AudioPlayer = ({audioSourse}: IAudioPlayerProps) => {
     if (audio) {
       setDuration(audio.duration);
     }
-  },[])
+  },[]);
 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     const audio = audioRef.current;
-    if(!audio) return
+    if(!audio) return;
     const seekTime = parseFloat(e.target.value);
     audio.currentTime = seekTime;
     setCurrentTime(seekTime);			
@@ -85,4 +85,4 @@ const AudioPlayer = ({audioSourse}: IAudioPlayerProps) => {
   );
 };
 
-export default AudioPlayer
+export default AudioPlayer;

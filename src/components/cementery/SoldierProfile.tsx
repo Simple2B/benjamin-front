@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 type ISoldierProfileProps = {
 	photo: string,
@@ -15,7 +15,7 @@ const SoldierProfile = ({photo, name}: ISoldierProfileProps) => {
       />
       <p className='text-base text-center'>{name}</p>
     </div>
-  )
-}
+  );
+};
 
-export default SoldierProfile
+export default SoldierProfile;

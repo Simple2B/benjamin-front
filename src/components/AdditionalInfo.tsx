@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 type ICementryInfoProps = {
     superintendent: string;
@@ -18,10 +18,10 @@ const AdditionalInfo = (props: ICementryInfoProps) => {
             <p className='text-sm  text-grey-20'>{key}</p>
             <p className='text-base  text-indigo-1000 font-medium'>{value}</p>
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default AdditionalInfo
+export default AdditionalInfo;

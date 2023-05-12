@@ -1,6 +1,6 @@
-import React from 'react'
-import IconButton from '../IconButton'
-import { ICONS_NAME } from '../IconButton.constants'
+import React from 'react';
+import IconButton from '../IconButton';
+import { ICONS_NAME } from '../IconButton.constants';
 
 type IButtonContactCementeryProps = {
 	icon: string,
@@ -13,7 +13,7 @@ const ButtonContactCementery = ({icon, description}: IButtonContactCementeryProp
       <IconButton iconName={ICONS_NAME[icon]} className={'h-3 w-3'}/>
       <p className='text-sm'>{description}</p>
     </div>
-  )
-}
+  );
+};
 
-export default ButtonContactCementery
+export default ButtonContactCementery;
