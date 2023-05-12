@@ -1,5 +1,5 @@
 import React from 'react'
-import IconCall from './icons/iconCall'
+import IconCall from '../icons/iconCall'
 
 type Props = {}
 
