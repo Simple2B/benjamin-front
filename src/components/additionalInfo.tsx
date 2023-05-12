@@ -11,27 +11,27 @@ interface CementryInfo {
 }
 
 const AdditionalInfo = (props: Props) => {  
-    const cementryInfo: CementryInfo = {
-        Superintendent: 'John McJohn',
-        War: 'World War II',
-        'Number of soldiers buried': '12,000',
-        'Number of Jewish soldiers buried': 250,
-        'Listed as Missing Soldiers': 500,
-      };
+	const cementryInfo: CementryInfo = {
+		Superintendent: 'John McJohn',
+		War: 'World War II',
+		'Number of soldiers buried': '12,000',
+		'Number of Jewish soldiers buried': 250,
+		'Listed as Missing Soldiers': 500,
+	};
       
-  return (
-    <div className='w-[366px] bg-grey-10 p-4 rounded-lg'>
-        <h2 className='font-semibold'>Additional info</h2>
-        {Object.entries(cementryInfo).map(([key, value])=>{
-           return(
-            <div className='my-2'>
-                <p className='text-sm  text-grey-20'>{key}</p>
-                <p className='text-base  text-indigo-1000 font-medium'>{value}</p>
-            </div>
-           )
-        })}
-    </div>
-  )
+	return (
+		<div className='w-[366px] bg-grey-10 p-4 rounded-lg'>
+			<h2 className='font-semibold'>Additional info</h2>
+			{Object.entries(cementryInfo).map(([key, value])=>{
+				return(
+					<div className='my-2' key={key}>
+						<p className='text-sm  text-grey-20'>{key}</p>
+						<p className='text-base  text-indigo-1000 font-medium'>{value}</p>
+					</div>
+				)
+			})}
+		</div>
+	)
 }
 
 export default AdditionalInfo

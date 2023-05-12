@@ -3,8 +3,8 @@ import React from 'react'
 type Props = {}
 
 export default function page({}: Props) {
-  return (
-    <div>stone</div>
-  )
+	return (
+		<div>stone</div>
+	)
 }
 
