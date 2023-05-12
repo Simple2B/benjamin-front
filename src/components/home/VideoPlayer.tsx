@@ -1,8 +1,6 @@
 import React from 'react';
 
-type Props = {}
-
-const VideoPlayer = (props: Props) => {
+const VideoPlayer = () => {
 	return (
 		<div>
 			<video autoPlay muted id="myVideo">

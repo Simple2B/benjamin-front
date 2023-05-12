@@ -4,9 +4,11 @@ import { useState, useEffect } from 'react';
 import IconPlay from './icons/iconPlay';
 import IconPause from './icons/iconPause';
 
-type Props = {}
+type IAudioPlayerProps = {
+	audioSourse: string
+}
 
-const AudioPlayer = (props: Props) => {
+const AudioPlayer = ({audioSourse}: IAudioPlayerProps) => {
 	const audioRef = React.useRef<HTMLAudioElement>(null);
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
 	const [currentTime, setCurrentTime] = useState<number>(0);
@@ -40,8 +42,9 @@ const AudioPlayer = (props: Props) => {
 		if (audio) {
 			const seekTime = parseFloat(e.target.value);
 			audio.currentTime = seekTime;
-			setCurrentTime(seekTime);
+			setCurrentTime(seekTime);			
 		}
+		
 	};
 
 	const formatTime = (time: number): string => {
@@ -71,7 +74,7 @@ const AudioPlayer = (props: Props) => {
 			/>
 			<audio
 				ref={audioRef}
-				src='https://www.bensound.com/bensound-music/bensound-tenderness.mp3'
+				src={audioSourse}
 				onTimeUpdate={handleTimeUpdate}
 			/>
 			<p className='text-xs text-grey-20'>{formatTime(duration) ?? '0:00'}</p>
