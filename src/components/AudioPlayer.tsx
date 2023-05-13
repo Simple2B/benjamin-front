@@ -3,6 +3,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import IconButton from './IconButton';
 import { ICONS_NAME } from './IconButton.constants';
+import { formatTime } from './AudioPlayer.utils';
 
 type IAudioPlayerProps = {
 	audioSourse: string
@@ -47,13 +48,7 @@ const AudioPlayer = ({audioSourse}: IAudioPlayerProps) => {
 		
   };
 
-  const formatTime = (time: number): string => {
-    const minutes: number = Math.floor(time / 60);
-    const seconds: number = Math.floor(time % 60);
-    const formattedMinutes: string = minutes < 10 ? `0${minutes}` : String(minutes);
-    const formattedSeconds: string = seconds < 10 ? `0${seconds}` : String(seconds);
-    return `${formattedMinutes}:${formattedSeconds}`;
-  };  
+
   return (
     <div className="flex items-center gap-1 justify-evenly p-2 px-1.5 w-96">
       <div onClick={togglePlay}>
