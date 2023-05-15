@@ -12,7 +12,7 @@ export default function page() {
       <VideoPlayer srcVideo='/video/greetingVideo.mp4' />    
       <ProjectInfo />
       <Link href={PATH.location}>
-        <NavigationButton icon={ICONS_NAME.arrowRigth} action='Done' />
+        <NavigationButton icon={ICONS_NAME.arrowRigth} action='Done'  className='w-28 bg-turquoise-100' />
       </Link>
     </div>
   );
