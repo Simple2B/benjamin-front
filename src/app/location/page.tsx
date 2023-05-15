@@ -6,7 +6,7 @@ import { PATH } from '@/components/constants/path.constants';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
-export default function page() {
+export default function Page() {
   const [selectedCementery, setSelectedCementery] = useState<string>('');
 
   return (

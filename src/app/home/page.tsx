@@ -6,7 +6,7 @@ import ProjectInfo from '@/components/projectInfo/ProjectInfo';
 import Link from 'next/link';
 import React from 'react';
 
-export default function page() {
+export default function Page() {
   return (
     <div className='flex flex-col items-end'>
       <VideoPlayer srcVideo='/video/greetingVideo.mp4' />    
