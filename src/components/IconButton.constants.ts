@@ -1,4 +1,4 @@
-export const ICONS_NAME: Record<string, string> = {
+export const ICONS_NAME = {
   telephone: 'telephone',
   website: 'website',
   calendar: 'calendar',
