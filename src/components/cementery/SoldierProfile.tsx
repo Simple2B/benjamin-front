@@ -1,16 +1,16 @@
 import React from 'react';
 
 type ISoldierProfileProps = {
-	photo: string,
+	photoUrl: string,
 	name: string,
 }
 
-const SoldierProfile = ({photo, name}: ISoldierProfileProps) => {
+const SoldierProfile = ({photoUrl, name}: ISoldierProfileProps) => {
   return (
     <div className='w-36'>
       <img 
         className='w-36 h-32 rounded-lg bg-grey-30' 
-        src={photo}
+        src={photoUrl}
         alt="Soldier" 
       />
       <p className='text-base text-center'>{name}</p>

@@ -1,11 +1,16 @@
 import React from 'react';
 
-const VideoPlayer = () => {
+type IVideoPlayeProps = {
+  srcVideo: string;
+}
+
+
+const VideoPlayer = ({srcVideo}: IVideoPlayeProps) => {
   return (
     <div>
-      <video autoPlay muted id="myVideo">
+      <video autoPlay muted>
         <source
-          src='/video/greetingVideo.mp4'
+          src={srcVideo}
           type="video/mp4"
         />
       </video>
