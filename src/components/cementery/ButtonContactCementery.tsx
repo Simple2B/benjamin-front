@@ -1,6 +1,6 @@
 import React from 'react';
 import IconButton from '../IconButton';
-import { ICONS_NAME } from '../IconButton.constants';
+import { ICONS_NAME } from '../constants/iconName';
 
 type IButtonContactCementeryProps = {
 	icon: string,

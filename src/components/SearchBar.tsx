@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import IconButton from './IconButton';
-import { ICONS_NAME } from './IconButton.constants';
+import { ICONS_NAME } from './constants/iconName';
 
 const SearchBar = () => {
   const [userInput, setUserInput] = useState<string>();

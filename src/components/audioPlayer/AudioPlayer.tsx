@@ -1,9 +1,10 @@
 'use client';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import IconButton from './IconButton';
-import { ICONS_NAME } from './IconButton.constants';
+import IconButton from '../IconButton';
 import { formatTime } from './AudioPlayer.utils';
+import { ICONS_NAME } from '../constants/iconName';
+
 
 type IAudioPlayerProps = {
 	audioSourse: string
