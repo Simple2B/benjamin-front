@@ -9,5 +9,6 @@ export const ICONS_NAME = {
   camera: 'photo-camera-interface-symbol-for-button',
   settings: 'settings',
   arrow: 'arrow',
-  arrowRigth: 'arrow-right'
+  arrowRigth: 'arrow-right',
+  selectingArrow: 'selecting-arrow'
 };
