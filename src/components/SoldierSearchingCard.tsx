@@ -1,5 +1,5 @@
 import React from 'react';
-import { UNICODE_DOT } from '../constants/unicode.constants';
+import { UNICODE_DOT } from './constants/unicode.constants';
 
 type ISoldierSearchingCard = {
 	name: string,
