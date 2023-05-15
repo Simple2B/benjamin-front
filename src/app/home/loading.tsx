@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-type Props = {}
-
-export default function loading({}: Props) {
+export default function loading() {
   return (
     <div>loading</div>
-  )
+  );
 }
