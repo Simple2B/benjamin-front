@@ -7,5 +7,7 @@ export const ICONS_NAME = {
   play: 'play',
   magnifyingGlass:'magnifying-glass',
   camera: 'photo-camera-interface-symbol-for-button',
-  settings: 'settings'
+  settings: 'settings',
+  arrow: 'arrow',
+  arrowRigth: 'arrow-right'
 };
