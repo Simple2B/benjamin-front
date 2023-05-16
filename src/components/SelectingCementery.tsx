@@ -2,7 +2,6 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import { Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
-import * as solid from '@heroicons/react/20/solid';
 import IconButton from './IconButton';
 import { ICONS_NAME } from './constants/iconName';
 
@@ -17,7 +16,7 @@ interface ICemeteryInfo {
 }
 
 const SelectingCemetery = ({setState}: ISelectingCemeterProps) => {
-  const [cementeries, setCementeries] = useState<ICemeteryInfo[]>([]);
+  const [cemeteries, setCemeteries] = useState<ICemeteryInfo[]>([]);
   const [selected, setSelected] = useState<ICemeteryInfo | undefined>();
   
   const handleChange = (e: ICemeteryInfo) => {
@@ -50,7 +49,7 @@ const SelectingCemetery = ({setState}: ISelectingCemeterProps) => {
                 leaveTo="opacity-0"
               >
                 <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                  {cementeries.map((cemetery, cemeteryIdx) => (
+                  {cemeteries.map((cemetery, cemeteryIdx) => (
                     <Listbox.Option
                       key={cemeteryIdx}
                       className={({ active }) =>
