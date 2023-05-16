@@ -19,7 +19,7 @@ export default function Page() {
             <NavigationButton icon={ICONS_NAME.arrowRigth} action='Visit soldiers'  className='bg-turquoise-100' />
           </Link>
         ):(
-          <NavigationButton icon={ICONS_NAME.arrowRigth} action='Visit soldiers'  className='&:disabled bg-indigo-10'/>
+          <NavigationButton icon={ICONS_NAME.arrowRigth} action='Visit soldiers'  className='&:disabled bg-indigo-10 opacity-60'/>
         )
         }
       </div>
