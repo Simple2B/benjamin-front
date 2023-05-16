@@ -10,5 +10,8 @@ export const ICONS_NAME = {
   settings: 'settings',
   arrow: 'arrow',
   arrowRigth: 'arrow-right',
-  selectingArrow: 'selecting-arrow'
+  selectingArrow: 'selecting-arrow',
+  hastag: 'hastag',
+  medal: 'medal',
+  chevron: 'chevron',
 };
