@@ -38,10 +38,10 @@ const SoldierMainInfoCard = ({photoUrL, name, serviceNumber, branchOfService, aw
   ];
 
   return (
-    <div className='w-10/12 flex justify-center gap-4'>
+    <div className='flex justify-center gap-4'>
       <img src={photoUrL} className='w-36 h-32 rounded-lg bg-grey-30' alt="Soldier" />
       <div className='flex flex-col gap-2'>
-        <p className='text-lg'>{name}</p>
+        <p className='text-lg font-semibold'>{name}</p>
         {militaryInfo.map(({heading, text, icon})=>{
           return(
             <SoldierMainInfo heading={heading} text={text} icon={icon} key={heading}/>

@@ -12,7 +12,7 @@ const SoldierMainInfo = ({heading, text , icon}: ISoldierMainInfoProps) => {
   return (
     <div>
       <p className='text-sm text-grey-20'><IconButton iconName={icon} className='h-3 w-3 m-1' />{heading}</p>
-      <p className='ml-4'>{text}</p>
+      <p className='ml-4 font-medium'>{text}</p>
     </div>
   );
 };
