@@ -56,12 +56,12 @@ const AudioPlayer = ({audioSourse}: IAudioPlayerProps) => {
 
 
   return (
-    <div className="flex items-center gap-1 justify-evenly p-2 px-1.5 w-96">
+    <div className="flex items-center gap-1 justify-evenly px-1.5">
       <div onClick={togglePlay}>
         {isPlaying ? 
-          <IconButton iconName={ICONS_NAME.pause} className={'h-6 w-6'}/> 
+          <IconButton iconName={ICONS_NAME.pause} className={'h-4 w-4'}/> 
           : 
-          <IconButton iconName={ICONS_NAME.play} className={'h-6 w-6'}/>}       
+          <IconButton iconName={ICONS_NAME.play} className={'h-4 w-4'}/>}       
       </div>            
       <p className='text-xs text-grey-20'>{formatTime(currentTime)}</p>
       <input
