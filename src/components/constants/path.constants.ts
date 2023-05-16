@@ -1,7 +1,7 @@
 export const PATH = {
   location: '/location',
   search: '/search',
-  cementery: '/cemetery',
+  cemetery: '/cemetery',
   home: '/home',
   message:'/message',
   prayer:'/prayer',

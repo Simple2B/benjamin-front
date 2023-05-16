@@ -2,12 +2,12 @@ import React from 'react';
 import IconButton from './IconButton';
 import { ICONS_NAME } from './constants/iconName';
 
-type IButtonContactCementeryProps = {
+type IButtonContactCemeteryProps = {
 	icon: string,
 	description: string,
 }
 
-const ButtonContactCementery = ({icon, description}: IButtonContactCementeryProps) => {
+const ButtonContactCemetery = ({icon, description}: IButtonContactCemeteryProps) => {
   return (
     <div className='inline-flex items-center gap-x-1 p-1.5 rounded-lg bg-turquoise-50'> 
       <IconButton iconName={ICONS_NAME[icon]} className={'h-3 w-3'}/>
@@ -16,4 +16,4 @@ const ButtonContactCementery = ({icon, description}: IButtonContactCementeryProp
   );
 };
 
-export default ButtonContactCementery;
+export default ButtonContactCemetery;

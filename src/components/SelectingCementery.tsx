@@ -6,32 +6,21 @@ import * as solid from '@heroicons/react/20/solid';
 import IconButton from './IconButton';
 import { ICONS_NAME } from './constants/iconName';
 
-type ISelectingCementerProps = {
+type ISelectingCemeterProps = {
   setState: React.Dispatch<React.SetStateAction<string>>;
 }
 
-interface ICementeryInfo {
+interface ICemeteryInfo {
   id: number;
   name: string;
   value: string
 }
 
-const SelectingCementery = ({setState}: ISelectingCementerProps) => {
-  const [cementeries, setCementeries] = useState<ICementeryInfo[]>([]);
-  const [selected, setSelected] = useState<ICementeryInfo | undefined>();
-  useEffect(() => {
-    fetch('#')
-      .then(res => res.json())
-      .then((res: ICementeryInfo[]) => {
-        const selectingItems: ICementeryInfo[] =[{id: 0, name: 'Select a cemetery', value: ''}, ...res ];
-        setCementeries([...selectingItems]);  
-        setSelected(selectingItems[0]);
-      })
-      .catch(error => console.log(error));
-  }, []);
+const SelectingCemetery = ({setState}: ISelectingCemeterProps) => {
+  const [cementeries, setCementeries] = useState<ICemeteryInfo[]>([]);
+  const [selected, setSelected] = useState<ICemeteryInfo | undefined>();
   
-
-  const handleChange = (e: ICementeryInfo)=>{
+  const handleChange = (e: ICemeteryInfo) => {
     setState(e.value);
     setSelected(e);
   };
@@ -95,4 +84,4 @@ const SelectingCementery = ({setState}: ISelectingCementerProps) => {
   );
 };
 
-export default SelectingCementery;
+export default SelectingCemetery;
