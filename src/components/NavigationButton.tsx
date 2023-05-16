@@ -3,7 +3,7 @@ import IconButton from './IconButton';
 
 type INavigationButtonProps = {
   icon: string,
-	action: string,
+  action: string,
   className: string,
 }
 
