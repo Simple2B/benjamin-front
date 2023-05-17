@@ -16,7 +16,7 @@ export interface IContactInfo {
 
 const CemeteryMainInfo = ({name, location, contactInfo, audioSrc}: ICemeteryMainInfoProps) => {
   return (
-    <div className='mt-52 flex flex-col gap-4'>
+    <div className='mt-44 flex flex-col gap-5'>
       <div>
         <h1 className='text-xl font-semibold'>{name}</h1>
         <p className='text-sm'>{location}</p>
@@ -26,8 +26,10 @@ const CemeteryMainInfo = ({name, location, contactInfo, audioSrc}: ICemeteryMain
           <ButtonContactCemetery icon={icon} description={description} key={description}/>
         )}
       </div>
-      <p className='text-sm text-grey-20'>Audio Tour</p>
-      <AudioPlayer audioSourse={audioSrc} />
+      <div>
+        <p className='text-sm text-grey-20'>Audio Tour</p>
+        <AudioPlayer audioSourse={audioSrc} />
+      </div>      
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 
-type ISoldierProfileProps = {
+export type ISoldierProfileProps = {
 	photoUrl: string,
 	name: string,
 }
