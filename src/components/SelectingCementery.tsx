@@ -6,7 +6,7 @@ import IconButton from './IconButton';
 import { ICONS_NAME } from './constants/iconName';
 
 type ISelectingCemeterProps = {
-  setState: React.Dispatch<React.SetStateAction<string>>;
+  setState: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 interface ICemeteryInfo {

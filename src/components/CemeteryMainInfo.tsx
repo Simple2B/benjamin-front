@@ -16,7 +16,7 @@ export interface IContactInfo {
 
 const CemeteryMainInfo = ({name, location, contactInfo, audioSrc}: ICemeteryMainInfoProps) => {
   return (
-    <div className='mt-44 flex flex-col gap-5'>
+    <div className='mt-56 flex flex-col gap-5'>
       <div>
         <h1 className='text-xl font-semibold'>{name}</h1>
         <p className='text-sm'>{location}</p>
