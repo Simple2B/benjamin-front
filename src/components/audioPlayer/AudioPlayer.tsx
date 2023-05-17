@@ -38,10 +38,17 @@ const AudioPlayer = ({audioSourse}: IAudioPlayerProps) => {
 
   useEffect(()=>{
     const audio = audioRef.current;
-    if (audio) {
-      setDuration(audio.duration);
+    if (!audio) {
+      return;
     }
-  },[]);
+    audio.addEventListener('loadedmetadata', () => {
+      setDuration(audio.duration);
+    });
+
+    return () => {
+      audio.removeEventListener('loadedmetadata', () => {});
+    };
+  }, []);
 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     const audio = audioRef.current;
