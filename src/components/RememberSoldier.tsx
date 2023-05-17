@@ -27,7 +27,7 @@ const RememberSoldier = ({name}: IRememberSoldierProps) => {
         {REMEMBERING.map(({image, text})=>{
           return (
             <div key='text' className='w-1/4'>
-              <img src={image} alt='remember soldier' className='w-24 bg-grey-30'/>
+              <img src={image} alt='remember soldier' className='w-24 bg-grey-30 rounded-lg'/>
               <p className='text-white text-xs'>{text}</p>
             </div>
           );
