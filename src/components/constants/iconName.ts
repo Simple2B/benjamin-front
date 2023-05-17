@@ -14,5 +14,7 @@ export const ICONS_NAME = {
   hastag: 'hastag',
   medal: 'medal',
   chevron: 'chevron',
-  line: 'line'
+  line: 'line',
+  location: 'location-pin',
+  navigation: 'navigation'
 };
