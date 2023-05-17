@@ -16,5 +16,7 @@ export const ICONS_NAME = {
   chevron: 'chevron',
   line: 'line',
   location: 'location-pin',
-  navigation: 'navigation'
+  navigation: 'navigation',
+  web: 'web',
+  envelope: 'envelope',
 };
