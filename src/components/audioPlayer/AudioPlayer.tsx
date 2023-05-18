@@ -6,6 +6,7 @@ import { formatTime } from "./AudioPlayer.utils";
 import { ICONS_NAME } from "../constants/iconName";
 import ReactHowler from "react-howler";
 import Spinner from "../Spinner";
+import { SECOND } from "../constants/constants";
 
 type IAudioPlayerProps = {
   audioSourse: string;
@@ -26,7 +27,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
     intervalRef.current = setInterval(() => {
       setCurrentTime(audioRef.current?.seek() ?? 0);
       console.log("interval called");
-    }, 1000);
+    }, SECOND);
   };
 
   const handleStop = () => {

@@ -1,21 +1,20 @@
-import { IInfo } from '@/app/soldier/page';
-import React from 'react';
+import { IInfo } from "@/app/soldier/page";
+import React from "react";
 
 type ISoldierCardBlockInfoProps = {
-    info:IInfo[],
-}
+  solderInfo: IInfo[];
+};
 
-const SoldierCardBlockInfo = ({info}: ISoldierCardBlockInfoProps) => {
+const SoldierCardBlockInfo = ({ solderInfo }: ISoldierCardBlockInfoProps) => {
   return (
     <>
-      { info.length &&
-          info.map(({criteriaName, criteriaValue}) =>(
-            <div key={criteriaName} className='mt-3'>
-              <p className='text-sm text-grey-20'>{criteriaName}</p>
-              <p className='font-medium'>{criteriaValue}</p>
-            </div>
-          ))
-      }</>
+      {solderInfo.map(({ criteriaName, criteriaValue }) => (
+        <div key={criteriaName} className="mt-3">
+          <p className="text-sm text-grey-20">{criteriaName}</p>
+          <p className="font-medium">{criteriaValue}</p>
+        </div>
+      ))}
+    </>
   );
 };
 
