@@ -5,6 +5,7 @@ import IconButton from "../IconButton";
 import { formatTime } from "./AudioPlayer.utils";
 import { ICONS_NAME } from "../constants/iconName";
 import ReactHowler from "react-howler";
+import Spinner from "../Spinner";
 
 type IAudioPlayerProps = {
   audioSourse: string;
@@ -14,9 +15,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
   const audioRef = useRef<ReactHowler>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
-  // const [duration, setDuration] = useState<number>(0);
   const [isAudioLoaded, setAudioLoaded] = useState<boolean>(false);
-  const [loadedProgressAudio, setLoadedProgressAudio] = useState<number>(0);
   const intervalRef = useRef<NodeJS.Timer>(null);
 
   const togglePlay = () => {
@@ -37,14 +36,6 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
     clearInterval(intervalRef.current);
   };
 
-  const handleTimeUpdate = () => {
-    const audio = audioRef.current;
-    if (!audio) {
-      return;
-    }
-    setCurrentTime(audio.currentTime);
-  };
-
   useEffect(() => {
     return () => {
       if (intervalRef.current) {
@@ -57,7 +48,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
     audioRef.current.seek(e.currentTarget.value);
 
   return (
-    <div className="flex items-center gap-1 justify-evenly px-1.5">
+    <div className="flex items-center gap-1 justify-center px-1.5">
       <ReactHowler
         src={audioSourse}
         playing={isPlaying}
@@ -105,20 +96,8 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
           </p>
         </>
       ) : (
-        <div className="w-full bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
-          <div
-            className="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500"
-            style={{ width: `${loadedProgressAudio}%` }}
-          ></div>
-        </div>
+        <Spinner />
       )}
-
-      {/* <audio
-        onProgress={()=>console.log('+')}
-        ref={audioRef}
-        src={play}
-        onTimeUpdate={handleTimeUpdate}
-      />  */}
     </div>
   );
 };
