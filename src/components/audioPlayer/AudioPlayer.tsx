@@ -1,94 +1,124 @@
-'use client';
-import React from 'react';
-import { useState, useEffect } from 'react';
-import IconButton from '../IconButton';
-import { formatTime } from './AudioPlayer.utils';
-import { ICONS_NAME } from '../constants/iconName';
-
+"use client";
+import React, { useRef } from "react";
+import { useState, useEffect } from "react";
+import IconButton from "../IconButton";
+import { formatTime } from "./AudioPlayer.utils";
+import { ICONS_NAME } from "../constants/iconName";
+import ReactHowler from "react-howler";
 
 type IAudioPlayerProps = {
-	audioSourse: string
-}
+  audioSourse: string;
+};
 
-const AudioPlayer = ({audioSourse}: IAudioPlayerProps) => {
-  const audioRef = React.useRef<HTMLAudioElement>(null);
+const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
+  const audioRef = useRef<ReactHowler>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
-  const [duration, setDuration] = useState<number>(0);
-
+  // const [duration, setDuration] = useState<number>(0);
+  const [isAudioLoaded, setAudioLoaded] = useState<boolean>(false);
+  const [loadedProgressAudio, setLoadedProgressAudio] = useState<number>(0);
+  const intervalRef = useRef<NodeJS.Timer>(null);
 
   const togglePlay = () => {
-    const audio = audioRef.current;
-    if (!audio){
-      return;
-    };
-    {isPlaying ? audio.pause() : audio.play();}
     setIsPlaying(!isPlaying);
-    
+  };
+
+  const handlePlay = () => {
+    intervalRef.current = setInterval(() => {
+      setCurrentTime(audioRef.current?.seek() ?? 0);
+      console.log("interval called");
+    }, 1000);
+  };
+
+  const handleStop = () => {
+    if (!intervalRef.current) {
+      return;
+    }
+    clearInterval(intervalRef.current);
   };
 
   const handleTimeUpdate = () => {
     const audio = audioRef.current;
-    if (!audio){
-      return;
-    };
-    setCurrentTime(audio.currentTime);
-
-  };
-
-  useEffect(()=>{
-    const audio = audioRef.current;
     if (!audio) {
       return;
     }
-    audio.addEventListener('loadedmetadata', () => {
-      setDuration(audio.duration);
-    });
+    setCurrentTime(audio.currentTime);
+  };
 
+  useEffect(() => {
     return () => {
-      audio.removeEventListener('loadedmetadata', () => {});
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     };
   }, []);
 
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const audio = audioRef.current;
-    if (!audio){
-      return;
-    };
-    const seekTime = parseFloat(e.target.value);
-    audio.currentTime = seekTime;
-    setCurrentTime(seekTime);			
-		
-  };
-
+  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) =>
+    audioRef.current.seek(e.currentTarget.value);
 
   return (
     <div className="flex items-center gap-1 justify-evenly px-1.5">
-      <div onClick={togglePlay}>
-        {isPlaying ? 
-          <IconButton iconName={ICONS_NAME.pause} className={'h-4 w-4'}/> 
-          : 
-          <IconButton iconName={ICONS_NAME.play} className={'h-4 w-4'}/>}       
-      </div>            
-      <p className='text-xs text-grey-20'>{formatTime(currentTime)}</p>
-      <input
-        type="range"
-        min="0"
-        max={duration}
-        value={currentTime}
-        step="0.01"
-        onChange={handleSeek}
-        className="h-1 w-full mx-4 appearance-none thumb-blue outline-none"
-        style={{
-          background: `linear-gradient(to right, #2693AB 0%, #2693AB ${(currentTime / duration) * 100}%, #d1d5db ${(currentTime / duration) * 100}%, #d1d5db 100%)`
-        }}
-      />
-      <audio
-        ref={audioRef}
+      <ReactHowler
         src={audioSourse}
-        onTimeUpdate={handleTimeUpdate}
+        playing={isPlaying}
+        onLoad={() => setAudioLoaded(true)}
+        ref={audioRef}
+        onEnd={handleStop}
+        onPlay={handlePlay}
+        onPause={handleStop}
       />
-      <p className='text-xs text-grey-20'>{formatTime(duration)}</p>
+
+      {isAudioLoaded ? (
+        <>
+          <div onClick={togglePlay}>
+            <IconButton
+              iconName={isPlaying ? ICONS_NAME.pause : ICONS_NAME.play}
+              className={"h-4 w-4"}
+            />
+          </div>
+          <p className="text-xs text-grey-20">
+            {formatTime(audioRef.current ? audioRef.current.seek() : 0)}
+          </p>
+          <input
+            type="range"
+            min="0"
+            max={audioRef.current ? audioRef.current.duration() : 0}
+            value={audioRef.current ? audioRef.current.seek() : 0}
+            step="0.01"
+            onChange={handleSeek}
+            className="h-1 w-full mx-4 appearance-none thumb-blue outline-none"
+            style={{
+              background: `linear-gradient(to right, #2693AB 0%, #2693AB ${
+                (currentTime /
+                  (audioRef.current ? audioRef.current.duration() : 0)) *
+                100
+              }%, #d1d5db ${
+                (currentTime /
+                  (audioRef.current ? audioRef.current.duration() : 0) /
+                  1000) *
+                100
+              }%, #d1d5db 100%)`,
+            }}
+          />
+          <p className="text-xs text-grey-20">
+            {formatTime(audioRef.current ? audioRef.current.duration() : 0)}
+          </p>
+        </>
+      ) : (
+        <div className="w-full bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
+          <div
+            className="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500"
+            style={{ width: `${loadedProgressAudio}%` }}
+          ></div>
+        </div>
+      )}
+
+      {/* <audio
+        onProgress={()=>console.log('+')}
+        ref={audioRef}
+        src={play}
+        onTimeUpdate={handleTimeUpdate}
+      />  */}
     </div>
   );
 };
