@@ -22,6 +22,7 @@ export default function Page() {
               icon={ICONS_NAME.arrowRigth}
               action="Visit soldiers"
               className="bg-turquoise-100"
+              isButtonEnabled={true}
             />
           </Link>
         ) : (
@@ -29,6 +30,7 @@ export default function Page() {
             icon={ICONS_NAME.arrowRigth}
             action="Visit soldiers"
             className="&:disabled bg-indigo-10 opacity-60"
+            isButtonEnabled={true}
           />
         )}
       </div>
