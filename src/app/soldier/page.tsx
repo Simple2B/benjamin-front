@@ -7,13 +7,13 @@ import SoldierMainInfoCard from '@/components/SoldierMainInfoCard';
 import AudioPlayer from '@/components/audioPlayer/AudioPlayer';
 import React from 'react';
 
-export interface IInfo {
+export interface ISoldierInfo {
   criteriaName: string;
   criteriaValue: string;
 }
 
 export default function Page() {
-  const lifeInfo: IInfo[] = [
+  const lifeInfo: ISoldierInfo[] = [
     {
       criteriaName: 'Birth date',
       criteriaValue: 'December 15th, 1927',
@@ -24,7 +24,7 @@ export default function Page() {
     },
   ];
 
-  const serviceInfo: IInfo[] = [
+  const serviceInfo: ISoldierInfo[] = [
     {
       criteriaName: 'Service number',
       criteriaValue: 'O-430368',
@@ -51,7 +51,7 @@ export default function Page() {
     },
   ];
 
-  const deathInfo: IInfo[] = [
+  const deathInfo: ISoldierInfo[] = [
     {
       criteriaName: 'Date of death',
       criteriaValue: 'June 1, 1944',

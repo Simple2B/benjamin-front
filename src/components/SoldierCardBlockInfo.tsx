@@ -1,8 +1,8 @@
-import { IInfo } from '@/app/soldier/page';
+import { ISoldierInfo } from '@/app/soldier/page';
 import React from 'react';
 
 type ISoldierCardBlockInfoProps = {
-  solderInfo: IInfo[];
+  solderInfo: ISoldierInfo[];
 };
 
 const SoldierCardBlockInfo = ({ solderInfo }: ISoldierCardBlockInfoProps) => {
