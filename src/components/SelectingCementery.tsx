@@ -6,7 +6,7 @@ import IconButton from "./IconButton";
 import { ICONS_NAME } from "./constants/iconName";
 
 type ISelectingCemeterProps = {
-  setState: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setCemetery: React.Dispatch<React.SetStateAction<string | undefined>>;
 };
 
 interface ICemeteryInfo {
@@ -15,12 +15,12 @@ interface ICemeteryInfo {
   value: string;
 }
 
-const SelectingCemetery = ({ setState }: ISelectingCemeterProps) => {
+const SelectingCemetery = ({ setCemetery }: ISelectingCemeterProps) => {
   const [cemeteries, setCemeteries] = useState<ICemeteryInfo[]>([]);
   const [selected, setSelected] = useState<ICemeteryInfo | undefined>();
 
   const handleChange = (e: ICemeteryInfo) => {
-    setState(e.value);
+    setCemetery(e.value);
     setSelected(e);
   };
 
