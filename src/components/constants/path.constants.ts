@@ -3,10 +3,9 @@ export const PATH = {
   search: '/search',
   cemetery: '/cemetery',
   home: '/home',
-  message:'/message',
-  prayer:'/prayer',
+  message: '/message',
+  prayer: '/prayer',
   settings: '/settings',
   soldier: '/soldier',
-  stone: '/stone'
+  stone: '/stone',
 };
-  

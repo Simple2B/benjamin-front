@@ -1,12 +1,12 @@
-"use client";
-import SearchBar from "@/components/SearchBar";
-import SelectingCemetery from "@/components/SelectingCementery";
-import React, { useState } from "react";
-import { ICONS_NAME } from "@/components/constants/iconName";
-import MapCemetery from "@/components/MapCemetery";
-import CemeteryMainInfo, { IContactInfo } from "@/components/CemeteryMainInfo";
-import AdditionalInfo from "@/components/AdditionalInfo";
-import HorizontalPhotoGallery from "@/components/HorizontalPhotoGallery";
+'use client';
+import SearchBar from '@/components/SearchBar';
+import SelectingCemetery from '@/components/SelectingCementery';
+import React, { useState } from 'react';
+import { ICONS_NAME } from '@/components/constants/iconName';
+import MapCemetery from '@/components/MapCemetery';
+import CemeteryMainInfo, { IContactInfo } from '@/components/CemeteryMainInfo';
+import AdditionalInfo from '@/components/AdditionalInfo';
+import HorizontalPhotoGallery from '@/components/HorizontalPhotoGallery';
 
 export default function Page() {
   const [inputSoldier, setInputSoldier] = useState<string>();
@@ -17,15 +17,15 @@ export default function Page() {
   const contactInfo: IContactInfo[] = [
     {
       icon: ICONS_NAME.telephone,
-      description: "Call",
+      description: 'Call',
     },
     {
       icon: ICONS_NAME.envelope,
-      description: "Email",
+      description: 'Email',
     },
     {
       icon: ICONS_NAME.web,
-      description: "Website",
+      description: 'Website',
     },
   ];
   return (

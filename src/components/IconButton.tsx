@@ -1,7 +1,7 @@
-"use client";
-import React, { useState } from "react";
-import Image from "next/image";
-import Spinner from "./Spinner";
+'use client';
+import React, { useState } from 'react';
+import Image from 'next/image';
+import Spinner from './Spinner';
 
 type IIconButtonProps = {
   iconName: string;

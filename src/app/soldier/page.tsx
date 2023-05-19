@@ -1,11 +1,11 @@
-import ClosebleInfo from "@/components/ClosebleInfo";
-import RememberSoldier from "@/components/RememberSoldier";
-import SoldierAdditionalVideo from "@/components/SoldierAdditionaVideo";
-import SoldierAdditionalImage from "@/components/SoldierAdditionalImage";
-import SoldierCardBlockInfo from "@/components/SoldierCardBlockInfo";
-import SoldierMainInfoCard from "@/components/SoldierMainInfoCard";
-import AudioPlayer from "@/components/audioPlayer/AudioPlayer";
-import React from "react";
+import ClosebleInfo from '@/components/ClosebleInfo';
+import RememberSoldier from '@/components/RememberSoldier';
+import SoldierAdditionalVideo from '@/components/SoldierAdditionaVideo';
+import SoldierAdditionalImage from '@/components/SoldierAdditionalImage';
+import SoldierCardBlockInfo from '@/components/SoldierCardBlockInfo';
+import SoldierMainInfoCard from '@/components/SoldierMainInfoCard';
+import AudioPlayer from '@/components/audioPlayer/AudioPlayer';
+import React from 'react';
 
 export interface IInfo {
   criteriaName: string;
@@ -15,60 +15,60 @@ export interface IInfo {
 export default function Page() {
   const lifeInfo: IInfo[] = [
     {
-      criteriaName: "Birth date",
-      criteriaValue: "December 15th, 1927",
+      criteriaName: 'Birth date',
+      criteriaValue: 'December 15th, 1927',
     },
     {
-      criteriaName: "Birth location",
-      criteriaValue: "Edminton, New Hampshire",
+      criteriaName: 'Birth location',
+      criteriaValue: 'Edminton, New Hampshire',
     },
   ];
 
   const serviceInfo: IInfo[] = [
     {
-      criteriaName: "Service number",
-      criteriaValue: "O-430368",
+      criteriaName: 'Service number',
+      criteriaValue: 'O-430368',
     },
     {
-      criteriaName: "State entered service from",
+      criteriaName: 'State entered service from',
       criteriaValue: "Fort Jay (Governor's Island), New York",
     },
     {
-      criteriaName: "Branch of service",
-      criteriaValue: "US Airforce",
+      criteriaName: 'Branch of service',
+      criteriaValue: 'US Airforce',
     },
     {
-      criteriaName: "Assignment",
+      criteriaName: 'Assignment',
       criteriaValue: '583rd Signal Air Warning Battalion "C"',
     },
     {
-      criteriaName: "Position",
-      criteriaValue: "Gunner",
+      criteriaName: 'Position',
+      criteriaValue: 'Gunner',
     },
     {
-      criteriaName: "Awards",
-      criteriaValue: "Air Medal, Purple Heart",
+      criteriaName: 'Awards',
+      criteriaValue: 'Air Medal, Purple Heart',
     },
   ];
 
   const deathInfo: IInfo[] = [
     {
-      criteriaName: "Date of death",
-      criteriaValue: "June 1, 1944",
+      criteriaName: 'Date of death',
+      criteriaValue: 'June 1, 1944',
     },
     {
-      criteriaName: "Circumstances of death",
+      criteriaName: 'Circumstances of death',
       criteriaValue:
-        "Succumbed to scrub typhus at the 2nd Station Hospital in Nadzab",
+        'Succumbed to scrub typhus at the 2nd Station Hospital in Nadzab',
     },
     {
-      criteriaName: "Initial burial ",
-      criteriaValue: "Initial burial ",
+      criteriaName: 'Initial burial ',
+      criteriaValue: 'Initial burial ',
     },
     {
-      criteriaName: "Initial burial ",
+      criteriaName: 'Initial burial ',
       criteriaValue:
-        "Manila American Cemetery (Plot A, Row 7, Grave 79), Taguig City, Philippines",
+        'Manila American Cemetery (Plot A, Row 7, Grave 79), Taguig City, Philippines',
     },
   ];
 

@@ -1,9 +1,9 @@
-"use client";
-import React, { useState, ChangeEvent, useEffect } from "react";
-import { Fragment } from "react";
-import { Listbox, Transition } from "@headlessui/react";
-import IconButton from "./IconButton";
-import { ICONS_NAME } from "./constants/iconName";
+'use client';
+import React, { useState, ChangeEvent, useEffect } from 'react';
+import { Fragment } from 'react';
+import { Listbox, Transition } from '@headlessui/react';
+import IconButton from './IconButton';
+import { ICONS_NAME } from './constants/iconName';
 
 type ISelectingCemeterProps = {
   setCemetery: React.Dispatch<React.SetStateAction<string | undefined>>;
@@ -26,10 +26,10 @@ const SelectingCemetery = ({ setCemetery }: ISelectingCemeterProps) => {
 
   useEffect(() => {
     const cem: ICemeteryInfo[] = [
-      { id: 0, name: "Select a cemetery", value: "" },
-      { id: 1, name: "cemetery1", value: "cemetery1" },
-      { id: 2, name: "cemetery2", value: "cemetery2" },
-      { id: 3, name: "cemetery3", value: "cemetery3" },
+      { id: 0, name: 'Select a cemetery', value: '' },
+      { id: 1, name: 'cemetery1', value: 'cemetery1' },
+      { id: 2, name: 'cemetery2', value: 'cemetery2' },
+      { id: 3, name: 'cemetery3', value: 'cemetery3' },
     ];
     setCemeteries(cem);
     setSelected(cem[0]);
@@ -46,7 +46,7 @@ const SelectingCemetery = ({ setCemetery }: ISelectingCemeterProps) => {
                 <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                   <IconButton
                     iconName={ICONS_NAME.selectingArrow}
-                    className={`h-4 w-4 m-1 ${open && "rotate-90"}`}
+                    className={`h-4 w-4 m-1 ${open && 'rotate-90'}`}
                   />
                 </span>
               </Listbox.Button>
@@ -66,8 +66,8 @@ const SelectingCemetery = ({ setCemetery }: ISelectingCemeterProps) => {
                       className={({ active }) =>
                         `relative cursor-default select-none py-2 pl-10 pr-4 ${
                           active
-                            ? "bg-amber-100 text-amber-900"
-                            : "text-gray-900"
+                            ? 'bg-amber-100 text-amber-900'
+                            : 'text-gray-900'
                         }`
                       }
                       value={cemetery}
@@ -76,7 +76,7 @@ const SelectingCemetery = ({ setCemetery }: ISelectingCemeterProps) => {
                         <>
                           <span
                             className={`block truncate ${
-                              selected ? "font-medium" : "font-normal"
+                              selected ? 'font-medium' : 'font-normal'
                             }`}
                           >
                             {cemetery.name}

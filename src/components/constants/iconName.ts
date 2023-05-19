@@ -5,7 +5,7 @@ export const ICONS_NAME = {
   email: 'email',
   pause: 'pause',
   play: 'play',
-  magnifyingGlass:'magnifying-glass',
+  magnifyingGlass: 'magnifying-glass',
   camera: 'photo-camera-interface-symbol-for-button',
   settings: 'settings',
   arrow: 'arrow',

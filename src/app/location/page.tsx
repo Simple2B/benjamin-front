@@ -1,10 +1,10 @@
-"use client";
-import NavigationButton from "@/components/NavigationButton";
-import SelectingCemetery from "@/components/SelectingCementery";
-import { ICONS_NAME } from "@/components/constants/iconName";
-import { PATH } from "@/components/constants/path.constants";
-import Link from "next/link";
-import React, { useState } from "react";
+'use client';
+import NavigationButton from '@/components/NavigationButton';
+import SelectingCemetery from '@/components/SelectingCementery';
+import { ICONS_NAME } from '@/components/constants/iconName';
+import { PATH } from '@/components/constants/path.constants';
+import Link from 'next/link';
+import React, { useState } from 'react';
 
 export default function Page() {
   const [selectedCemetery, setSelectedCemetery] = useState<

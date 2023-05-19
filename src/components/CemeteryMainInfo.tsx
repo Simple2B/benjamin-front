@@ -3,33 +3,42 @@ import AudioPlayer from './audioPlayer/AudioPlayer';
 import ButtonContactCemetery from './ButtonContactCemetery';
 
 type ICemeteryMainInfoProps = {
-    name: string,
-    location: string,
-    contactInfo: IContactInfo[],
-    audioSrc: string,
-}
+  name: string;
+  location: string;
+  contactInfo: IContactInfo[];
+  audioSrc: string;
+};
 
 export interface IContactInfo {
-	icon: string,
-	description: string,
+  icon: string;
+  description: string;
 }
 
-const CemeteryMainInfo = ({name, location, contactInfo, audioSrc}: ICemeteryMainInfoProps) => {
+const CemeteryMainInfo = ({
+  name,
+  location,
+  contactInfo,
+  audioSrc,
+}: ICemeteryMainInfoProps) => {
   return (
-    <div className='mt-56 flex flex-col gap-5'>
+    <div className="mt-56 flex flex-col gap-5">
       <div>
-        <h1 className='text-xl font-semibold'>{name}</h1>
-        <p className='text-sm'>{location}</p>
+        <h1 className="text-xl font-semibold">{name}</h1>
+        <p className="text-sm">{location}</p>
       </div>
-      <div className='flex gap-3'>
-        {contactInfo.map(({icon, description})=>
-          <ButtonContactCemetery icon={icon} description={description} key={description}/>
-        )}
+      <div className="flex gap-3">
+        {contactInfo.map(({ icon, description }) => (
+          <ButtonContactCemetery
+            icon={icon}
+            description={description}
+            key={description}
+          />
+        ))}
       </div>
       <div>
-        <p className='text-sm text-grey-20'>Audio Tour</p>
+        <p className="text-sm text-grey-20">Audio Tour</p>
         <AudioPlayer audioSourse={audioSrc} />
-      </div>      
+      </div>
     </div>
   );
 };

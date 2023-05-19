@@ -1,7 +1,7 @@
-"use client";
-import React, { useState } from "react";
-import IconButton from "./IconButton";
-import { ICONS_NAME } from "./constants/iconName";
+'use client';
+import React, { useState } from 'react';
+import IconButton from './IconButton';
+import { ICONS_NAME } from './constants/iconName';
 
 type IClosebleInfoProps = {
   heading: string;
@@ -20,7 +20,7 @@ const ClosebleInfo = ({ component, heading }: IClosebleInfoProps) => {
       <div className="flex justify-between">
         <h2 className="text-lg font-semibold">{heading}</h2>
         <div onClick={handleClick}>
-          <IconButton iconName={ICONS_NAME.line} className={"h-4 w-8"} />
+          <IconButton iconName={ICONS_NAME.line} className={'h-4 w-8'} />
         </div>
       </div>
 

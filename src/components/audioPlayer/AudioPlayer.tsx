@@ -1,12 +1,12 @@
-"use client";
-import React, { useRef } from "react";
-import { useState, useEffect } from "react";
-import IconButton from "../IconButton";
-import { formatTime } from "./AudioPlayer.utils";
-import { ICONS_NAME } from "../constants/iconName";
-import ReactHowler from "react-howler";
-import Spinner from "../Spinner";
-import { SECOND } from "../constants/constants";
+'use client';
+import React, { useRef } from 'react';
+import { useState, useEffect } from 'react';
+import IconButton from '../IconButton';
+import { formatTime } from './AudioPlayer.utils';
+import { ICONS_NAME } from '../constants/iconName';
+import ReactHowler from 'react-howler';
+import Spinner from '../Spinner';
+import { SECOND } from '../constants/constants';
 
 type IAudioPlayerProps = {
   audioSourse: string;
@@ -26,7 +26,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
   const handlePlay = () => {
     intervalRef.current = setInterval(() => {
       setCurrentTime(audioRef.current?.seek() ?? 0);
-      console.log("interval called");
+      console.log('interval called');
     }, SECOND);
   };
 
@@ -65,7 +65,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
           <div onClick={togglePlay}>
             <IconButton
               iconName={isPlaying ? ICONS_NAME.pause : ICONS_NAME.play}
-              className={"h-4 w-4"}
+              className={'h-4 w-4'}
             />
           </div>
           <p className="text-xs text-grey-20">
