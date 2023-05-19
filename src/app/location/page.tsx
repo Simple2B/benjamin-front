@@ -7,9 +7,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 export default function Page() {
-  const [selectedCemetery, setSelectedCemetery] = useState<
-    string | undefined
-  >();
+  const [selectedCemetery, setSelectedCemetery] = useState<string>('');
 
   return (
     <div className="bg-gradient-to-r from-indigo-20 to-indigo-30 w-screen h-screen flex flex-col justify-start gap-10 p-4 items-end">
