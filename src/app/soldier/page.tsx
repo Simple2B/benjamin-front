@@ -86,43 +86,31 @@ export default function Page() {
           <p className="text-sm text-grey-20">Audio Tour</p>
           <AudioPlayer audioSourse="https://www.bensound.com/bensound-music/bensound-tenderness.mp3" />
         </div>
-        <ClosebleInfo
-          heading="LIFE"
-          component={<SoldierCardBlockInfo solderInfo={lifeInfo} />}
-        />
-        <ClosebleInfo
-          heading="SERVICE"
-          component={
-            <>
-              <SoldierCardBlockInfo solderInfo={serviceInfo} />
-              <SoldierAdditionalImage
-                imageUrl="#"
-                imageDescription="Jewish Serviceman’s card"
-              />
-            </>
-          }
-        />
-        <ClosebleInfo
-          heading="DEATH"
-          component={
-            <>
-              <SoldierCardBlockInfo solderInfo={deathInfo} />
-              <SoldierAdditionalImage
-                imageUrl="#"
-                imageDescription="Killed In Action (KIA) Telegram"
-              />
-            </>
-          }
-        />
-        <ClosebleInfo
-          heading="CHANGE CEREMONY"
-          component={
-            <SoldierAdditionalVideo
-              videoUrl="-"
-              videoDescription="Replacement ceremony video"
-            />
-          }
-        />
+        <ClosebleInfo heading="LIFE">
+          <SoldierCardBlockInfo solderInfo={lifeInfo} />
+        </ClosebleInfo>
+        <ClosebleInfo heading="SERVICE">
+          <SoldierCardBlockInfo solderInfo={serviceInfo} />
+          <SoldierAdditionalImage
+            imageUrl="#"
+            imageDescription="Jewish Serviceman’s card"
+          />
+        </ClosebleInfo>
+
+        <ClosebleInfo heading="DEATH">
+          <SoldierCardBlockInfo solderInfo={deathInfo} />
+          <SoldierAdditionalImage
+            imageUrl="#"
+            imageDescription="Killed In Action (KIA) Telegram"
+          />
+        </ClosebleInfo>
+
+        <ClosebleInfo heading="CHANGE CEREMONY">
+          <SoldierAdditionalVideo
+            videoUrl="-"
+            videoDescription="Replacement ceremony video"
+          />
+        </ClosebleInfo>
       </div>
       <RememberSoldier name="1st Lt. Robert Fink" />
     </div>

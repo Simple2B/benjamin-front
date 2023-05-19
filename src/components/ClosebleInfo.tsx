@@ -2,13 +2,17 @@
 import React, { useState } from 'react';
 import IconButton from './IconButton';
 import { ICONS_NAME } from './constants/iconName';
+import { PropsWithChildren } from 'react';
 
 type IClosebleInfoProps = {
   heading: string;
-  component: React.ReactNode;
+  children: React.ReactNode;
 };
 
-const ClosebleInfo = ({ component, heading }: IClosebleInfoProps) => {
+const ClosebleInfo = ({
+  children,
+  heading,
+}: PropsWithChildren<IClosebleInfoProps>) => {
   const [isOpen, setOpen] = useState<boolean>(true);
 
   const handleClick = () => {
@@ -24,7 +28,7 @@ const ClosebleInfo = ({ component, heading }: IClosebleInfoProps) => {
         </div>
       </div>
 
-      {isOpen && <>{component}</>}
+      {isOpen && <>{children}</>}
     </div>
   );
 };
