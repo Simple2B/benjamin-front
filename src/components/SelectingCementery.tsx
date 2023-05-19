@@ -6,23 +6,34 @@ import IconButton from './IconButton';
 import { ICONS_NAME } from './constants/iconName';
 
 type ISelectingCemeterProps = {
-  setState: React.Dispatch<React.SetStateAction<string>>;
-}
+  setCemetery: React.Dispatch<React.SetStateAction<string>>;
+};
 
 interface ICemeteryInfo {
   id: number;
   name: string;
-  value: string
+  value: string;
 }
 
-const SelectingCemetery = ({setState}: ISelectingCemeterProps) => {
+const SelectingCemetery = ({ setCemetery }: ISelectingCemeterProps) => {
   const [cemeteries, setCemeteries] = useState<ICemeteryInfo[]>([]);
   const [selected, setSelected] = useState<ICemeteryInfo | undefined>();
-  
+
   const handleChange = (e: ICemeteryInfo) => {
-    setState(e.value);
+    setCemetery(e.value);
     setSelected(e);
   };
+
+  useEffect(() => {
+    const cem: ICemeteryInfo[] = [
+      { id: 0, name: 'Select a cemetery', value: '' },
+      { id: 1, name: 'cemetery1', value: 'cemetery1' },
+      { id: 2, name: 'cemetery2', value: 'cemetery2' },
+      { id: 3, name: 'cemetery3', value: 'cemetery3' },
+    ];
+    setCemeteries(cem);
+    setSelected(cem[0]);
+  }, []);
 
   return (
     <div className="w-80">
@@ -54,7 +65,9 @@ const SelectingCemetery = ({setState}: ISelectingCemeterProps) => {
                       key={cemeteryIdx}
                       className={({ active }) =>
                         `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                          active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
+                          active
+                            ? 'bg-amber-100 text-amber-900'
+                            : 'text-gray-900'
                         }`
                       }
                       value={cemetery}
@@ -68,7 +81,6 @@ const SelectingCemetery = ({setState}: ISelectingCemeterProps) => {
                           >
                             {cemetery.name}
                           </span>
-                          
                         </>
                       )}
                     </Listbox.Option>

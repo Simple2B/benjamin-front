@@ -1,19 +1,19 @@
 import React from 'react';
 
-type ISoldierProfileProps = {
-	photoUrl: string,
-	name: string,
-}
+export type ISoldierProfileProps = {
+  photoUrl: string;
+  name: string;
+};
 
-const SoldierProfile = ({photoUrl, name}: ISoldierProfileProps) => {
+const SoldierProfile = ({ photoUrl, name }: ISoldierProfileProps) => {
   return (
-    <div className='w-36'>
-      <img 
-        className='w-36 h-32 rounded-lg bg-grey-30' 
+    <div className="w-36">
+      <img
+        className="w-36 h-32 rounded-lg bg-grey-30"
         src={photoUrl}
-        alt="Soldier" 
+        alt="Soldier"
       />
-      <p className='text-base text-center'>{name}</p>
+      <p className="text-base text-center">{name}</p>
     </div>
   );
 };
