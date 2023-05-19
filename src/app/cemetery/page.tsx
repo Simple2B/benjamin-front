@@ -9,7 +9,7 @@ import AdditionalInfo from '@/components/AdditionalInfo';
 import HorizontalPhotoGallery from '@/components/HorizontalPhotoGallery';
 
 export default function Page() {
-  const [inputSoldier, setInputSoldier] = useState<string>();
+  const [inputSoldier, setInputSoldier] = useState<string>('');
   const [selectedCemetery, setSelectedCemetery] = useState<string>('');
 
   const contactInfo: IContactInfo[] = [

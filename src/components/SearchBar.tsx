@@ -8,7 +8,7 @@ type ISearchBarProps = {
 };
 
 const SearchBar = ({ setInputSoldier }: ISearchBarProps) => {
-  const [userInput, setUserInput] = useState<string>();
+  const [userInput, setUserInput] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
