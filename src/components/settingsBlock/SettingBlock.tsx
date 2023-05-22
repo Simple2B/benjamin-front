@@ -4,7 +4,7 @@ import SettingsBox from '../SettingsBox';
 
 const SettingBlock = () => {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 w-full">
       {SETTINHS_INFO.map(({ iconName, boxName }) => (
         <SettingsBox iconName={iconName} boxName={boxName} key={boxName} />
       ))}
