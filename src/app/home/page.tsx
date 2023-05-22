@@ -3,75 +3,61 @@ import NavigationButton from '@/components/NavigationButton';
 import { ICONS_NAME } from '@/components/constants/iconName';
 import { PATH } from '@/components/constants/path.constants';
 import ProjectInfo from '@/components/projectInfo/ProjectInfo';
-import {
-  IProjectInfoToDisplay,
-  PROJECT_INFO_TO_DISPLAY,
-} from '@/components/projectInfo/projectInfo.constants';
+import { PROJECT_INFO_TO_DISPLAY } from '@/components/projectInfo/projectInfo.constants';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 export default function Page() {
-  const [currentProjectInfo, setCurrentProjectInfo] =
-    useState<IProjectInfoToDisplay>(PROJECT_INFO_TO_DISPLAY[0]);
+  const [currentInfoIndex, setCurrentInfoIndex] = useState<number>(0);
   const [isButtonEnabled, setButtonButtonEnabled] = useState<boolean>(false);
   const [isLastPage, setLastPage] = useState<boolean>(false);
 
+  const setButtonButtonEnable = () => {
+    setButtonButtonEnabled(true);
+  };
+
   useEffect(() => {
+    if (currentInfoIndex == PROJECT_INFO_TO_DISPLAY.length - 1) {
+      setLastPage(true);
+    }
+
     setButtonButtonEnabled(false);
     const timeout = setTimeout(() => {
       setButtonButtonEnabled(true);
-    }, 3000);
+    }, 0);
     return () => {
       clearTimeout(timeout);
     };
-  }, [currentProjectInfo]);
+  }, [currentInfoIndex]);
 
   const handleClick = () => {
-    if (!isButtonEnabled) {
-      return;
-    }
-    const indexOfCurrent: number =
-      PROJECT_INFO_TO_DISPLAY.indexOf(currentProjectInfo);
     if (isLastPage) {
       return;
     }
-
-    setCurrentProjectInfo(PROJECT_INFO_TO_DISPLAY[indexOfCurrent + 1]);
-    if (indexOfCurrent == PROJECT_INFO_TO_DISPLAY.length - 2) {
-      setLastPage(true);
-      return;
-    }
+    setCurrentInfoIndex(currentInfoIndex + 1);
   };
 
   return (
     <>
+      {isLastPage && <Link href={PATH.location} />}
       <ProjectInfo
-        text={currentProjectInfo.text}
-        heading={currentProjectInfo.heading}
-        vireoUrl={currentProjectInfo.vireoUrl}
+        onVideoEnd={setButtonButtonEnable}
+        text={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].text}
+        heading={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].heading}
+        vireoUrl={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].vireoUrl}
       />
-      <div
-        className="flex flex-col items-end justify-evenly"
-        onClick={handleClick}
-      >
-        <div onClick={handleClick}>
-          {isLastPage && isButtonEnabled ? (
-            <Link href={PATH.location}>
-              <NavigationButton
-                icon={ICONS_NAME.arrowRigth}
-                action={isLastPage ? 'Done' : 'Next'}
-                className="w-28"
-                isButtonEnabled={isButtonEnabled}
-              />
-            </Link>
-          ) : (
+
+      <div className="flex flex-col items-end justify-evenly">
+        <div>
+          <Link href={isLastPage ? PATH.location : PATH.home}>
             <NavigationButton
               icon={ICONS_NAME.arrowRigth}
               action={isLastPage ? 'Done' : 'Next'}
               className="w-28"
               isButtonEnabled={isButtonEnabled}
+              onClick={handleClick}
             />
-          )}
+          </Link>
         </div>
       </div>
     </>
