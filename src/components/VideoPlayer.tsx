@@ -43,7 +43,7 @@ const VideoPlayer = ({ srcVideo, onVideoEnd }: IVideoPlayeProps) => {
         autoPlay
         muted
         ref={videoRef}
-        className="w-screen bg-grey-20"
+        className="w-screen bg-gradient-to-r from-indigo-20 to-indigo-30"
       ></video>
     </>
   );
