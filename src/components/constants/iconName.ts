@@ -19,4 +19,7 @@ export const ICONS_NAME = {
   navigation: 'navigation',
   web: 'web',
   envelope: 'envelope',
+  info: 'info',
+  form: 'google-docs',
+  heart: 'heart',
 };
