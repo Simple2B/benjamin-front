@@ -19,21 +19,21 @@ const VideoPlayer = ({ srcVideo, onVideoEnd }: IVideoPlayeProps) => {
       }
     }, 100);
     return () => clearInterval(timerId);
-  }, [onVideoEnd, srcVideo]);
+  }, [onVideoEnd]);
 
   useEffect(() => {
     videoRef.current.setAttribute('src', srcVideo);
   }, [srcVideo]);
 
   useEffect(() => {
-    const videoElement = videoRef.current;
     const setHeightToWidth = () => {
-      videoElement.style.height = videoElement.offsetWidth + 'px';
+      const { offsetWidth } = videoRef.current;
+      videoRef.current.style.height = `${offsetWidth}px`;
     };
     setHeightToWidth();
-    window.addEventListener('resize', setHeightToWidth); 
+    window.onresize = setHeightToWidth;
     return () => {
-      window.removeEventListener('resize', setHeightToWidth); 
+      window.onresize = null;
     };
   }, []);
 
