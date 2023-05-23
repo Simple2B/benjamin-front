@@ -1,65 +1,39 @@
 'use client';
-import NavigationButton from '@/components/NavigationButton';
-import { ICONS_NAME } from '@/components/constants/iconName';
-import { PATH } from '@/components/constants/path.constants';
-import ProjectInfo from '@/components/projectInfo/ProjectInfo';
-import { PROJECT_INFO_TO_DISPLAY } from '@/components/projectInfo/projectInfo.constants';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import IntroVideo from '@/components/IntroVideo';
+import PreviewProjectInfo from '@/components/PreviewProjectInfo';
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function Page() {
+  const [displayVideoPreview, setDisplayVideoPreview] = useState<boolean>(true);
+  const videoPreviewTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [currentInfoIndex, setCurrentInfoIndex] = useState<number>(0);
-  const [isButtonEnabled, setButtonButtonEnabled] = useState<boolean>(false);
-  const [isLastPage, setLastPage] = useState<boolean>(false);
 
-  const setButtonButtonEnable = () => {
-    setButtonButtonEnabled(true);
+  const handleVideoEnd = () => {
+    videoPreviewTimeoutRef.current = setTimeout(() => {
+      setDisplayVideoPreview(false);
+    }, 1500);
   };
 
   useEffect(() => {
-    if (currentInfoIndex == PROJECT_INFO_TO_DISPLAY.length - 1) {
-      setLastPage(true);
+    if (videoPreviewTimeoutRef.current) {
+      clearTimeout(videoPreviewTimeoutRef.current);
     }
-
-    setButtonButtonEnabled(false);
-    const timeout = setTimeout(() => {
-      setButtonButtonEnabled(true);
-    }, 0);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [currentInfoIndex]);
+  }, []);
 
   const handleClick = () => {
-    if (isLastPage) {
-      return;
-    }
-    setCurrentInfoIndex(currentInfoIndex + 1);
+    setCurrentInfoIndex((prev) => prev + 1);
   };
 
   return (
     <>
-      {isLastPage && <Link href={PATH.location} />}
-      <ProjectInfo
-        onVideoEnd={setButtonButtonEnable}
-        text={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].text}
-        heading={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].heading}
-        vireoUrl={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].vireoUrl}
-      />
-
-      <div className="flex flex-col items-end justify-evenly">
-        <div>
-          <Link href={isLastPage ? PATH.location : PATH.home}>
-            <NavigationButton
-              icon={ICONS_NAME.arrowRigth}
-              action={isLastPage ? 'Done' : 'Next'}
-              className="w-28"
-              isButtonEnabled={isButtonEnabled}
-              onClick={handleClick}
-            />
-          </Link>
-        </div>
-      </div>
+      {displayVideoPreview ? (
+        <IntroVideo onVideoEnd={handleVideoEnd} />
+      ) : (
+        <PreviewProjectInfo
+          currentInfoIndex={currentInfoIndex}
+          onNextButtonClick={handleClick}
+        />
+      )}
     </>
   );
 }
