@@ -1,6 +1,7 @@
 import React from 'react';
 import AudioPlayer from './audioPlayer/AudioPlayer';
 import ButtonContactCemetery from './ButtonContactCemetery';
+import Link from 'next/link';
 
 type ICemeteryMainInfoProps = {
   name: string;
@@ -12,6 +13,7 @@ type ICemeteryMainInfoProps = {
 export interface IContactInfo {
   icon: string;
   description: string;
+  link: string;
 }
 
 const CemeteryMainInfo = ({
@@ -27,12 +29,14 @@ const CemeteryMainInfo = ({
         <p className="text-sm">{location}</p>
       </div>
       <div className="flex gap-3">
-        {contactInfo.map(({ icon, description }) => (
-          <ButtonContactCemetery
-            icon={icon}
-            description={description}
-            key={description}
-          />
+        {contactInfo.map(({ icon, description, link }) => (
+          <>
+            {link && (
+              <Link href={link} key={description}>
+                <ButtonContactCemetery icon={icon} description={description} />
+              </Link>
+            )}
+          </>
         ))}
       </div>
       <div>

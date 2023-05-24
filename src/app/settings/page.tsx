@@ -4,8 +4,22 @@ import { PATH } from '@/components/constants/path.constants';
 import SettingBlock from '@/components/settingsBlock/SettingBlock';
 import Link from 'next/link';
 import React from 'react';
+import { ApiService } from '@/openapi';
 
-export default function Page() {
+const LINKS = ['aboutUrl', 'gravestoneFormUrl', 'contactUsUrl', 'donateUrl'];
+
+const Page = async () => {
+  const settingsData = await ApiService.rootApiGet();
+  const links: { [key: string]: string } = {};
+
+  (Object.keys(settingsData) as (keyof typeof settingsData)[]).forEach(
+    (key) => {
+      if (LINKS.includes(key)) {
+        links[key] = settingsData[key];
+      }
+    }
+  );
+
   return (
     <div className="flex flex-col items-start m-6 gap-5">
       <div className="flex items-center w-2/3 justify-between">
@@ -18,7 +32,9 @@ export default function Page() {
         <h1 className="text-2xl font-semibold">Settings</h1>
       </div>
 
-      <SettingBlock />
+      <SettingBlock links={links} />
     </div>
   );
-}
+};
+
+export default Page;

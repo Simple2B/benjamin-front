@@ -1,14 +1,20 @@
 'use client';
-import SearchBar from '@/components/SearchBar';
-import SelectingCemetery from '@/components/SelectingCementery';
 import React, { useState } from 'react';
-import { ICONS_NAME } from '@/components/constants/iconName';
-import MapCemetery from '@/components/MapCemetery';
-import CemeteryMainInfo, { IContactInfo } from '@/components/CemeteryMainInfo';
-import AdditionalInfo from '@/components/AdditionalInfo';
-import HorizontalPhotoGallery from '@/components/HorizontalPhotoGallery';
+import { CemeteryOut } from '@/openapi';
+import { useRouter } from 'next/router';
+import AdditionalInfo from './AdditionalInfo';
+import CemeteryMainInfo, { IContactInfo } from './CemeteryMainInfo';
+import HorizontalPhotoGallery from './HorizontalPhotoGallery';
+import MapCemetery from './MapCemetery';
+import SearchBar from './SearchBar';
+import SelectingCemetery from './SelectingCementery';
+import { ICONS_NAME } from './constants/iconName';
 
-export default function Page() {
+interface CemeteryPageProps {
+  cemetery: CemeteryOut;
+}
+
+export default function PreviewCementery({ cemetery }: CemeteryPageProps) {
   const [inputSoldier, setInputSoldier] = useState<string>('');
   const [selectedCemetery, setSelectedCemetery] = useState<string>('');
 
@@ -16,30 +22,34 @@ export default function Page() {
     {
       icon: ICONS_NAME.telephone,
       description: 'Call',
+      link: cemetery.phone,
     },
     {
       icon: ICONS_NAME.envelope,
       description: 'Email',
+      link: cemetery.email,
     },
     {
       icon: ICONS_NAME.web,
       description: 'Website',
+      link: cemetery.urlPath,
     },
   ];
+  console.log(cemetery);
   return (
-    <div className="flex flex-col gap-6 items-center px-4 mb-4">
+    <div className="flex flex-col gap-6 items-center px-4 mb-4 w-full">
       <MapCemetery />
       <SearchBar setInputSoldier={setInputSoldier} />
       <SelectingCemetery setCemetery={setSelectedCemetery} />
       <CemeteryMainInfo
-        name="Normandy American Cemetery"
-        location="Rte du Cimetiere Americain, 14710 Colleville-sur-Mer, France"
+        name={cemetery.name}
+        location={cemetery.location}
         contactInfo={contactInfo}
         audioSrc="https://www.bensound.com/bensound-music/bensound-tenderness.mp3"
       />
       <AdditionalInfo
-        superintendent="John McJohn"
-        war="World War II"
+        superintendent={cemetery.superintendent}
+        war={cemetery.war}
         numberOfSoldiersBuried={12000}
         numberOfJewishSoldiersBuried={250}
         listedAsMissingSoldiers={500}
