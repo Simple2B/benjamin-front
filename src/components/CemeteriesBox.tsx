@@ -15,15 +15,17 @@ interface ICemeteriesBox {
 }
 
 const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
-  console.log(cemeteries);
-  const [selectedCemetery, setSelectedCemetery] = useState<CemeteryOut | null>(
-    null
-  );
+  const [selectedCemetery, setSelectedCemetery] = useState<CemeteryOut>({
+    name: '',
+    location: '',
+    uuid: '',
+  });
   return (
     <>
       <SelectingCemetery
+        selectedCemetery={selectedCemetery}
         setCemetery={setSelectedCemetery}
-        cemeteries={cemeteries}
+        cemeteries={cemeteries.items}
       />
       <div className="flex justify-end h-3/6 items-end">
         {!!selectedCemetery ? (

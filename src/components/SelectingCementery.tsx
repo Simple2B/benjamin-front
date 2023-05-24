@@ -6,9 +6,10 @@ import IconButton from './IconButton';
 import { ICONS_NAME } from './constants/iconName';
 import { Cemeteries, CemeteryOut } from '@/openapi';
 
-type ISelectingCemeterProps = {
-  setCemetery: React.Dispatch<React.SetStateAction<CemeteryOut | null>>;
-  cemeteries: Cemeteries;
+type ISelectingCemeteriesProps = {
+  selectedCemetery: CemeteryOut;
+  setCemetery: React.Dispatch<React.SetStateAction<CemeteryOut>>;
+  cemeteries: Array<CemeteryOut>;
 };
 
 interface ICemeteryInfo {
@@ -18,29 +19,26 @@ interface ICemeteryInfo {
 }
 
 const SelectingCemetery = ({
+  selectedCemetery,
   setCemetery,
   cemeteries,
-}: ISelectingCemeterProps) => {
-  const [selected, setSelected] = useState<ICemeteryInfo | undefined>(
-    cemeteries?.items.forEach((cemetery) => {
-      cemetery;
-    })
-  );
-
-  const handleChange = (e: ICemeteryInfo) => {
+}: ISelectingCemeteriesProps) => {
+  const handleChange = (e: CemeteryOut) => {
     setCemetery(e);
-    setSelected(e);
+    // setSelected(e);
   };
 
   return (
     <div className="w-80">
-      <Listbox value={selected} onChange={handleChange}>
+      <Listbox value={selectedCemetery} onChange={handleChange}>
         {({ open }) => (
           <>
             <div className="relative mt-1">
               <Listbox.Button className="relative w-full h-10 cursor-default rounded-3xl bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                 <span className="block truncate">
-                  {selected ? selected.name : 'Select cemetery'}
+                  {selectedCemetery.name
+                    ? selectedCemetery.name
+                    : 'Select cemetery'}
                 </span>
                 <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                   <IconButton
@@ -62,7 +60,7 @@ const SelectingCemetery = ({
                   placeholder="Select cemetery"
                   className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {cemeteries?.items.map((cementery) => (
+                  {cemeteries.map((cementery) => (
                     <Listbox.Option
                       key={cementery.uuid}
                       className={({ active }) =>

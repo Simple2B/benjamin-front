@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 
-type IVideoPlayeProps = {
+type IVideoPlayerProps = {
   srcVideo: string;
   onVideoEnd?: () => void;
 };
 
-const VideoPlayer = ({ srcVideo, onVideoEnd }: IVideoPlayeProps) => {
+const VideoPlayer = ({ srcVideo, onVideoEnd }: IVideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -22,13 +22,17 @@ const VideoPlayer = ({ srcVideo, onVideoEnd }: IVideoPlayeProps) => {
   }, [onVideoEnd]);
 
   useEffect(() => {
-    videoRef.current.setAttribute('src', srcVideo);
+    if (videoRef && videoRef.current) {
+      videoRef.current.setAttribute('src', srcVideo);
+    }
   }, [srcVideo]);
 
   useEffect(() => {
     const setHeightToWidth = () => {
-      const { offsetWidth } = videoRef.current;
-      videoRef.current.style.height = `${offsetWidth}px`;
+      if (videoRef && videoRef.current) {
+        const { offsetWidth } = videoRef.current;
+        videoRef.current.style.height = `${offsetWidth}px`;
+      }
     };
     setHeightToWidth();
     window.onresize = setHeightToWidth;
