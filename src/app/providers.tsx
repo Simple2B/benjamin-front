@@ -2,6 +2,9 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
+import { OpenAPI } from '@/openapi';
+
+OpenAPI.BASE = process.env.BACKEND_URL || '';
 
 interface IProviders {
   children: React.ReactNode;

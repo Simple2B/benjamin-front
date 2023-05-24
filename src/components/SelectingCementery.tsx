@@ -1,12 +1,14 @@
 'use client';
-import React, { useState, ChangeEvent, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import IconButton from './IconButton';
 import { ICONS_NAME } from './constants/iconName';
+import { Cemeteries, CemeteryOut } from '@/openapi';
 
 type ISelectingCemeterProps = {
-  setCemetery: React.Dispatch<React.SetStateAction<string>>;
+  setCemetery: React.Dispatch<React.SetStateAction<CemeteryOut | null>>;
+  cemeteries: Cemeteries;
 };
 
 interface ICemeteryInfo {
@@ -15,25 +17,20 @@ interface ICemeteryInfo {
   value: string;
 }
 
-const SelectingCemetery = ({ setCemetery }: ISelectingCemeterProps) => {
-  const [cemeteries, setCemeteries] = useState<ICemeteryInfo[]>([]);
-  const [selected, setSelected] = useState<ICemeteryInfo | undefined>();
+const SelectingCemetery = ({
+  setCemetery,
+  cemeteries,
+}: ISelectingCemeterProps) => {
+  const [selected, setSelected] = useState<ICemeteryInfo | undefined>(
+    cemeteries?.items.forEach((cemetery) => {
+      cemetery;
+    })
+  );
 
   const handleChange = (e: ICemeteryInfo) => {
-    setCemetery(e.value);
+    setCemetery(e);
     setSelected(e);
   };
-
-  useEffect(() => {
-    const cem: ICemeteryInfo[] = [
-      { id: 0, name: 'Select a cemetery', value: '' },
-      { id: 1, name: 'cemetery1', value: 'cemetery1' },
-      { id: 2, name: 'cemetery2', value: 'cemetery2' },
-      { id: 3, name: 'cemetery3', value: 'cemetery3' },
-    ];
-    setCemeteries(cem);
-    setSelected(cem[0]);
-  }, []);
 
   return (
     <div className="w-80">
@@ -42,7 +39,9 @@ const SelectingCemetery = ({ setCemetery }: ISelectingCemeterProps) => {
           <>
             <div className="relative mt-1">
               <Listbox.Button className="relative w-full h-10 cursor-default rounded-3xl bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                <span className="block truncate">{selected?.name}</span>
+                <span className="block truncate">
+                  {selected ? selected.name : 'Select cemetery'}
+                </span>
                 <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                   <IconButton
                     iconName={ICONS_NAME.selectingArrow}
@@ -59,10 +58,13 @@ const SelectingCemetery = ({ setCemetery }: ISelectingCemeterProps) => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                  {cemeteries.map((cemetery, cemeteryIdx) => (
+                <Listbox.Options
+                  placeholder="Select cemetery"
+                  className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                >
+                  {cemeteries?.items.map((cementery) => (
                     <Listbox.Option
-                      key={cemeteryIdx}
+                      key={cementery.uuid}
                       className={({ active }) =>
                         `relative cursor-default select-none py-2 pl-10 pr-4 ${
                           active
@@ -70,7 +72,7 @@ const SelectingCemetery = ({ setCemetery }: ISelectingCemeterProps) => {
                             : 'text-gray-900'
                         }`
                       }
-                      value={cemetery}
+                      value={cementery}
                     >
                       {({ selected }) => (
                         <>
@@ -79,7 +81,7 @@ const SelectingCemetery = ({ setCemetery }: ISelectingCemeterProps) => {
                               selected ? 'font-medium' : 'font-normal'
                             }`}
                           >
-                            {cemetery.name}
+                            {cementery.name}
                           </span>
                         </>
                       )}

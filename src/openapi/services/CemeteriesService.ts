@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { Cemeteries } from '../models/Cemeteries';
+import type { CemeteryOut } from '../models/CemeteryOut';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -27,6 +28,27 @@ export class CemeteriesService {
             query: {
                 'page': page,
                 'per_page': perPage,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Get Cemetery
+     * @param cemeteryUuid
+     * @returns CemeteryOut Successful Response
+     * @throws ApiError
+     */
+    public static getCemeteryApiCemeteryCemeteryUuidGet(
+        cemeteryUuid: string,
+    ): CancelablePromise<CemeteryOut> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/cemetery{cemetery_uuid}',
+            path: {
+                'cemetery_uuid': cemeteryUuid,
             },
             errors: {
                 422: `Validation Error`,

@@ -20,7 +20,8 @@ services:
     env_file:
       - .env
     environment:
-      APP_ENV: production # TODO remove in future
+      # APP_ENV: production # TODO remove in future
+      DATABASE_URI: postgresql://${DATABASE_USERNAME:-postgres}:${DATABASE_PASSWORD:-passwd}@db/db
     depends_on:
       - db
     ports:
