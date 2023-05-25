@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import { CemeteryOut } from '@/openapi';
-import { useRouter } from 'next/router';
 import AdditionalInfo from './AdditionalInfo';
 import CemeteryMainInfo, { IContactInfo } from './CemeteryMainInfo';
 import HorizontalPhotoGallery from './HorizontalPhotoGallery';

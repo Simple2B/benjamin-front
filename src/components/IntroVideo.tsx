@@ -22,7 +22,12 @@ const IntroVideo = ({ onVideoEnd }: IIntroVideoProps) => {
 
   return (
     <div className="h-full">
-      <video autoPlay muted ref={videoRef}>
+      <video
+        autoPlay
+        muted
+        ref={videoRef}
+        className="absolute top-0 left-0 w-full h-full object-cover"
+      >
         <source src="/video/greetingVideo.mp4" type="video/mp4" />
       </video>
     </div>
