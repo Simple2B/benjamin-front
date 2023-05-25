@@ -27,5 +27,12 @@ services:
     ports:
       - 127.0.0.1:${LOCAL_WEB_PORT:-8000}:80
 
+  web:
+    build: .
+    depends_on:
+      - app
+    ports:
+      - 127.0.0.1:3002:3000
+
 volumes:
   db_data:

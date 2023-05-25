@@ -7,7 +7,7 @@ type INavigationButtonProps = {
   action: string;
   className: string;
   isButtonEnabled: boolean;
-  onClick: React.MouseEventHandler;
+  onClick?: React.MouseEventHandler;
 };
 
 const NavigationButton = ({
@@ -26,7 +26,7 @@ const NavigationButton = ({
           isButtonEnabled ? 'bg-turquoise-100' : 'bg-grey-30'
         }`}
       >
-        <p className="text-white">{action}</p>
+        <p className="text-white">{action} </p>
         <IconButton iconName={icon} className={'h-3 w-3'} />
       </button>
     </div>
