@@ -23,7 +23,7 @@ const CemeteryMainInfo = ({
   audioSrc,
 }: ICemeteryMainInfoProps) => {
   return (
-    <div className="mt-56 flex flex-col gap-5">
+    <div className="w-full mt-56 flex flex-col gap-5">
       <div>
         <h1 className="text-xl font-semibold">{name}</h1>
         <p className="text-sm">{location}</p>
@@ -43,6 +43,7 @@ const CemeteryMainInfo = ({
         <p className="text-sm text-grey-20">Audio Tour</p>
         <AudioPlayer audioSourse={audioSrc} />
       </div>
+      <hr />
     </div>
   );
 };

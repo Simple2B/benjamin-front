@@ -49,7 +49,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
     audioRef.current.seek(e.currentTarget.value);
 
   return (
-    <div className="flex items-center gap-1 justify-center px-1.5">
+    <div className="flex items-center gap-1 justify-center">
       <ReactHowler
         src={audioSourse}
         playing={isPlaying}
@@ -65,7 +65,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
           <div onClick={togglePlay}>
             <IconButton
               iconName={isPlaying ? ICONS_NAME.pause : ICONS_NAME.play}
-              className={'h-4 w-4'}
+              className={'h-5 w-5'}
             />
           </div>
           <p className="text-xs text-grey-20">

@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { CemeteryOut } from '@/openapi';
-import AdditionalInfo from './AdditionalInfo';
+import CemeteryAdditionalInfo from './cemeteryAdditionalInfo/CemeteryAdditionalInfo';
 import CemeteryMainInfo, { IContactInfo } from './CemeteryMainInfo';
 import HorizontalPhotoGallery from './HorizontalPhotoGallery';
 import MapCemetery from './MapCemetery';
@@ -46,7 +46,7 @@ export default function PreviewCementery({ cemetery }: CemeteryPageProps) {
         contactInfo={contactInfo}
         audioSrc="https://www.bensound.com/bensound-music/bensound-tenderness.mp3"
       />
-      <AdditionalInfo
+      <CemeteryAdditionalInfo
         superintendent={cemetery.superintendent}
         war={cemetery.war}
         numberOfSoldiersBuried={12000}
