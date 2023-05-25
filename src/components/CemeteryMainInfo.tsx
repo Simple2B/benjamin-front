@@ -13,7 +13,7 @@ type ICemeteryMainInfoProps = {
 export interface IContactInfo {
   icon: string;
   description: string;
-  link: string;
+  link?: string;
 }
 
 const CemeteryMainInfo = ({

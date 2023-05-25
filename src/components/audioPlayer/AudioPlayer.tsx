@@ -17,7 +17,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [isAudioLoaded, setAudioLoaded] = useState<boolean>(false);
-  const intervalRef = useRef<NodeJS.Timer>(null);
+  const intervalRef = useRef<NodeJS.Timer | null>(null);
 
   const togglePlay = () => {
     setIsPlaying(!isPlaying);
@@ -45,8 +45,13 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
     };
   }, []);
 
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) =>
-    audioRef.current.seek(e.currentTarget.value);
+  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (audioRef.current && e.currentTarget) {
+      return audioRef.current.seek(parseInt(e.currentTarget.value));
+    }
+
+    return 0;
+  };
 
   return (
     <div className="flex items-center gap-1 justify-center">

@@ -8,6 +8,8 @@ import { ApiService } from '@/openapi';
 
 const LINKS = ['aboutUrl', 'gravestoneFormUrl', 'contactUsUrl', 'donateUrl'];
 
+export const dynamic = 'force-dynamic';
+
 const Page = async () => {
   const settingsData = await ApiService.rootApiGet();
   const links: { [key: string]: string } = {};

@@ -6,7 +6,7 @@ type INavigationButtonProps = {
   action: string;
   className: string;
   isButtonEnabled: boolean;
-  onClick: React.MouseEventHandler;
+  onClick?: React.MouseEventHandler;
 };
 
 const NavigationButton = ({

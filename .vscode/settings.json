@@ -1,0 +1,8 @@
+{
+  "editor.formatOnSave": true,
+  "files.autoSave": "onFocusChange",
+  "notebook.formatOnSave.enabled": true,
+  "python.linting.lintOnSave": true,
+  "python.testing.autoTestDiscoverOnSaveEnabled": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
