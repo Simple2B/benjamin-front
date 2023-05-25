@@ -41,7 +41,7 @@ const PreviewProjectInfo = ({
         srcVideo={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].vireoUrl}
         onVideoEnd={handleVideoEnd}
       />
-      <div className="flex flex-col justify-between h-1/2">
+      <div className="h-full flex flex-col">
         <ProjectInfo
           text={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].text}
           heading={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].heading}
