@@ -33,7 +33,7 @@ const SelectingCemetery = ({
   };
 
   return (
-    <div className="w-80">
+    <div className="w-10/12">
       <Listbox value={selected} onChange={handleChange}>
         {({ open }) => (
           <>

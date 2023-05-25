@@ -46,7 +46,7 @@ const PreviewProjectInfo = ({
           text={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].text}
           heading={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].heading}
         />
-        <div className="flex flex-col items-end justify-evenly">
+        <div className="flex flex-col items-end justify-evenly flex-grow">
           <Link href={isLastPage ? PATH.location : PATH.home}>
             <NavigationButton
               icon={ICONS_NAME.arrowRigth}
