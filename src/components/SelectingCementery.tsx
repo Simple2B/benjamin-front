@@ -26,6 +26,7 @@ const SelectingCemetery = ({
   const [selected, setSelected] = useState<string>('');
   const handleChange = (e: CemeteryOut) => {
     setCemetery(e);
+
     //setSelected(e);
   };
 

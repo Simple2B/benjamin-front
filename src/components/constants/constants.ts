@@ -1,1 +1,1 @@
-export const SECOND: number = 1000;
+export const SECOND = 1000;
