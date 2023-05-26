@@ -23,10 +23,10 @@ const SelectingCemetery = ({
   setCemetery,
   cemeteries,
 }: ISelectingCemeteriesProps) => {
-  const [selected, setSelected] = useState<string>('');
+  const [selected, setSelected] = useState<CemeteryOut | null>(null);
+
   const handleChange = (e: CemeteryOut) => {
     setCemetery(e);
-
     //setSelected(e);
   };
 
