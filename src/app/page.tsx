@@ -1,9 +1,6 @@
-import Image from 'next/image';
+import PreviewerHomePage from '@/components/PreviewerHomePage';
+import React from 'react';
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div>hello word</div>
-    </main>
-  );
+  return <PreviewerHomePage />;
 }

@@ -1,8 +1,8 @@
 export const PATH = {
+  home: '/',
   location: '/location',
   search: '/search',
   cemetery: '/cemetery',
-  home: '/home',
   message: '/message',
   prayer: '/prayer',
   settings: '/settings',
