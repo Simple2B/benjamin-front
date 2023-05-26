@@ -39,7 +39,7 @@ const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
             icon={ICONS_NAME.arrowRigth}
             action="Visit soldiers"
             className={
-              !!selectedCemetery
+              !!selectedCemetery.name
                 ? 'bg-turquoise-100'
                 : '&:disabled bg-indigo-10 opacity-60'
             }

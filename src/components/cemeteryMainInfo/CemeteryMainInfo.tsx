@@ -1,7 +1,7 @@
 import React from 'react';
-import AudioPlayer from './audioPlayer/AudioPlayer';
-import ButtonContactCemetery from './ButtonContactCemetery';
-import Link from 'next/link';
+import AudioPlayer from '../audioPlayer/AudioPlayer';
+import ButtonContactCemetery from '../ButtonContactCemetery';
+import { linkAction } from './CemeteryMainInfo.constants';
 
 type ICemeteryMainInfoProps = {
   name: string;
@@ -32,9 +32,9 @@ const CemeteryMainInfo = ({
         {contactInfo.map(({ icon, description, link }) => (
           <>
             {link && (
-              <Link href={link} key={description}>
+              <a href={linkAction[description] + link} key={description}>
                 <ButtonContactCemetery icon={icon} description={description} />
-              </Link>
+              </a>
             )}
           </>
         ))}

@@ -1,6 +1,6 @@
 export type ICemeteryAdditionalInfo = {
-  superintendent: string;
-  war: string;
+  superintendent?: string;
+  war?: string;
   numberOfSoldiersBuried: number;
   numberOfJewishSoldiersBuried: number;
   listedAsMissingSoldiers: number;
