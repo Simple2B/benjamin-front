@@ -8,22 +8,26 @@ type IHorizontalPhotoGalleryProps = {
 const HorizontalPhotoGallery = ({ text }: IHorizontalPhotoGalleryProps) => {
   const solierHeadstoneChanges: ISoldierProfileProps[] = [
     {
-      photoUrl: '',
+      photoUrl: '/images/photos/soldier1.jpg',
       name: '1st Lt. Robert S. Fink',
     },
     {
-      photoUrl: '',
+      photoUrl: '/images/photos/soldier2.jpg',
       name: 'Sgt. Charles Solomon',
     },
     {
-      photoUrl: '',
+      photoUrl: '/images/photos/soldier1.jpg',
       name: 'Pvt. Alan Franken',
+    },
+    {
+      photoUrl: '/images/photos/soldier2.jpg',
+      name: '1st Lt. Robert S. Fink',
     },
   ];
   return (
     <div className="w-full">
       <p className="text-indigo-100 font-semibold">{text}</p>
-      <div className="flex gap-3 overflow-x-scroll pb-4">
+      <div className="flex gap-3 overflow-x-auto pb-4 ">
         {solierHeadstoneChanges.map(({ photoUrl, name }) => (
           <SoldierProfile photoUrl={photoUrl} name={name} key={name} />
         ))}

@@ -9,7 +9,7 @@ export type CemeteryOut = {
     longitude?: number;
     phone?: string;
     email?: string;
-    urlPath?: string;
+    webUrl?: string;
     superintendent?: string;
     uuid: string;
     war?: string;
