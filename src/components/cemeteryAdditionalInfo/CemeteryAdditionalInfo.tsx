@@ -1,15 +1,8 @@
 import React from 'react';
-import { ADDITONAL_INFO_HEADERS } from './cemeteryAdditionalInfo.constants';
+import { ADDITONAL_INFO_HEADERS } from './CemeteryAdditionalInfo.constants';
+import { ICemeteryAdditionalInfo } from './CemeteryAdditionalInfo.types';
 
-type ICementryInfoProps = {
-  superintendent: string;
-  war: string;
-  numberOfSoldiersBuried: number;
-  numberOfJewishSoldiersBuried: number;
-  listedAsMissingSoldiers: number;
-};
-
-const CemeteryAdditionalInfo = (props: ICementryInfoProps) => {
+const CemeteryAdditionalInfo = (props: ICemeteryAdditionalInfo) => {
   return (
     <div className="w-full bg-grey-10 p-4 rounded-lg">
       <h2 className="font-semibold">Additional info</h2>
@@ -19,7 +12,7 @@ const CemeteryAdditionalInfo = (props: ICementryInfoProps) => {
             {value && (
               <div className="my-2" key={key}>
                 <p className="text-sm  text-grey-20">
-                  {ADDITONAL_INFO_HEADERS[key]}
+                  {ADDITONAL_INFO_HEADERS[key as keyof ICemeteryAdditionalInfo]}
                 </p>
                 <p className="text-base  text-indigo-100 font-medium">
                   {value}
