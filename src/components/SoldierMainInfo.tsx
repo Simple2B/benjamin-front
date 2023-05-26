@@ -11,10 +11,10 @@ type ISoldierMainInfoProps = {
 const SoldierMainInfo = ({ heading, text, icon }: ISoldierMainInfoProps) => {
   return (
     <div>
-      <p className="text-sm text-grey-20">
+      <div className="flex">
         <IconButton iconName={icon} className="h-3 w-3 m-1" />
-        {heading}
-      </p>
+        <p className="text-sm text-grey-20">{heading}</p>
+      </div>
       <p className="ml-4 font-medium">{text}</p>
     </div>
   );

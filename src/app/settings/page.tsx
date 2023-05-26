@@ -24,14 +24,16 @@ const Page = async () => {
 
   return (
     <div className="flex flex-col items-start m-6 gap-5">
-      <div className="flex items-center w-2/3 justify-between">
+      <div className="w-full flex items-baseline justify-between">
         <Link href={PATH.cemetery}>
           <IconButton
             iconName={ICONS_NAME.selectingArrow}
             className="w-4 h-4 rotate-180"
           />
         </Link>
-        <h1 className="text-2xl font-semibold">Settings</h1>
+        <h1 className="text-2xl font-semibold flex-grow text-center">
+          Settings
+        </h1>
       </div>
 
       <SettingBlock links={links} />

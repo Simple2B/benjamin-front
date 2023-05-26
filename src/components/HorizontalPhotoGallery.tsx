@@ -28,6 +28,7 @@ const HorizontalPhotoGallery = ({ text }: IHorizontalPhotoGalleryProps) => {
           <SoldierProfile photoUrl={photoUrl} name={name} key={name} />
         ))}
       </div>
+      <hr />
     </div>
   );
 };

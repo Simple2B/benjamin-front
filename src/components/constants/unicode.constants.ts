@@ -1,1 +1,1 @@
-export const UNICODE_DOT: string = '\u2022';
+export const UNICODE_DOT = '\u2022';

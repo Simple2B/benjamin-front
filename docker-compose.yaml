@@ -27,12 +27,24 @@ services:
     ports:
       - 127.0.0.1:${LOCAL_WEB_PORT:-8000}:80
 
-  web:
-    build: .
-    depends_on:
-      - app
+  admin:
+    image: simple2b/benjamin-admin
+    restart: always
+    command: ['sh', 'start_server.sh']
+    environment:
+      APP_ENV: production
+      DATABASE_URL: postgresql://${DATABASE_USERNAME:-postgres}:${DATABASE_PASSWORD:-passwd}@db/db
     ports:
-      - 127.0.0.1:3002:3000
+      - 127.0.0.1:8009:8000
+    depends_on:
+      - db
+
+  # web:
+  #   build: .
+  #   depends_on:
+  #     - app
+  #   ports:
+  #     - 127.0.0.1:3002:3000
 
 volumes:
   db_data:

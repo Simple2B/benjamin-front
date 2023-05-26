@@ -27,24 +27,26 @@ const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
         setCemetery={setSelectedCemetery}
         cemeteries={cemeteries.items}
       />
-      <div className="flex justify-end h-3/6 items-end">
-        {!!selectedCemetery ? (
-          <Link href={urlJoin(PATH.cemetery, selectedCemetery.uuid)}>
-            <NavigationButton
-              icon={ICONS_NAME.arrowRigth}
-              action="Visit soldiers"
-              className="bg-turquoise-100"
-              isButtonEnabled={true}
-            />
-          </Link>
-        ) : (
+      <div className="flex justify-end h-3/6 items-end self-end">
+        <Link
+          href={
+            !!selectedCemetery
+              ? urlJoin(PATH.cemetery, selectedCemetery.uuid)
+              : PATH.location
+          }
+        >
           <NavigationButton
             icon={ICONS_NAME.arrowRigth}
             action="Visit soldiers"
-            className="&:disabled bg-indigo-10 opacity-60"
+            className={
+              !!selectedCemetery
+                ? 'bg-turquoise-100'
+                : '&:disabled bg-indigo-10 opacity-60'
+            }
             isButtonEnabled={true}
+            onClick={() => {}}
           />
-        )}
+        </Link>
       </div>
     </>
   );

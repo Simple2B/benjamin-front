@@ -23,14 +23,16 @@ const SelectingCemetery = ({
   setCemetery,
   cemeteries,
 }: ISelectingCemeteriesProps) => {
+  const [selected, setSelected] = useState<CemeteryOut | null>(null);
+
   const handleChange = (e: CemeteryOut) => {
     setCemetery(e);
-    // setSelected(e);
+    //setSelected(e);
   };
 
   return (
-    <div className="w-80">
-      <Listbox value={selectedCemetery} onChange={handleChange}>
+    <div className="w-10/12">
+      <Listbox value={selected} onChange={handleChange}>
         {({ open }) => (
           <>
             <div className="relative mt-1">
