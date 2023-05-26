@@ -2,7 +2,9 @@
 import React, { useState } from 'react';
 import { CemeteryOut } from '@/openapi';
 import CemeteryAdditionalInfo from './cemeteryAdditionalInfo/CemeteryAdditionalInfo';
-import CemeteryMainInfo, { IContactInfo } from './CemeteryMainInfo';
+import CemeteryMainInfo, {
+  IContactInfo,
+} from './cemeteryMainInfo/CemeteryMainInfo';
 import HorizontalPhotoGallery from './HorizontalPhotoGallery';
 import MapCemetery from './MapCemetery';
 import SearchBar from './SearchBar';
@@ -53,6 +55,13 @@ export default function PreviewCementery({
         location={cemetery.location ? cemetery.location : ''}
         contactInfo={contactInfo}
         audioSrc="https://www.bensound.com/bensound-music/bensound-tenderness.mp3"
+      />
+      <CemeteryAdditionalInfo
+        superintendent={cemetery.superintendent}
+        war={cemetery.war}
+        numberOfSoldiersBuried={12000}
+        numberOfJewishSoldiersBuried={250}
+        listedAsMissingSoldiers={500}
       />
       <HorizontalPhotoGallery text="Soldiers with Headstone Changes" />
       <HorizontalPhotoGallery text="Soldiers born in New York" />
