@@ -6,15 +6,15 @@ type IRememberSoldierProps = {
 
 const REMEMBERING = [
   {
-    image: '#',
+    image: '/images/photos/prayer.jpg',
     text: 'Recite a prayer',
   },
   {
-    image: '#',
+    image: '/images/photos/stone.jpg',
     text: 'Lay a stone',
   },
   {
-    image: '#',
+    image: '/images/photos/message.jpg',
     text: 'Write a message',
   },
 ];
@@ -23,7 +23,6 @@ const RememberSoldier = ({ name }: IRememberSoldierProps) => {
   return (
     <div className="w-full p-4 bg-indigo-100 text-center">
       <h2 className="text-white font-semibold my-2">
-        {' '}
         REMEMBER {name.toLocaleUpperCase()}
       </h2>
       <div className="flex justify-evenly">
@@ -35,7 +34,7 @@ const RememberSoldier = ({ name }: IRememberSoldierProps) => {
                 alt="remember soldier"
                 className="w-24 bg-grey-30 rounded-lg"
               />
-              <p className="text-white text-xs">{text}</p>
+              <p className="text-white text-xs pt-1">{text}</p>
             </div>
           );
         })}

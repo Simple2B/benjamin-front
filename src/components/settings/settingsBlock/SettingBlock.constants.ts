@@ -1,4 +1,4 @@
-import { ICONS_NAME } from '../constants/iconName';
+import { ICONS_NAME } from '@/components/constants/iconName';
 
 interface SETTING_BOX_INFO {
   iconName: string;

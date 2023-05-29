@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import NavigationButton from './NavigationButton';
+import NavigationButton from '../NavigationButton';
 import VideoPlayer from './VideoPlayer';
-import { ICONS_NAME } from './constants/iconName';
-import { PATH } from './constants/path.constants';
+import { ICONS_NAME } from '../constants/iconName';
+import { PATH } from '../constants/path.constants';
 import ProjectInfo from './projectInfo/ProjectInfo';
 import { PROJECT_INFO_TO_DISPLAY } from './projectInfo/projectInfo.constants';
 

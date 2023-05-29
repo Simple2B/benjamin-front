@@ -1,6 +1,6 @@
 import React from 'react';
 import { ApiService } from '@/openapi';
-import PreviewerSettings from '@/components/PreviewerSettings';
+import PreviewerSettings from '@/components/settings/PreviewerSettings';
 
 export const dynamic = 'force-dynamic';
 const Page = async () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { CemeteriesService } from '@/openapi';
-import CemeteriesBox from '@/components/CemeteriesBox';
+import CemeteriesBox from '@/components/cemetery/CemeteriesBox';
 
 export const dynamic = 'force-dynamic';
 

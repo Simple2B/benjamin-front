@@ -1,7 +1,7 @@
 import React from 'react';
-import AudioPlayer from '../audioPlayer/AudioPlayer';
-import ButtonContactCemetery from '../ButtonContactCemetery';
 import { linkAction } from './CemeteryMainInfo.constants';
+import AudioPlayer from '@/components/audioPlayer/AudioPlayer';
+import ButtonContactCemetery from '../ButtonContactCemetery';
 
 type ICemeteryMainInfoProps = {
   name: string;
