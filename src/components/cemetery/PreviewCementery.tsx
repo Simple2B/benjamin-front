@@ -2,14 +2,15 @@
 import React, { useState } from 'react';
 import { CemeteryOut } from '@/openapi';
 import CemeteryAdditionalInfo from './cemeteryAdditionalInfo/CemeteryAdditionalInfo';
+
+import HorizontalPhotoGallery from './HorizontalPhotoGallery';
+import MapCemetery from './MapCemetery';
+import SearchBar from '../SearchBar';
+import SelectingCemetery from '../SelectingCementery';
+import { ICONS_NAME } from '../constants/iconName';
 import CemeteryMainInfo, {
   IContactInfo,
 } from './cemeteryMainInfo/CemeteryMainInfo';
-import HorizontalPhotoGallery from './HorizontalPhotoGallery';
-import MapCemetery from './MapCemetery';
-import SearchBar from './SearchBar';
-import SelectingCemetery from './SelectingCementery';
-import { ICONS_NAME } from './constants/iconName';
 
 interface CemeteryPageProps {
   cemetery: CemeteryOut;

@@ -1,10 +1,10 @@
 'use client';
 import React from 'react';
-import IconButton from './IconButton';
-import { ICONS_NAME } from './constants/iconName';
-import SettingBlock from './settingsBlock/SettingBlock';
+import IconButton from '../IconButton';
+import { ICONS_NAME } from '../constants/iconName';
 import { Metadata } from '@/openapi/models/Metadata';
 import { useRouter } from 'next/navigation';
+import SettingBlock from './settingsBlock/SettingBlock';
 
 type IPreviewerSettingsProps = { settingsData: Metadata };
 
@@ -40,7 +40,6 @@ export default function PreviewerSettings({
           Settings
         </h1>
       </div>
-
       <SettingBlock links={links} />
     </div>
   );

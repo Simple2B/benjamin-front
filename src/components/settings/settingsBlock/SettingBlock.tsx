@@ -1,7 +1,7 @@
 import React from 'react';
 import { SETTINHS_INFO } from './SettingBlock.constants';
-import SettingsBox from '../SettingsBox';
 import Link from 'next/link';
+import SettingsBox from '../SettingsBox';
 
 interface ISettingsBlockProps {
   links: { [key: string]: string };

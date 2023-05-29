@@ -1,4 +1,4 @@
-import PreviewCementery from '@/components/PreviewCementery';
+import PreviewCementery from '@/components/cemetery/PreviewCementery';
 import { CemeteriesService } from '@/openapi';
 
 export const dynamic = 'force-dynamic';

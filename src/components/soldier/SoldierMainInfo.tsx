@@ -1,6 +1,6 @@
 import React from 'react';
-import IconButton from './IconButton';
-import { ICONS_NAME } from './constants/iconName';
+import IconButton from '../IconButton';
+import { ICONS_NAME } from '../constants/iconName';
 
 type ISoldierMainInfoProps = {
   heading: string;

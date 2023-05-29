@@ -1,4 +1,4 @@
-import PreviewerHomePage from '@/components/PreviewerHomePage';
+import PreviewerHomePage from '@/components/home/PreviewerHomePage';
 import React from 'react';
 
 export default function Home() {

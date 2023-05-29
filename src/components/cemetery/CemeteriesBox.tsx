@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import React from 'react';
-import NavigationButton from './NavigationButton';
-import SelectingCemetery from './SelectingCementery';
-import { ICONS_NAME } from './constants/iconName';
-import { PATH } from './constants/path.constants';
+import NavigationButton from '../NavigationButton';
+import SelectingCemetery from '../SelectingCementery';
+import { ICONS_NAME } from '../constants/iconName';
+import { PATH } from '../constants/path.constants';
 import { Cemeteries, CemeteryOut } from '@/openapi';
 import urlJoin from 'url-join';
 
