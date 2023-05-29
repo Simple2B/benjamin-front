@@ -51,7 +51,7 @@ export const PreviewPrayer = () => {
         <div onClick={router.back}>
           <IconButton iconName={ICONS_NAME.arrow} className="w-4 h-4" />
         </div>
-        <h1 className="text-sm font-medium flex-grow text-center">
+        <h1 className="text-sm font-medium flex-grow text-center font-medium">
           Recite a prayer
         </h1>
       </div>
