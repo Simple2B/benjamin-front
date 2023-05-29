@@ -26,6 +26,7 @@ const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
         selectedCemetery={selectedCemetery}
         setCemetery={setSelectedCemetery}
         cemeteries={cemeteries.items}
+        isRedirecting={false}
       />
       <div className="flex justify-end h-3/6 items-end self-end">
         <Link

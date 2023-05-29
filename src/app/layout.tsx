@@ -1,6 +1,6 @@
 import './globals.css';
 import { OpenAPI } from '@/openapi';
-import { Providers } from '@/store/provider';
+import Providers from './providers';
 
 OpenAPI.BASE = process.env.BACKEND_URL || '';
 

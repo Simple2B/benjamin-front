@@ -49,6 +49,7 @@ export default function PreviewCementery({
         setCemetery={setSelectedCemetery}
         selectedCemetery={selectedCemetery}
         cemeteries={cemeteries}
+        isRedirecting={true}
       />
       <CemeteryMainInfo
         name={selectedCemetery.name}

@@ -5,27 +5,32 @@ import { Listbox, Transition } from '@headlessui/react';
 import IconButton from './IconButton';
 import { ICONS_NAME } from './constants/iconName';
 import { CemeteryOut } from '@/openapi';
-import { useAppDispatch } from '@/store/hooks';
-import { setCemeteryUuid } from '@/store/reducers/cemetery';
+import { useRouter } from 'next/navigation';
+import { PATH } from './constants/path.constants';
 
 type ISelectingCemeteriesProps = {
   selectedCemetery: CemeteryOut;
   setCemetery: React.Dispatch<React.SetStateAction<CemeteryOut>>;
   cemeteries: Array<CemeteryOut>;
+  isRedirecting: boolean;
 };
 
 const SelectingCemetery = ({
   selectedCemetery,
   setCemetery,
   cemeteries,
+  isRedirecting,
 }: ISelectingCemeteriesProps) => {
   const [selected, setSelected] = useState<CemeteryOut | null>(null);
-  const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const handleChange = (e: CemeteryOut) => {
     setCemetery(e);
-    dispatch(setCemeteryUuid(e.uuid));
-    //setSelected(e);
+    setSelected(e);
+
+    if (isRedirecting) {
+      router.replace(`${PATH.cemetery}/${e.uuid}`);
+    }
   };
 
   return (
