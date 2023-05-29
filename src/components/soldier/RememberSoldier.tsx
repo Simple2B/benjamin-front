@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 type IRememberSoldierProps = {
   name: string;
@@ -29,10 +30,12 @@ const RememberSoldier = ({ name }: IRememberSoldierProps) => {
         {REMEMBERING.map(({ image, text }) => {
           return (
             <div key="text" className="w-1/4">
-              <img
+              <Image
                 src={image}
+                width={500}
+                height={500}
                 alt="remember soldier"
-                className="w-24 bg-grey-30 rounded-lg"
+                className="w-24 object-cover rounded-lg bg-grey-30"
               />
               <p className="text-white text-xs pt-1">{text}</p>
             </div>

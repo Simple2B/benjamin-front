@@ -1,6 +1,13 @@
 import './globals.css';
 import { OpenAPI } from '@/openapi';
 import Providers from './providers';
+import { Noto_Sans } from 'next/font/google';
+
+const notoSans = Noto_Sans({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 OpenAPI.BASE = process.env.BACKEND_URL || '';
 
@@ -17,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body>
+      <body className={notoSans.className}>
         <Providers>{children}</Providers>
       </body>
     </html>
