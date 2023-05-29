@@ -4,7 +4,9 @@ import { Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import IconButton from './IconButton';
 import { ICONS_NAME } from './constants/iconName';
-import { Cemeteries, CemeteryOut } from '@/openapi';
+import { CemeteryOut } from '@/openapi';
+import { useAppDispatch } from '@/store/hooks';
+import { setCemeteryUuid } from '@/store/reducers/cemetery';
 
 type ISelectingCemeteriesProps = {
   selectedCemetery: CemeteryOut;
@@ -12,21 +14,17 @@ type ISelectingCemeteriesProps = {
   cemeteries: Array<CemeteryOut>;
 };
 
-interface ICemeteryInfo {
-  id: number;
-  name: string;
-  value: string;
-}
-
 const SelectingCemetery = ({
   selectedCemetery,
   setCemetery,
   cemeteries,
 }: ISelectingCemeteriesProps) => {
   const [selected, setSelected] = useState<CemeteryOut | null>(null);
+  const dispatch = useAppDispatch();
 
   const handleChange = (e: CemeteryOut) => {
     setCemetery(e);
+    dispatch(setCemeteryUuid(e.uuid));
     //setSelected(e);
   };
 

@@ -38,7 +38,7 @@ export default function PreviewCementery({
     {
       icon: ICONS_NAME.web,
       description: 'Website',
-      link: cemetery.urlPath,
+      link: cemetery.webUrl,
     },
   ];
   return (

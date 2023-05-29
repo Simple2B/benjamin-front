@@ -14,7 +14,7 @@ const IconButton = ({ iconName, className }: IIconButtonProps) => {
         src={`/images/icons/${iconName}.svg`}
         width={500}
         height={500}
-        alt="Picture of the author"
+        alt="icon"
       />
     </div>
   );
