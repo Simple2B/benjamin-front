@@ -28,7 +28,7 @@ export const PreviewerMessage = () => {
   };
 
   return (
-    <div className="h-[calc(100dvh)] flex flex-col items-start p-6 text-indigo-100 justify-between gap-3">
+    <div className="h-[calc(100dvh)] flex flex-col items-start px-3 py-6 text-indigo-100 justify-between gap-3">
       <div className="w-full flex justify-between">
         <div onClick={router.back}>
           <IconButton iconName={ICONS_NAME.arrow} className="w-4 h-4" />
@@ -37,7 +37,7 @@ export const PreviewerMessage = () => {
           Write a message to the family
         </h1>
       </div>
-      <div className="flex flex-col items-start gap-3">
+      <div className="flex flex-col items-start gap-3 px-3">
         <p>
           It is very meaningful for families to have the service and sacrifice
           of their family members acknowledged. In some cases, soldiers’
@@ -49,7 +49,7 @@ export const PreviewerMessage = () => {
           forward the message to the family at the earliest opportunity.
         </p>
       </div>
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full px-3">
         <h3 className="font-semibold">EMAIL</h3>
         <input
           type="email"
@@ -63,8 +63,7 @@ export const PreviewerMessage = () => {
           Please enter accurate email address
         </p>
       </div>
-
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full px-3">
         <h3 className="font-semibold">MESSAGE</h3>
         <textarea
           maxLength={500}
@@ -78,13 +77,14 @@ export const PreviewerMessage = () => {
           {message.length}/{maxLength}
         </p>
       </div>
-
-      <button
-        className="bg-turquoise-100 w-full text-white p-3 rounded-lg font-semibold"
-        onClick={handleSend}
-      >
-        Send message
-      </button>
+      <div className="px-3 w-full">
+        <button
+          className="bg-turquoise-100 w-full text-white p-3 rounded-lg font-semibold"
+          onClick={handleSend}
+        >
+          Send message
+        </button>
+      </div>
     </div>
   );
 };

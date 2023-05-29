@@ -46,7 +46,7 @@ export const PreviewPrayer = () => {
   };
 
   return (
-    <div className="flex flex-col items-start p-6 text-indigo-100 justify-between w-full">
+    <div className="flex flex-col items-start py-6 px-3 text-indigo-100 justify-between w-full">
       <div className="w-full flex justify-between">
         <div onClick={router.back}>
           <IconButton iconName={ICONS_NAME.arrow} className="w-4 h-4" />
@@ -55,40 +55,43 @@ export const PreviewPrayer = () => {
           Recite a prayer
         </h1>
       </div>
-      <Tab.Group>
-        <Tab.List className="flex w-full space-x-1 text-indigo-100">
-          {Object.keys(prayers).map((prayer) => (
-            <Tab
-              key={prayer}
-              className={({ selected }) =>
-                `w-full rounded-lg leading-5
+
+      <div className="px-3">
+        <Tab.Group>
+          <Tab.List className="flex w-full space-x-1 text-indigo-100">
+            {Object.keys(prayers).map((prayer) => (
+              <Tab
+                key={prayer}
+                className={({ selected }) =>
+                  `w-full rounded-lg leading-5
                  ${selected ? 'font-semibold underline' : 'text-grey-30'}`
-              }
-            >
-              {prayer}
-            </Tab>
-          ))}
-        </Tab.List>
-        <Tab.Panels className="mt-2 w-full">
-          {Object.values(prayers).map((posts, idx) => (
-            <Tab.Panel key={idx}>
-              <ul>
-                {posts.map((post) => (
-                  <div key={post.prayerText} className="flex flex-col gap-5">
-                    <p className="text-sm p-3 bg-turquoise-100 bg-opacity-10 rounded-lg">
-                      {post.description}
-                    </p>
-                    <div className="shadow-lg p-3 rounded-lg border-gray-100 border">
-                      <AudioPlayer audioSourse={post.audioUrl} />
+                }
+              >
+                {prayer}
+              </Tab>
+            ))}
+          </Tab.List>
+          <Tab.Panels className="mt-2 w-full">
+            {Object.values(prayers).map((posts, idx) => (
+              <Tab.Panel key={idx}>
+                <ul>
+                  {posts.map((post) => (
+                    <div key={post.prayerText} className="flex flex-col gap-5">
+                      <p className="text-sm p-3 bg-turquoise-100 bg-opacity-10 rounded-lg">
+                        {post.description}
+                      </p>
+                      <div className="shadow-lg p-3 rounded-lg border-gray-100 border">
+                        <AudioPlayer audioSourse={post.audioUrl} />
+                      </div>
+                      <p>{post.prayerText}</p>
                     </div>
-                    <p>{post.prayerText}</p>
-                  </div>
-                ))}
-              </ul>
-            </Tab.Panel>
-          ))}
-        </Tab.Panels>
-      </Tab.Group>
+                  ))}
+                </ul>
+              </Tab.Panel>
+            ))}
+          </Tab.Panels>
+        </Tab.Group>
+      </div>
     </div>
   );
 };
