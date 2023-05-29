@@ -23,7 +23,6 @@ const RememberSoldier = ({ name }: IRememberSoldierProps) => {
   return (
     <div className="w-full p-4 bg-indigo-100 text-center">
       <h2 className="text-white font-semibold my-2">
-        {' '}
         REMEMBER {name.toLocaleUpperCase()}
       </h2>
       <div className="flex justify-evenly">

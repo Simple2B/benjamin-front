@@ -7,6 +7,7 @@ import { ICONS_NAME } from './constants/iconName';
 import { CemeteryOut } from '@/openapi';
 import { useRouter } from 'next/navigation';
 import { PATH } from './constants/path.constants';
+import urlJoin from 'url-join';
 
 type ISelectingCemeteriesProps = {
   selectedCemetery: CemeteryOut;
@@ -21,21 +22,19 @@ const SelectingCemetery = ({
   cemeteries,
   isRedirecting,
 }: ISelectingCemeteriesProps) => {
-  const [selected, setSelected] = useState<CemeteryOut | null>(null);
   const router = useRouter();
 
   const handleChange = (e: CemeteryOut) => {
     setCemetery(e);
-    setSelected(e);
 
     if (isRedirecting) {
-      router.replace(`${PATH.cemetery}/${e.uuid}`);
+      router.replace(urlJoin(PATH.cemetery, e.uuid));
     }
   };
 
   return (
     <div className="w-10/12">
-      <Listbox value={selected} onChange={handleChange}>
+      <Listbox value={selectedCemetery} onChange={handleChange}>
         {({ open }) => (
           <>
             <div className="relative mt-1">
