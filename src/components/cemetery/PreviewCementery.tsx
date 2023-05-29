@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { CemeteryOut } from '@/openapi';
 import CemeteryAdditionalInfo from './cemeteryAdditionalInfo/CemeteryAdditionalInfo';
 
-import HorizontalPhotoGallery from './HorizontalPhotoGallery';
+import HorizontalPhotoGallery from '../HorizontalPhotoGallery';
 import MapCemetery from './MapCemetery';
 import SearchBar from '../SearchBar';
 import SelectingCemetery from '../SelectingCementery';

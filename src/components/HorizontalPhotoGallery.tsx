@@ -1,5 +1,7 @@
 import React from 'react';
-import SoldierProfile, { ISoldierProfileProps } from './SoldierProfile';
+import SoldierProfile, {
+  ISoldierProfileProps,
+} from './cemetery/SoldierProfile';
 
 type IHorizontalPhotoGalleryProps = {
   text: string;
