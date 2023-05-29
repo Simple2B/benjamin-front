@@ -6,15 +6,15 @@ type IRememberSoldierProps = {
 
 const REMEMBERING = [
   {
-    image: '#',
+    image: '/images/photos/prayer.jpg',
     text: 'Recite a prayer',
   },
   {
-    image: '#',
+    image: '/images/photos/stone.jpg',
     text: 'Lay a stone',
   },
   {
-    image: '#',
+    image: '/images/photos/message.jpg',
     text: 'Write a message',
   },
 ];
@@ -35,7 +35,7 @@ const RememberSoldier = ({ name }: IRememberSoldierProps) => {
                 alt="remember soldier"
                 className="w-24 bg-grey-30 rounded-lg"
               />
-              <p className="text-white text-xs">{text}</p>
+              <p className="text-white text-xs pt-1">{text}</p>
             </div>
           );
         })}
