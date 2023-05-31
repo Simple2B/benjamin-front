@@ -27,20 +27,6 @@ const VideoPlayer = ({ srcVideo, onVideoEnd }: IVideoPlayerProps) => {
     }
   }, [srcVideo]);
 
-  useEffect(() => {
-    const setHeightToWidth = () => {
-      if (videoRef && videoRef.current) {
-        const { offsetWidth } = videoRef.current;
-        videoRef.current.style.height = `${offsetWidth}px`;
-      }
-    };
-    setHeightToWidth();
-    window.onresize = setHeightToWidth;
-    return () => {
-      window.onresize = null;
-    };
-  }, []);
-
   return (
     <>
       <video

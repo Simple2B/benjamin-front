@@ -1,8 +1,6 @@
 import React from 'react';
-import { CemeteriesService } from '@/openapi';
+import { Cemeteries, CemeteriesService } from '@/openapi';
 import CemeteriesBox from '@/components/cemetery/CemeteriesBox';
-
-export const dynamic = 'force-dynamic';
 
 const Page = async () => {
   const cemeteries = await CemeteriesService.getCemeteriesApiCemeteryGet(
