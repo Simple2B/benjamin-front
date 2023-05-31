@@ -47,6 +47,7 @@ const VideoPlayer = ({ srcVideo, onVideoEnd }: IVideoPlayerProps) => {
         autoPlay
         muted
         ref={videoRef}
+        playsInline
         className="w-screen bg-gradient-to-r from-indigo-20 to-indigo-30"
       ></video>
     </>
