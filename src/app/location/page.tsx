@@ -1,6 +1,7 @@
 import React from 'react';
-import { Cemeteries, CemeteriesService } from '@/openapi';
+import { CemeteriesService } from '@/openapi';
 import CemeteriesBox from '@/components/cemetery/CemeteriesBox';
+import { rajdhani } from '@/components/constants/constants';
 
 const Page = async () => {
   const cemeteries = await CemeteriesService.getCemeteriesApiCemeteryGet(
@@ -10,7 +11,9 @@ const Page = async () => {
 
   return (
     <div className="bg-gradient-to-r from-indigo-20 to-indigo-30 w-screen h-screen flex flex-col justify-start gap-10 p-4 items-center">
-      <h1 className="text-xl leading-none text-white text-center mt-28">
+      <h1
+        className={`text-2xl leading-none text-white text-center mt-28 ${rajdhani.className}`}
+      >
         Which American military cemetery would you like to explore?
       </h1>
       <CemeteriesBox cemeteries={cemeteries} />
