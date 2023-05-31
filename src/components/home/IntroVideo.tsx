@@ -24,6 +24,7 @@ const IntroVideo = ({ onVideoEnd }: IIntroVideoProps) => {
     <div className="h-full">
       <video
         autoPlay
+        playsInline
         muted
         ref={videoRef}
         className="absolute top-0 left-0 w-full h-full object-cover"

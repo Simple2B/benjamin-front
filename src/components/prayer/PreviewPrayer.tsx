@@ -56,7 +56,7 @@ export const PreviewPrayer = () => {
         </h1>
       </div>
 
-      <div className="px-3">
+      <div className="px-3 w-full">
         <Tab.Group>
           <Tab.List className="flex w-full space-x-1 text-indigo-100">
             {Object.keys(prayers).map((prayer) => (
