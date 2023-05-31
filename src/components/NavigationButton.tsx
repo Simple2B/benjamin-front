@@ -20,12 +20,12 @@ const NavigationButton = ({
     <button
       disabled={!isButtonEnabled}
       onClick={onClick}
-      className={`inline-flex items-center gap-x-1 p-3 rounded-lg justify-evenly m-3 ${className} ${
+      className={`inline-flex items-center gap-x-1 p-3 rounded-lg justify-evenly text-white ${className} ${
         isButtonEnabled ? 'bg-turquoise-100' : 'bg-grey-30'
       }`}
     >
-      <p className="text-white">{action}</p>
-      <IconButton iconName={icon} className={'h-3 w-3'} />
+      <p className={`leading-6 font-semibold`}>{action}</p>
+      <IconButton iconName={icon} className={'h-4 w-4'} />
     </button>
   );
 };

@@ -9,30 +9,32 @@ module.exports = {
     extend: {
       colors: {
         turquoise: {
-          50: '#A6DDE9',   
-          100: '#2693AB'       
+          50: '#A6DDE9',
+          100: '#2693AB',
         },
         grey: {
           10: '#FAFAFB',
           20: '#808EAB',
-          30: '#B6B9C1'
+          30: '#B6B9C1',
+          40: '#D9DADD',
         },
-        indigo:{   
+        indigo: {
           10: '#3E5080',
           20: '#334A81',
           30: '#17244A',
           50: '#1A2850',
-          100: '#0C1831'
+          100: '#0C1831',
+          200: '#19274E',
         },
         blue: {
           DEFAULT: '#2693AB',
         },
-        width:{
-          '350': '21.5rem'
-        }
+        width: {
+          350: '21.5rem',
+        },
       },
       boxShadow: {
-        'box': '0px 3px 25px -5px rgba(0,0,0, 0.1)'
+        box: '0px 3px 25px -5px rgba(0,0,0, 0.1)',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

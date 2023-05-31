@@ -6,6 +6,7 @@ import { ICONS_NAME } from '../constants/iconName';
 import { PATH } from '../constants/path.constants';
 import ProjectInfo from './projectInfo/ProjectInfo';
 import { PROJECT_INFO_TO_DISPLAY } from './projectInfo/projectInfo.constants';
+import { CurrentPointer } from './CurrentPointer';
 
 interface IPreviewProjectInfoProps {
   currentInfoIndex: number;
@@ -36,7 +37,7 @@ const PreviewProjectInfo = ({
   };
 
   return (
-    <div className="h-[calc(100dvh)] flex flex-col">
+    <div className="h-[calc(100dvh)] flex flex-col items-center ">
       <VideoPlayer
         srcVideo={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].vireoUrl}
         onVideoEnd={handleVideoEnd}
@@ -46,7 +47,7 @@ const PreviewProjectInfo = ({
           text={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].text}
           heading={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].heading}
         />
-        <div className="flex flex-col items-end justify-evenly flex-grow">
+        <div className="h-full flex flex-col items-end justify-end px-6 mb-12">
           <Link href={isLastPage ? PATH.location : PATH.home}>
             <NavigationButton
               icon={ICONS_NAME.arrowRigth}
@@ -58,6 +59,7 @@ const PreviewProjectInfo = ({
           </Link>
         </div>
       </div>
+      <CurrentPointer currentInfoIndex={currentInfoIndex} />
     </div>
   );
 };
