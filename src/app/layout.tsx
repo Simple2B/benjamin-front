@@ -1,11 +1,17 @@
 import './globals.css';
 import { OpenAPI } from '@/openapi';
 import Providers from './providers';
-import { Noto_Sans } from 'next/font/google';
+import localFont from 'next/font/local';
 
-const notoSans = Noto_Sans({
-  weight: '400',
-  subsets: ['latin'],
+const rajdhani = localFont({
+  src: '../../public/fonts/Rajdhani-Regular.ttf',
+  variable: '--rajdhani',
+  display: 'swap',
+});
+
+const notoSans = localFont({
+  src: '../../public/fonts/NotoSans-Regular.ttf',
+  variable: '--noto-sans',
   display: 'swap',
 });
 
@@ -22,9 +28,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${rajdhani.variable} ${notoSans.variable} ${notoSans.className}`}
+    >
       <head />
-      <body className={notoSans.className}>
+      <body>
         <Providers>{children}</Providers>
       </body>
     </html>
