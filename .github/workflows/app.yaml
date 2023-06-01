@@ -55,4 +55,4 @@ jobs:
           host: ${{ secrets.PROD_HOST }}
           username: ${{ secrets.PROD_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          script: whoami
+          script: cat ~/project_benjamin/docker_compose.yaml
