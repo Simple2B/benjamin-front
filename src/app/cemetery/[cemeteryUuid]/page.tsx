@@ -17,10 +17,7 @@ const Page = async ({ params }: ICemeteryPageProps) => {
   const cemetery =
     await CemeteriesService.getCemeteryApiCemeteryCemeteryUuidGet(cemeteryUuid);
 
-  const cemeteries = await CemeteriesService.getCemeteriesApiCemeteryGet(
-    1,
-    1000
-  );
+  const cemeteries = await CemeteriesService.getCemeteriesApiCemeteryGet();
   return (
     <div className="flex flex-col gap-6 items-center px-4 mb-4">
       <PreviewCementery cemetery={cemetery} cemeteries={cemeteries.items} />
