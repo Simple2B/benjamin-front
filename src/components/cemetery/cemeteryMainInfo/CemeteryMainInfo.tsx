@@ -2,7 +2,6 @@ import React from 'react';
 import { linkAction } from './CemeteryMainInfo.constants';
 import AudioPlayer from '@/components/audioPlayer/AudioPlayer';
 import ButtonContactCemetery from '../ButtonContactCemetery';
-import { rajdhani } from '@/components/constants/constants';
 
 type ICemeteryMainInfoProps = {
   name: string;
@@ -26,22 +25,20 @@ const CemeteryMainInfo = ({
   return (
     <div className="w-full mt-56 flex flex-col gap-5">
       <div>
-        <h1
-          className={`text-2xl font-semibold ${rajdhani.className} text-indigo-100`}
-        >
+        <h1 className={`text-2xl font-semibold font-raj text-indigo-100`}>
           {name}
         </h1>
         <p className="text-sm">{location}</p>
       </div>
       <div className="flex gap-3">
         {contactInfo.map(({ icon, description, link }) => (
-          <>
+          <div key={description}>
             {link && (
-              <a href={linkAction[description] + link} key={description}>
+              <a href={linkAction[description] + link}>
                 <ButtonContactCemetery icon={icon} description={description} />
               </a>
             )}
-          </>
+          </div>
         ))}
       </div>
       <div>

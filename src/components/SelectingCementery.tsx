@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import { Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import IconButton from './IconButton';
@@ -41,9 +41,9 @@ const SelectingCemetery = ({
               <Listbox.Button
                 className={`relative w-full h-10 cursor-default text-sm leading-6 ${
                   open ? 'rounded-t-3xl' : 'rounded-3xl'
-                } bg-white py-2 text-left shadow-md focus:outline-nonesm:text-sm border-b border-solid border-grey-40`}
+                } bg-white py-2 text-left shadow-md focus:outline-nonesm:text-sm border-b border-solid border-grey-40 font-noto`}
               >
-                <span className="block truncate pl-4">
+                <span className={`block truncate pl-4 font-noto`}>
                   {selectedCemetery.name
                     ? selectedCemetery.name
                     : 'Select cemetery'}
@@ -79,7 +79,7 @@ const SelectingCemetery = ({
                       {({ selected }) => (
                         <>
                           <span
-                            className={` block truncate ${
+                            className={`font-noto block truncate ${
                               selected ? 'font-medium' : 'font-normal'
                             }`}
                           >

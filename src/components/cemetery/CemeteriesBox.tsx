@@ -8,7 +8,6 @@ import { ICONS_NAME } from '../constants/iconName';
 import { PATH } from '../constants/path.constants';
 import { Cemeteries, CemeteryOut } from '@/openapi';
 import urlJoin from 'url-join';
-import { rajdhani } from '../constants/constants';
 
 interface ICemeteriesBox {
   cemeteries: Cemeteries;
@@ -20,10 +19,11 @@ const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
     location: '',
     uuid: '',
   });
+
   return (
     <div className="bg-gradient-to-r from-indigo-20 to-indigo-30 w-screen flex flex-col justify-start gap-8 px-8 items-center all-height">
       <h1
-        className={`text-2xl leading-8 text-white text-center mt-40 font-semibold ${rajdhani.className}`}
+        className={`text-2xl leading-8 text-white text-center mt-40 font-semibold font-raj`}
       >
         Which American military cemetery would you like to explore?
       </h1>
