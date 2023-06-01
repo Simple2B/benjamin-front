@@ -39,12 +39,13 @@ services:
     depends_on:
       - db
 
-  # web:
-  #   build: .
-  #   depends_on:
-  #     - app
-  #   ports:
-  #     - 127.0.0.1:3002:3000
+  web:
+    build: .
+    image: simple2b/project-benjamin-front
+    depends_on:
+      - app
+    ports:
+      - 127.0.0.1:3002:3000
 
 volumes:
   db_data:

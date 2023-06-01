@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import Link from 'next/link';
 import React from 'react';
@@ -20,18 +19,24 @@ const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
     location: '',
     uuid: '',
   });
+
   return (
-    <>
+    <div className="bg-gradient-to-r from-indigo-20 to-indigo-30 w-screen flex flex-col justify-start gap-8 px-8 items-center all-height">
+      <h1
+        className={`font-rajdhani text-2xl leading-8 text-white text-center mt-40 font-semibold`}
+      >
+        Which American military cemetery would you like to explore?
+      </h1>
       <SelectingCemetery
         selectedCemetery={selectedCemetery}
         setCemetery={setSelectedCemetery}
         cemeteries={cemeteries.items}
         isRedirecting={false}
       />
-      <div className="flex justify-end h-3/6 items-end self-end">
+      <div className="flex justify-end h-full items-end self-end mb-8">
         <Link
           href={
-            !!selectedCemetery
+            !!selectedCemetery.name
               ? urlJoin(PATH.cemetery, selectedCemetery.uuid)
               : PATH.location
           }
@@ -39,17 +44,13 @@ const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
           <NavigationButton
             icon={ICONS_NAME.arrowRigth}
             action="Visit soldiers"
-            className={
-              !!selectedCemetery.name
-                ? 'bg-turquoise-100'
-                : '&:disabled bg-indigo-10 opacity-60'
-            }
-            isButtonEnabled={true}
+            className="w-44"
+            isButtonEnabled={!!selectedCemetery.name}
             onClick={() => {}}
           />
         </Link>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -8,9 +8,9 @@ const CemeteryAdditionalInfo = (props: ICemeteryAdditionalInfo) => {
       <h2 className="font-semibold">Additional info</h2>
       {Object.entries(props).map(([key, value]) => {
         return (
-          <>
+          <div key={key}>
             {value && (
-              <div className="my-2" key={key}>
+              <div className="my-2">
                 <p className="text-sm  text-grey-20">
                   {ADDITONAL_INFO_HEADERS[key as keyof ICemeteryAdditionalInfo]}
                 </p>
@@ -19,7 +19,7 @@ const CemeteryAdditionalInfo = (props: ICemeteryAdditionalInfo) => {
                 </p>
               </div>
             )}
-          </>
+          </div>
         );
       })}
     </div>

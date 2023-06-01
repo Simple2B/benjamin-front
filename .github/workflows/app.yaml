@@ -11,7 +11,7 @@ on:
 
 env:
   DOCKER_LOGIN: simple2b
-  IMAGE_REPO: simple2b/project-benjamin-front
+  IMAGE_REPO: simple2b/benjamin-front
 
 jobs:
   test:
@@ -49,3 +49,10 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: ${{ env.IMAGE_REPO }}:latest
+      - name: deploy
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.PROD_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: docker compose -f ~/project_benjamin/docker-compose.yaml pull web && docker compose -f ~/project_benjamin/docker-compose.yaml up -d web

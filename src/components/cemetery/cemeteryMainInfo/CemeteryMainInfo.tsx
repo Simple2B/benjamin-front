@@ -25,18 +25,20 @@ const CemeteryMainInfo = ({
   return (
     <div className="w-full mt-56 flex flex-col gap-5">
       <div>
-        <h1 className="text-xl font-semibold">{name}</h1>
+        <h1 className={`font-rajdhani text-2xl font-semibold  text-indigo-100`}>
+          {name}
+        </h1>
         <p className="text-sm">{location}</p>
       </div>
       <div className="flex gap-3">
         {contactInfo.map(({ icon, description, link }) => (
-          <>
+          <div key={description}>
             {link && (
-              <a href={linkAction[description] + link} key={description}>
+              <a href={linkAction[description] + link}>
                 <ButtonContactCemetery icon={icon} description={description} />
               </a>
             )}
-          </>
+          </div>
         ))}
       </div>
       <div>

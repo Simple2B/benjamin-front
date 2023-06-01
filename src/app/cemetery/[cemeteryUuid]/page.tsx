@@ -1,7 +1,8 @@
 import PreviewCementery from '@/components/cemetery/PreviewCementery';
 import { CemeteriesService } from '@/openapi';
 
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
+export const fetchCache = 'default-cache';
 
 interface ICemeteryPageProps {
   params: ICemeteryParams;

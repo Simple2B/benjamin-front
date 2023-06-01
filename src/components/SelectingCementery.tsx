@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import { Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import IconButton from './IconButton';
@@ -33,18 +33,22 @@ const SelectingCemetery = ({
   };
 
   return (
-    <div className="w-10/12">
+    <div className="w-[302px] h-10">
       <Listbox value={selectedCemetery} onChange={handleChange}>
         {({ open }) => (
           <>
             <div className="relative mt-1">
-              <Listbox.Button className="relative w-full h-10 cursor-default rounded-3xl bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                <span className="block truncate">
+              <Listbox.Button
+                className={`relative w-full h-10 cursor-default text-sm leading-6 ${
+                  open ? 'rounded-t-3xl' : 'rounded-3xl'
+                } bg-white py-2 text-left shadow-md focus:outline-nonesm:text-sm border-b border-solid border-grey-40 font-noto`}
+              >
+                <span className={`block truncate pl-4 font-noto`}>
                   {selectedCemetery.name
                     ? selectedCemetery.name
                     : 'Select cemetery'}
                 </span>
-                <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4">
                   <IconButton
                     iconName={ICONS_NAME.selectingArrow}
                     className={`h-4 w-4 m-1 ${open && 'rotate-90'}`}
@@ -62,32 +66,32 @@ const SelectingCemetery = ({
               >
                 <Listbox.Options
                   placeholder="Select cemetery"
-                  className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                  className="absolute max-h-60 w-full overflow-auto rounded-b-3xl bg-white text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
                   {cemeteries.map((cementery) => (
-                    <Listbox.Option
-                      key={cementery.uuid}
-                      className={({ active }) =>
-                        `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                          active
-                            ? 'bg-amber-100 text-amber-900'
-                            : 'text-gray-900'
-                        }`
-                      }
-                      value={cementery}
-                    >
-                      {({ selected }) => (
-                        <>
-                          <span
-                            className={`block truncate ${
-                              selected ? 'font-medium' : 'font-normal'
-                            }`}
-                          >
-                            {cementery.name}
-                          </span>
-                        </>
+                    <>
+                      {cementery.uuid !== selectedCemetery.uuid && (
+                        <Listbox.Option
+                          key={cementery.uuid}
+                          className={({ active }) =>
+                            `relative cursor-default select-none py-2 pl-4 text-sm leading-6 border-b border-solid border-grey-40`
+                          }
+                          value={cementery}
+                        >
+                          {({ selected }) => (
+                            <>
+                              <span
+                                className={`font-noto block truncate ${
+                                  selected ? 'font-medium' : 'font-normal'
+                                }`}
+                              >
+                                {cementery.name}
+                              </span>
+                            </>
+                          )}
+                        </Listbox.Option>
                       )}
-                    </Listbox.Option>
+                    </>
                   ))}
                 </Listbox.Options>
               </Transition>
