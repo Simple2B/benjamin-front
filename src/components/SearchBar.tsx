@@ -18,7 +18,7 @@ const SearchBar = ({ setInputSoldier }: ISearchBarProps) => {
   };
 
   return (
-    <div className="relative inline-flex items-center gap-3 rounded-lg bg-white h-12 justify-evenly px-1.5 mt-10 w-[350px]">
+    <div className="rounded-lg bg-white relative flex items-center h-12 justify-between px-1.5 mt-10 w-[350px]">
       <div className="pl-3 flex justify-center items-center">
         <IconButton
           iconName={ICONS_NAME.magnifyingGlass}
