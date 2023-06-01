@@ -19,7 +19,7 @@ const Page = async ({ params }: ICemeteryPageProps) => {
 
   const cemeteries = await CemeteriesService.getCemeteriesApiCemeteryGet();
   return (
-    <div className="flex flex-col gap-6 items-center px-4 mb-4">
+    <div className="flex flex-col gap-6 items-center">
       <PreviewCementery cemetery={cemetery} cemeteries={cemeteries.items} />
     </div>
   );
