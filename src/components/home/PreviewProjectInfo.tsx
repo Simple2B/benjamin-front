@@ -37,7 +37,7 @@ const PreviewProjectInfo = ({
   };
 
   return (
-    <div className="h-[calc(100dvh)] flex flex-col items-center ">
+    <div className="h-[calc(100dvh)] flex flex-col items-center all-height">
       <VideoPlayer
         srcVideo={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].vireoUrl}
         onVideoEnd={handleVideoEnd}

@@ -8,7 +8,6 @@ import { CemeteryOut } from '@/openapi';
 import { useRouter } from 'next/navigation';
 import { PATH } from './constants/path.constants';
 import urlJoin from 'url-join';
-import { notoSans } from './constants/constants';
 
 type ISelectingCemeteriesProps = {
   selectedCemetery: CemeteryOut;
@@ -42,7 +41,7 @@ const SelectingCemetery = ({
               <Listbox.Button
                 className={`relative w-full h-10 cursor-default text-sm leading-6 ${
                   open ? 'rounded-t-3xl' : 'rounded-3xl'
-                } bg-white py-2 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 sm:text-sm`}
+                } bg-white py-2 text-left shadow-md focus:outline-nonesm:text-sm border-b border-solid border-grey-40`}
               >
                 <span className="block truncate pl-4">
                   {selectedCemetery.name
@@ -73,7 +72,7 @@ const SelectingCemetery = ({
                     <Listbox.Option
                       key={cementery.uuid}
                       className={({ active }) =>
-                        `relative cursor-default select-none py-2 pl-4 text-sm leading-6 border-b border-solid border-[#dfe0e2]`
+                        `relative cursor-default select-none py-2 pl-4 text-sm leading-6 border-b border-solid border-grey-40`
                       }
                       value={cementery}
                     >

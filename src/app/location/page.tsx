@@ -8,11 +8,7 @@ const Page = async () => {
     1000
   );
 
-  return (
-    <div className="bg-gradient-to-r from-indigo-20 to-indigo-30 w-screen h-screen flex flex-col justify-start gap-8 px-8 items-center">
-      <CemeteriesBox cemeteries={cemeteries} />
-    </div>
-  );
+  return <CemeteriesBox cemeteries={cemeteries} />;
 };
 
 export default Page;
