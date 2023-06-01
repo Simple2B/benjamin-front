@@ -69,25 +69,29 @@ const SelectingCemetery = ({
                   className="absolute max-h-60 w-full overflow-auto rounded-b-3xl bg-white text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
                   {cemeteries.map((cementery) => (
-                    <Listbox.Option
-                      key={cementery.uuid}
-                      className={({ active }) =>
-                        `relative cursor-default select-none py-2 pl-4 text-sm leading-6 border-b border-solid border-grey-40`
-                      }
-                      value={cementery}
-                    >
-                      {({ selected }) => (
-                        <>
-                          <span
-                            className={`font-noto block truncate ${
-                              selected ? 'font-medium' : 'font-normal'
-                            }`}
-                          >
-                            {cementery.name}
-                          </span>
-                        </>
+                    <>
+                      {cementery.uuid !== selectedCemetery.uuid && (
+                        <Listbox.Option
+                          key={cementery.uuid}
+                          className={({ active }) =>
+                            `relative cursor-default select-none py-2 pl-4 text-sm leading-6 border-b border-solid border-grey-40`
+                          }
+                          value={cementery}
+                        >
+                          {({ selected }) => (
+                            <>
+                              <span
+                                className={`font-noto block truncate ${
+                                  selected ? 'font-medium' : 'font-normal'
+                                }`}
+                              >
+                                {cementery.name}
+                              </span>
+                            </>
+                          )}
+                        </Listbox.Option>
                       )}
-                    </Listbox.Option>
+                    </>
                   ))}
                 </Listbox.Options>
               </Transition>
