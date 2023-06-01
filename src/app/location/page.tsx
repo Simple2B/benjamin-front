@@ -3,10 +3,7 @@ import { CemeteriesService } from '@/openapi';
 import CemeteriesBox from '@/components/cemetery/CemeteriesBox';
 
 const Page = async () => {
-  const cemeteries = await CemeteriesService.getCemeteriesApiCemeteryGet(
-    1,
-    1000
-  );
+  const cemeteries = await CemeteriesService.getCemeteriesApiCemeteryGet();
 
   return <CemeteriesBox cemeteries={cemeteries} />;
 };

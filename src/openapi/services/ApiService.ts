@@ -4,6 +4,7 @@
 import type { Cemeteries } from '../models/Cemeteries';
 import type { CemeteryOut } from '../models/CemeteryOut';
 import type { Metadata } from '../models/Metadata';
+import type { Soldiers } from '../models/Soldiers';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -14,25 +15,13 @@ export class ApiService {
     /**
      * Get Cemeteries
      * Get all cemeteries with pagination
-     * @param page
-     * @param perPage
      * @returns Cemeteries Successful Response
      * @throws ApiError
      */
-    public static getCemeteriesApiCemeteryGet(
-        page: number = 1,
-        perPage: number = 10,
-    ): CancelablePromise<Cemeteries> {
+    public static getCemeteriesApiCemeteryGet(): CancelablePromise<Cemeteries> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cemetery',
-            query: {
-                'page': page,
-                'per_page': perPage,
-            },
-            errors: {
-                422: `Validation Error`,
-            },
         });
     }
 
@@ -50,6 +39,34 @@ export class ApiService {
             url: '/api/cemetery{cemetery_uuid}',
             path: {
                 'cemetery_uuid': cemeteryUuid,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Get Soldiers
+     * Get all cemeteries with pagination
+     * @param q
+     * @param page
+     * @param perPage
+     * @returns Soldiers Successful Response
+     * @throws ApiError
+     */
+    public static getSoldiersApiSoldierGet(
+        q?: string,
+        page: number = 1,
+        perPage: number = 10,
+    ): CancelablePromise<Soldiers> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/soldier',
+            query: {
+                'q': q,
+                'page': page,
+                'per_page': perPage,
             },
             errors: {
                 422: `Validation Error`,

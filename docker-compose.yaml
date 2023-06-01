@@ -15,7 +15,7 @@ services:
       - 127.0.0.1:${LOCAL_DB_PORT:-15432}:5432
 
   app:
-    image: simple2b/operation-benjamin
+    image: simple2b/benjamin-back
     restart: always
     env_file:
       - .env
@@ -41,7 +41,6 @@ services:
 
   web:
     build: .
-    image: simple2b/project-benjamin-front
     depends_on:
       - app
     ports:
