@@ -38,6 +38,8 @@ services:
       - 127.0.0.1:8009:8000
     depends_on:
       - db
+    env_file:
+      - .env
 
   web:
     build: .
@@ -45,6 +47,8 @@ services:
       - app
     ports:
       - 127.0.0.1:3002:3000
+    env_file:
+      - .env
 
 volumes:
   db_data:
