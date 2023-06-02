@@ -52,7 +52,9 @@ const PreviewProjectInfo = ({
             <NavigationButton
               icon={ICONS_NAME.arrowRigth}
               action={isLastPage ? 'Done' : 'Next'}
-              className="w-28"
+              className={`w-28 text-white ${
+                isButtonEnabled ? 'bg-turquoise-100' : 'bg-grey-30'
+              }`}
               isButtonEnabled={isButtonEnabled}
               onClick={handleClick}
             />

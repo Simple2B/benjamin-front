@@ -3,6 +3,7 @@ import { CemeteriesService } from '@/openapi';
 
 // export const dynamic = 'force-dynamic';
 export const fetchCache = 'default-cache';
+export const revalidate = 60;
 
 interface ICemeteryPageProps {
   params: ICemeteryParams;
