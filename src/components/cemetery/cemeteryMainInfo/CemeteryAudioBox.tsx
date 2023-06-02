@@ -13,10 +13,14 @@ export const CemeteryAudioBox = ({ audio_tours }: ICemeteryAudioBoxProps) => {
       <div className="flex flex-col gap-2">
         <p className="font-semibold text-indigo-100">Audio Tour</p>
         {audio_tours.map((melody) => (
-          <AudioPlayer
-            key={melody}
-            audioSourse={urlJoin(AWS_BASE_URL, melody)}
-          />
+          <>
+            {AWS_BASE_URL && (
+              <AudioPlayer
+                key={melody}
+                audioSourse={urlJoin(AWS_BASE_URL, melody)}
+              />
+            )}
+          </>
         ))}
       </div>
       <hr />
