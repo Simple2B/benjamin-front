@@ -57,6 +57,7 @@ const PreviewProjectInfo = ({
               }`}
               isButtonEnabled={isButtonEnabled}
               onClick={handleClick}
+              iconClassName={''}
             />
           </Link>
         </div>
