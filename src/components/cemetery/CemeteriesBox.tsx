@@ -10,15 +10,13 @@ import { Cemeteries, CemeteryOut } from '@/openapi';
 import urlJoin from 'url-join';
 
 interface ICemeteriesBox {
-  cemeteries: Cemeteries;
+  cemeteries: Array<CemeteryOut>;
 }
 
 const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
-  const [selectedCemetery, setSelectedCemetery] = useState<CemeteryOut>({
-    name: '',
-    location: '',
-    uuid: '',
-  });
+  const [selectedCemetery, setSelectedCemetery] = useState<
+    CemeteryOut | undefined
+  >(undefined);
 
   return (
     <div className="bg-gradient-to-r from-indigo-20 to-indigo-30 w-screen flex flex-col justify-start gap-8 px-8 items-center all-height">
@@ -29,14 +27,13 @@ const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
       </h1>
       <SelectingCemetery
         selectedCemetery={selectedCemetery}
-        setCemetery={setSelectedCemetery}
-        cemeteries={cemeteries.items}
-        isRedirecting={false}
+        onSelect={setSelectedCemetery}
+        cemeteries={cemeteries}
       />
       <div className="flex justify-end h-full items-end self-end mb-8">
         <Link
           href={
-            !!selectedCemetery.name
+            !!selectedCemetery?.name
               ? urlJoin(PATH.cemetery, selectedCemetery.uuid)
               : PATH.location
           }
@@ -45,12 +42,12 @@ const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
             icon={ICONS_NAME.arrowRigth}
             action="Visit soldiers"
             className={`${
-              !!selectedCemetery.name
+              !!selectedCemetery?.name
                 ? 'bg-turquoise-100 text-white'
                 : 'bg-indigo-10 text-grey-20'
             } w-44 `}
-            iconClassName={!!selectedCemetery.name ? '' : 'opacity-25'}
-            isButtonEnabled={!!selectedCemetery.name}
+            iconClassName={!!selectedCemetery?.name ? '' : 'opacity-25'}
+            isButtonEnabled={!!selectedCemetery?.name}
             onClick={() => {}}
           />
         </Link>

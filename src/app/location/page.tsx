@@ -7,7 +7,7 @@ export const revalidate = 60;
 const Page = async () => {
   const cemeteries = await CemeteriesService.getCemeteriesApiCemeteryGet();
 
-  return <CemeteriesBox cemeteries={cemeteries} />;
+  return <CemeteriesBox cemeteries={cemeteries.items} />;
 };
 
 export default Page;
