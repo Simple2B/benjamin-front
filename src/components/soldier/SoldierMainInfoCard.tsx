@@ -1,10 +1,10 @@
 import React from 'react';
-import IconButton from '../IconButton';
+import Image from 'next/image';
 import { ICONS_NAME } from '../constants/iconName';
 import SoldierMainInfo from './SoldierMainInfo';
 
 type ISoldierMainInfoProps = {
-  photoUrL: string;
+  photoUrl: string;
   name: string;
   serviceNumber: string;
   branchOfService: string;
@@ -18,7 +18,7 @@ interface IMilitaryInfo {
 }
 
 const SoldierMainInfoCard = ({
-  photoUrL,
+  photoUrl,
   name,
   serviceNumber,
   branchOfService,
@@ -43,11 +43,13 @@ const SoldierMainInfoCard = ({
   ];
 
   return (
-    <div className="flex justify-center gap-4">
-      <img
-        src={photoUrL}
-        className="w-36 h-32 rounded-lg bg-grey-30"
+    <div className="flex justify-start gap-4 w-full">
+      <Image
+        src={photoUrl}
+        width={140}
+        height={132}
         alt="Soldier"
+        className="w-[126px] h-[123px] rounded-lg bg-grey-30"
       />
       <div className="flex flex-col gap-2">
         <p className="text-lg font-semibold">{name}</p>
