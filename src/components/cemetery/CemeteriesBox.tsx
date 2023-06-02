@@ -44,7 +44,12 @@ const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
           <NavigationButton
             icon={ICONS_NAME.arrowRigth}
             action="Visit soldiers"
-            className="w-44"
+            className={`${
+              !!selectedCemetery.name
+                ? 'bg-turquoise-100 text-white'
+                : 'bg-indigo-10 text-grey-20'
+            } w-44 `}
+            iconClassName={!!selectedCemetery.name ? '' : 'opacity-25'}
             isButtonEnabled={!!selectedCemetery.name}
             onClick={() => {}}
           />
