@@ -55,4 +55,6 @@ jobs:
           host: ${{ secrets.PROD_HOST }}
           username: ${{ secrets.PROD_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          script: docker compose -f ~/project_benjamin/docker-compose.yaml pull web && docker compose -f ~/project_benjamin/docker-compose.yaml up -d web
+          script: |
+            cd ~/operation-benjamin
+            docker compose pull web && docker compose up -d web

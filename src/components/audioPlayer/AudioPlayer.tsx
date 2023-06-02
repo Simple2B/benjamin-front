@@ -67,10 +67,13 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
 
       {isAudioLoaded ? (
         <>
-          <div onClick={togglePlay}>
+          <div
+            onClick={togglePlay}
+            className="flex items-center justify-center"
+          >
             <IconButton
               iconName={isPlaying ? ICONS_NAME.pause : ICONS_NAME.play}
-              className={'h-5 w-5'}
+              className={'h-6 w-6'}
             />
           </div>
           <p className="text-xs text-grey-20">
@@ -97,7 +100,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
               }%, #d1d5db 100%)`,
             }}
           />
-          <p className="text-xs text-grey-20">
+          <p className="text-xs text-grey-30">
             {formatTime(audioRef.current ? audioRef.current.duration() : 0)}
           </p>
         </>

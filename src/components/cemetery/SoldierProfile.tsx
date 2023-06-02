@@ -16,7 +16,7 @@ const SoldierProfile = ({ photoUrl, name }: ISoldierProfileProps) => {
         alt="Soldier"
         className="h-32 w-36 object-cover rounded-lg"
       />
-      <p className="text-base text-center">{name}</p>
+      <p className="text-base text-center leading-5 mt-2">{name}</p>
     </div>
   );
 };

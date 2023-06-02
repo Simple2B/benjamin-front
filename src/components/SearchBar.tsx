@@ -18,8 +18,13 @@ const SearchBar = ({ setInputSoldier }: ISearchBarProps) => {
   };
 
   return (
-    <div className="relative inline-flex items-center gap-2 rounded-lg bg-white h-12 justify-evenly px-1.5 mt-10 ">
-      <IconButton iconName={ICONS_NAME.magnifyingGlass} className={'h-6 w-6'} />
+    <div className="rounded-lg bg-white relative flex items-center h-12 justify-between px-1.5 mt-10 w-[350px]">
+      <div className="pl-3 flex justify-center items-center">
+        <IconButton
+          iconName={ICONS_NAME.magnifyingGlass}
+          className={'h-4 w-4'}
+        />
+      </div>
       <input
         type="text"
         placeholder="Seach for the soldier"
@@ -31,7 +36,7 @@ const SearchBar = ({ setInputSoldier }: ISearchBarProps) => {
         <IconButton
           iconName={ICONS_NAME.settings}
           className={
-            'inline-flex items-center justify-center h-9 w-9 bg-turquoise-100 rounded p-2'
+            'inline-flex items-center justify-center h-9 w-9 bg-turquoise-100 rounded p-2.5'
           }
         />
       </Link>
