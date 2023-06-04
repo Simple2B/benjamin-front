@@ -28,7 +28,7 @@ const SelectingCemetery = ({
                   open ? 'rounded-t-3xl' : 'rounded-3xl'
                 } bg-white py-2 text-left shadow-md focus:outline-nonesm:text-sm border-b border-solid border-grey-40 font-noto`}
               >
-                <span className={`block truncate pl-4 font-noto`}>
+                <span className={`block truncate pl-4 font-noto w-[235px]`}>
                   {selectedCemetery?.name
                     ? selectedCemetery.name
                     : 'Select cemetery'}
@@ -66,7 +66,7 @@ const SelectingCemetery = ({
                           {({ selected }) => (
                             <>
                               <span
-                                className={`font-noto block truncate ${
+                                className={`font-noto block truncate w-[235px] ${
                                   selected ? 'font-medium' : 'font-normal'
                                 }`}
                               >
