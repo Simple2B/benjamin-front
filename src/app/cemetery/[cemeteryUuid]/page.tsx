@@ -28,11 +28,7 @@ const Page = async ({ params }: ICemeteryPageProps) => {
     redirect(PATH.location);
   }
 
-  return (
-    <div className="flex flex-col gap-6 items-center">
-      <PreviewCementery cemetery={cemetery} cemeteries={cemeteries.items} />
-    </div>
-  );
+  return <PreviewCementery cemetery={cemetery} cemeteries={cemeteries.items} />;
 };
 
 export default Page;

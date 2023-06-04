@@ -9,7 +9,7 @@ type ICemeteryAudioBoxProps = {
 
 export const CemeteryAudioBox = ({ audio_tours }: ICemeteryAudioBoxProps) => {
   return (
-    <div className="w-full flex flex-col gap-6 bg-white px-6 z-10">
+    <div className="w-full flex flex-col gap-6 bg-white px-6 z-10 py-5">
       <div className="flex flex-col gap-2">
         <p className="font-semibold text-indigo-100">Audio Tour</p>
         {audio_tours.map((melody) => (

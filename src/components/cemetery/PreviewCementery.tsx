@@ -30,17 +30,21 @@ export default function PreviewCementery({
 
   return (
     <>
-      <div className="flex flex-col gap-5 items-center w-full">
-        <MapCemetery />
-        <div className="mx-8">
-          <SearchBar setInputSoldier={setInputSoldier} />
+      <div className="flex flex-col items-center w-full bg-white">
+        <div className="fixed">
+          <MapCemetery />
+          <div className="mx-8">
+            <SearchBar setInputSoldier={setInputSoldier} />
+          </div>
+          <div className="flex flex-col items-center pt-5">
+            <SelectingCemetery
+              selectedCemetery={cemetery}
+              onSelect={handleSelectCemetery}
+              cemeteries={cemeteries}
+            />
+          </div>
         </div>
 
-        <SelectingCemetery
-          selectedCemetery={cemetery}
-          onSelect={handleSelectCemetery}
-          cemeteries={cemeteries}
-        />
         <CemeteryMainInfo
           name={cemetery.name}
           location={cemetery.location ? cemetery.location : ''}
@@ -49,7 +53,7 @@ export default function PreviewCementery({
           webUrl={cemetery.webUrl}
         />
         <CemeteryAudioBox audio_tours={cemetery.audio_tours} />
-        <div className="flex flex-col gap-6 items-center w-full px-6 z-10">
+        <div className="flex flex-col gap-6 items-center w-full px-6 z-10 bg-white">
           <CemeteryAdditionalInfo
             superintendent={cemetery.superintendent}
             war={cemetery.war}
@@ -59,7 +63,7 @@ export default function PreviewCementery({
           />
         </div>
       </div>
-      <div className="flex flex-col gap-6 items-center pl-5 mb-8 w-full z-10">
+      <div className="relative flex flex-col gap-6 items-center pl-5 mb-8 w-full z-10 pb-5 bg-white pt-6">
         <HorizontalPhotoGallery text="Soldiers with Headstone Changes" />
         <HorizontalPhotoGallery text="Soldiers born in New York" />
       </div>

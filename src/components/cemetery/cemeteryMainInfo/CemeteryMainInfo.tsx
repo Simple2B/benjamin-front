@@ -43,7 +43,7 @@ const CemeteryMainInfo = ({
   ];
 
   return (
-    <div className="w-full flex flex-col gap-6 bg-white rounded-t-xl px-6 mt-[12.5rem] z-10 pt-8">
+    <div className="w-full flex flex-col gap-6 bg-white rounded-t-xl px-6 mt-[calc(100vh-414px)] z-10 pt-8">
       <div className="flex flex-col gap-1">
         <h1
           className={`font-rajdhani text-2xl font-semibold  text-indigo-100 leading-7`}
@@ -65,7 +65,7 @@ const CemeteryMainInfo = ({
             </div>
           ))}
         </div>
-      </div>      
+      </div>
     </div>
   );
 };

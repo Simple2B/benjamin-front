@@ -1,13 +1,13 @@
 'use client';
-import { useState } from 'react';
+
+import { CemeteryOut } from '@/openapi';
 import Link from 'next/link';
-import React from 'react';
+import { useState } from 'react';
+import urlJoin from 'url-join';
 import NavigationButton from '../NavigationButton';
 import SelectingCemetery from '../SelectingCementery';
 import { ICONS_NAME } from '../constants/iconName';
 import { PATH } from '../constants/path.constants';
-import { Cemeteries, CemeteryOut } from '@/openapi';
-import urlJoin from 'url-join';
 
 interface ICemeteriesBox {
   cemeteries: Array<CemeteryOut>;
