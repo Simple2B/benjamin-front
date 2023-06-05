@@ -26,3 +26,7 @@ body {
   /* min-height: -webkit-fill-available;*/
   height: 100%;
 }
+
+ul {
+  --tw-ring-offset-color: 0 0 #000 !important;
+}

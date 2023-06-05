@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CemeteryOut } from '@/openapi';
 import CemeteryAdditionalInfo from './cemeteryAdditionalInfo/CemeteryAdditionalInfo';
 import HorizontalPhotoGallery from '../HorizontalPhotoGallery';
@@ -31,9 +31,9 @@ export default function PreviewCementery({
   return (
     <>
       <div className="flex flex-col items-center w-full bg-white">
-        <div className="fixed">
+        <div className="fixed w-screen">
           <MapCemetery />
-          <div className="mx-8">
+          <div className="flex flex-col items-center">
             <SearchBar setInputSoldier={setInputSoldier} />
           </div>
           <div className="flex flex-col items-center pt-5">
