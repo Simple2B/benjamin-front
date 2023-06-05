@@ -24,11 +24,15 @@ const SelectingCemetery = ({
           <>
             <div className="relative mt-1">
               <Listbox.Button
-                className={`relative w-full h-10 cursor-default text-sm leading-6 ${
+                className={`relative  w-full h-10 cursor-default text-sm leading-6 pl-4 ${
                   open ? 'rounded-t-3xl' : 'rounded-3xl'
-                } bg-white py-2 text-left shadow-md focus:outline-nonesm:text-sm border-b border-solid border-grey-40 font-noto`}
+                } bg-white pt-2 text-left shadow-md focus:outline-nonesm:text-sm  font-noto`}
               >
-                <span className={`block truncate pl-4 font-noto w-[235px]`}>
+                <span
+                  className={`block truncate font-noto w-[235px] pb-1 ${
+                    open && 'border-b border-solid border-grey-40'
+                  }`}
+                >
                   {selectedCemetery?.name
                     ? selectedCemetery.name
                     : 'Select cemetery'}
@@ -59,14 +63,14 @@ const SelectingCemetery = ({
                         <Listbox.Option
                           key={cementery.uuid}
                           className={({ active }) =>
-                            `relative cursor-default select-none py-2 pl-4 text-sm leading-6 border-b border-solid border-grey-40`
+                            `relative cursor-default select-none pt-2 pl-4 text-sm leading-6 h-10 flex`
                           }
                           value={cementery}
                         >
                           {({ selected }) => (
                             <>
                               <span
-                                className={`font-noto block truncate w-[235px] ${
+                                className={`font-noto block truncate w-[235px] border-b border-solid border-[rgba(217, 218, 221, 0.5)] ${
                                   selected ? 'font-medium' : 'font-normal'
                                 }`}
                               >

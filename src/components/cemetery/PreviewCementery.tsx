@@ -31,7 +31,7 @@ export default function PreviewCementery({
   return (
     <>
       <div className="flex flex-col items-center w-full bg-white">
-        <div className="fixed">
+        <div className="fixed w-screen">
           <MapCemetery />
           <div className="mx-8">
             <SearchBar setInputSoldier={setInputSoldier} />
