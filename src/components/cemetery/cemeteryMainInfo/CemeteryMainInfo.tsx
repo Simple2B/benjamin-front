@@ -1,29 +1,49 @@
 import React from 'react';
 import { linkAction } from './CemeteryMainInfo.constants';
-import AudioPlayer from '@/components/audioPlayer/AudioPlayer';
 import ButtonContactCemetery from '../ButtonContactCemetery';
+import { ICONS_NAME } from '@/components/constants/iconName';
 
-type ICemeteryMainInfoProps = {
-  name: string;
-  location: string;
-  contactInfo: IContactInfo[];
-  audioSrc: string;
-};
-
-export interface IContactInfo {
+interface IContactInfo {
   icon: string;
   description: string;
   link?: string;
 }
 
+type ICemeteryMainInfoProps = {
+  name: string;
+  location: string;
+  phone?: string;
+  email?: string;
+  webUrl?: string;
+};
+
 const CemeteryMainInfo = ({
   name,
   location,
-  contactInfo,
-  audioSrc,
+  phone,
+  email,
+  webUrl,
 }: ICemeteryMainInfoProps) => {
+  const contactInfo: IContactInfo[] = [
+    {
+      icon: ICONS_NAME.telephone,
+      description: 'Call',
+      link: phone,
+    },
+    {
+      icon: ICONS_NAME.envelope,
+      description: 'Email',
+      link: email,
+    },
+    {
+      icon: ICONS_NAME.web,
+      description: 'Website',
+      link: webUrl,
+    },
+  ];
+
   return (
-    <div className="w-full flex flex-col gap-6 bg-white rounded-t-xl px-6 mt-[12.5rem] z-10 pt-8">
+    <div className="w-full flex flex-col gap-6 bg-white rounded-t-xl px-6 mt-[calc(100vh-414px)] z-10 pt-8">
       <div className="flex flex-col gap-1">
         <h1
           className={`font-rajdhani text-2xl font-semibold  text-indigo-100 leading-7`}
@@ -46,12 +66,6 @@ const CemeteryMainInfo = ({
           ))}
         </div>
       </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="font-semibold text-indigo-100">Audio Tour</p>
-        <AudioPlayer audioSourse={audioSrc} />
-      </div>
-      <hr />
     </div>
   );
 };

@@ -13,5 +13,6 @@ export type CemeteryOut = {
     superintendent?: string;
     uuid: string;
     war?: string;
+    audio_tours: Array<string>;
 };
 

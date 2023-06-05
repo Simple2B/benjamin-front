@@ -76,7 +76,7 @@ export default function PreviewerSoldier() {
     <div>
       <div className="flex flex-col justify-center items-center mx-7 gap-4 my-4">
         <SoldierMainInfoCard
-          photoUrL="#"
+          photoUrl="/images/photos/soldier2.jpg"
           name="1st Lt. Robert Fink"
           serviceNumber="O-430368"
           branchOfService="US Coast Guard"

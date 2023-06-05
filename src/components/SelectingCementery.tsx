@@ -5,36 +5,21 @@ import { Listbox, Transition } from '@headlessui/react';
 import IconButton from './IconButton';
 import { ICONS_NAME } from './constants/iconName';
 import { CemeteryOut } from '@/openapi';
-import { useRouter } from 'next/navigation';
-import { PATH } from './constants/path.constants';
-import urlJoin from 'url-join';
 
 type ISelectingCemeteriesProps = {
-  selectedCemetery: CemeteryOut;
-  setCemetery: React.Dispatch<React.SetStateAction<CemeteryOut>>;
+  selectedCemetery?: CemeteryOut;
+  onSelect: (arg: CemeteryOut) => void;
   cemeteries: Array<CemeteryOut>;
-  isRedirecting: boolean;
 };
 
 const SelectingCemetery = ({
   selectedCemetery,
-  setCemetery,
+  onSelect,
   cemeteries,
-  isRedirecting,
 }: ISelectingCemeteriesProps) => {
-  const router = useRouter();
-
-  const handleChange = (e: CemeteryOut) => {
-    setCemetery(e);
-
-    if (isRedirecting) {
-      router.replace(urlJoin(PATH.cemetery, e.uuid));
-    }
-  };
-
   return (
     <div className="w-[302px] h-10">
-      <Listbox value={selectedCemetery} onChange={handleChange}>
+      <Listbox value={selectedCemetery} onChange={onSelect}>
         {({ open }) => (
           <>
             <div className="relative mt-1">
@@ -43,8 +28,8 @@ const SelectingCemetery = ({
                   open ? 'rounded-t-3xl' : 'rounded-3xl'
                 } bg-white py-2 text-left shadow-md focus:outline-nonesm:text-sm border-b border-solid border-grey-40 font-noto`}
               >
-                <span className={`block truncate pl-4 font-noto`}>
-                  {selectedCemetery.name
+                <span className={`block truncate pl-4 font-noto w-[235px]`}>
+                  {selectedCemetery?.name
                     ? selectedCemetery.name
                     : 'Select cemetery'}
                 </span>
@@ -70,7 +55,7 @@ const SelectingCemetery = ({
                 >
                   {cemeteries.map((cementery) => (
                     <>
-                      {cementery.uuid !== selectedCemetery.uuid && (
+                      {cementery.uuid !== selectedCemetery?.uuid && (
                         <Listbox.Option
                           key={cementery.uuid}
                           className={({ active }) =>
@@ -81,7 +66,7 @@ const SelectingCemetery = ({
                           {({ selected }) => (
                             <>
                               <span
-                                className={`font-noto block truncate ${
+                                className={`font-noto block truncate w-[235px] ${
                                   selected ? 'font-medium' : 'font-normal'
                                 }`}
                               >

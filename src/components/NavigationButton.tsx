@@ -22,7 +22,7 @@ const NavigationButton = ({
     <button
       disabled={!isButtonEnabled}
       onClick={onClick}
-      className={`inline-flex items-center gap-x-1 p-3 rounded-lg justify-evenly  font-semibold ${className} `}
+      className={`inline-flex items-center gap-x-2 p-3 rounded-lg justify-center  font-semibold ${className} `}
     >
       <p className={`leading-6 font-semibold font-noto`}>{action}</p>
       <IconButton iconName={icon} className={`${iconClassName} h-4 w-4`} />

@@ -27,7 +27,7 @@ const HorizontalPhotoGallery = ({ text }: IHorizontalPhotoGalleryProps) => {
     },
   ];
   return (
-    <div className="w-full">
+    <div className="w-full z-10">
       <p className="text-indigo-100 font-semibold mb-3 leading-6">{text}</p>
       <div className="flex gap-3 overflow-x-auto pb-4  text-indigo-100">
         {solierHeadstoneChanges.map(({ photoUrl, name }) => (
