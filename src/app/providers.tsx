@@ -21,7 +21,6 @@ export default function Providers({ children }: IProviders) {
     }
     const page = pageRef.current;
     page.addEventListener('click', () => {
-      console.log('click');
       if (screenfull.isEnabled) {
         screenfull.request();
       }
