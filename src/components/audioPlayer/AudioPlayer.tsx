@@ -54,7 +54,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
   };
 
   return (
-    <div className="flex items-center gap-1 justify-center">
+    <div className="flex items-center gap-1 justify-center h-6">
       <ReactHowler
         src={audioSourse}
         playing={isPlaying}
