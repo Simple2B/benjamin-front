@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { CemeteryOut } from '@/openapi';
 import CemeteryAdditionalInfo from './cemeteryAdditionalInfo/CemeteryAdditionalInfo';
 import HorizontalPhotoGallery from '../HorizontalPhotoGallery';

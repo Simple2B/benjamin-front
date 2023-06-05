@@ -8,6 +8,12 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+html {
+  overflow-y: scroll;
+  overflow: hidden;
+  width: 100%;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -19,6 +25,10 @@
 body {
   color: black;
   height: 100dvh;
+  height: 100%;
+  position: fixed;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .all-height {

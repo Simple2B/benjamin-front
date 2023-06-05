@@ -32,9 +32,17 @@ export default function RootLayout({
       lang="en"
       className={`${rajdhani.variable} ${notoSans.variable} ${notoSans.className}`}
     >
-      <head />
+      <head>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+      </head>
       <body>
-        <Providers>{children}</Providers>
+        <div
+          id="page"
+          className="fixed top-0 left-0 w-full h-full overflow-auto"
+        >
+          <Providers>{children}</Providers>
+        </div>
       </body>
     </html>
   );
