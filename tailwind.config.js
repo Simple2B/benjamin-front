@@ -44,6 +44,7 @@ module.exports = {
       fontFamily: {
         noto: ['var(--noto-sans)'],
         rajdhani: ['var(--rajdhani)'],
+        rajdhaniSemiBold: ['var(--rajdhani-semi-bold)'],
       },
     },
   },
