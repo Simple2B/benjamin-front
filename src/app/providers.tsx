@@ -22,7 +22,7 @@ export default function Providers({ children }: IProviders) {
     const page = pageRef.current;
     page.addEventListener('click', () => {
       if (screenfull.isEnabled) {
-        screenfull.request();
+        screenfull.request(page);
       }
     });
   });
