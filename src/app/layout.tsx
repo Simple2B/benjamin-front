@@ -9,6 +9,12 @@ const rajdhani = localFont({
   display: 'swap',
 });
 
+const rajdhaniSemiBold = localFont({
+  src: '../../public/fonts/Rajdhani-SemiBold.ttf',
+  variable: '--rajdhani-semi-bold',
+  display: 'swap',
+});
+
 const notoSans = localFont({
   src: '../../public/fonts/NotoSans-Regular.ttf',
   variable: '--noto-sans',
@@ -30,7 +36,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${rajdhani.variable} ${notoSans.variable} ${notoSans.className}`}
+      className={`${rajdhani.variable} ${rajdhaniSemiBold.variable} ${notoSans.variable} ${notoSans.className} `}
     >
       <head>
         <meta name="apple-mobile-web-app-capable" content="yes" />
