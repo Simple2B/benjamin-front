@@ -45,7 +45,7 @@ export default function RootLayout({
       <body>
         <div
           id="page"
-          className="fixed top-0 left-0 w-full h-full overflow-auto"
+          className="fixed top-0 left-0 w-full h-full overflow-scroll"
         >
           <Providers>{children}</Providers>
         </div>
