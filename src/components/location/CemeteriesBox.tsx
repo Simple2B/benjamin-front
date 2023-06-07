@@ -18,6 +18,9 @@ const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
     CemeteryOut | undefined
   >(undefined);
 
+  const localStorage = window.localStorage;
+  localStorage.setItem('isLoged', 'true');
+
   return (
     <div className="bg-gradient-to-r from-indigo-20 to-indigo-30 w-screen flex flex-col justify-start gap-8 px-8 items-center all-height">
       <h1

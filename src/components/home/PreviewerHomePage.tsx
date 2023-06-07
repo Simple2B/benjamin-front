@@ -2,11 +2,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import IntroVideo from './IntroVideo';
 import PreviewProjectInfo from './PreviewProjectInfo';
+import { PATH } from '../constants/path.constants';
+import { useRouter } from 'next/navigation';
 
 const PreviewerHomePage = () => {
   const [displayVideoPreview, setDisplayVideoPreview] = useState<boolean>(true);
   const videoPreviewTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [currentInfoIndex, setCurrentInfoIndex] = useState<number>(0);
+  const router = useRouter();
 
   const handleVideoEnd = () => {
     videoPreviewTimeoutRef.current = setTimeout(() => {
@@ -28,6 +31,8 @@ const PreviewerHomePage = () => {
     <>
       {displayVideoPreview ? (
         <IntroVideo onVideoEnd={handleVideoEnd} />
+      ) : localStorage.length ? (
+        router.push(PATH.location)
       ) : (
         <PreviewProjectInfo
           currentInfoIndex={currentInfoIndex}
