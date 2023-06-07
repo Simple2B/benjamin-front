@@ -2348,6 +2348,11 @@ react-dom@18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
+react-fullscreen-crossbrowser@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-fullscreen-crossbrowser/-/react-fullscreen-crossbrowser-1.1.2.tgz#643380a71c0de40531c22b75b29f7553bd4a972d"
+  integrity sha512-GA9tVJbU8e8iuYPI1h6PemtKDeQgnsgcRTVhC/8L7NpzMj7WBtzWSiqy6rzaXRAItDmuw7D2WgmZozdIBV+uVg==
+
 react-howler@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/react-howler/-/react-howler-5.2.0.tgz#fceef108f7c691f570155afee1c1436265218219"

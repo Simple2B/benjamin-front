@@ -27,8 +27,9 @@ body {
   height: 100dvh;
   height: 100%;
   position: fixed;
-  overflow-y: scroll;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
+  background-color: #ffff;
 }
 
 .all-height {
@@ -39,4 +40,8 @@ body {
 
 ul {
   --tw-ring-offset-color: 0 0 #000 !important;
+}
+
+.FullScreen {
+  overflow: auto;
 }

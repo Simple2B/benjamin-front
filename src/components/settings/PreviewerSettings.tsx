@@ -26,7 +26,7 @@ export default function PreviewerSettings({
   );
 
   return (
-    <div className="flex flex-col items-start m-6 gap-5">
+    <div className="flex flex-col items-start m-6 gap-5 bg-white">
       <div
         className="w-full flex items-baseline justify-between"
         onClick={router.back}
