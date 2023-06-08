@@ -22,4 +22,5 @@ export const ICONS_NAME = {
   info: 'info',
   form: 'google-docs',
   heart: 'heart',
+  navigatorEdge: 'navigation-arrow',
 };
