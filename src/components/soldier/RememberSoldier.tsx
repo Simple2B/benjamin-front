@@ -22,22 +22,22 @@ const REMEMBERING = [
 
 const RememberSoldier = ({ name }: IRememberSoldierProps) => {
   return (
-    <div className="w-full p-4 bg-indigo-100 text-center">
-      <h2 className="text-white font-semibold my-2">
+    <div className="w-full px-8 pt-6 bg-indigo-100 text-center">
+      <h2 className="text-white font-semibold my-6 leading-6">
         REMEMBER {name.toLocaleUpperCase()}
       </h2>
-      <div className="flex justify-evenly">
+      <div className="flex justify-between pb-14 gap-4">
         {REMEMBERING.map(({ image, text }) => {
           return (
-            <div key="text" className="w-1/4">
+            <div key="text" className="w-[106px] flex flex-col justify-evenly ">
               <Image
                 src={image}
                 width={500}
                 height={500}
                 alt="remember soldier"
-                className="w-24 object-cover rounded-lg bg-grey-30"
+                className="w-[106px] object-cover rounded-lg bg-grey-30"
               />
-              <p className="text-white text-xs pt-1">{text}</p>
+              <p className="text-white text-xs text-center">{text}</p>
             </div>
           );
         })}

@@ -8,12 +8,12 @@ type ISoldierMainInfoProps = {
   name: string;
   serviceNumber: string;
   branchOfService: string;
-  awards: string;
+  awards: string[];
 };
 
 interface IMilitaryInfo {
   heading: string;
-  text: string;
+  text: string | string[];
   icon: string;
 }
 
@@ -52,7 +52,9 @@ const SoldierMainInfoCard = ({
         className="w-[126px] h-[123px] rounded-lg bg-grey-30"
       />
       <div className="flex flex-col gap-2">
-        <p className="text-lg font-semibold">{name}</p>
+        <p className="text-2xl font-semibold font-rajdhaniSemiBold leading-7">
+          {name}
+        </p>
         {militaryInfo.map(({ heading, text, icon }) => {
           return (
             <SoldierMainInfo
