@@ -7,6 +7,7 @@ import SoldierCardBlockInfo from '@/components/soldier/SoldierCardBlockInfo';
 import SoldierMainInfoCard from '@/components/soldier/SoldierMainInfoCard';
 import React from 'react';
 import { SoldierCoordinates } from './SoldierCoordinates';
+import { SoldierMessages } from './SoldierMessages';
 
 export interface ISoldierInfo {
   criteriaName: string;
@@ -109,7 +110,7 @@ export default function PreviewerSoldier() {
 
   return (
     <div>
-      <div className="flex flex-col justify-center items-center mx-7 gap-4 my-4 text-indigo-100 leading-7">
+      <div className="flex flex-col justify-center items-center mx-7 gap-4 my-4 text-indigo-100 leading-7 mb-32">
         <SoldierMainInfoCard
           photoUrl="/images/photos/soldier2.jpg"
           name={soldierInfo.name}
@@ -118,7 +119,7 @@ export default function PreviewerSoldier() {
           awards={soldierInfo.awards}
         />
         {soldierInfo.audioSourse && (
-          <div className="w-full bg-grey-10 rounded-lg p-3">
+          <div className="w-full bg-grey-10 rounded-lg p-4">
             <p className="text-sm text-grey-20">Audio Tour</p>
             <AudioPlayer audioSourse={soldierInfo.audioSourse} />
           </div>
@@ -154,6 +155,12 @@ export default function PreviewerSoldier() {
               videoUrl={soldierInfo.ceremonyVideoUrl}
               videoDescription="Replacement ceremony video"
             />
+          </ClosebleInfo>
+        )}
+
+        {soldierInfo.messages.length && (
+          <ClosebleInfo heading="ADDITIONAL INFO">
+            <SoldierMessages messages={soldierInfo.messages} />
           </ClosebleInfo>
         )}
       </div>

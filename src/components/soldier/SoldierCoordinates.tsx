@@ -12,7 +12,7 @@ export const SoldierCoordinates = ({
   finalBurialLocation,
 }: ISoldierCoordinates) => {
   return (
-    <div className="w-full p-3 bg-grey-10 rounded-lg flex justify-between items-center">
+    <div className="w-full p-4 bg-grey-10 rounded-lg flex justify-between items-center">
       <div className="flex flex-col">
         <p className="text-sm text-grey-20">Final burial location</p>
         <p className="leading-6">{finalBurialLocation}</p>
