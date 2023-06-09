@@ -1,17 +1,17 @@
 import React from 'react';
-import { ISoldierInfo } from './PreviewerSoldier';
+import { IDeath, Ilife, IService } from './soldier.types';
 
 type ISoldierCardBlockInfoProps = {
-  solderInfo: ISoldierInfo[];
+  solderInfo: IDeath | Ilife | IService;
 };
 
 const SoldierCardBlockInfo = ({ solderInfo }: ISoldierCardBlockInfoProps) => {
   return (
     <>
-      {solderInfo.map(({ criteriaName, criteriaValue }) => (
-        <div key={criteriaName} className="mt-3">
-          <p className="text-sm text-grey-20 leading-7">{criteriaName}</p>
-          <p className="font-medium leading-6 ">{criteriaValue}</p>
+      {Object.values(solderInfo).map(({ header, value }) => (
+        <div key={header} className="mt-3">
+          <p className="text-sm text-grey-20 leading-7">{header}</p>
+          <p className="font-medium leading-6 ">{value}</p>
         </div>
       ))}
     </>

@@ -6,20 +6,20 @@ import SoldierAdditionalImage from '@/components/soldier/SoldierAdditionalImage'
 import SoldierCardBlockInfo from '@/components/soldier/SoldierCardBlockInfo';
 import SoldierMainInfoCard from '@/components/soldier/SoldierMainInfoCard';
 import React from 'react';
-import { SoldierCoordinates } from './SoldierCoordinates';
-import { SoldierMessages } from './SoldierMessages';
-
-export interface ISoldierInfo {
-  criteriaName: string;
-  criteriaValue: string | string[];
-}
+import { SoldierCoordinates } from '../SoldierCoordinates';
+import { SoldierMessages } from '../SoldierMessages';
+import { Ilife, IService, IDeath } from '../soldier.types';
+import {
+  SOLDIER_LIFE_HEADERS,
+  SOLDIER_SERVICE_HEADERS,
+  SOLDIER_DEATH_HEADERS,
+} from './PreviewerSoldier.constants';
 
 const soldierInfo = {
   name: '1st Lt. Robert Fink',
   serviceNumber: 'O-430368',
   branchOfService: 'US Coast Guard',
-  photoUrl:
-    'https://i.pinimg.com/564x/93/71/ef/9371ef654aa84ecb36a098feeb3a080d.jpg',
+  photoUrl: '/images/photos/soldier2.jpg',
   awards: ['Air Medal', 'Purple Heart'],
   audioSourse:
     'https://www.bensound.com/bensound-music/bensound-tenderness.mp3',
@@ -30,12 +30,14 @@ const soldierInfo = {
   stateEnteredServiceFrom: "Fort Jay (Governor's Island), New York",
   assignment: '583rd Signal Air Warning Battalion "C"',
   position: 'Gunner',
-  jewishServicemanCard: '#',
+  jewishServicemanCardDescription: 'Jewish Serviceman’s card',
+  jewishServicemanCardPhotoUrl: '/images/photos/document.jpg',
   dateOfDeath: 'June 1, 1944',
   circumstancesOfDeath:
     'Succumbed to scrub typhus at the 2nd Station Hospital in Nadzab',
   initialBurial: 'Nadzab, Papua New Guinea',
-  killedinActionTelegram: '#',
+  killedinActionTelegramDescription: 'Killed In Action (KIA) Telegram',
+  killedinActionTelegramPhotoUrl: '/images/photos/document.jpg',
   ceremonyVideoUrl:
     'https://www.youtube.com/watch?v=bcNdYOsTcTg&list=RDbcNdYOsTcTg&start_radio=1',
   messages: [
@@ -51,68 +53,68 @@ const soldierInfo = {
 };
 
 export default function PreviewerSoldier() {
-  const lifeInfo: ISoldierInfo[] = [
-    {
-      criteriaName: 'Birth date',
-      criteriaValue: soldierInfo.birthDate,
+  const life: Ilife = {
+    birthDate: {
+      header: SOLDIER_LIFE_HEADERS.birthDate,
+      value: soldierInfo.birthDate,
     },
-    {
-      criteriaName: 'Birth location',
-      criteriaValue: soldierInfo.birthLocation,
+    birthLocation: {
+      header: SOLDIER_LIFE_HEADERS.birthLocation,
+      value: soldierInfo.birthDate,
     },
-  ];
+  };
 
-  const serviceInfo: ISoldierInfo[] = [
-    {
-      criteriaName: 'Service number',
-      criteriaValue: soldierInfo.serviceNumber,
+  const service: IService = {
+    serviceNumber: {
+      header: SOLDIER_SERVICE_HEADERS.serviceNumber,
+      value: soldierInfo.serviceNumber,
     },
-    {
-      criteriaName: 'State entered service from',
-      criteriaValue: soldierInfo.stateEnteredServiceFrom,
+    stateEnteredServiceFrom: {
+      header: SOLDIER_SERVICE_HEADERS.stateEnteredServiceFrom,
+      value: soldierInfo.stateEnteredServiceFrom,
     },
-    {
-      criteriaName: 'Branch of service',
-      criteriaValue: soldierInfo.branchOfService,
+    branchOfService: {
+      header: SOLDIER_SERVICE_HEADERS.branchOfService,
+      value: soldierInfo.branchOfService,
     },
-    {
-      criteriaName: 'Assignment',
-      criteriaValue: soldierInfo.assignment,
+    assignment: {
+      header: SOLDIER_SERVICE_HEADERS.assignment,
+      value: soldierInfo.assignment,
     },
-    {
-      criteriaName: 'Position',
-      criteriaValue: soldierInfo.position,
+    position: {
+      header: SOLDIER_SERVICE_HEADERS.position,
+      value: soldierInfo.position,
     },
-    {
-      criteriaName: 'Awards',
-      criteriaValue: soldierInfo.awards,
+    awards: {
+      header: SOLDIER_SERVICE_HEADERS.awards,
+      value: soldierInfo.awards,
     },
-  ];
+  };
 
-  const deathInfo: ISoldierInfo[] = [
-    {
-      criteriaName: 'Date of death',
-      criteriaValue: soldierInfo.dateOfDeath,
+  const death: IDeath = {
+    dateOfDeath: {
+      header: SOLDIER_DEATH_HEADERS.dateOfDeath,
+      value: soldierInfo.dateOfDeath,
     },
-    {
-      criteriaName: 'Circumstances of death',
-      criteriaValue: soldierInfo.circumstancesOfDeath,
+    circumstancesOfDeath: {
+      header: SOLDIER_DEATH_HEADERS.circumstancesOfDeath,
+      value: soldierInfo.circumstancesOfDeath,
     },
-    {
-      criteriaName: 'Initial burial ',
-      criteriaValue: soldierInfo.initialBurial,
+    initialBurial: {
+      header: SOLDIER_DEATH_HEADERS.initialBurial,
+      value: soldierInfo.initialBurial,
     },
-    {
-      criteriaName: 'Final burial location',
-      criteriaValue: soldierInfo.finalBurialLocation,
+    finalBurialLocation: {
+      header: SOLDIER_DEATH_HEADERS.finalBurialLocation,
+      value: soldierInfo.finalBurialLocation,
     },
-  ];
+  };
 
   return (
     <div>
       <div className="flex flex-col justify-center items-center mx-7 gap-4 my-4 text-indigo-100 leading-7 mb-32">
         <SoldierMainInfoCard
-          photoUrl="/images/photos/soldier2.jpg"
+          photoUrl={soldierInfo.photoUrl}
           name={soldierInfo.name}
           serviceNumber={soldierInfo.serviceNumber}
           branchOfService={soldierInfo.branchOfService}
@@ -131,21 +133,21 @@ export default function PreviewerSoldier() {
         />
 
         <ClosebleInfo heading="LIFE">
-          <SoldierCardBlockInfo solderInfo={lifeInfo} />
+          <SoldierCardBlockInfo solderInfo={life} />
         </ClosebleInfo>
         <ClosebleInfo heading="SERVICE">
-          <SoldierCardBlockInfo solderInfo={serviceInfo} />
+          <SoldierCardBlockInfo solderInfo={service} />
           <SoldierAdditionalImage
-            imageUrl={soldierInfo.jewishServicemanCard}
-            imageDescription="Jewish Serviceman’s card"
+            imageUrl={soldierInfo.jewishServicemanCardPhotoUrl}
+            imageDescription={soldierInfo.jewishServicemanCardDescription}
           />
         </ClosebleInfo>
 
         <ClosebleInfo heading="DEATH">
-          <SoldierCardBlockInfo solderInfo={deathInfo} />
+          <SoldierCardBlockInfo solderInfo={death} />
           <SoldierAdditionalImage
-            imageUrl={soldierInfo.killedinActionTelegram}
-            imageDescription="Killed In Action (KIA) Telegram"
+            imageUrl={soldierInfo.killedinActionTelegramPhotoUrl}
+            imageDescription={soldierInfo.killedinActionTelegramDescription}
           />
         </ClosebleInfo>
 
