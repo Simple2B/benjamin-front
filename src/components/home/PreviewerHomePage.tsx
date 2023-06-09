@@ -12,6 +12,10 @@ const PreviewerHomePage = () => {
   const router = useRouter();
 
   const handleVideoEnd = () => {
+    if (localStorage.getItem('isVideoWatched')) {
+      router.push(PATH.location);
+      return;
+    }
     videoPreviewTimeoutRef.current = setTimeout(() => {
       setDisplayVideoPreview(false);
     }, 1500);
@@ -31,8 +35,6 @@ const PreviewerHomePage = () => {
     <>
       {displayVideoPreview ? (
         <IntroVideo onVideoEnd={handleVideoEnd} />
-      ) : localStorage.length ? (
-        router.push(PATH.location)
       ) : (
         <PreviewProjectInfo
           currentInfoIndex={currentInfoIndex}

@@ -31,6 +31,7 @@ const PreviewProjectInfo = ({
 
   const handleClick = () => {
     if (isLastPage) {
+      localStorage.setItem('isVideoWatched', 'true');
       return;
     }
     onNextButtonClick();
