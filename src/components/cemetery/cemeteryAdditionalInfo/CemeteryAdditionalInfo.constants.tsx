@@ -7,6 +7,6 @@ export const ADDITONAL_INFO_HEADERS: Record<
   superintendent: 'Superintendent',
   war: 'War',
   numberOfSoldiersBuried: 'Number of soldiers buried',
-  numberOfJewishSoldiersBuried: 'numberOfJewishSoldiersBuried',
+  numberOfJewishSoldiersBuried: 'Number of jewish soldiers buried',
   listedAsMissingSoldiers: 'Listed as Missing Soldiers',
 };

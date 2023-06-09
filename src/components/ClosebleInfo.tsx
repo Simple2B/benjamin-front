@@ -20,9 +20,9 @@ const ClosebleInfo = ({
   };
 
   return (
-    <div className="w-full p-3 bg-grey-10 rounded-lg">
+    <div className="w-full p-4 bg-grey-10 rounded-lg">
       <div className="flex justify-between">
-        <h2 className="text-lg font-semibold">{heading}</h2>
+        <h2 className="text-lg font-semibold leading-6">{heading}</h2>
         <div onClick={handleClick}>
           <IconButton iconName={ICONS_NAME.line} className={'h-4 w-8'} />
         </div>
