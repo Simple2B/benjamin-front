@@ -3,7 +3,7 @@ import React from 'react';
 import IconButton from '../IconButton';
 import { useRouter } from 'next/navigation';
 import { ICONS_NAME } from '../constants/iconName';
-import HorizontalPhotoGallery from '../HorizontalPhotoGallery';
+import HorizontalPhotoGallery from '../cemetery/HorizontalPhotoGallery';
 
 export const PreviewerStone = () => {
   const router = useRouter();

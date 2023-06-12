@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { CemeteryOut } from '@/openapi';
 import CemeteryAdditionalInfo from './cemeteryAdditionalInfo/CemeteryAdditionalInfo';
-import HorizontalPhotoGallery from '../HorizontalPhotoGallery';
+import HorizontalPhotoGallery from './HorizontalPhotoGallery';
 import MapCemetery from './MapCemetery';
 import SearchBar from '../SearchBar';
 import SelectingCemetery from '../SelectingCementery';
@@ -68,7 +68,7 @@ export default function PreviewCementery({
           />
         </div>
       </div>
-      <div className="relative flex flex-col gap-6 items-center pl-5 mb-8 w-full z-10 pb-5 bg-white pt-6">
+      <div className="relative flex flex-col gap-6 items-center mb-8 w-full z-10 pb-5 bg-white pt-6">
         <HorizontalPhotoGallery text="Soldiers with Headstone Changes" />
         <HorizontalPhotoGallery text="Soldiers born in New York" />
       </div>

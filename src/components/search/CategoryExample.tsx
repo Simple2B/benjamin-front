@@ -17,7 +17,7 @@ export const CategoryExample = () => {
       {filterExamples.map(({ iconName, iconDescription }, index) => (
         <div
           className={`bg-turquoise-50 h-8 pl-[10px] pr-3 flex gap-3 justify-center items-center rounded-2xl whitespace-nowrap flex-shrink-0 overflow-hidden ${
-            index == 0 ? 'ml-8' : ''
+            index == 0 ? 'ml-[calc((100vw-350px)/2)]' : ''
           }`}
           key={index}
         >
