@@ -23,4 +23,7 @@ export const ICONS_NAME = {
   form: 'google-docs',
   heart: 'heart',
   navigatorEdge: 'navigation-arrow',
+  davidStar: 'star-of-david',
+  locationPin: 'location-pin',
+  ellipsis: 'ellipsis',
 };
