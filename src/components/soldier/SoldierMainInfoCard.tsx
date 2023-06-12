@@ -8,12 +8,12 @@ type ISoldierMainInfoProps = {
   name: string;
   serviceNumber: string;
   branchOfService: string;
-  awards: string[];
+  awards: string;
 };
 
 interface IMilitaryInfo {
   heading: string;
-  text: string | string[];
+  text: string;
   icon: string;
 }
 
@@ -43,7 +43,7 @@ const SoldierMainInfoCard = ({
   ];
 
   return (
-    <div className="flex justify-start gap-4 w-full">
+    <div className="flex justify-start gap-4 w-full mb-2">
       <Image
         src={photoUrl}
         width={140}
