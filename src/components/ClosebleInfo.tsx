@@ -6,14 +6,16 @@ import { PropsWithChildren } from 'react';
 
 type IClosebleInfoProps = {
   heading: string;
+  isOpened: boolean;
   children: React.ReactNode;
 };
 
 const ClosebleInfo = ({
   children,
   heading,
+  isOpened,
 }: PropsWithChildren<IClosebleInfoProps>) => {
-  const [isOpen, setOpen] = useState<boolean>(true);
+  const [isOpen, setOpen] = useState<boolean>(isOpened);
 
   const handleClick = () => {
     setOpen(!isOpen);
