@@ -20,7 +20,7 @@ export const SoldierCoordinates = ({
       <div className="h-10 w-10 bg-indigo-100 flex justify-center items-center rounded-full">
         <IconButton
           iconName={ICONS_NAME.navigatorEdge}
-          className={'h-7 w-7 rotate-90'}
+          className={'h-6 w-6 rotate-45'}
         />
       </div>
     </div>

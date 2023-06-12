@@ -17,6 +17,7 @@ module.exports = {
           20: '#808EAB',
           30: '#B6B9C1',
           40: '#D9DADD',
+          50: '#D8D8D8',
         },
         indigo: {
           10: '#3E5080',
