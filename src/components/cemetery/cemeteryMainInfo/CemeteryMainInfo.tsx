@@ -45,7 +45,7 @@ const CemeteryMainInfo = ({
   return (
     <div className="w-full flex flex-col gap-6 bg-white rounded-t-xl px-6 mt-[calc(100vh-414px)] z-10 ">
       <div className="flex w-full justify-center">
-        <div className="h-[3px] w-16 bg-grey-50 mt-2"></div>
+        <div className="h-[3px] w-16 bg-grey-50 mt-2 rounded-3xl"></div>
       </div>
       <div className="flex flex-col gap-1">
         <h1

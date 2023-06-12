@@ -34,7 +34,7 @@ export const CategoryExample = () => {
         </div>
       ))}
       <div
-        className="bg-turquoise-50 h-8 pl-[10px] pr-3 flex gap-3 justify-center items-center rounded-2xl whitespace-nowrap flex-shrink-0 overflow-hidden"
+        className="bg-turquoise-50 h-8 pl-[10px] pr-3 flex gap-3 justify-center items-center rounded-2xl whitespace-nowrap flex-shrink-0 overflow-hidden mr-[calc((100vw-350px)/2)]"
         onClick={handleClick}
       >
         <IconButton iconName={ICONS_NAME.ellipsis} className="h-3 w-3" />
