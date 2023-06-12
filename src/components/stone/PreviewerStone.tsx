@@ -14,7 +14,7 @@ export const PreviewerStone = () => {
           <div onClick={router.back}>
             <IconButton iconName={ICONS_NAME.arrow} className="w-4 h-4" />
           </div>
-          <h1 className="text-sm font-medium flex-grow text-center font-medium">
+          <h1 className="text-sm font-medium flex-grow text-center">
             Lay a stone
           </h1>
         </div>
