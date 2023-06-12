@@ -1,11 +1,13 @@
+'use client';
 import React, { useState } from 'react';
 import SearchBar from '../SearchBar';
 
-const PreviewerSearch = () => {
+export const PreviewerSearch = () => {
   const [inputSoldier, setInputSoldier] = useState<string>('');
   return (
-    <div>
-      <SearchBar setInputSoldier={setInputSoldier} />
+    <div className="w-full flex flex-col items-center">
+      <SearchBar setInputSoldier={setInputSoldier} displaySettings={false} />
+      <p>The next/image</p>
     </div>
   );
 };

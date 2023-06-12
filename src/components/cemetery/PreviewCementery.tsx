@@ -34,7 +34,10 @@ export default function PreviewCementery({
         <div className="fixed w-screen">
           <MapCemetery />
           <div className="flex flex-col items-center">
-            <SearchBar setInputSoldier={setInputSoldier} />
+            <SearchBar
+              setInputSoldier={setInputSoldier}
+              displaySettings={true}
+            />
           </div>
           <div className="flex flex-col items-center pt-5">
             <SelectingCemetery
