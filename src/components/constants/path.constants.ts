@@ -8,4 +8,5 @@ export const PATH = {
   settings: '/settings',
   soldier: '/soldier',
   stone: '/stone',
+  category: '/search/categories',
 };
