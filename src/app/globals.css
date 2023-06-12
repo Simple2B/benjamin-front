@@ -46,3 +46,7 @@ ul {
   overflow: auto;
   background-color: #ffffff;
 }
+
+.shadow-custom {
+  box-shadow: 0 3px 25px -5px rgba(0, 0, 0, 0.1);
+}

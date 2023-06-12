@@ -73,7 +73,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
           >
             <IconButton
               iconName={isPlaying ? ICONS_NAME.pause : ICONS_NAME.play}
-              className={'h-6 w-6'}
+              className={'h-4 w-4'}
             />
           </div>
           <p className="text-xs text-grey-20">

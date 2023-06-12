@@ -3,7 +3,7 @@ import React from 'react';
 import IconButton from '../IconButton';
 import { useRouter } from 'next/navigation';
 import { ICONS_NAME } from '../constants/iconName';
-import HorizontalPhotoGallery from '../HorizontalPhotoGallery';
+import HorizontalPhotoGallery from '../cemetery/HorizontalPhotoGallery';
 
 export const PreviewerStone = () => {
   const router = useRouter();
@@ -14,7 +14,7 @@ export const PreviewerStone = () => {
           <div onClick={router.back}>
             <IconButton iconName={ICONS_NAME.arrow} className="w-4 h-4" />
           </div>
-          <h1 className="text-sm font-medium flex-grow text-center font-medium">
+          <h1 className="text-sm font-medium flex-grow text-center">
             Lay a stone
           </h1>
         </div>

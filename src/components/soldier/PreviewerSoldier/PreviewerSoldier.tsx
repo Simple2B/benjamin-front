@@ -1,3 +1,4 @@
+'use client';
 import ClosebleInfo from '@/components/ClosebleInfo';
 import AudioPlayer from '@/components/audioPlayer/AudioPlayer';
 import RememberSoldier from '@/components/soldier/RememberSoldier';
@@ -14,6 +15,9 @@ import {
   SOLDIER_SERVICE_HEADERS,
   SOLDIER_DEATH_HEADERS,
 } from './PreviewerSoldier.constants';
+import IconButton from '@/components/IconButton';
+import { ICONS_NAME } from '@/components/constants/iconName';
+import { useRouter } from 'next/navigation';
 
 const soldierInfo = {
   name: '1st Lt. Robert Fink',
@@ -53,6 +57,13 @@ const soldierInfo = {
 };
 
 export default function PreviewerSoldier() {
+  const router = useRouter();
+
+  const awardsInPreview =
+    soldierInfo.awards.length >= 1
+      ? `${soldierInfo.awards[0]}, other awards`
+      : soldierInfo.awards[0];
+
   const life: Ilife = {
     birthDate: {
       header: SOLDIER_LIFE_HEADERS.birthDate,
@@ -87,7 +98,7 @@ export default function PreviewerSoldier() {
     },
     awards: {
       header: SOLDIER_SERVICE_HEADERS.awards,
-      value: soldierInfo.awards,
+      value: soldierInfo.awards.join(', '),
     },
   };
 
@@ -113,12 +124,21 @@ export default function PreviewerSoldier() {
   return (
     <div>
       <div className="flex flex-col justify-center items-center mx-7 gap-4 my-4 text-indigo-100 leading-7 mb-32">
+        <div
+          className="w-full flex items-baseline justify-between mb-2"
+          onClick={router.back}
+        >
+          <IconButton
+            iconName={ICONS_NAME.selectingArrow}
+            className="w-6 h-6 rotate-180"
+          />
+        </div>
         <SoldierMainInfoCard
           photoUrl={soldierInfo.photoUrl}
           name={soldierInfo.name}
           serviceNumber={soldierInfo.serviceNumber}
           branchOfService={soldierInfo.branchOfService}
-          awards={soldierInfo.awards}
+          awards={awardsInPreview}
         />
         {soldierInfo.audioSourse && (
           <div className="w-full bg-grey-10 rounded-lg p-4">
@@ -132,10 +152,14 @@ export default function PreviewerSoldier() {
           finalBurialLocation={soldierInfo.finalBurialLocation}
         />
 
-        <ClosebleInfo heading="LIFE">
+        <ClosebleInfo
+          heading="LIFE"
+          isOpened={soldierInfo.ceremonyVideoUrl ? false : true}
+        >
           <SoldierCardBlockInfo solderInfo={life} />
         </ClosebleInfo>
-        <ClosebleInfo heading="SERVICE">
+
+        <ClosebleInfo heading="SERVICE" isOpened={false}>
           <SoldierCardBlockInfo solderInfo={service} />
           <SoldierAdditionalImage
             imageUrl={soldierInfo.jewishServicemanCardPhotoUrl}
@@ -143,7 +167,7 @@ export default function PreviewerSoldier() {
           />
         </ClosebleInfo>
 
-        <ClosebleInfo heading="DEATH">
+        <ClosebleInfo heading="DEATH" isOpened={false}>
           <SoldierCardBlockInfo solderInfo={death} />
           <SoldierAdditionalImage
             imageUrl={soldierInfo.killedinActionTelegramPhotoUrl}
@@ -152,7 +176,7 @@ export default function PreviewerSoldier() {
         </ClosebleInfo>
 
         {soldierInfo.ceremonyVideoUrl && (
-          <ClosebleInfo heading="CHANGE CEREMONY">
+          <ClosebleInfo heading="CHANGE CEREMONY" isOpened={true}>
             <SoldierAdditionalVideo
               videoUrl={soldierInfo.ceremonyVideoUrl}
               videoDescription="Replacement ceremony video"
@@ -161,7 +185,7 @@ export default function PreviewerSoldier() {
         )}
 
         {soldierInfo.messages.length && (
-          <ClosebleInfo heading="ADDITIONAL INFO">
+          <ClosebleInfo heading="ADDITIONAL INFO" isOpened={false}>
             <SoldierMessages messages={soldierInfo.messages} />
           </ClosebleInfo>
         )}
