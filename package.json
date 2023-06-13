@@ -7,14 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-openapi": "openapi --input http://localhost:3003/openapi.json --output ./src/openapi --client axios",
+    "generate-openapi": "openapi --input http://localhost:3003/openapi.json --output ./src/openapi --client axios && echo \"\nimport { OpenAPI } from './core/OpenAPI';\n\nOpenAPI.BASE = process.env.BACKEND_URL || '';\" >> ./src/openapi/index.ts",
     "emit": "tsc --noEmit"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.18",
     "@reduxjs/toolkit": "^1.9.5",
-    "@tanstack/react-query": "^4.29.7",
+    "@tanstack/react-query": "^4.29.12",
     "@types/node": "20.1.2",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
@@ -37,7 +37,8 @@
     "tailwindcss": "3.3.2",
     "typescript": "^5.0.4",
     "url-join": "^5.0.0",
-    "video-react": "^0.16.0"
+    "video-react": "^0.16.0",
+    "zustand": "^4.3.8"
   },
   "devDependencies": {
     "@types/react-howler": "^5.2.0"

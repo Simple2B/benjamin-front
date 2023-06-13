@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CemeteryOut } from '@/openapi';
 import CemeteryAdditionalInfo from './cemeteryAdditionalInfo/CemeteryAdditionalInfo';
 import HorizontalPhotoGallery from './HorizontalPhotoGallery';
@@ -11,19 +11,26 @@ import { useRouter } from 'next/navigation';
 import urlJoin from 'url-join';
 import { PATH } from '../constants/path.constants';
 import { CemeteryAudioBox } from './cemeteryMainInfo/CemeteryAudioBox';
+import { useAppStore } from '@/lib/slices/store';
 
 interface CemeteryPageProps {
   cemetery: CemeteryOut;
   cemeteries: Array<CemeteryOut>;
 }
 
-export default function PreviewCementery({
+export default function PreviewCemetery({
   cemetery,
   cemeteries,
 }: CemeteryPageProps) {
   const router = useRouter();
+  const { setCurrentCemetery } = useAppStore();
+
+  useEffect(() => {
+    setCurrentCemetery(cemetery);
+  }, [cemetery]);
 
   const handleSelectCemetery = (cemetery: CemeteryOut) => {
+    setCurrentCemetery(cemetery);
     router.push(urlJoin(PATH.cemetery, cemetery.uuid));
   };
 

@@ -1,7 +1,7 @@
-import PreviewCementery from '@/components/cemetery/PreviewCementery';
-import { PATH } from '@/components/constants/path.constants';
-import { CemeteriesService } from '@/openapi';
 import { redirect } from 'next/navigation';
+import { CemeteriesService } from '@/openapi';
+import PreviewCemetery from '@/components/cemetery/PreviewCementery';
+import { PATH } from '@/components/constants/path.constants';
 
 // export const dynamic = 'force-dynamic';
 export const fetchCache = 'default-cache';
@@ -28,7 +28,7 @@ const Page = async ({ params }: ICemeteryPageProps) => {
     redirect(PATH.location);
   }
 
-  return <PreviewCementery cemetery={cemetery} cemeteries={cemeteries.items} />;
+  return <PreviewCemetery cemetery={cemetery} cemeteries={cemeteries.items} />;
 };
 
 export default Page;

@@ -5,6 +5,9 @@ import { ICONS_NAME } from './constants/iconName';
 import Link from 'next/link';
 import { PATH } from './constants/path.constants';
 import { useRouter } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
+import { CemeteriesService, CemeteryOut } from '@/openapi';
+import { useAppStore } from '@/lib/slices/store';
 
 type ISearchBarProps = {
   displaySettings: boolean;
@@ -14,12 +17,37 @@ const SearchBar = ({ displaySettings }: ISearchBarProps) => {
   const [userInput, setUserInput] = useState<string>('');
   const router = useRouter();
 
+  const { currentCemetery } = useAppStore();
+
+  console.log({ currentCemetery });
+
+  const soldiersQuery = useQuery(
+    ['soldiersQuery', userInput],
+    () =>
+      CemeteriesService.getSoldiersApiCemeteryCemeteryUuidSoldierGet(
+        (currentCemetery as CemeteryOut).uuid,
+        userInput,
+        1,
+        10
+      ),
+    {
+      enabled: !!currentCemetery,
+    }
+  );
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
   };
 
+  console.log(soldiersQuery);
   return (
     <div className="mt-10">
+      {soldiersQuery.isFetched &&
+        soldiersQuery.data &&
+        soldiersQuery.data.items.map((soldier, i) => (
+          <p key={i}>{soldier.firstName}</p>
+        ))}
+
       <div
         className={`rounded-lg bg-white relative flex items-center h-12 justify-between px-1.5 w-[350px] shadow-lg ${
           !displaySettings && 'pr-4'
@@ -52,7 +80,6 @@ const SearchBar = ({ displaySettings }: ISearchBarProps) => {
               className="flex-shrink"
               type="text"
               placeholder="Seach for the soldier"
-              onChange={handleChange}
               value={userInput}
             />
           </Link>

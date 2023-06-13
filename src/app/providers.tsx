@@ -6,8 +6,6 @@ import { OpenAPI } from '@/openapi';
 import screenfull from 'screenfull';
 // import FullScreen from 'react-fullscreen-crossbrowser';
 
-OpenAPI.BASE = process.env.BACKEND_URL || '';
-
 interface IProviders {
   children: React.ReactNode;
 }

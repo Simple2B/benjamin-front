@@ -1,5 +1,5 @@
 import './globals.css';
-import { OpenAPI } from '@/openapi';
+
 import Providers from './providers';
 import localFont from 'next/font/local';
 
@@ -20,8 +20,6 @@ const notoSans = localFont({
   variable: '--noto-sans',
   display: 'swap',
 });
-
-OpenAPI.BASE = process.env.BACKEND_URL || '';
 
 export const metadata = {
   title: 'Create Next App',
