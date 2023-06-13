@@ -7,17 +7,15 @@ import { PATH } from './constants/path.constants';
 import { useRouter } from 'next/navigation';
 
 type ISearchBarProps = {
-  setInputSoldier: (value: string) => void;
   displaySettings: boolean;
 };
 
-const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
+const SearchBar = ({ displaySettings }: ISearchBarProps) => {
   const [userInput, setUserInput] = useState<string>('');
   const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
-    setInputSoldier(e.target.value);
   };
 
   return (

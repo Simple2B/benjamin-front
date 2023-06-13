@@ -5,8 +5,6 @@ import { CategoryExample } from './CategoryExample';
 import { SoldierSearchingCard } from './SoldierSearchingCard';
 
 export const PreviewerSearch = () => {
-  const [inputSoldier, setInputSoldier] = useState<string>('');
-
   const SOLDIERS = [
     { name: 'Charles Abraham', number: '#43758698', city: 'Cleveland, OH' },
     { name: 'Morris Abramowitz', number: '#82758698', city: 'Chicago, IL' },
@@ -25,7 +23,7 @@ export const PreviewerSearch = () => {
   return (
     <div>
       <div className="w-full flex flex-col items-center px-8">
-        <SearchBar setInputSoldier={setInputSoldier} displaySettings={false} />
+        <SearchBar displaySettings={false} />
       </div>
       <CategoryExample />
       <div className="w-full flex flex-col items-center px-8 gap-3 mt-2">
