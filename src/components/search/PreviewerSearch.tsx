@@ -28,7 +28,7 @@ export const PreviewerSearch = () => {
         <SearchBar setInputSoldier={setInputSoldier} displaySettings={false} />
       </div>
       <CategoryExample />
-      <div className="w-full flex flex-col items-center px-8 gap-3">
+      <div className="w-full flex flex-col items-center px-8 gap-3 mt-2">
         {SOLDIERS.map(({ name, number, city }, index) => (
           <SoldierSearchingCard
             key={index}
