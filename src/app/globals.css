@@ -50,3 +50,15 @@ ul {
 .shadow-custom {
   box-shadow: 0 3px 25px -5px rgba(0, 0, 0, 0.1);
 }
+
+input[type='range']::-webkit-slider-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 16px;
+  background: #2693ab;
+}
+
+.audio-thumb::-webkit-slider-thumb {
+  border-radius: 16px;
+  background: #2693ab;
+}

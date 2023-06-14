@@ -86,7 +86,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
             value={audioRef.current ? audioRef.current.seek() : 0}
             step="0.01"
             onChange={handleSeek}
-            className="h-1 w-full mx-4 appearance-none thumb-blue outline-none"
+            className="h-1 w-full mx-4 appearance-none thumb-blue outline-none [&::-webkit-slider-thumb]:appearance-none"
             style={{
               background: `linear-gradient(to right, #2693AB 0%, #2693AB ${
                 (currentTime /
