@@ -2,12 +2,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { SoldierOut } from './SoldierOut';
+import type { SoldierCard } from './SoldierCard';
 
 export type Soldiers = {
     page?: number;
     per_page?: number;
-    items: Array<SoldierOut>;
+    items: Array<SoldierCard>;
     total: number;
 };
 

@@ -4,6 +4,7 @@
 import type { Cemeteries } from '../models/Cemeteries';
 import type { CemeteryOut } from '../models/CemeteryOut';
 import type { Metadata } from '../models/Metadata';
+import type { SoldierOut } from '../models/SoldierOut';
 import type { Soldiers } from '../models/Soldiers';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -18,7 +19,7 @@ export class ApiService {
      * @returns Cemeteries Successful Response
      * @throws ApiError
      */
-    public static getCemeteriesApiCemeteryGet(): CancelablePromise<Cemeteries> {
+    public static getCemeteries(): CancelablePromise<Cemeteries> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cemetery',
@@ -31,7 +32,7 @@ export class ApiService {
      * @returns CemeteryOut Successful Response
      * @throws ApiError
      */
-    public static getCemeteryApiCemeteryCemeteryUuidGet(
+    public static getCemetery(
         cemeteryUuid: string,
     ): CancelablePromise<CemeteryOut> {
         return __request(OpenAPI, {
@@ -56,7 +57,7 @@ export class ApiService {
      * @returns Soldiers Successful Response
      * @throws ApiError
      */
-    public static getSoldiersApiCemeteryCemeteryUuidSoldierGet(
+    public static getCemeterySoldiers(
         cemeteryUuid: string,
         q?: string,
         page: number = 1,
@@ -72,6 +73,27 @@ export class ApiService {
                 'q': q,
                 'page': page,
                 'per_page': perPage,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Get Soldier
+     * @param soldierUuid
+     * @returns SoldierOut Successful Response
+     * @throws ApiError
+     */
+    public static getSoldier(
+        soldierUuid: string,
+    ): CancelablePromise<SoldierOut> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/soldier/{soldier_uuid}',
+            path: {
+                'soldier_uuid': soldierUuid,
             },
             errors: {
                 422: `Validation Error`,

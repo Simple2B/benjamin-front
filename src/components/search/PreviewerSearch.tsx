@@ -5,7 +5,12 @@ import { CategoryExample } from './CategoryExample';
 import { SoldierSearchingCard } from './SoldierSearchingCard';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { CemeteriesService, CemeteryOut, SoldierOut } from '@/openapi';
+import {
+  CemeteriesService,
+  CemeteryOut,
+  SoldierCard,
+  SoldierOut,
+} from '@/openapi';
 import { useAppStore } from '@/lib/slices/store';
 import { PATH } from '../constants/path.constants';
 
@@ -24,7 +29,7 @@ export const PreviewerSearch = () => {
   const soldiersQuery = useQuery(
     ['soldiersQuery', inputSoldier],
     () =>
-      CemeteriesService.getSoldiersApiCemeteryCemeteryUuidSoldierGet(
+      CemeteriesService.getCemeterySoldiers(
         (currentCemetery as CemeteryOut).uuid,
         inputSoldier,
         1,
@@ -34,10 +39,6 @@ export const PreviewerSearch = () => {
       enabled: !!currentCemetery,
     }
   );
-
-  const handleSoldierClick = (soldier: SoldierOut) => {
-    setCurrentSoldier(soldier);
-  };
 
   return (
     <div>
@@ -49,12 +50,7 @@ export const PreviewerSearch = () => {
         {soldiersQuery.isFetched &&
           soldiersQuery.data &&
           soldiersQuery.data.items.map((soldier, index) => (
-            <div
-              onClick={() => {
-                handleSoldierClick(soldier);
-              }}
-              key={index}
-            >
+            <div key={index}>
               <SoldierSearchingCard
                 name={soldier.firstName}
                 number={soldier.serviceNumber}

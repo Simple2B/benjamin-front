@@ -17,7 +17,7 @@ export class CemeteriesService {
      * @returns Cemeteries Successful Response
      * @throws ApiError
      */
-    public static getCemeteriesApiCemeteryGet(): CancelablePromise<Cemeteries> {
+    public static getCemeteries(): CancelablePromise<Cemeteries> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cemetery',
@@ -30,7 +30,7 @@ export class CemeteriesService {
      * @returns CemeteryOut Successful Response
      * @throws ApiError
      */
-    public static getCemeteryApiCemeteryCemeteryUuidGet(
+    public static getCemetery(
         cemeteryUuid: string,
     ): CancelablePromise<CemeteryOut> {
         return __request(OpenAPI, {
@@ -55,7 +55,7 @@ export class CemeteriesService {
      * @returns Soldiers Successful Response
      * @throws ApiError
      */
-    public static getSoldiersApiCemeteryCemeteryUuidSoldierGet(
+    public static getCemeterySoldiers(
         cemeteryUuid: string,
         q?: string,
         page: number = 1,
