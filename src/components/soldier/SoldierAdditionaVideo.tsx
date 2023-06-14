@@ -12,10 +12,9 @@ const SoldierAdditionalVideo = ({
   return (
     <div className="mt-3">
       <p className="text-sm text-grey-20">{videoDescription}</p>
-      <iframe
-        className="w-full h-56 rounded-lg bg-grey-30 mt-2"
-        src={videoUrl}
-      ></iframe>
+      <video className="w-full h-56 rounded-lg bg-grey-30 mt-2" controls>
+        <source src={videoUrl} />
+      </video>
     </div>
   );
 };

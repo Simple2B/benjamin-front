@@ -5,7 +5,7 @@ import { CategoryExample } from './CategoryExample';
 import { SoldierSearchingCard } from './SoldierSearchingCard';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { CemeteriesService, CemeteryOut } from '@/openapi';
+import { CemeteriesService, CemeteryOut, SoldierOut } from '@/openapi';
 import { useAppStore } from '@/lib/slices/store';
 import { PATH } from '../constants/path.constants';
 
@@ -13,7 +13,7 @@ export const PreviewerSearch = () => {
   const [inputSoldier, setInputSoldier] = useState<string>('');
   const router = useRouter();
 
-  const { currentCemetery } = useAppStore();
+  const { currentCemetery, setCurrentSoldier } = useAppStore();
 
   if (!currentCemetery) {
     router.push(PATH.location);
@@ -33,6 +33,10 @@ export const PreviewerSearch = () => {
     }
   );
 
+  const handleSoldierClick = (soldier: SoldierOut) => {
+    setCurrentSoldier(soldier);
+  };
+
   return (
     <div>
       <div className="w-full flex flex-col items-center px-8">
@@ -43,13 +47,19 @@ export const PreviewerSearch = () => {
         {soldiersQuery.isFetched &&
           soldiersQuery.data &&
           soldiersQuery.data.items.map((soldier, index) => (
-            <SoldierSearchingCard
+            <div
+              onClick={() => {
+                handleSoldierClick(soldier);
+              }}
               key={index}
-              name={soldier.firstName}
-              number={soldier.serviceNumber}
-              city={soldier.birthLocation}
-              soldierUuid={soldier.uuid}
-            />
+            >
+              <SoldierSearchingCard
+                name={soldier.firstName}
+                number={soldier.serviceNumber}
+                city={soldier.birthLocation}
+                soldierUuid={soldier.uuid}
+              />
+            </div>
           ))}
       </div>
     </div>

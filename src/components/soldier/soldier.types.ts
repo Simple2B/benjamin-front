@@ -21,5 +21,5 @@ export interface IDeath {
 
 interface iSoldierDataMap {
   header: string;
-  value: string | string[];
+  value: string | string[] | undefined;
 }
