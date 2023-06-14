@@ -24,9 +24,13 @@ const SelectingCemetery = ({
           <>
             <div className="relative mt-1">
               <Listbox.Button
-                className={`relative  w-full h-10 cursor-default text-sm leading-6 pl-4 ${
+                style={{
+                  transitionProperty: 'border-radius',
+                  transitionDuration: '150ms',
+                }}
+                className={`relative w-full h-10 cursor-default text-sm leading-6 pl-4 ${
                   open ? 'rounded-t-3xl' : 'rounded-3xl'
-                } bg-white pt-2 text-left shadow-md focus:outline-nonesm:text-sm  font-noto`}
+                } bg-white pt-2 text-left shadow-md focus:outline-nonesm:text-sm  font-noto transition duration-500 ease-in-out`}
               >
                 <span
                   className={`block truncate font-noto w-[235px] pb-1 ${
@@ -46,12 +50,12 @@ const SelectingCemetery = ({
               </Listbox.Button>
               <Transition
                 as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
+                enter="transition duration-100 ease-out"
+                enterFrom="transform scale-95 opacity-0"
+                enterTo="transform scale-100 opacity-100"
+                leave="transition duration-75 ease-out"
+                leaveFrom="transform scale-100 opacity-100"
+                leaveTo="transform scale-95 opacity-0"
               >
                 <Listbox.Options
                   placeholder="Select cemetery"
