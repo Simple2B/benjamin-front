@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SearchBar from '../SearchBar';
 import { CategoryExample } from './CategoryExample';
 import { SoldierSearchingCard } from './SoldierSearchingCard';
@@ -15,9 +15,11 @@ export const PreviewerSearch = () => {
 
   const { currentCemetery, setCurrentSoldier } = useAppStore();
 
-  if (!currentCemetery) {
-    router.push(PATH.location);
-  }
+  useEffect(() => {
+    if (!currentCemetery) {
+      router.push(PATH.location);
+    }
+  }, [currentCemetery, router]);
 
   const soldiersQuery = useQuery(
     ['soldiersQuery', inputSoldier],
