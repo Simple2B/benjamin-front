@@ -22,6 +22,7 @@ import { useAppStore } from '@/lib/slices/store';
 import { PATH } from '@/components/constants/path.constants';
 import urlJoin from 'url-join';
 import { AWS_BASE_URL } from '@/components/constants/constants';
+import { formatDate } from './PreviewerSoldier.utils';
 
 export default function PreviewerSoldier() {
   const router = useRouter();
@@ -52,11 +53,11 @@ export default function PreviewerSoldier() {
   const life: Ilife = {
     birthDate: {
       header: SOLDIER_LIFE_HEADERS.birthDate,
-      value: soldierInfo?.birthDate,
+      value: formatDate(soldierInfo?.birthDate),
     },
     birthLocation: {
       header: SOLDIER_LIFE_HEADERS.birthLocation,
-      value: soldierInfo?.birthDate,
+      value: soldierInfo?.birthLocation,
     },
   };
 
@@ -90,7 +91,7 @@ export default function PreviewerSoldier() {
   const death: IDeath = {
     dateOfDeath: {
       header: SOLDIER_DEATH_HEADERS.dateOfDeath,
-      value: soldierInfo?.deathDate,
+      value: formatDate(soldierInfo?.deathDate),
     },
     circumstancesOfDeath: {
       header: SOLDIER_DEATH_HEADERS.circumstancesOfDeath,
