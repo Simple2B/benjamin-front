@@ -1,5 +1,7 @@
 import PreviewerSoldier from '@/components/soldier/PreviewerSoldier/PreviewerSoldier';
+import { SoldiersService } from '@/openapi';
 import React from 'react';
+import { isConditionalExpression } from 'typescript';
 
 // export const dynamic = 'force-dynamic';
 export const fetchCache = 'default-cache';
@@ -10,11 +12,15 @@ interface ISoldierPageProps {
 }
 
 interface ISoldierParams {
-  soldierryUuid: string;
+  soldierUuid: string;
 }
 
 const Page = async ({ params }: ISoldierPageProps) => {
-  return <PreviewerSoldier />;
+  const { soldierUuid } = params;
+
+  const soldier = await SoldiersService.getSoldier(soldierUuid);
+
+  return <PreviewerSoldier soldier={soldier} />;
 };
 
 export default Page;

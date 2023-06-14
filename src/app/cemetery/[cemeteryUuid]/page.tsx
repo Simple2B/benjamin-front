@@ -18,7 +18,7 @@ interface ICemeteryParams {
 const Page = async ({ params }: ICemeteryPageProps) => {
   const { cemeteryUuid } = params;
 
-  const cemeteries = await CemeteriesService.getCemeteriesApiCemeteryGet();
+  const cemeteries = await CemeteriesService.getCemeteries();
 
   const cemetery = cemeteries.items.find(
     (cemetery) => cemetery.uuid === cemeteryUuid

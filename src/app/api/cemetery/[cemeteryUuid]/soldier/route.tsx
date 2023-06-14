@@ -27,13 +27,12 @@ export async function GET(request: Request, context: IContext) {
 
   const { cemeteryUuid } = params;
 
-  const response =
-    await CemeteriesService.getSoldiersApiCemeteryCemeteryUuidSoldierGet(
-      cemeteryUuid,
-      q,
-      page,
-      perPage
-    );
+  const response = await CemeteriesService.getCemeterySoldiers(
+    cemeteryUuid,
+    q,
+    page,
+    perPage
+  );
 
   return NextResponse.json(response);
 }
