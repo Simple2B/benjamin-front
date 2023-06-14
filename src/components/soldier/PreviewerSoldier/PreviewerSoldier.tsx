@@ -6,7 +6,7 @@ import SoldierAdditionalVideo from '@/components/soldier/SoldierAdditionaVideo';
 import SoldierAdditionalImage from '@/components/soldier/SoldierAdditionalImage';
 import SoldierCardBlockInfo from '@/components/soldier/SoldierCardBlockInfo';
 import SoldierMainInfoCard from '@/components/soldier/SoldierMainInfoCard';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SoldierCoordinates } from '../SoldierCoordinates';
 import { SoldierMessages } from '../SoldierMessages';
 import { Ilife, IService, IDeath } from '../soldier.types';
@@ -23,55 +23,20 @@ import { PATH } from '@/components/constants/path.constants';
 import urlJoin from 'url-join';
 import { AWS_BASE_URL } from '@/components/constants/constants';
 
-const soldierInfo = {
-  name: '1st Lt. Robert Fink',
-  serviceNumber: 'O-430368',
-  branchOfService: 'US Coast Guard',
-  photoUrl: '/images/photos/soldier2.jpg',
-  awards: ['Air Medal', 'Purple Heart'],
-  audioSourse:
-    'https://www.bensound.com/bensound-music/bensound-tenderness.mp3',
-  finalBurialLocation: 'Plot D, Row 9, Grave 43',
-  finalBurialCoordinates: [54, 89],
-  birthDate: 'December 15th, 1927',
-  birthLocation: 'Edminton, New Hampshire',
-  stateEnteredServiceFrom: "Fort Jay (Governor's Island), New York",
-  assignment: '583rd Signal Air Warning Battalion "C"',
-  position: 'Gunner',
-  jewishServicemanCardDescription: 'Jewish Serviceman’s card',
-  jewishServicemanCardPhotoUrl: '/images/photos/document.jpg',
-  dateOfDeath: 'June 1, 1944',
-  circumstancesOfDeath:
-    'Succumbed to scrub typhus at the 2nd Station Hospital in Nadzab',
-  initialBurial: 'Nadzab, Papua New Guinea',
-  killedinActionTelegramDescription: 'Killed In Action (KIA) Telegram',
-  killedinActionTelegramPhotoUrl: '/images/photos/document.jpg',
-  ceremonyVideoUrl:
-    'https://www.youtube.com/watch?v=bcNdYOsTcTg&list=RDbcNdYOsTcTg&start_radio=1',
-  messages: [
-    {
-      sender: 'Message from Operation Benjamin ',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tempus libero elit, vel viverra est dignissim eu. Nam facilisis dapibus lorem vitae euismod. Donec congue velit a tellus cursus posuere. Donec pretium, ipsum ac tristique fringilla, nisl lectus auctor felis, sit amet accumsan nisi urna non nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris tincidunt imperdiet eros id porta. Phasellus semper, libero at commodo dignissim, mi massa rutrum nisi, nec luctus arcu risus sed sem. Praesent faucibus imperdiet nibh, et pellentesque ligula convallis in. Aliquam id pulvinar dolor, in volutpat est. Aenean finibus.',
-    },
-    {
-      sender: 'Message from Robert Fink’s family',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tempus libero elit, vel viverra est dignissim eu. Nam facilisis dapibus lorem vitae euismod. Donec congue velit a tellus cursus posuere. Donec pretium, ipsum ac tristique fringilla, nisl lectus auctor felis, sit amet accumsan nisi urna non nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris tincidunt imperdiet eros id porta. Phasellus semper, libero at commodo dignissim, mi massa rutrum nisi, nec luctus arcu risus sed sem. Praesent faucibus imperdiet nibh, et pellentesque ligula convallis in. Aliquam id pulvinar dolor, in volutpat est. Aenean finibus.',
-    },
-  ],
-};
-
 export default function PreviewerSoldier() {
   const router = useRouter();
 
   const { currentSoldier, currentCemetery } = useAppStore();
 
-  if (!currentSoldier) {
-    if (!currentCemetery) {
-      router.push(PATH.location);
-    } else {
-      router.push(PATH.search);
+  useEffect(() => {
+    if (!currentSoldier) {
+      if (!currentCemetery) {
+        router.push(PATH.location);
+      } else {
+        router.push(PATH.search);
+      }
     }
-  }
+  }, [currentSoldier, currentCemetery, router]);
 
   const soldierInfo = currentSoldier;
 
