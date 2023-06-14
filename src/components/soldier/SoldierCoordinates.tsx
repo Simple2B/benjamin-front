@@ -3,8 +3,8 @@ import IconButton from '../IconButton';
 import { ICONS_NAME } from '../constants/iconName';
 
 type ISoldierCoordinates = {
-  finalBurialCoordinates: number[];
-  finalBurialLocation: string;
+  finalBurialCoordinates: string | undefined;
+  finalBurialLocation: string | undefined;
 };
 
 export const SoldierCoordinates = ({

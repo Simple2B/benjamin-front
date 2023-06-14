@@ -4,16 +4,16 @@ import { ICONS_NAME } from '../constants/iconName';
 import SoldierMainInfo from './SoldierMainInfo';
 
 type ISoldierMainInfoProps = {
-  photoUrl: string;
-  name: string;
-  serviceNumber: string;
-  branchOfService: string;
-  awards: string;
+  photoUrl: string | undefined;
+  name: string | undefined;
+  serviceNumber: string | undefined;
+  branchOfService: string | undefined;
+  awards: string | undefined;
 };
 
 interface IMilitaryInfo {
   heading: string;
-  text: string;
+  text: string | undefined;
   icon: string;
 }
 
@@ -44,13 +44,13 @@ const SoldierMainInfoCard = ({
 
   return (
     <div className="flex justify-start gap-4 w-full mb-2">
-      <Image
-        src={photoUrl}
-        width={140}
-        height={132}
-        alt="Soldier"
-        className="w-[126px] h-[123px] rounded-lg bg-grey-30"
-      />
+      {photoUrl && (
+        <img
+          src={photoUrl}
+          alt="Soldier"
+          className="w-[126px] h-[123px] rounded-lg bg-grey-30"
+        />
+      )}
       <div className="flex flex-col gap-2">
         <p className="text-2xl font-semibold font-rajdhaniSemiBold leading-7">
           {name}

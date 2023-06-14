@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 
 type IRememberSoldierProps = {
-  name: string;
+  name: string | undefined;
 };
 
 const REMEMBERING = [
@@ -24,7 +24,7 @@ const RememberSoldier = ({ name }: IRememberSoldierProps) => {
   return (
     <div className="w-full px-8 pt-6 bg-indigo-100 text-center">
       <h2 className="text-white font-semibold my-6 leading-6">
-        REMEMBER {name.toLocaleUpperCase()}
+        REMEMBER {name?.toLocaleUpperCase()}
       </h2>
       <div className="flex justify-between pb-14 gap-4">
         {REMEMBERING.map(({ image, text }) => {

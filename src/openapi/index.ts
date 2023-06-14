@@ -16,4 +16,7 @@ export type { ValidationError } from './models/ValidationError';
 
 export { ApiService } from './services/ApiService';
 export { CemeteriesService } from './services/CemeteriesService';
-export { SoldiersService } from './services/SoldiersService';
+
+import { OpenAPI } from './core/OpenAPI';
+
+OpenAPI.BASE = process.env.BACKEND_URL || '';

@@ -35,7 +35,7 @@ services:
       APP_ENV: production
       DATABASE_URL: postgresql://${DATABASE_USERNAME:-postgres}:${DATABASE_PASSWORD:-passwd}@db/db
     ports:
-      - 127.0.0.1:8009:8000
+      - 127.0.0.1:8009:80
     depends_on:
       - db
     env_file:

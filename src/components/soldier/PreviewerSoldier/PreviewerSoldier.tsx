@@ -18,6 +18,10 @@ import {
 import IconButton from '@/components/IconButton';
 import { ICONS_NAME } from '@/components/constants/iconName';
 import { useRouter } from 'next/navigation';
+import { useAppStore } from '@/lib/slices/store';
+import { PATH } from '@/components/constants/path.constants';
+import urlJoin from 'url-join';
+import { AWS_BASE_URL } from '@/components/constants/constants';
 
 const soldierInfo = {
   name: '1st Lt. Robert Fink',
@@ -59,65 +63,81 @@ const soldierInfo = {
 export default function PreviewerSoldier() {
   const router = useRouter();
 
-  const awardsInPreview =
-    soldierInfo.awards.length >= 1
-      ? `${soldierInfo.awards[0]}, other awards`
-      : soldierInfo.awards[0];
+  const { currentSoldier, currentCemetery } = useAppStore();
+
+  if (!currentSoldier) {
+    if (!currentCemetery) {
+      router.push(PATH.location);
+    } else {
+      router.push(PATH.search);
+    }
+  }
+
+  const soldierInfo = currentSoldier;
+
+  let awardsInPreview = '';
+
+  if (soldierInfo?.soldier_awards.length) {
+    awardsInPreview =
+      soldierInfo?.soldier_awards.length >= 1
+        ? `${soldierInfo?.soldier_awards[0]}, other awards`
+        : soldierInfo?.soldier_awards[0];
+  }
 
   const life: Ilife = {
     birthDate: {
       header: SOLDIER_LIFE_HEADERS.birthDate,
-      value: soldierInfo.birthDate,
+      value: soldierInfo?.birthDate,
     },
     birthLocation: {
       header: SOLDIER_LIFE_HEADERS.birthLocation,
-      value: soldierInfo.birthDate,
+      value: soldierInfo?.birthDate,
     },
   };
 
   const service: IService = {
     serviceNumber: {
       header: SOLDIER_SERVICE_HEADERS.serviceNumber,
-      value: soldierInfo.serviceNumber,
+      value: soldierInfo?.serviceNumber,
     },
     stateEnteredServiceFrom: {
       header: SOLDIER_SERVICE_HEADERS.stateEnteredServiceFrom,
-      value: soldierInfo.stateEnteredServiceFrom,
+      value: soldierInfo?.stateEnteredServiceFrom,
     },
     branchOfService: {
       header: SOLDIER_SERVICE_HEADERS.branchOfService,
-      value: soldierInfo.branchOfService,
+      value: soldierInfo?.serviceBranch,
     },
     assignment: {
       header: SOLDIER_SERVICE_HEADERS.assignment,
-      value: soldierInfo.assignment,
+      value: soldierInfo?.assignment,
     },
     position: {
       header: SOLDIER_SERVICE_HEADERS.position,
-      value: soldierInfo.position,
+      value: soldierInfo?.position,
     },
     awards: {
       header: SOLDIER_SERVICE_HEADERS.awards,
-      value: soldierInfo.awards.join(', '),
+      value: soldierInfo?.soldier_awards.join(', '),
     },
   };
 
   const death: IDeath = {
     dateOfDeath: {
       header: SOLDIER_DEATH_HEADERS.dateOfDeath,
-      value: soldierInfo.dateOfDeath,
+      value: soldierInfo?.deathDate,
     },
     circumstancesOfDeath: {
       header: SOLDIER_DEATH_HEADERS.circumstancesOfDeath,
-      value: soldierInfo.circumstancesOfDeath,
+      value: soldierInfo?.deathCircumstance,
     },
     initialBurial: {
       header: SOLDIER_DEATH_HEADERS.initialBurial,
-      value: soldierInfo.initialBurial,
+      value: soldierInfo?.initialBurialLocation,
     },
     finalBurialLocation: {
       header: SOLDIER_DEATH_HEADERS.finalBurialLocation,
-      value: soldierInfo.finalBurialLocation,
+      value: soldierInfo?.finalBurialLocation,
     },
   };
 
@@ -133,64 +153,81 @@ export default function PreviewerSoldier() {
             className="w-6 h-6 rotate-180"
           />
         </div>
-        <SoldierMainInfoCard
-          photoUrl={soldierInfo.photoUrl}
-          name={soldierInfo.name}
-          serviceNumber={soldierInfo.serviceNumber}
-          branchOfService={soldierInfo.branchOfService}
-          awards={awardsInPreview}
-        />
-        {soldierInfo.audioSourse && (
+        {soldierInfo?.photoPaths && (
+          <SoldierMainInfoCard
+            photoUrl={urlJoin(AWS_BASE_URL || '', soldierInfo.photoPaths[0])}
+            name={soldierInfo?.firstName}
+            serviceNumber={soldierInfo?.serviceNumber}
+            branchOfService={soldierInfo?.serviceBranch}
+            awards={awardsInPreview}
+          />
+        )}
+        {soldierInfo?.soldierAudioTour && (
           <div className="w-full bg-grey-10 rounded-lg p-4">
             <p className="text-sm text-grey-20">Audio Tour</p>
-            <AudioPlayer audioSourse={soldierInfo.audioSourse} />
+            <AudioPlayer
+              audioSourse={urlJoin(
+                AWS_BASE_URL || '',
+                soldierInfo.soldierAudioTour
+              )}
+            />
           </div>
         )}
 
         <SoldierCoordinates
-          finalBurialCoordinates={soldierInfo.finalBurialCoordinates}
-          finalBurialLocation={soldierInfo.finalBurialLocation}
+          finalBurialCoordinates={soldierInfo?.finalBurialLocation}
+          finalBurialLocation={soldierInfo?.finalBurialLocation}
         />
 
         <ClosebleInfo
           heading="LIFE"
-          isOpened={soldierInfo.ceremonyVideoUrl ? false : true}
+          isOpened={soldierInfo?.replacementCeremonyVideo ? false : true}
         >
           <SoldierCardBlockInfo solderInfo={life} />
         </ClosebleInfo>
 
         <ClosebleInfo heading="SERVICE" isOpened={false}>
           <SoldierCardBlockInfo solderInfo={service} />
-          <SoldierAdditionalImage
-            imageUrl={soldierInfo.jewishServicemanCardPhotoUrl}
-            imageDescription={soldierInfo.jewishServicemanCardDescription}
-          />
+          {soldierInfo?.jewishServicemansCard && (
+            <SoldierAdditionalImage
+              imageUrl={urlJoin(
+                AWS_BASE_URL || '',
+                soldierInfo.jewishServicemansCard
+              )}
+              imageDescription={'Jewish Serviceman’s card'}
+            />
+          )}
         </ClosebleInfo>
 
         <ClosebleInfo heading="DEATH" isOpened={false}>
           <SoldierCardBlockInfo solderInfo={death} />
-          <SoldierAdditionalImage
-            imageUrl={soldierInfo.killedinActionTelegramPhotoUrl}
-            imageDescription={soldierInfo.killedinActionTelegramDescription}
-          />
+          {soldierInfo?.kiaTelegram && (
+            <SoldierAdditionalImage
+              imageUrl={urlJoin(AWS_BASE_URL || '', soldierInfo.kiaTelegram)}
+              imageDescription={'Killed In Action (KIA) Telegram'}
+            />
+          )}
         </ClosebleInfo>
 
-        {soldierInfo.ceremonyVideoUrl && (
+        {soldierInfo?.replacementCeremonyVideo && (
           <ClosebleInfo heading="CHANGE CEREMONY" isOpened={true}>
             <SoldierAdditionalVideo
-              videoUrl={soldierInfo.ceremonyVideoUrl}
+              videoUrl={urlJoin(
+                AWS_BASE_URL || '',
+                soldierInfo.replacementCeremonyVideo
+              )}
               videoDescription="Replacement ceremony video"
             />
           </ClosebleInfo>
         )}
 
-        {soldierInfo.messages.length && (
+        {/* {soldierInfo.messages.length && (
           <ClosebleInfo heading="ADDITIONAL INFO" isOpened={false}>
             <SoldierMessages messages={soldierInfo.messages} />
           </ClosebleInfo>
-        )}
+        )} */}
       </div>
-      <RememberSoldier name={soldierInfo.name} />
+      <RememberSoldier name={soldierInfo?.firstName} />
     </div>
   );
 }

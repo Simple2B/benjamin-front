@@ -7,8 +7,8 @@ import { PATH } from './constants/path.constants';
 import { useRouter } from 'next/navigation';
 
 type ISearchBarProps = {
-  setInputSoldier: (value: string) => void;
   displaySettings: boolean;
+  setInputSoldier: (value: string) => void;
 };
 
 const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
@@ -48,13 +48,24 @@ const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
             />
           </div>
         )}
-        <input
-          className="flex-shrink"
-          type="text"
-          placeholder="Seach for the soldier"
-          onChange={handleChange}
-          value={userInput}
-        />
+        {displaySettings ? (
+          <Link href={PATH.search}>
+            <input
+              className="flex-shrink"
+              type="text"
+              placeholder="Seach for the soldier"
+              value={userInput}
+            />
+          </Link>
+        ) : (
+          <input
+            className="flex-shrink"
+            type="text"
+            placeholder="Seach for the soldier"
+            onChange={handleChange}
+            value={userInput}
+          />
+        )}
         <IconButton iconName={ICONS_NAME.camera} className={'h-6 w-6'} />
         {displaySettings && (
           <Link href={PATH.settings}>

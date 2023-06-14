@@ -3,7 +3,7 @@ import IconButton from '../IconButton';
 
 type ISoldierMainInfoProps = {
   heading: string;
-  text: string | string[];
+  text: string | string[] | undefined;
   icon: string;
 };
 

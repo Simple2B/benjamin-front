@@ -36,7 +36,7 @@ export class ApiService {
     ): CancelablePromise<CemeteryOut> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/cemetery{cemetery_uuid}',
+            url: '/api/cemetery/{cemetery_uuid}',
             path: {
                 'cemetery_uuid': cemeteryUuid,
             },
@@ -49,20 +49,25 @@ export class ApiService {
     /**
      * Get Soldiers
      * Get all cemeteries with pagination
+     * @param cemeteryUuid
      * @param q
      * @param page
      * @param perPage
      * @returns Soldiers Successful Response
      * @throws ApiError
      */
-    public static getSoldiersApiSoldierGet(
+    public static getSoldiersApiCemeteryCemeteryUuidSoldierGet(
+        cemeteryUuid: string,
         q?: string,
         page: number = 1,
         perPage: number = 10,
     ): CancelablePromise<Soldiers> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/soldier',
+            url: '/api/cemetery/{cemetery_uuid}/soldier',
+            path: {
+                'cemetery_uuid': cemeteryUuid,
+            },
             query: {
                 'q': q,
                 'page': page,

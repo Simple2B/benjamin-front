@@ -8,6 +8,7 @@ import NavigationButton from '../NavigationButton';
 import SelectingCemetery from '../SelectingCementery';
 import { ICONS_NAME } from '../constants/iconName';
 import { PATH } from '../constants/path.constants';
+import { useAppStore } from '@/lib/slices/store';
 
 interface ICemeteriesBox {
   cemeteries: Array<CemeteryOut>;
@@ -18,6 +19,13 @@ const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
     CemeteryOut | undefined
   >(undefined);
 
+  const { setCurrentCemetery } = useAppStore();
+
+  const handleSelect = (cemetery: CemeteryOut) => {
+    setCurrentCemetery(cemetery);
+    setSelectedCemetery(cemetery);
+  };
+
   return (
     <div className="bg-gradient-to-r from-indigo-20 to-indigo-30 w-screen flex flex-col justify-start gap-8 px-8 items-center all-height">
       <h1
@@ -27,7 +35,7 @@ const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
       </h1>
       <SelectingCemetery
         selectedCemetery={selectedCemetery}
-        onSelect={setSelectedCemetery}
+        onSelect={handleSelect}
         cemeteries={cemeteries}
       />
       <div className="flex justify-end h-full items-end self-end mb-8">
