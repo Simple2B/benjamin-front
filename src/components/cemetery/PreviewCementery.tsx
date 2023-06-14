@@ -22,6 +22,7 @@ export default function PreviewCemetery({
   cemetery,
   cemeteries,
 }: CemeteryPageProps) {
+  const [inputSoldier, setInputSoldier] = useState<string>('');
   const router = useRouter();
   const { setCurrentCemetery } = useAppStore();
 
@@ -40,7 +41,10 @@ export default function PreviewCemetery({
         <div className="fixed w-screen">
           <MapCemetery />
           <div className="flex flex-col items-center">
-            <SearchBar displaySettings={true} />
+            <SearchBar
+              setInputSoldier={setInputSoldier}
+              displaySettings={true}
+            />
           </div>
           <div className="flex flex-col items-center pt-5">
             <SelectingCemetery
