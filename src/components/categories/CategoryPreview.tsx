@@ -5,21 +5,7 @@ import { ICONS_NAME } from '../constants/iconName';
 import { useRouter } from 'next/navigation';
 import { FilteredCategoryExample } from './FilteredCategoryExample';
 import { CategoryBlock } from './CategoryBlock';
-
-const MONTH = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
+import { MONTH } from '../constants/constants';
 
 const YEAR = ['1920', '1921', '1922', '1923', '1924', '1295', '1926'];
 

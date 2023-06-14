@@ -69,9 +69,9 @@ export default function PreviewCemetery({
           <CemeteryAdditionalInfo
             superintendent={cemetery.superintendent}
             war={cemetery.war}
-            numberOfSoldiersBuried={12000}
-            numberOfJewishSoldiersBuried={250}
-            listedAsMissingSoldiers={500}
+            numberOfSoldiersBuried={cemetery.amountBuriedSoldiersCommon}
+            numberOfJewishSoldiersBuried={cemetery.amountBuriedSoldiersJewish}
+            listedAsMissingSoldiers={cemetery.amountBuriedSoldiersMissing}
           />
         </div>
       </div>
