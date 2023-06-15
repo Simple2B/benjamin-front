@@ -5,8 +5,7 @@
 export type SoldierCard = {
     uuid: string;
     serviceNumber: string;
-    firstName: string;
-    lastName: string;
+    name: string;
     birthLocation?: string;
 };
 

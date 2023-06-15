@@ -119,7 +119,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
         {soldier?.photoPaths && (
           <SoldierMainInfoCard
             photoUrl={urlJoin(AWS_BASE_URL || '', soldier.photoPaths[0])}
-            name={soldier?.firstName}
+            name={soldier?.name}
             serviceNumber={soldier?.serviceNumber}
             branchOfService={soldier?.serviceBranch}
             awards={awardsInPreview}
@@ -190,7 +190,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
           </ClosebleInfo>
         )} */}
       </div>
-      <RememberSoldier name={soldier?.firstName} />
+      <RememberSoldier name={soldier?.name} />
     </div>
   );
 }
