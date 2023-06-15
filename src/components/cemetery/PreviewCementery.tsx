@@ -18,6 +18,12 @@ interface CemeteryPageProps {
   cemeteries: Array<CemeteryOut>;
 }
 
+export type ISolderPhotoGallery = {
+  uuid: string;
+  photoUrl: string;
+  name: string;
+};
+
 export default function PreviewCemetery({
   cemetery,
   cemeteries,
@@ -25,6 +31,29 @@ export default function PreviewCemetery({
   const [inputSoldier, setInputSoldier] = useState<string>('');
   const router = useRouter();
   const { setCurrentCemetery } = useAppStore();
+
+  const soliers = [
+    {
+      uuid: '',
+      photoUrl: '/images/photos/soldier1.jpg',
+      name: '1st Lt. Robert S. Fink',
+    },
+    {
+      uuid: '',
+      photoUrl: '/images/photos/soldier2.jpg',
+      name: 'Sgt. Charles Solomon',
+    },
+    {
+      uuid: '',
+      photoUrl: '/images/photos/soldier1.jpg',
+      name: 'Pvt. Alan Franken',
+    },
+    {
+      uuid: '',
+      photoUrl: '/images/photos/soldier2.jpg',
+      name: '1st Lt. Robert S. Fink',
+    },
+  ];
 
   useEffect(() => {
     setCurrentCemetery(cemetery);
@@ -76,8 +105,16 @@ export default function PreviewCemetery({
         </div>
       </div>
       <div className="relative flex flex-col gap-6 items-center mb-8 w-full z-10 pb-5 bg-white pt-6">
-        <HorizontalPhotoGallery text="Soldiers with Headstone Changes" />
-        <HorizontalPhotoGallery text="Soldiers born in New York" />
+        <HorizontalPhotoGallery
+          text="Soldiers with Headstone Changes"
+          solders={soliers}
+          className="z-10"
+        />
+        <HorizontalPhotoGallery
+          text="Soldiers born in New York"
+          solders={soliers}
+          className="z-10"
+        />
       </div>
     </>
   );
