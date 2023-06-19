@@ -7,6 +7,29 @@ import HorizontalPhotoGallery from '../cemetery/HorizontalPhotoGallery';
 
 export const PreviewerStone = () => {
   const router = useRouter();
+
+  const soliers = [
+    {
+      uuid: '',
+      photoUrl: '/images/photos/soldier1.jpg',
+      name: '1st Lt. Robert S. Fink',
+    },
+    {
+      uuid: '',
+      photoUrl: '/images/photos/soldier2.jpg',
+      name: 'Sgt. Charles Solomon',
+    },
+    {
+      uuid: '',
+      photoUrl: '/images/photos/soldier1.jpg',
+      name: 'Pvt. Alan Franken',
+    },
+    {
+      uuid: '',
+      photoUrl: '/images/photos/soldier2.jpg',
+      name: '1st Lt. Robert S. Fink',
+    },
+  ];
   return (
     <>
       <div className="text-indigo-100 py-6 px-3 flex flex-col gap-4">
@@ -40,7 +63,7 @@ export const PreviewerStone = () => {
             bonds of eternal life.
           </p>
         </div>
-        <HorizontalPhotoGallery text="" />
+        <HorizontalPhotoGallery text="" solders={soliers} className="z-0" />
       </div>
       <div className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end">
         <button className="w-10/12 bg-turquoise-100 text-white p-3 rounded-lg font-semibold m-3">

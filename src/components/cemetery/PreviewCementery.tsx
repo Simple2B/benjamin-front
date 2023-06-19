@@ -18,14 +18,25 @@ interface CemeteryPageProps {
   cemeteries: Array<CemeteryOut>;
 }
 
+export type ISolderPhotoGallery = {
+  uuid: string;
+  photoUrl: string;
+  name: string;
+};
+
 export default function PreviewCemetery({
   cemetery,
   cemeteries,
 }: CemeteryPageProps) {
   const [inputSoldier, setInputSoldier] = useState<string>('');
   const [isSelectingOpen, setSelectingOpen] = useState<boolean>(false);
+  const [isScrolling, setScrolling] = useState<boolean>(false);
   const router = useRouter();
   const { setCurrentCemetery } = useAppStore();
+
+  const OPEN = ['start', 'medium', 'end'];
+
+  const open = 'start';
 
   useEffect(() => {
     setCurrentCemetery(cemetery);
@@ -40,7 +51,7 @@ export default function PreviewCemetery({
     <>
       <div className={`flex flex-col items-baseline w-full bg-white`}>
         <div className="fixed w-screen">
-          <MapCemetery />
+          <MapCemetery scrollLevel={open} />
           <div className="flex flex-col items-center">
             <SearchBar
               setInputSoldier={setInputSoldier}
@@ -55,10 +66,11 @@ export default function PreviewCemetery({
               setSelectingOpen={setSelectingOpen}
             />
           </div>
-          <div className={`${isSelectingOpen ? 'filter-indigo' : ''} `}> </div>
+          {isSelectingOpen && <div className="filter-indigo" />}
         </div>
 
         <CemeteryMainInfo
+          scrollLevel={open}
           name={cemetery.name}
           location={cemetery.location ? cemetery.location : ''}
           phone={cemetery.phone}
@@ -81,8 +93,13 @@ export default function PreviewCemetery({
         </div>
       </div>
       <div className="relative flex flex-col gap-6 items-center pb-8 w-full z-10 bg-white pt-6">
-        <HorizontalPhotoGallery text="Soldiers with Headstone Changes" />
-        <HorizontalPhotoGallery text="Soldiers born in New York" />
+        {cemetery.filtered_soldiers && (
+          <HorizontalPhotoGallery
+            text={cemetery.filtered_soldiers.title}
+            solders={cemetery.filtered_soldiers.soldiers}
+            className="z-10"
+          />
+        )}
       </div>
     </>
   );

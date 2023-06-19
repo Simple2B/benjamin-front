@@ -11,8 +11,10 @@ export type { CemeteryOut } from './models/CemeteryOut';
 export type { HTTPValidationError } from './models/HTTPValidationError';
 export type { Metadata } from './models/Metadata';
 export type { SoldierCard } from './models/SoldierCard';
+export type { SoldierCardWithPhoto } from './models/SoldierCardWithPhoto';
 export type { SoldierOut } from './models/SoldierOut';
 export type { Soldiers } from './models/Soldiers';
+export type { SoldiersFiltered } from './models/SoldiersFiltered';
 export type { ValidationError } from './models/ValidationError';
 
 export { ApiService } from './services/ApiService';

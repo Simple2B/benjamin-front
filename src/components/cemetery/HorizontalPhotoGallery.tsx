@@ -1,37 +1,35 @@
 import React from 'react';
 import SoldierProfile from './SoldierProfile';
+import { ISolderPhotoGallery } from './PreviewCementery';
+import { PATH } from '../constants/path.constants';
+import urlJoin from 'url-join';
+import Link from 'next/link';
+import { SoldierCardWithPhoto } from '@/openapi';
 
 type IHorizontalPhotoGalleryProps = {
   text: string;
+  solders: SoldierCardWithPhoto[];
+  className: string;
 };
 
-const HorizontalPhotoGallery = ({ text }: IHorizontalPhotoGalleryProps) => {
-  const solierHeadstoneChanges = [
-    {
-      photoUrl: '/images/photos/soldier1.jpg',
-      name: '1st Lt. Robert S. Fink',
-    },
-    {
-      photoUrl: '/images/photos/soldier2.jpg',
-      name: 'Sgt. Charles Solomon',
-    },
-    {
-      photoUrl: '/images/photos/soldier1.jpg',
-      name: 'Pvt. Alan Franken',
-    },
-    {
-      photoUrl: '/images/photos/soldier2.jpg',
-      name: '1st Lt. Robert S. Fink',
-    },
-  ];
+const HorizontalPhotoGallery = ({
+  text,
+  solders,
+  className,
+}: IHorizontalPhotoGalleryProps) => {
   return (
-    <div className="w-full z-10">
+    <div className={`w-full ${className}`}>
       <p className="text-indigo-100 font-semibold mb-3 leading-6 pl-5">
         {text}
       </p>
       <div className="flex gap-3 overflow-x-auto pb-4  text-indigo-100 px-6">
-        {solierHeadstoneChanges.map(({ photoUrl, name }, index) => (
-          <SoldierProfile photoUrl={photoUrl} name={name} key={index} />
+        {solders.map(({ soldierTitlePhoto, name, uuid }, index) => (
+          <SoldierProfile
+            photoUrl={soldierTitlePhoto}
+            name={name}
+            uuid={uuid}
+            key={index}
+          />
         ))}
       </div>
       <div className="mx-6">
