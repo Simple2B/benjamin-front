@@ -9,12 +9,21 @@ interface IContactInfo {
   link?: string;
 }
 
+type ScrollLevel = 'start' | 'medium' | 'end';
+
 type ICemeteryMainInfoProps = {
   name: string;
   location: string;
   phone?: string;
   email?: string;
   webUrl?: string;
+  scrollLevel: ScrollLevel;
+};
+
+const LEVELS = {
+  start: `mt-[calc(100vh-182px)]`,
+  medium: `mt-[calc(100vh-414px)]`,
+  end: 'mt-[calc(100vh-100vh)]',
 };
 
 const CemeteryMainInfo = ({
@@ -23,6 +32,7 @@ const CemeteryMainInfo = ({
   phone,
   email,
   webUrl,
+  scrollLevel,
 }: ICemeteryMainInfoProps) => {
   const contactInfo: IContactInfo[] = [
     {
@@ -43,7 +53,9 @@ const CemeteryMainInfo = ({
   ];
 
   return (
-    <div className="w-full flex flex-col gap-[21px] bg-white rounded-t-xl px-6 mt-[calc(100vh-414px)] z-10">
+    <div
+      className={`w-full flex flex-col gap-[21px] bg-white rounded-t-xl px-6 ${LEVELS[scrollLevel]} z-10`}
+    >
       <div className="flex w-full justify-center">
         <div className="h-[3px] w-16 bg-grey-50 mt-2 rounded-3xl"></div>
       </div>
