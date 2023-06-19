@@ -23,7 +23,8 @@ export const CemeteryAudioBox = ({ audio_tours }: ICemeteryAudioBoxProps) => {
           </>
         ))}
       </div>
-      <hr />
+
+      <hr className="border-indigo-100 border-opacity-10" />
     </div>
   );
 };

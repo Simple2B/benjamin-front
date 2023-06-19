@@ -18,6 +18,7 @@ const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
   const [selectedCemetery, setSelectedCemetery] = useState<
     CemeteryOut | undefined
   >(undefined);
+  const [isSelectingOpen, setSelectingOpen] = useState<boolean>(false);
 
   const { setCurrentCemetery } = useAppStore();
 
@@ -37,6 +38,7 @@ const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
         selectedCemetery={selectedCemetery}
         onSelect={handleSelect}
         cemeteries={cemeteries}
+        setSelectingOpen={setSelectingOpen}
       />
       <div className="flex justify-end h-full items-end self-end mb-8">
         <Link

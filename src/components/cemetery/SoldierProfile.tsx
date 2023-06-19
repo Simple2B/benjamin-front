@@ -4,12 +4,11 @@ import Image from 'next/image';
 export type ISoldierProfileProps = {
   photoUrl: string;
   name: string;
-  index: number;
 };
 
-const SoldierProfile = ({ photoUrl, name, index }: ISoldierProfileProps) => {
+const SoldierProfile = ({ photoUrl, name }: ISoldierProfileProps) => {
   return (
-    <div className={`w-36 flex-shrink-0 ${index == 0 ? 'ml-6' : ''}`}>
+    <div className={`w-36 flex-shrink-0`}>
       <Image
         src={photoUrl}
         width={140}

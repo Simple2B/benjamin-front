@@ -29,17 +29,14 @@ const HorizontalPhotoGallery = ({ text }: IHorizontalPhotoGalleryProps) => {
       <p className="text-indigo-100 font-semibold mb-3 leading-6 pl-5">
         {text}
       </p>
-      <div className="flex gap-3 overflow-x-auto pb-4  text-indigo-100">
+      <div className="flex gap-3 overflow-x-auto pb-4  text-indigo-100 px-6">
         {solierHeadstoneChanges.map(({ photoUrl, name }, index) => (
-          <SoldierProfile
-            photoUrl={photoUrl}
-            name={name}
-            key={index}
-            index={index}
-          />
+          <SoldierProfile photoUrl={photoUrl} name={name} key={index} />
         ))}
       </div>
-      <hr />
+      <div className="mx-6">
+        <hr className="border-indigo-100 border-opacity-10" />
+      </div>
     </div>
   );
 };
