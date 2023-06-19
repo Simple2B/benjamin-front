@@ -1,9 +1,5 @@
 import React from 'react';
 import SoldierProfile from './SoldierProfile';
-import { ISolderPhotoGallery } from './PreviewCementery';
-import { PATH } from '../constants/path.constants';
-import urlJoin from 'url-join';
-import Link from 'next/link';
 import { SoldierCardWithPhoto } from '@/openapi';
 
 type IHorizontalPhotoGalleryProps = {
