@@ -65,7 +65,7 @@ const SelectingCemetery = ({
                   className="absolute max-h-60 w-full overflow-auto rounded-b-3xl bg-white text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
                   {cemeteries.map((cementery) => (
-                    <>
+                    <div key={cementery.uuid}>
                       {cementery.uuid !== selectedCemetery?.uuid && (
                         <Listbox.Option
                           key={cementery.uuid}
@@ -87,7 +87,7 @@ const SelectingCemetery = ({
                           )}
                         </Listbox.Option>
                       )}
-                    </>
+                    </div>
                   ))}
                 </Listbox.Options>
               </Transition>

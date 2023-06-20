@@ -54,7 +54,7 @@ const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
               type="text"
               placeholder="Search for the soldier"
               className="flex-shrink w-[210px]"
-              value={userInput}
+              defaultValue={userInput}
             />
           </Link>
         ) : (
@@ -63,7 +63,7 @@ const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
             type="text"
             placeholder="Search for the soldier"
             onChange={handleChange}
-            value={userInput}
+            defaultValue={userInput}
           />
         )}
         <div className="flex justify-center items-center">

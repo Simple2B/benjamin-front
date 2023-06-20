@@ -77,3 +77,11 @@ div::-webkit-scrollbar {
   opacity: 0.5;
   z-index: 10;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+#cemetery-scrollable {
+  min-height: 100vh;
+}
