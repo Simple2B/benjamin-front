@@ -19,10 +19,10 @@ const SoldierProfile = ({ photoUrl, name, uuid }: ISoldierProfileProps) => {
           <img
             src={urlJoin(AWS_BASE_URL || '', photoUrl)}
             alt="Soldier"
-            className="w-[126px] h-[123px] rounded-lg bg-grey-30 soldier-shawdow "
+            className="w-[126px] h-[123px] rounded-lg bg-grey-30 soldier-shawdow"
           />
         ) : (
-          <div className="h-32 w-36 object-cover rounded-lg bg-grey-40"></div>
+          <div className="w-[126px] h-[123px] rounded-lg bg-grey-30 soldier-shawdow"></div>
         )}
 
         <p className="text-base text-center leading-5 mt-2">{name}</p>
