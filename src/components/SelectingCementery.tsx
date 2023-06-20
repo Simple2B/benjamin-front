@@ -10,18 +10,21 @@ type ISelectingCemeteriesProps = {
   selectedCemetery?: CemeteryOut;
   onSelect: (arg: CemeteryOut) => void;
   cemeteries: Array<CemeteryOut>;
+  setSelectingOpen: (arg: boolean) => void;
 };
 
 const SelectingCemetery = ({
   selectedCemetery,
   onSelect,
   cemeteries,
+  setSelectingOpen,
 }: ISelectingCemeteriesProps) => {
   return (
-    <div className="w-[302px] h-10">
+    <div className="w-[302px] h-10 z-50 relative">
       <Listbox value={selectedCemetery} onChange={onSelect}>
         {({ open }) => (
           <>
+            {setSelectingOpen(open)}
             <div className="relative mt-1">
               <Listbox.Button
                 style={{
@@ -62,7 +65,7 @@ const SelectingCemetery = ({
                   className="absolute max-h-60 w-full overflow-auto rounded-b-3xl bg-white text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
                   {cemeteries.map((cementery) => (
-                    <>
+                    <div key={cementery.uuid}>
                       {cementery.uuid !== selectedCemetery?.uuid && (
                         <Listbox.Option
                           key={cementery.uuid}
@@ -84,7 +87,7 @@ const SelectingCemetery = ({
                           )}
                         </Listbox.Option>
                       )}
-                    </>
+                    </div>
                   ))}
                 </Listbox.Options>
               </Transition>

@@ -46,6 +46,7 @@ module.exports = {
         noto: ['var(--noto-sans)'],
         rajdhani: ['var(--rajdhani)'],
         rajdhaniSemiBold: ['var(--rajdhani-semi-bold)'],
+        roboto: ['var(--roboto)'],
       },
     },
   },

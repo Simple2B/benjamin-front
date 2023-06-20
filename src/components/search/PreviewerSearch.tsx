@@ -52,7 +52,7 @@ export const PreviewerSearch = () => {
           soldiersQuery.data.items.map((soldier, index) => (
             <div key={index}>
               <SoldierSearchingCard
-                name={soldier.firstName}
+                name={soldier.name}
                 number={soldier.serviceNumber}
                 city={soldier.birthLocation}
                 soldierUuid={soldier.uuid}

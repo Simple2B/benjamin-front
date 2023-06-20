@@ -4,8 +4,7 @@
 
 export type SoldierOut = {
     serviceNumber: string;
-    firstName: string;
-    lastName: string;
+    name: string;
     serviceBranch: string;
     birthDate: string;
     birthLocation?: string;

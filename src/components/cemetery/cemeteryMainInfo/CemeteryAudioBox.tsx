@@ -9,21 +9,19 @@ type ICemeteryAudioBoxProps = {
 
 export const CemeteryAudioBox = ({ audio_tours }: ICemeteryAudioBoxProps) => {
   return (
-    <div className="w-full flex flex-col gap-6 bg-white px-6 z-10 py-5">
+    <div className="w-full flex flex-col gap-6 bg-white px-6 z-10 pt-5">
       <div className="flex flex-col gap-2">
         <p className="font-semibold text-indigo-100">Audio Tour</p>
-        {audio_tours.map((melody) => (
-          <>
+        {audio_tours.map((melody, index) => (
+          <div key={index}>
             {AWS_BASE_URL && (
-              <AudioPlayer
-                key={melody}
-                audioSourse={urlJoin(AWS_BASE_URL, melody)}
-              />
+              <AudioPlayer audioSourse={urlJoin(AWS_BASE_URL, melody)} />
             )}
-          </>
+          </div>
         ))}
       </div>
-      <hr />
+
+      <hr className="border-indigo-100 border-opacity-10" />
     </div>
   );
 };

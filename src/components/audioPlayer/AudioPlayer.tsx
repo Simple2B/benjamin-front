@@ -46,6 +46,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
   }, []);
 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsPlaying(true);
     if (audioRef.current && e.currentTarget) {
       return audioRef.current.seek(parseInt(e.currentTarget.value));
     }
@@ -54,7 +55,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
   };
 
   return (
-    <div className="flex items-center gap-1 justify-center h-6">
+    <div className="flex items-center gap-2 justify-center h-6">
       <ReactHowler
         src={audioSourse}
         playing={isPlaying}
@@ -67,10 +68,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
 
       {isAudioLoaded ? (
         <>
-          <div
-            onClick={togglePlay}
-            className="flex items-center justify-center"
-          >
+          <div onClick={togglePlay} className="flex items-center ">
             <IconButton
               iconName={isPlaying ? ICONS_NAME.pause : ICONS_NAME.play}
               className={'h-4 w-4'}
@@ -86,9 +84,9 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
             value={audioRef.current ? audioRef.current.seek() : 0}
             step="0.01"
             onChange={handleSeek}
-            className="h-1 w-full mx-4 appearance-none thumb-blue outline-none [&::-webkit-slider-thumb]:appearance-none"
+            className="h-1 w-full appearance-none thumb-blue outline-none [&::-webkit-slider-thumb]:appearance-none"
             style={{
-              background: `linear-gradient(to right, #2693AB 0%, #2693AB ${
+              background: `linear-gradient(to right, #2693AB, #2693AB ${
                 (currentTime /
                   (audioRef.current ? audioRef.current.duration() : 0)) *
                 100

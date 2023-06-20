@@ -3,6 +3,12 @@ import './globals.css';
 import Providers from './providers';
 import localFont from 'next/font/local';
 
+const roboto = localFont({
+  src: '../../public/fonts/RobotoFlex-Regular.ttf',
+  variable: '--roboto',
+  display: 'swap',
+});
+
 const rajdhani = localFont({
   src: '../../public/fonts/Rajdhani-Regular.ttf',
   variable: '--rajdhani',
@@ -34,7 +40,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${rajdhani.variable} ${rajdhaniSemiBold.variable} ${notoSans.variable} ${notoSans.className} `}
+      className={`${rajdhani.variable} ${rajdhaniSemiBold.variable} ${notoSans.variable} ${roboto.variable} ${notoSans.className} `}
     >
       <head>
         <meta name="apple-mobile-web-app-capable" content="yes" />

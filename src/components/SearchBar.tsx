@@ -23,7 +23,7 @@ const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
   return (
     <div className="mt-10">
       <div
-        className={`rounded-lg bg-white relative flex items-center h-12 justify-between px-1.5 w-[350px] shadow-lg ${
+        className={`rounded-lg bg-white relative flex items-center h-12  px-1.5 w-[350px] shadow-lg gap-3 ${
           !displaySettings && 'pr-4'
         }`}
         style={{
@@ -31,7 +31,7 @@ const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
         }}
       >
         {displaySettings ? (
-          <div className="pl-3 flex justify-center items-center">
+          <div className="pl-4 flex justify-center items-center">
             <IconButton
               iconName={ICONS_NAME.magnifyingGlass}
               className={'h-4 w-4'}
@@ -39,7 +39,7 @@ const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
           </div>
         ) : (
           <div
-            className="pl-3 flex justify-center items-center"
+            className="pl-4 flex justify-center items-center"
             onClick={router.back}
           >
             <IconButton
@@ -51,28 +51,30 @@ const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
         {displaySettings ? (
           <Link href={PATH.search}>
             <input
-              className="flex-shrink"
               type="text"
-              placeholder="Seach for the soldier"
-              value={userInput}
+              placeholder="Search for the soldier"
+              className="flex-shrink w-[210px]"
+              defaultValue={userInput}
             />
           </Link>
         ) : (
           <input
-            className="flex-shrink"
+            className="flex-shrink w-[250px] "
             type="text"
-            placeholder="Seach for the soldier"
+            placeholder="Search for the soldier"
             onChange={handleChange}
-            value={userInput}
+            defaultValue={userInput}
           />
         )}
-        <IconButton iconName={ICONS_NAME.camera} className={'h-6 w-6'} />
+        <div className="flex justify-center items-center">
+          <IconButton iconName={ICONS_NAME.camera} className={'h-6 w-6'} />
+        </div>
         {displaySettings && (
           <Link href={PATH.settings}>
             <IconButton
               iconName={ICONS_NAME.settings}
               className={
-                'inline-flex items-center justify-center h-9 w-9 bg-turquoise-100 rounded p-2.5'
+                'inline-flex items-center justify-center h-9 w-9 bg-turquoise-100 rounded p-2.5 mr-[6px]'
               }
             />
           </Link>

@@ -2,6 +2,8 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { SoldiersFiltered } from './SoldiersFiltered';
+
 export type CemeteryOut = {
     name: string;
     location?: string;
@@ -17,5 +19,6 @@ export type CemeteryOut = {
     uuid: string;
     war?: string;
     audio_tours: Array<string>;
+    filtered_soldiers?: SoldiersFiltered;
 };
 

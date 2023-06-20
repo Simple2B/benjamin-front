@@ -1,24 +1,34 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import urlJoin from 'url-join';
+import { PATH } from '../constants/path.constants';
 
 export type ISoldierProfileProps = {
-  photoUrl: string;
+  photoUrl?: string;
   name: string;
-  index: number;
+  uuid: string;
 };
 
-const SoldierProfile = ({ photoUrl, name, index }: ISoldierProfileProps) => {
+const SoldierProfile = ({ photoUrl, name, uuid }: ISoldierProfileProps) => {
   return (
-    <div className={`w-36 flex-shrink-0 ${index == 0 ? 'ml-6' : ''}`}>
-      <Image
-        src={photoUrl}
-        width={140}
-        height={132}
-        alt="Soldier"
-        className="h-32 w-36 object-cover rounded-lg"
-      />
-      <p className="text-base text-center leading-5 mt-2">{name}</p>
-    </div>
+    <Link href={urlJoin(PATH.soldier, uuid)}>
+      <div className={`w-36 flex-shrink-0`}>
+        {photoUrl ? (
+          <Image
+            src={photoUrl}
+            width={140}
+            height={132}
+            alt="Soldier"
+            className="h-32 w-36 object-cover rounded-lg bg-grey-40"
+          />
+        ) : (
+          <div className="h-32 w-36 object-cover rounded-lg bg-grey-40"></div>
+        )}
+
+        <p className="text-base text-center leading-5 mt-2">{name}</p>
+      </div>
+    </Link>
   );
 };
 
