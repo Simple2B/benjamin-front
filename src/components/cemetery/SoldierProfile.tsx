@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import urlJoin from 'url-join';
 import { PATH } from '../constants/path.constants';
+import { AWS_BASE_URL } from '../constants/constants';
 
 export type ISoldierProfileProps = {
   photoUrl?: string;
@@ -15,12 +16,10 @@ const SoldierProfile = ({ photoUrl, name, uuid }: ISoldierProfileProps) => {
     <Link href={urlJoin(PATH.soldier, uuid)}>
       <div className={`w-36 flex-shrink-0`}>
         {photoUrl ? (
-          <Image
-            src={photoUrl}
-            width={140}
-            height={132}
+          <img
+            src={urlJoin(AWS_BASE_URL || '', photoUrl)}
             alt="Soldier"
-            className="h-32 w-36 object-cover rounded-lg bg-grey-40"
+            className="w-[126px] h-[123px] rounded-lg bg-grey-30 soldier-shawdow "
           />
         ) : (
           <div className="h-32 w-36 object-cover rounded-lg bg-grey-40"></div>
