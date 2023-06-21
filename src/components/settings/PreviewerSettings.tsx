@@ -45,7 +45,7 @@ export default function PreviewerSettings({
   );
 
   return (
-    <div className="flex flex-col items-start m-6 gap-5 bg-white">
+    <div className="flex flex-col items-start m-6 gap-8 bg-white">
       <div
         className="w-full flex items-baseline justify-between"
         onClick={router.back}
@@ -59,7 +59,7 @@ export default function PreviewerSettings({
           Settings
         </h1>
       </div>
-      <div className="flex flex-col items-center ">
+      <div className="flex flex-col items-center w-full">
         <SelectingCemetery
           selectedCemetery={currentCemetery}
           onSelect={handleSelect}

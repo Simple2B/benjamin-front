@@ -22,8 +22,8 @@ export default function PreviewCemetery() {
   }
 
   return (
-    <>
-      <div className={`flex flex-col items-baseline w-full bg-white`}>
+    <div>
+      <div className={`flex flex-col items-baseline w-full bg-white h-full`}>
         <div className="fixed w-screen">
           <MapCemetery />
           <div className="flex flex-col items-center">
@@ -35,6 +35,6 @@ export default function PreviewCemetery() {
         </div>
       </div>
       <CemeteryInfo cemetery={currentCemetery} />
-    </>
+    </div>
   );
 }

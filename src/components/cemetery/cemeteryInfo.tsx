@@ -61,7 +61,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
 
   return (
     <div
-      className="relative w-full z-10 bg-white rounded-t-xl"
+      className="absolute w-full z-10 bg-white rounded-t-xl mt-[calc(100vh-182px)]"
       id="cemetery-scrollable"
       ref={scrollRef}
     >
@@ -77,7 +77,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
         <CemeteryAudioBox audio_tours={cemetery.audio_tours} />
       ) : null}
 
-      <div className="flex flex-col gap-6 items-center w-full px-6 z-10 bg-white pt-5">
+      <div className="flex flex-col gap-6 items-center w-full px-6 z-10 bg-white pt-5 relative">
         <CemeteryAdditionalInfo
           superintendent={cemetery.superintendent}
           war={cemetery.war}

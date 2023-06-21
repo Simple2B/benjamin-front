@@ -118,7 +118,11 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
         </div>
         {soldier?.photoPaths && (
           <SoldierMainInfoCard
-            photoUrl={urlJoin(AWS_BASE_URL || '', soldier.photoPaths[0])}
+            photoUrl={
+              soldier.photoPaths[0]
+                ? urlJoin(AWS_BASE_URL || '', soldier.photoPaths[0])
+                : ''
+            }
             name={soldier?.name}
             serviceNumber={soldier?.serviceNumber}
             branchOfService={soldier?.serviceBranch}
