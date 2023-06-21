@@ -14,15 +14,15 @@ export type ISoldierProfileProps = {
 const SoldierProfile = ({ photoUrl, name, uuid }: ISoldierProfileProps) => {
   return (
     <Link href={urlJoin(PATH.soldier, uuid)}>
-      <div className={`w-36 flex-shrink-0`}>
+      <div className={`w-[140px] flex-shrink-0`}>
         {photoUrl ? (
           <img
             src={urlJoin(AWS_BASE_URL || '', photoUrl)}
             alt="Soldier"
-            className="w-[126px] h-[123px] rounded-lg bg-grey-30 soldier-shawdow"
+            className="w-[140px] h-[132px] rounded-lg bg-grey-30 soldier-shawdow"
           />
         ) : (
-          <div className="w-[126px] h-[123px] rounded-lg bg-grey-30 soldier-shawdow"></div>
+          <div className="w-[140px] h-[132px] rounded-lg bg-grey-30 soldier-shawdow"></div>
         )}
 
         <p className="text-base text-center leading-5 mt-2">{name}</p>
