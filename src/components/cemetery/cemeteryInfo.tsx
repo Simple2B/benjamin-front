@@ -4,6 +4,8 @@ import CemeteryAdditionalInfo from './cemeteryAdditionalInfo/CemeteryAdditionalI
 import { CemeteryAudioBox } from './cemeteryMainInfo/CemeteryAudioBox';
 import CemeteryMainInfo from './cemeteryMainInfo/CemeteryMainInfo';
 import { CemeteryOut } from '@/openapi';
+import { redirect } from 'next/navigation';
+import { PATH } from '../constants/path.constants';
 
 interface ICemeteryInfoProps {
   cemetery: CemeteryOut;
@@ -12,6 +14,12 @@ interface ICemeteryInfoProps {
 export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [touchStart, setTouchStart] = useState<number>(0);
+  const [touchEnd, setTouchEnd] = useState<number>(0);
+  const [isInfoBoxFullScreen, setInfoBoxFullScreen] = useState<boolean>(false);
+
+  if (!cemetery) {
+    redirect(PATH.location);
+  }
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -26,38 +34,45 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
         const currentYPos = (
           e.currentTarget as Element
         )?.getBoundingClientRect().y;
-
-        if (currentYPos > touchStart) {
-          document.getElementById('page')?.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'smooth',
-          });
-        } else {
-          document.getElementById('page')?.scrollTo({
-            top: 1000,
-            left: 0,
-            behavior: 'smooth',
-          });
-        }
+        setTouchEnd(currentYPos);
       });
-
-      onwheel = (event: WheelEvent) => {
-        if (event.deltaY > 0) {
-          document.getElementById('page')?.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'smooth',
-          });
-        }
-        if (event.deltaY < 0) {
-          document.getElementById('cemetery-scrollable')?.scrollIntoView({
-            behavior: 'smooth',
-          });
-        }
-      };
     }
-  }, [scrollRef, touchStart]);
+  }, [scrollRef]);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      if (touchEnd > touchStart) {
+        document.getElementById('page')?.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        });
+        setInfoBoxFullScreen(false);
+      } else if (touchEnd < touchStart && !isInfoBoxFullScreen) {
+        document.getElementById('page')?.scrollTo({
+          top: window.screen.height - 182,
+          left: 0,
+          behavior: 'smooth',
+        });
+        setInfoBoxFullScreen(true);
+      }
+    }
+
+    onwheel = (event: WheelEvent) => {
+      if (event.deltaY < 0) {
+        document.getElementById('page')?.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        });
+      }
+      if (event.deltaY > 0) {
+        document.getElementById('cemetery-scrollable')?.scrollIntoView({
+          behavior: 'smooth',
+        });
+      }
+    };
+  }, [touchEnd, isInfoBoxFullScreen]);
 
   return (
     <div

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import IconButton from '../IconButton';
 import { ICONS_NAME } from '../constants/iconName';
 import { Metadata } from '@/openapi/models/Metadata';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import SettingBlock from './settingsBlock/SettingBlock';
 import SelectingCemetery from '../SelectingCementery';
 import { useAppStore } from '@/lib/slices/store';
@@ -33,6 +33,10 @@ export default function PreviewerSettings({
     setCurrentCemetery(cemetery);
     setSelectedCemetery(cemetery);
   };
+
+  if (!currentCemetery) {
+    redirect(PATH.location);
+  }
 
   const links: { [key: string]: string } = {};
 
