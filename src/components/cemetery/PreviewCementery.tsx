@@ -1,19 +1,11 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { CemeteryOut } from '@/openapi';
 import MapCemetery from './MapCemetery';
 import SearchBar from '../SearchBar';
-import SelectingCemetery from '../SelectingCementery';
-import { useRouter } from 'next/navigation';
-import urlJoin from 'url-join';
+import { redirect } from 'next/navigation';
 import { PATH } from '../constants/path.constants';
 import { useAppStore } from '@/lib/slices/store';
 import { CemeteryInfo } from './cemeteryInfo';
-
-interface CemeteryPageProps {
-  cemetery: CemeteryOut;
-  cemeteries: Array<CemeteryOut>;
-}
 
 export type ISolderPhotoGallery = {
   uuid: string;
@@ -21,23 +13,13 @@ export type ISolderPhotoGallery = {
   name: string;
 };
 
-export default function PreviewCemetery({
-  cemetery,
-  cemeteries,
-}: CemeteryPageProps) {
+export default function PreviewCemetery() {
   const [inputSoldier, setInputSoldier] = useState<string>('');
-  const [isSelectingOpen, setSelectingOpen] = useState<boolean>(false);
-  const router = useRouter();
-  const { setCurrentCemetery } = useAppStore();
+  const { currentCemetery } = useAppStore();
 
-  useEffect(() => {
-    setCurrentCemetery(cemetery);
-  }, [cemetery]);
-
-  const handleSelectCemetery = (cemetery: CemeteryOut) => {
-    setCurrentCemetery(cemetery);
-    router.push(urlJoin(PATH.cemetery, cemetery.uuid));
-  };
+  if (!currentCemetery) {
+    redirect(PATH.location);
+  }
 
   return (
     <>
@@ -50,18 +32,9 @@ export default function PreviewCemetery({
               displaySettings={true}
             />
           </div>
-          <div className="flex flex-col items-center pt-5">
-            <SelectingCemetery
-              selectedCemetery={cemetery}
-              onSelect={handleSelectCemetery}
-              cemeteries={cemeteries}
-              setSelectingOpen={setSelectingOpen}
-            />
-          </div>
-          {isSelectingOpen && <div className="filter-indigo" />}
         </div>
       </div>
-      <CemeteryInfo cemetery={cemetery} />
+      <CemeteryInfo cemetery={currentCemetery} />
     </>
   );
 }

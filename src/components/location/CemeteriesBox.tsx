@@ -39,6 +39,7 @@ const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
         onSelect={handleSelect}
         cemeteries={cemeteries}
         setSelectingOpen={setSelectingOpen}
+        boxWidth={`w-[302px]`}
       />
       <div className="flex justify-end h-full items-end self-end mb-8">
         <Link
