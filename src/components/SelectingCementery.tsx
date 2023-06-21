@@ -7,10 +7,11 @@ import { ICONS_NAME } from './constants/iconName';
 import { CemeteryOut } from '@/openapi';
 
 type ISelectingCemeteriesProps = {
-  selectedCemetery?: CemeteryOut;
+  selectedCemetery?: CemeteryOut | null;
   onSelect: (arg: CemeteryOut) => void;
   cemeteries: Array<CemeteryOut>;
   setSelectingOpen: (arg: boolean) => void;
+  boxWidth: string;
 };
 
 const SelectingCemetery = ({
@@ -18,9 +19,10 @@ const SelectingCemetery = ({
   onSelect,
   cemeteries,
   setSelectingOpen,
+  boxWidth,
 }: ISelectingCemeteriesProps) => {
   return (
-    <div className="w-[302px] h-10 z-50 relative">
+    <div className={`${boxWidth} h-10 z-50 relative`}>
       <Listbox value={selectedCemetery} onChange={onSelect}>
         {({ open }) => (
           <>
@@ -33,7 +35,7 @@ const SelectingCemetery = ({
                 }}
                 className={`relative w-full h-10 cursor-default text-sm leading-6 pl-4 ${
                   open ? 'rounded-t-3xl' : 'rounded-3xl'
-                } bg-white pt-2 text-left shadow-md focus:outline-nonesm:text-sm  font-noto transition duration-500 ease-in-out`}
+                } bg-white pt-2 text-left shadow-md focus:outline-nonesm:text-sm  font-noto transition duration-500 ease-in-out `}
               >
                 <span
                   className={`block truncate font-noto w-[235px] pb-1 ${
