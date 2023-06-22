@@ -6,6 +6,7 @@ import CemeteryMainInfo from './cemeteryMainInfo/CemeteryMainInfo';
 import { CemeteryOut } from '@/openapi';
 import { redirect } from 'next/navigation';
 import { PATH } from '../constants/path.constants';
+import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
 interface ICemeteryInfoProps {
   cemetery: CemeteryOut;
@@ -16,10 +17,21 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
   const [touchStart, setTouchStart] = useState<number>(0);
   const [touchEnd, setTouchEnd] = useState<number>(0);
   const [isInfoBoxFullScreen, setInfoBoxFullScreen] = useState<boolean>(false);
+  const [isScrolableArea, setScrollableArea] = useState<boolean>(false);
 
   if (!cemetery) {
     redirect(PATH.location);
   }
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      document
+        .getElementById('cemetery-main-info')
+        ?.addEventListener('touchstart', (e) => {
+          setScrollableArea(true);
+        });
+    }
+  }, [scrollRef]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -41,13 +53,28 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
 
   useEffect(() => {
     if (scrollRef.current) {
-      if (touchEnd > touchStart) {
+      if (touchEnd > touchStart && isScrolableArea) {
         document.getElementById('page')?.scrollTo({
           top: 0,
           left: 0,
           behavior: 'smooth',
         });
         setInfoBoxFullScreen(false);
+        return;
+      } else if (touchEnd > touchStart && !isScrolableArea) {
+        const bodyRect = document.body.getBoundingClientRect();
+        const elemRect = document
+          .getElementById('cemetery-scrollable')
+          ?.getBoundingClientRect();
+        const offset = (elemRect?.top ?? 0) - bodyRect.top;
+        if (offset > 0) {
+          document.getElementById('page')?.scrollTo({
+            top: window.screen.height - 182,
+            left: 0,
+            behavior: 'smooth',
+          });
+          setInfoBoxFullScreen(true);
+        }
       } else if (touchEnd < touchStart && !isInfoBoxFullScreen) {
         document.getElementById('page')?.scrollTo({
           top: window.screen.height - 182,
@@ -65,13 +92,16 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
           left: 0,
           behavior: 'smooth',
         });
+        setInfoBoxFullScreen(false);
       }
       if (event.deltaY > 0) {
         document.getElementById('cemetery-scrollable')?.scrollIntoView({
           behavior: 'smooth',
         });
+        setInfoBoxFullScreen(true);
       }
     };
+    setScrollableArea(false);
   }, [touchEnd, isInfoBoxFullScreen]);
 
   return (
@@ -104,11 +134,18 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
 
       <div className="relative flex flex-col gap-6 items-center pb-8 w-full z-10 bg-white pt-6">
         {cemetery.filtered_soldiers && (
-          <HorizontalPhotoGallery
-            text={cemetery.filtered_soldiers.title}
-            solders={cemetery.filtered_soldiers.soldiers}
-            className="z-10"
-          />
+          <>
+            <HorizontalPhotoGallery
+              text={'Soldiers with Headstone Changes'}
+              solders={cemetery.filtered_soldiers.soldiers}
+              className="z-10"
+            />
+            <HorizontalPhotoGallery
+              text={cemetery.filtered_soldiers.title}
+              solders={cemetery.filtered_soldiers.soldiers}
+              className="z-10"
+            />
+          </>
         )}
       </div>
     </div>

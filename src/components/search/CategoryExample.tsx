@@ -32,7 +32,7 @@ export const CategoryExample = () => {
           key={index}
         >
           <div
-            className={`bg-turquoise-50 h-8 pl-[10px] pr-3 flex gap-3 justify-center items-center rounded-2xl whitespace-nowrap flex-shrink-0 overflow-hidden ${
+            className={`bg-opacity-20  bg-turquoise-50 h-8 pl-[10px] pr-3 flex gap-3 justify-center items-center rounded-2xl whitespace-nowrap flex-shrink-0 overflow-hidden ${
               index == 0 ? 'ml-[calc((100vw-350px)/2)]' : ''
             }`}
           >
@@ -42,7 +42,7 @@ export const CategoryExample = () => {
         </Link>
       ))}
       <Link href={PATH.category}>
-        <div className="bg-turquoise-50 h-8 pl-[10px] pr-3 flex gap-3 justify-center items-center rounded-2xl whitespace-nowrap flex-shrink-0 overflow-hidden mr-[calc((100vw-350px)/2)]">
+        <div className="bg-opacity-20  bg-turquoise-50 h-8 pl-[10px] pr-3 flex gap-3 justify-center items-center rounded-2xl whitespace-nowrap flex-shrink-0 overflow-hidden mr-[calc((100vw-350px)/2)]">
           <IconButton iconName={ICONS_NAME.ellipsis} className="h-3 w-3" />
           <p className="text-sm leading-5">More</p>
         </div>
