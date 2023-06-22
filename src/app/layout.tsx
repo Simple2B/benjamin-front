@@ -4,7 +4,7 @@ import Providers from './providers';
 import localFont from 'next/font/local';
 
 const roboto = localFont({
-  src: '../../public/fonts/RobotoFlex-Regular.ttf',
+  src: '../../public/fonts/Roboto-Regular.ttf',
   variable: '--roboto',
   display: 'swap',
 });
