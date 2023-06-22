@@ -35,7 +35,7 @@ const SelectingCemetery = ({
                 }}
                 className={`relative w-full h-10 cursor-default text-sm leading-6 pl-4 ${
                   open ? 'rounded-t-3xl' : 'rounded-3xl'
-                } bg-white pt-2 text-left shadow-md focus:outline-nonesm:text-sm  font-noto transition duration-500 ease-in-out `}
+                } bg-white pt-2 text-left settings-shawdow  focus:outline-nonesm:text-sm  font-noto transition duration-500 ease-in-out `}
               >
                 <span
                   className={`block truncate font-noto w-[235px] pb-1 ${
