@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import IconButton from '../IconButton';
 import { useRouter } from 'next/navigation';
 import { ICONS_NAME } from '../constants/iconName';
@@ -7,6 +7,7 @@ import HorizontalPhotoGallery from '../cemetery/HorizontalPhotoGallery';
 import urlJoin from 'url-join';
 import { AWS_BASE_URL } from '../constants/constants';
 import StoneHorizontalGallery from './StoneHorizontalGallery';
+import { StoneUploadWindow } from './StoneUploadWindow';
 
 export interface IStonePhotosGallery {
   date: string;
@@ -15,6 +16,7 @@ export interface IStonePhotosGallery {
 }
 
 export const PreviewerStone = () => {
+  const [isUploadWindowOpen, setUploadWindowOpen] = useState<boolean>(false);
   const router = useRouter();
 
   const stonePhotosGallery: IStonePhotosGallery[] = [
@@ -39,6 +41,10 @@ export const PreviewerStone = () => {
       photo: '/images/photos/stonePhoto.jpg',
     },
   ];
+
+  const handleUploadWindowClose = () => {
+    setUploadWindowOpen(false);
+  };
 
   return (
     <>
@@ -75,11 +81,17 @@ export const PreviewerStone = () => {
         </div>
         <StoneHorizontalGallery stonePhotosGallery={stonePhotosGallery} />
       </div>
-      <div className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end">
+      <div
+        className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end"
+        onClick={() => setUploadWindowOpen(true)}
+      >
         <button className="w-[350px] bg-turquoise-100 text-white p-3 rounded-lg font-semibold m-3 mb-11">
           Add headstone photo
         </button>
       </div>
+      {isUploadWindowOpen && (
+        <StoneUploadWindow handleUploadWindowClose={handleUploadWindowClose} />
+      )}
     </>
   );
 };
