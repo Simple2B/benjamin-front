@@ -194,7 +194,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
           </ClosebleInfo>
         )} */}
       </div>
-      <RememberSoldier name={soldier?.name} />
+      <RememberSoldier name={soldier?.name} soldierUuid={soldier.uuid} />
     </div>
   );
 }

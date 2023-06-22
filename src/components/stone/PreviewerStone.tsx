@@ -4,22 +4,54 @@ import IconButton from '../IconButton';
 import { useRouter } from 'next/navigation';
 import { ICONS_NAME } from '../constants/iconName';
 import HorizontalPhotoGallery from '../cemetery/HorizontalPhotoGallery';
+import urlJoin from 'url-join';
+import { AWS_BASE_URL } from '../constants/constants';
+import StoneHorizontalGallery from './StoneHorizontalGallery';
+
+export interface IStonePhotosGallery {
+  date: string;
+  sender: string;
+  photo: string;
+}
 
 export const PreviewerStone = () => {
   const router = useRouter();
 
+  const stonePhotosGallery: IStonePhotosGallery[] = [
+    {
+      date: 'January 30th, 2020',
+      sender: 'Daniel Katz',
+      photo: '/images/photos/stonePhoto.jpg',
+    },
+    {
+      date: 'May 14th, 2020',
+      sender: 'LA',
+      photo: '/images/photos/stonePhoto.jpg',
+    },
+    {
+      date: 'July 28th, 2020',
+      sender: 'John',
+      photo: '',
+    },
+    {
+      date: 'September 1th, 2020',
+      sender: 'Marta',
+      photo: '/images/photos/stonePhoto.jpg',
+    },
+  ];
+
   return (
     <>
-      <div className="text-indigo-100 py-6 px-3 flex flex-col gap-4">
-        <div className="w-full flex justify-between">
+      <div className="text-indigo-100 py-4 flex flex-col gap-8">
+        <div className="w-full flex justify-between px-[18px]">
           <div onClick={router.back}>
             <IconButton iconName={ICONS_NAME.arrow} className="w-4 h-4" />
           </div>
-          <h1 className="text-sm font-medium flex-grow text-center">
+          <h1 className="text-sm font-medium flex-grow text-center leading-5">
             Lay a stone
           </h1>
         </div>
-        <div className="flex flex-col gap-3 px-3 ">
+        <div className="flex flex-col gap-3 px-8 leading-6">
           <p>
             Jews traditionally mark a visit to a grave with the laying of a
             small stone on the grave or headstone. By visiting an ancestor or
@@ -41,10 +73,10 @@ export const PreviewerStone = () => {
             bonds of eternal life.
           </p>
         </div>
-        <HorizontalPhotoGallery text="" solders={[]} className="z-0" />
+        <StoneHorizontalGallery stonePhotosGallery={stonePhotosGallery} />
       </div>
       <div className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end">
-        <button className="w-10/12 bg-turquoise-100 text-white p-3 rounded-lg font-semibold m-3">
+        <button className="w-[350px] bg-turquoise-100 text-white p-3 rounded-lg font-semibold m-3 mb-11">
           Add headstone photo
         </button>
       </div>

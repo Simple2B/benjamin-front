@@ -6,12 +6,14 @@ type IHorizontalPhotoGalleryProps = {
   text: string;
   solders: SoldierCardWithPhoto[];
   className: string;
+  dash: boolean;
 };
 
 const HorizontalPhotoGallery = ({
   text,
   solders,
   className,
+  dash,
 }: IHorizontalPhotoGalleryProps) => {
   return (
     <>
@@ -30,9 +32,11 @@ const HorizontalPhotoGallery = ({
               />
             ))}
           </div>
-          <div className="mx-6">
-            <hr className="border-indigo-100 border-opacity-10" />
-          </div>
+          {dash && (
+            <div className="mx-6">
+              <hr className="border-indigo-100 border-opacity-10" />
+            </div>
+          )}
         </div>
       ) : null}
     </>
