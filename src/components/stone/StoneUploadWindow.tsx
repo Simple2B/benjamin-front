@@ -6,6 +6,7 @@ import { StoneUploadPhoto } from './StoneUploadPhoto';
 import { SendPhotoForm } from './SendPhotoForm';
 import moment from 'moment';
 import { useAppStore } from '@/lib/slices/store';
+import { IStone } from './PreviewerStone';
 
 type IStoneUploadWindowProps = {
   handleUploadWindowClose: () => void;
@@ -19,7 +20,7 @@ export const StoneUploadWindow = ({
   const [name, setName] = useState<string>('');
   const [isClosing, setClosing] = useState<boolean>(false);
   const [uploadedPhoto, setUploadedPhoto] = useState<string>();
-  const { setCurrentStone } = useAppStore();
+  const { currentStone, setCurrentStone } = useAppStore();
 
   const handleClose = () => {
     handleUploadWindowClose();
@@ -36,9 +37,15 @@ export const StoneUploadWindow = ({
         email: email,
         photoSrc: uploadedPhoto,
       };
+      let stonesArr: IStone[];
 
-      console.log(uploadPhotoInfo);
-      setCurrentStone(uploadPhotoInfo);
+      if (currentStone) {
+        stonesArr = [uploadPhotoInfo, ...currentStone];
+      } else {
+        stonesArr = [uploadPhotoInfo];
+      }
+
+      setCurrentStone(stonesArr);
       handleUploadWindowClose();
       setClosing(true);
     }

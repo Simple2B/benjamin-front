@@ -60,19 +60,21 @@ export const PreviewerStone = () => {
   const { currentStone } = useAppStore();
 
   useEffect(() => {
-    if (currentStone?.photoSrc) {
-      const stonePhotosGalleryCurrent: IStonePhotosGallery[] = [
-        {
-          date: currentStone?.date,
-          sender: currentStone?.sender,
-          photoSrc: currentStone?.photoSrc,
-        },
-      ];
-      const updatedStoneGallery =
-        stonePhotosGalleryCurrent.concat(stonePhotosGallery);
-      setStonePhotosGallery(updatedStoneGallery);
+    if (currentStone) {
+      if (currentStone[0]?.photoSrc && !isUploadWindowOpen) {
+        const stonePhotosGalleryCurrent: IStonePhotosGallery[] = [
+          {
+            date: currentStone[0]?.date,
+            sender: currentStone[0]?.sender,
+            photoSrc: currentStone[0]?.photoSrc,
+          },
+        ];
+        const updatedStoneGallery =
+          stonePhotosGalleryCurrent.concat(stonePhotosGallery);
+        setStonePhotosGallery(updatedStoneGallery);
+      }
     }
-  }, [isUploadWindowOpen]);
+  }, [isUploadWindowOpen, currentStone]);
 
   const handleUploadWindowClose = () => {
     setTimeout(() => {
@@ -113,7 +115,10 @@ export const PreviewerStone = () => {
             bonds of eternal life.
           </p>
         </div>
-        <StoneHorizontalGallery stonePhotosGallery={stonePhotosGallery} />
+        <StoneHorizontalGallery
+          stonePhotosGallery={stonePhotosGallery}
+          setStonePhotosGallery={setStonePhotosGallery}
+        />
       </div>
       <div
         className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end"

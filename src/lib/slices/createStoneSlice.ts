@@ -2,13 +2,13 @@ import { StateCreator } from 'zustand';
 import { IStone } from '@/components/stone/PreviewerStone';
 
 export interface StoneSlice {
-  currentStone: IStone | null;
-  setCurrentStone: (stone: IStone) => void;
+  currentStone: IStone[] | undefined;
+  setCurrentStone: (stones: IStone[]) => void;
 }
 
 export const createStoneSlice: StateCreator<StoneSlice> = (set) => ({
-  currentStone: null,
-  setCurrentStone: (currentStone: IStone) => {
-    set({ currentStone: currentStone });
+  currentStone: [],
+  setCurrentStone: (stones: IStone[]) => {
+    set({ currentStone: stones });
   },
 });

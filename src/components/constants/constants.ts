@@ -15,3 +15,5 @@ export const MONTH = [
   'November',
   'December',
 ];
+
+export const stoneTimer = 5000;

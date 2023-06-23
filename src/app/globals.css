@@ -123,3 +123,7 @@ html {
   transform: translateX(-50%);
   animation: smooth-disappear 1s ease forwards;
 }
+
+.negative {
+  filter: invert(1);
+}
