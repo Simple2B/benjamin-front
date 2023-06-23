@@ -2,9 +2,15 @@ import React, { ChangeEvent, useState } from 'react';
 import IconButton from '../IconButton';
 import { ICONS_NAME } from '../constants/iconName';
 
-type Props = {};
+type IStoneUploadPhotoProps = {
+  setUploadedPhotoSrc: (photoSrc: string) => void;
+  setPhotoUploaded: (arg: boolean) => void;
+};
 
-export const StoneUploadPhoto = (props: Props) => {
+export const StoneUploadPhoto = ({
+  setUploadedPhotoSrc,
+  setPhotoUploaded,
+}: IStoneUploadPhotoProps) => {
   const [photoSrc, setPhotoSrc] = useState<string | undefined>();
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +23,9 @@ export const StoneUploadPhoto = (props: Props) => {
       reader.onload = () => {
         const image = new Image();
         image.src = reader.result as string;
+        setPhotoUploaded(true);
         setPhotoSrc(image.src);
+        setUploadedPhotoSrc(image.src);
       };
       reader.readAsDataURL(file);
     }

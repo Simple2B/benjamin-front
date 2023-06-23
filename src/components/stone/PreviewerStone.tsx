@@ -1,46 +1,71 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import IconButton from '../IconButton';
 import { useRouter } from 'next/navigation';
 import { ICONS_NAME } from '../constants/iconName';
 import HorizontalPhotoGallery from '../cemetery/HorizontalPhotoGallery';
 import urlJoin from 'url-join';
-import { AWS_BASE_URL } from '../constants/constants';
-import StoneHorizontalGallery from './StoneHorizontalGallery';
+import { AWS_BASE_URL, MONTH } from '../constants/constants';
+import StoneHorizontalGallery from './stoneHorizontalGallery/StoneHorizontalGallery';
 import { StoneUploadWindow } from './StoneUploadWindow';
 
 export interface IStonePhotosGallery {
+  date: string | undefined;
+  sender: string | undefined;
+  photoSrc: string | undefined;
+}
+
+export interface IUploadedPhotoInfo {
   date: string;
   sender: string;
-  photo: string;
+  email: string;
 }
+const stonePhotosGalleryBE: IStonePhotosGallery[] = [
+  {
+    date: '2020-01-30',
+    sender: 'Daniel Katz',
+    photoSrc: '/images/photos/stonePhoto.jpg',
+  },
+  {
+    date: '2020-05-14',
+    sender: 'LA',
+    photoSrc: '/images/photos/stonePhoto.jpg',
+  },
+  {
+    date: '2020-07-28',
+    sender: 'John',
+    photoSrc: '',
+  },
+  {
+    date: '2020-09-01',
+    sender: 'Marta',
+    photoSrc: '/images/photos/stonePhoto.jpg',
+  },
+];
 
 export const PreviewerStone = () => {
   const [isUploadWindowOpen, setUploadWindowOpen] = useState<boolean>(false);
+  const [stonePhotosGallery, setStonePhotosGallery] =
+    useState<IStonePhotosGallery[]>(stonePhotosGalleryBE);
   const router = useRouter();
+  const [uploadedPhotoSrc, setUploadedPhotoSrc] = useState<string>();
+  const [uploadedPhotoInfo, setUploadedPhotoInfo] =
+    useState<IUploadedPhotoInfo>();
 
-  const stonePhotosGallery: IStonePhotosGallery[] = [
-    {
-      date: 'January 30th, 2020',
-      sender: 'Daniel Katz',
-      photo: '/images/photos/stonePhoto.jpg',
-    },
-    {
-      date: 'May 14th, 2020',
-      sender: 'LA',
-      photo: '/images/photos/stonePhoto.jpg',
-    },
-    {
-      date: 'July 28th, 2020',
-      sender: 'John',
-      photo: '',
-    },
-    {
-      date: 'September 1th, 2020',
-      sender: 'Marta',
-      photo: '/images/photos/stonePhoto.jpg',
-    },
-  ];
+  useEffect(() => {
+    if (uploadedPhotoSrc) {
+      const stonePhotosGalleryCurrent: IStonePhotosGallery[] = [
+        {
+          date: uploadedPhotoInfo?.date,
+          sender: uploadedPhotoInfo?.sender,
+          photoSrc: uploadedPhotoSrc,
+        },
+      ];
+      const updatedStoneGallery =
+        stonePhotosGalleryCurrent.concat(stonePhotosGalleryBE);
+      setStonePhotosGallery(updatedStoneGallery);
+    }
+  }, [isUploadWindowOpen]);
 
   const handleUploadWindowClose = () => {
     setTimeout(() => {
@@ -92,7 +117,11 @@ export const PreviewerStone = () => {
         </button>
       </div>
       {isUploadWindowOpen && (
-        <StoneUploadWindow handleUploadWindowClose={handleUploadWindowClose} />
+        <StoneUploadWindow
+          handleUploadWindowClose={handleUploadWindowClose}
+          setUploadedPhotoSrc={setUploadedPhotoSrc}
+          setUploadedPhotoInfo={setUploadedPhotoInfo}
+        />
       )}
     </>
   );

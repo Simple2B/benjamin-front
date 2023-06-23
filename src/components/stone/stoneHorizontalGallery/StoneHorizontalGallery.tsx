@@ -1,7 +1,8 @@
 import React from 'react';
-import { IStonePhotosGallery } from './PreviewerStone';
+import { IStonePhotosGallery } from '../PreviewerStone';
 import urlJoin from 'url-join';
-import { AWS_BASE_URL } from '../constants/constants';
+import { AWS_BASE_URL } from '../../constants/constants';
+import { formatDate } from './StoneHorizontalGallery.constants';
 
 type IStoneHorizontalGalleryProps = {
   stonePhotosGallery: IStonePhotosGallery[];
@@ -16,11 +17,11 @@ export const StoneHorizontalGallery = ({
     <>
       {stonePhotosGallery.length ? (
         <div className="flex gap-4 overflow-x-auto pb-4 text-indigo-100 px-8 w-full whitespace-nowrap mb-16">
-          {stonePhotosGallery.map(({ date, sender, photo }, index) => (
+          {stonePhotosGallery.map(({ date, sender, photoSrc }, index) => (
             <div className={`w-[148px] flex-shrink-0`} key={index}>
-              {photo ? (
+              {photoSrc ? (
                 <img
-                  src={photo}
+                  src={photoSrc}
                   alt="stone"
                   className="w-[148px] h-[144px] rounded-lg bg-grey-30 soldier-shawdow"
                 />
@@ -28,8 +29,12 @@ export const StoneHorizontalGallery = ({
                 <div className="w-[148px] h-[144px] rounded-lg bg-grey-30 soldier-shawdow"></div>
               )}
 
-              <p className="text-xs text-center leading-6 mt-[6px]">{date}</p>
-              <p className="text-xs text-center leading-6">{sender}</p>
+              <p className="text-xs text-center leading-6 mt-[6px]">
+                {date ? formatDate(date) : ''}
+              </p>
+              <p className="text-xs text-center leading-6">
+                {sender ? sender : 'Anonymous'}
+              </p>
             </div>
           ))}
         </div>
