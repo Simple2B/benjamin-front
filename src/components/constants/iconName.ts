@@ -27,4 +27,5 @@ export const ICONS_NAME = {
   locationPin: 'location-pin',
   ellipsis: 'ellipsis',
   cross: 'cross',
+  upload: 'upload',
 };

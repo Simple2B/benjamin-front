@@ -15,17 +15,17 @@ export default function Providers({ children }: IProviders) {
   const pageRef = useRef<HTMLDivElement | null>(null);
   // const [isFullScreen, setFullScreen] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (!pageRef.current) {
-      return;
-    }
-    const page = pageRef.current;
-    page.addEventListener('click', () => {
-      if (screenfull.isEnabled) {
-        screenfull.request();
-      }
-    });
-  });
+  // useEffect(() => {
+  //   if (!pageRef.current) {
+  //     return;
+  //   }
+  //   const page = pageRef.current;
+  //   page.addEventListener('click', () => {
+  //     if (screenfull.isEnabled) {
+  //       screenfull.request();
+  //     }
+  //   });
+  // });
 
   return (
     <div>

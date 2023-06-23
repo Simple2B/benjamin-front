@@ -43,12 +43,14 @@ export const PreviewerStone = () => {
   ];
 
   const handleUploadWindowClose = () => {
-    setUploadWindowOpen(false);
+    setTimeout(() => {
+      setUploadWindowOpen(false);
+    }, 1000);
   };
-
   return (
     <>
       <div className="text-indigo-100 py-4 flex flex-col gap-8">
+        {isUploadWindowOpen && <div className="filter-indigo" />}
         <div className="w-full flex justify-between px-[18px]">
           <div onClick={router.back}>
             <IconButton iconName={ICONS_NAME.arrow} className="w-4 h-4" />

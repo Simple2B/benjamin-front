@@ -93,3 +93,33 @@ html {
 .settings-shawdow {
   box-shadow: 0 2px 24px 2px rgba(0, 0, 0, 0.1);
 }
+
+@keyframes smooth-appear {
+  to {
+    bottom: 0px;
+    opacity: 1;
+  }
+}
+.upload-window-appear {
+  position: fixed;
+  bottom: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: smooth-appear 1s ease forwards;
+}
+
+@keyframes smooth-disappear {
+  to {
+    bottom: -100%;
+    opacity: 1;
+  }
+}
+
+.upload-window-disappear {
+  position: fixed;
+  bottom: 0px;
+  opacity: 1;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: smooth-disappear 1s ease forwards;
+}
