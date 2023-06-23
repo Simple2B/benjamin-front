@@ -15,40 +15,11 @@ type IStoneUploadWindowProps = {
 export const StoneUploadWindow = ({
   handleUploadWindowClose,
 }: IStoneUploadWindowProps) => {
-  const [isEmailValid, setEmailValid] = useState<boolean>(true);
-  const [email, setEmail] = useState<string>('');
-  const [name, setName] = useState<string>('');
   const [isClosing, setClosing] = useState<boolean>(false);
-  const [uploadedPhoto, setUploadedPhoto] = useState<string>();
-  const { currentStone, setCurrentStone } = useAppStore();
 
   const handleClose = () => {
     handleUploadWindowClose();
     setClosing(true);
-  };
-
-  const hadleUpload = () => {
-    const validation = /\S+@\S+\.\S+/.test(email);
-    setEmailValid(validation);
-    if (validation && uploadedPhoto) {
-      const uploadPhotoInfo = {
-        date: moment().format('YYYY-MM-D'),
-        sender: name,
-        email: email,
-        photoSrc: uploadedPhoto,
-      };
-      let stonesArr: IStone[];
-
-      if (currentStone) {
-        stonesArr = [uploadPhotoInfo, ...currentStone];
-      } else {
-        stonesArr = [uploadPhotoInfo];
-      }
-
-      setCurrentStone(stonesArr);
-      handleUploadWindowClose();
-      setClosing(true);
-    }
   };
 
   return (
@@ -64,22 +35,10 @@ export const StoneUploadWindow = ({
       >
         <IconButton iconName={ICONS_NAME.cross} className="w-4 h-4" />
       </div>
-      <StoneUploadPhoto setUploadedPhoto={setUploadedPhoto} />
       <SendPhotoForm
-        setEmail={setEmail}
-        setName={setName}
-        isEmailValid={isEmailValid}
+        setClosing={setClosing}
+        handleUploadWindowClose={handleUploadWindowClose}
       />
-
-      <div className="w-full mt-[48px] justify-end flex px-8">
-        <button
-          className={`inline-flex items-center gap-x-2 p-3 rounded-lg justify-center font-semibold bg-turquoise-100 w-36 text-white`}
-          onClick={hadleUpload}
-        >
-          <p className={`leading-6 font-semibold font-noto`}>Upload</p>
-          <IconButton iconName={ICONS_NAME.arrowRigth} className={` h-4 w-4`} />
-        </button>
-      </div>
     </div>
   );
 };
