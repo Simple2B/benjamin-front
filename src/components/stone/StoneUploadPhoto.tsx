@@ -3,13 +3,11 @@ import IconButton from '../IconButton';
 import { ICONS_NAME } from '../constants/iconName';
 
 type IStoneUploadPhotoProps = {
-  setUploadedPhotoSrc: (photoSrc: string) => void;
-  setPhotoUploaded: (arg: boolean) => void;
+  setUploadedPhoto: (photoSrc: string) => void;
 };
 
 export const StoneUploadPhoto = ({
-  setUploadedPhotoSrc,
-  setPhotoUploaded,
+  setUploadedPhoto,
 }: IStoneUploadPhotoProps) => {
   const [photoSrc, setPhotoSrc] = useState<string | undefined>();
 
@@ -23,9 +21,8 @@ export const StoneUploadPhoto = ({
       reader.onload = () => {
         const image = new Image();
         image.src = reader.result as string;
-        setPhotoUploaded(true);
         setPhotoSrc(image.src);
-        setUploadedPhotoSrc(image.src);
+        setUploadedPhoto(image.src);
       };
       reader.readAsDataURL(file);
     }

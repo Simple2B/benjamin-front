@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import IconButton from '../IconButton';
 import { useRouter } from 'next/navigation';
 import { ICONS_NAME } from '../constants/iconName';
-import HorizontalPhotoGallery from '../cemetery/HorizontalPhotoGallery';
 import urlJoin from 'url-join';
 import { AWS_BASE_URL, MONTH } from '../constants/constants';
 import StoneHorizontalGallery from './stoneHorizontalGallery/StoneHorizontalGallery';
 import { StoneUploadWindow } from './StoneUploadWindow';
+import { useAppStore } from '@/lib/slices/store';
 
 export interface IStonePhotosGallery {
   date: string | undefined;
@@ -20,6 +20,14 @@ export interface IUploadedPhotoInfo {
   sender: string;
   email: string;
 }
+
+export interface IStone {
+  date: string;
+  sender: string;
+  email: string;
+  photoSrc: string;
+}
+
 const stonePhotosGalleryBE: IStonePhotosGallery[] = [
   {
     date: '2020-01-30',
@@ -47,22 +55,21 @@ export const PreviewerStone = () => {
   const [isUploadWindowOpen, setUploadWindowOpen] = useState<boolean>(false);
   const [stonePhotosGallery, setStonePhotosGallery] =
     useState<IStonePhotosGallery[]>(stonePhotosGalleryBE);
+
   const router = useRouter();
-  const [uploadedPhotoSrc, setUploadedPhotoSrc] = useState<string>();
-  const [uploadedPhotoInfo, setUploadedPhotoInfo] =
-    useState<IUploadedPhotoInfo>();
+  const { currentStone } = useAppStore();
 
   useEffect(() => {
-    if (uploadedPhotoSrc) {
+    if (currentStone?.photoSrc) {
       const stonePhotosGalleryCurrent: IStonePhotosGallery[] = [
         {
-          date: uploadedPhotoInfo?.date,
-          sender: uploadedPhotoInfo?.sender,
-          photoSrc: uploadedPhotoSrc,
+          date: currentStone?.date,
+          sender: currentStone?.sender,
+          photoSrc: currentStone?.photoSrc,
         },
       ];
       const updatedStoneGallery =
-        stonePhotosGalleryCurrent.concat(stonePhotosGalleryBE);
+        stonePhotosGalleryCurrent.concat(stonePhotosGallery);
       setStonePhotosGallery(updatedStoneGallery);
     }
   }, [isUploadWindowOpen]);
@@ -117,11 +124,7 @@ export const PreviewerStone = () => {
         </button>
       </div>
       {isUploadWindowOpen && (
-        <StoneUploadWindow
-          handleUploadWindowClose={handleUploadWindowClose}
-          setUploadedPhotoSrc={setUploadedPhotoSrc}
-          setUploadedPhotoInfo={setUploadedPhotoInfo}
-        />
+        <StoneUploadWindow handleUploadWindowClose={handleUploadWindowClose} />
       )}
     </>
   );

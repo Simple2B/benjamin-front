@@ -1,28 +1,25 @@
 'use client';
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import IconButton from '../IconButton';
 import { ICONS_NAME } from '../constants/iconName';
 import { StoneUploadPhoto } from './StoneUploadPhoto';
 import { SendPhotoForm } from './SendPhotoForm';
-import { IUploadedPhotoInfo } from './PreviewerStone';
 import moment from 'moment';
+import { useAppStore } from '@/lib/slices/store';
 
 type IStoneUploadWindowProps = {
   handleUploadWindowClose: () => void;
-  setUploadedPhotoSrc: (photoSrc: string | undefined) => void;
-  setUploadedPhotoInfo: (uploadedPhotoInfo: IUploadedPhotoInfo) => void;
 };
 
 export const StoneUploadWindow = ({
   handleUploadWindowClose,
-  setUploadedPhotoSrc,
-  setUploadedPhotoInfo,
 }: IStoneUploadWindowProps) => {
   const [isEmailValid, setEmailValid] = useState<boolean>(true);
   const [email, setEmail] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [isClosing, setClosing] = useState<boolean>(false);
-  const [isPhotoUploaded, setPhotoUploaded] = useState<boolean>(false);
+  const [uploadedPhoto, setUploadedPhoto] = useState<string>();
+  const { setCurrentStone } = useAppStore();
 
   const handleClose = () => {
     handleUploadWindowClose();
@@ -32,19 +29,16 @@ export const StoneUploadWindow = ({
   const hadleUpload = () => {
     const validation = /\S+@\S+\.\S+/.test(email);
     setEmailValid(validation);
-    if (validation && isPhotoUploaded) {
-      const currentDate = new Date();
-      const year = currentDate.getFullYear();
-      const mounth = currentDate.getMonth();
-      const day = currentDate.getDate();
-
+    if (validation && uploadedPhoto) {
       const uploadPhotoInfo = {
         date: moment().format('YYYY-MM-D'),
         sender: name,
         email: email,
+        photoSrc: uploadedPhoto,
       };
 
-      setUploadedPhotoInfo(uploadPhotoInfo);
+      console.log(uploadPhotoInfo);
+      setCurrentStone(uploadPhotoInfo);
       handleUploadWindowClose();
       setClosing(true);
     }
@@ -63,10 +57,7 @@ export const StoneUploadWindow = ({
       >
         <IconButton iconName={ICONS_NAME.cross} className="w-4 h-4" />
       </div>
-      <StoneUploadPhoto
-        setUploadedPhotoSrc={setUploadedPhotoSrc}
-        setPhotoUploaded={setPhotoUploaded}
-      />
+      <StoneUploadPhoto setUploadedPhoto={setUploadedPhoto} />
       <SendPhotoForm
         setEmail={setEmail}
         setName={setName}
