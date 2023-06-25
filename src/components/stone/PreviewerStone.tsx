@@ -9,18 +9,6 @@ import StoneHorizontalGallery from './stoneHorizontalGallery/StoneHorizontalGall
 import { StoneUploadWindow } from './StoneUploadWindow';
 import { useAppStore } from '@/lib/slices/store';
 
-export interface IStonePhotosGallery {
-  date: string | undefined;
-  sender: string | undefined;
-  photoSrc: string | undefined;
-}
-
-export interface IUploadedPhotoInfo {
-  date: string;
-  sender: string;
-  email: string;
-}
-
 export interface IStone {
   date: string;
   sender: string;
@@ -28,33 +16,37 @@ export interface IStone {
   photoSrc: string;
 }
 
-const stonePhotosGalleryBE: IStonePhotosGallery[] = [
+const stonePhotosGalleryBE: IStone[] = [
   {
     date: '2020-01-30',
     sender: 'Daniel Katz',
     photoSrc: '/images/photos/stonePhoto.jpg',
+    email: 'r',
   },
   {
     date: '2020-05-14',
     sender: 'LA',
     photoSrc: '/images/photos/stonePhoto.jpg',
+    email: 'r',
   },
   {
     date: '2020-07-28',
     sender: 'John',
-    photoSrc: '',
+    photoSrc: '/images/photos/stonePhoto.jpg',
+    email: 'r',
   },
   {
     date: '2020-09-01',
     sender: 'Marta',
     photoSrc: '/images/photos/stonePhoto.jpg',
+    email: 'r',
   },
 ];
 
 export const PreviewerStone = () => {
   const [isUploadWindowOpen, setUploadWindowOpen] = useState<boolean>(false);
   const [stonePhotosGallery, setStonePhotosGallery] =
-    useState<IStonePhotosGallery[]>(stonePhotosGalleryBE);
+    useState<IStone[]>(stonePhotosGalleryBE);
 
   const router = useRouter();
   const { currentStone } = useAppStore();
@@ -62,11 +54,12 @@ export const PreviewerStone = () => {
   useEffect(() => {
     if (currentStone) {
       if (currentStone[0]?.photoSrc && !isUploadWindowOpen) {
-        const stonePhotosGalleryCurrent: IStonePhotosGallery[] = [
+        const stonePhotosGalleryCurrent: IStone[] = [
           {
             date: currentStone[0]?.date,
             sender: currentStone[0]?.sender,
             photoSrc: currentStone[0]?.photoSrc,
+            email: currentStone[0]?.email,
           },
         ];
         const updatedStoneGallery =
@@ -74,7 +67,7 @@ export const PreviewerStone = () => {
         setStonePhotosGallery(updatedStoneGallery);
       }
     }
-  }, [isUploadWindowOpen, currentStone]);
+  }, [isUploadWindowOpen]);
 
   const handleUploadWindowClose = () => {
     setTimeout(() => {

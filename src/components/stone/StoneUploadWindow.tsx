@@ -2,11 +2,7 @@
 import React, { useState } from 'react';
 import IconButton from '../IconButton';
 import { ICONS_NAME } from '../constants/iconName';
-import { StoneUploadPhoto } from './StoneUploadPhoto';
 import { SendPhotoForm } from './SendPhotoForm';
-import moment from 'moment';
-import { useAppStore } from '@/lib/slices/store';
-import { IStone } from './PreviewerStone';
 
 type IStoneUploadWindowProps = {
   handleUploadWindowClose: () => void;
@@ -24,9 +20,7 @@ export const StoneUploadWindow = ({
 
   return (
     <div
-      className={`fixed z-50 h-[838px] w-full bg-white flex flex-col items-center
-       bottom-0
-      rounded-t-xl 
+      className={`fixed z-50 h-[838px] w-full bg-white flex flex-col items-center max-h-screen bottom-0 rounded-t-xl 
       ${isClosing ? 'upload-window-disappear' : 'upload-window-appear'}`}
     >
       <div
