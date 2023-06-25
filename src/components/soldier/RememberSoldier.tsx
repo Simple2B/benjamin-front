@@ -33,7 +33,7 @@ const RememberSoldier = ({ name, soldierUuid }: IRememberSoldierProps) => {
       <h2 className="text-white font-semibold my-6 leading-6">
         REMEMBER {name?.toLocaleUpperCase()}
       </h2>
-      <div className="flex justify-between pb-14 gap-4">
+      <div className="flex justify-center pb-14 gap-4">
         {REMEMBERING.map(({ image, text, link }) => {
           return (
             <Link
@@ -48,7 +48,9 @@ const RememberSoldier = ({ name, soldierUuid }: IRememberSoldierProps) => {
                   alt="remember soldier"
                   className="w-[106px] object-cover rounded-lg bg-grey-30"
                 />
-                <p className="text-white text-xs text-center">{text}</p>
+                <p className="text-white text-[11px] text-center leading-7 mt-1">
+                  {text}
+                </p>
               </div>
             </Link>
           );
