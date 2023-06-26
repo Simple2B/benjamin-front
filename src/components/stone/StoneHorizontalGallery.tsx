@@ -1,6 +1,6 @@
 import React from 'react';
-import { IStone } from '../PreviewerStone';
-import { StoneProfile } from '../StoneProfile/StoneProfile';
+import { IStone } from './PreviewerStone';
+import { StoneProfile } from './StoneProfile/StoneProfile';
 import { useAppStore } from '@/lib/slices/store';
 
 type IStoneHorizontalGalleryProps = {

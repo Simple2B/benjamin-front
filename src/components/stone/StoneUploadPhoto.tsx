@@ -36,8 +36,8 @@ export const StoneUploadPhoto = ({
   };
   return (
     <>
-      <p className="leading-5">Upload grave photo</p>
-      <div className="mt-6">
+      <p className="leading-5 text-sm">Upload grave photo</p>
+      <div className="">
         {photoSrc ? (
           <img
             src={photoSrc}

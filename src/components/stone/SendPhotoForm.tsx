@@ -53,10 +53,10 @@ export const SendPhotoForm = ({
   };
 
   return (
-    <div className="flex flex-col w-full mt-8 gap-4 items-center justify-center">
+    <div className="flex flex-col w-full gap-6 items-center justify-center">
       <StoneUploadPhoto setUploadedPhoto={setUploadedPhoto} />
       <Formik initialValues={formInitialValues} onSubmit={handleSubmit}>
-        <Form className="w-full px-8">
+        <Form className="w-full px-8 mt-2 flex flex-col gap-4">
           <div className="flex flex-col w-full gap-2">
             <h3 className="font-semibold leading-6">NAME</h3>
             <Field
@@ -87,7 +87,7 @@ export const SendPhotoForm = ({
               className="text-xs text-red-600"
             />
           </div>
-          <div className="w-full mt-[48px] justify-end flex px-8">
+          <div className="w-full mt-8 justify-end flex px-8">
             <button
               type="submit"
               className={`inline-flex items-center gap-x-2 p-3 rounded-lg justify-center font-semibold bg-turquoise-100 w-36 text-white`}

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { ICONS_NAME } from '../constants/iconName';
 import urlJoin from 'url-join';
 import { AWS_BASE_URL, MONTH } from '../constants/constants';
-import StoneHorizontalGallery from './stoneHorizontalGallery/StoneHorizontalGallery';
+import StoneHorizontalGallery from './StoneHorizontalGallery';
 import { StoneUploadWindow } from './StoneUploadWindow';
 import { useAppStore } from '@/lib/slices/store';
 
