@@ -10,6 +10,8 @@ import moment from 'moment';
 type ISendPhotoFormProps = {
   setClosing: (ard: boolean) => void;
   handleUploadWindowClose: () => void;
+  stonePhotosGallery: IStone[];
+  setStonePhotosGallery: (arg: IStone[]) => void;
 };
 
 const formInitialValues = {
@@ -20,27 +22,30 @@ const formInitialValues = {
 export const SendPhotoForm = ({
   setClosing,
   handleUploadWindowClose,
+  stonePhotosGallery,
+  setStonePhotosGallery,
 }: ISendPhotoFormProps) => {
-  const { currentStone, setCurrentStone } = useAppStore();
+  const { currentStones, setCurrentStone } = useAppStore();
   const [uploadedPhoto, setUploadedPhoto] = useState<string>();
 
   const handleSubmit = (values: typeof formInitialValues) => {
     if (uploadedPhoto) {
       const uploadPhotoInfo = {
-        date: moment().format('YYYY-MM-D'),
+        date: moment().format('YYYY-MM-D HH:mm:ss'),
         sender: values.name,
         email: values.email,
         photoSrc: uploadedPhoto,
       };
-      let stonesArr: IStone[];
 
-      if (currentStone) {
-        stonesArr = [uploadPhotoInfo, ...currentStone];
+      if (currentStones) {
+        setCurrentStone([uploadPhotoInfo, ...currentStones]);
       } else {
-        stonesArr = [uploadPhotoInfo];
+        setCurrentStone([uploadPhotoInfo]);
       }
 
-      setCurrentStone(stonesArr);
+      const updatedStoneGallery = [uploadPhotoInfo, ...stonePhotosGallery];
+      setStonePhotosGallery(updatedStoneGallery);
+
       handleUploadWindowClose();
       setClosing(true);
     }

@@ -5,6 +5,7 @@ import { formatDate } from './StoneProfile.utils';
 import { IStone } from '../PreviewerStone';
 import { useAppStore } from '@/lib/slices/store';
 import { stoneTimer } from '@/components/constants/constants';
+import moment from 'moment';
 
 type IStoneProfileProps = {
   item: IStone;
@@ -15,20 +16,26 @@ export const StoneProfile = ({ item, handleDelete }: IStoneProfileProps) => {
   const { date, photoSrc, sender } = item;
   const [isRemovable, setRemovable] = useState<boolean>(false);
 
-  const { currentStone } = useAppStore();
-
   useEffect(() => {
-    const addRemoveIcon = (photoSrc: string) => {
-      return currentStone?.find((stone) => {
-        return stone.photoSrc == photoSrc;
-      });
-    };
+    const timeNow = moment();
+    const itemCreatingFormatedTime = moment(date, 'YYYY-MM-DD HH:mm:ss');
 
-    setRemovable(!!addRemoveIcon(item.photoSrc));
+    const timeDifferenceMinutes = timeNow.diff(
+      itemCreatingFormatedTime,
+      'milliseconds'
+    );
 
-    setTimeout(() => {
-      setRemovable(false);
-    }, stoneTimer);
+    if (timeDifferenceMinutes < stoneTimer) {
+      setRemovable(true);
+
+      const timer = setTimeout(() => {
+        setRemovable(false);
+      }, stoneTimer - timeDifferenceMinutes);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
   }, [item.photoSrc]);
 
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { IStone } from './PreviewerStone';
 import { StoneProfile } from './StoneProfile/StoneProfile';
 import { useAppStore } from '@/lib/slices/store';
@@ -12,7 +12,7 @@ export const StoneHorizontalGallery = ({
   stonePhotosGallery,
   setStonePhotosGallery,
 }: IStoneHorizontalGalleryProps) => {
-  const { currentStone, setCurrentStone } = useAppStore();
+  const { currentStones, setCurrentStone } = useAppStore();
 
   const handleDelete = (deletingPhoto: string | undefined) => {
     const filteredStones = stonePhotosGallery.filter(
@@ -23,7 +23,7 @@ export const StoneHorizontalGallery = ({
       }
     );
 
-    const filteredUploadedStones = currentStone?.filter(
+    const filteredUploadedStones = currentStones?.filter(
       ({ date, sender, photoSrc, email }) => {
         if (photoSrc !== deletingPhoto) {
           return { date, sender, photoSrc, email };

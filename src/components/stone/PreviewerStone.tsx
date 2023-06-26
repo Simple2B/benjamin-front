@@ -18,25 +18,25 @@ export interface IStone {
 
 const stonePhotosGalleryBE: IStone[] = [
   {
-    date: '2020-01-30',
+    date: '2020-01-30 8:26:13',
     sender: 'Daniel Katz',
     photoSrc: '/images/photos/stonePhoto.jpg',
     email: 'r',
   },
   {
-    date: '2020-05-14',
+    date: '2020-05-14 13:14:15',
     sender: 'LA',
     photoSrc: '/images/photos/stonePhoto.jpg',
     email: 'r',
   },
   {
-    date: '2020-07-28',
+    date: '2020-07-28 10:30:55',
     sender: 'John',
     photoSrc: '/images/photos/stonePhoto.jpg',
     email: 'r',
   },
   {
-    date: '2020-09-01',
+    date: '2020-09-01 5:45:12',
     sender: 'Marta',
     photoSrc: '/images/photos/stonePhoto.jpg',
     email: 'r',
@@ -49,25 +49,6 @@ export const PreviewerStone = () => {
     useState<IStone[]>(stonePhotosGalleryBE);
 
   const router = useRouter();
-  const { currentStone } = useAppStore();
-
-  useEffect(() => {
-    if (currentStone) {
-      if (currentStone[0]?.photoSrc && !isUploadWindowOpen) {
-        const stonePhotosGalleryCurrent: IStone[] = [
-          {
-            date: currentStone[0]?.date,
-            sender: currentStone[0]?.sender,
-            photoSrc: currentStone[0]?.photoSrc,
-            email: currentStone[0]?.email,
-          },
-        ];
-        const updatedStoneGallery =
-          stonePhotosGalleryCurrent.concat(stonePhotosGallery);
-        setStonePhotosGallery(updatedStoneGallery);
-      }
-    }
-  }, [isUploadWindowOpen]);
 
   const handleUploadWindowClose = () => {
     setTimeout(() => {
@@ -122,7 +103,11 @@ export const PreviewerStone = () => {
         </button>
       </div>
       {isUploadWindowOpen && (
-        <StoneUploadWindow handleUploadWindowClose={handleUploadWindowClose} />
+        <StoneUploadWindow
+          handleUploadWindowClose={handleUploadWindowClose}
+          stonePhotosGallery={stonePhotosGallery}
+          setStonePhotosGallery={setStonePhotosGallery}
+        />
       )}
     </>
   );

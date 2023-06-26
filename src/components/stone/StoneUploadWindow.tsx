@@ -3,13 +3,18 @@ import React, { useState } from 'react';
 import IconButton from '../IconButton';
 import { ICONS_NAME } from '../constants/iconName';
 import { SendPhotoForm } from './SendPhotoForm';
+import { IStone } from './PreviewerStone';
 
 type IStoneUploadWindowProps = {
   handleUploadWindowClose: () => void;
+  stonePhotosGallery: IStone[];
+  setStonePhotosGallery: (arg: IStone[]) => void;
 };
 
 export const StoneUploadWindow = ({
   handleUploadWindowClose,
+  stonePhotosGallery,
+  setStonePhotosGallery,
 }: IStoneUploadWindowProps) => {
   const [isClosing, setClosing] = useState<boolean>(false);
 
@@ -32,6 +37,8 @@ export const StoneUploadWindow = ({
       <SendPhotoForm
         setClosing={setClosing}
         handleUploadWindowClose={handleUploadWindowClose}
+        stonePhotosGallery={stonePhotosGallery}
+        setStonePhotosGallery={setStonePhotosGallery}
       />
     </div>
   );
