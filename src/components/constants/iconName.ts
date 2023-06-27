@@ -28,4 +28,5 @@ export const ICONS_NAME = {
   ellipsis: 'ellipsis',
   cross: 'cross',
   upload: 'upload',
+  fullscreen: 'fullscreen',
 };

@@ -1,4 +1,5 @@
 import { PreviewerStone } from '@/components/stone/PreviewerStone';
+import { SoldiersService } from '@/openapi';
 import React from 'react';
 
 // export const dynamic = 'force-dynamic';
@@ -13,7 +14,13 @@ interface IStoneParams {
   stoneSoldierUuid: string;
 }
 
-export default function Page({ params }: IStonePageProps) {
+const Page = async ({ params }: IStonePageProps) => {
   const { stoneSoldierUuid } = params;
+
+  const soldier = await SoldiersService.getSoldier(stoneSoldierUuid);
+  console.log(soldier);
+
   return <PreviewerStone />;
-}
+};
+
+export default Page;
