@@ -25,6 +25,7 @@ import { AWS_BASE_URL } from '@/components/constants/constants';
 import { formatDate } from './PreviewerSoldier.utils';
 import { SoldierOut } from '@/openapi';
 import { ProjectCreatorInfo } from '../ProjectCreatorInfo';
+import { PhotoCarrousel } from '../PhotoCarrousel';
 
 interface IPreviewerSoldierProps {
   soldier: SoldierOut;
@@ -152,6 +153,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
           isOpened={soldier?.replacementCeremonyVideo ? false : true}
         >
           <SoldierCardBlockInfo solderInfo={life} />
+          <PhotoCarrousel />
         </ClosebleInfo>
 
         <ClosebleInfo heading="SERVICE" isOpened={false}>
