@@ -11,6 +11,7 @@ module.exports = {
         turquoise: {
           50: '#A6DDE9',
           100: '#2693AB',
+          200: '#64BCD0',
         },
         grey: {
           10: '#FAFAFB',

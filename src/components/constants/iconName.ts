@@ -26,4 +26,7 @@ export const ICONS_NAME = {
   davidStar: 'star-of-david',
   locationPin: 'location-pin',
   ellipsis: 'ellipsis',
+  cross: 'cross',
+  upload: 'upload',
+  fullscreen: 'fullscreen',
 };

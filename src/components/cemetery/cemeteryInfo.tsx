@@ -6,7 +6,6 @@ import CemeteryMainInfo from './cemeteryMainInfo/CemeteryMainInfo';
 import { CemeteryOut } from '@/openapi';
 import { redirect } from 'next/navigation';
 import { PATH } from '../constants/path.constants';
-import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
 interface ICemeteryInfoProps {
   cemetery: CemeteryOut;
@@ -139,11 +138,13 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
               text={'Soldiers with Headstone Changes'}
               solders={cemetery.filtered_soldiers.soldiers}
               className="z-10"
+              dash={true}
             />
             <HorizontalPhotoGallery
               text={cemetery.filtered_soldiers.title}
               solders={cemetery.filtered_soldiers.soldiers}
               className="z-10"
+              dash={true}
             />
           </>
         )}

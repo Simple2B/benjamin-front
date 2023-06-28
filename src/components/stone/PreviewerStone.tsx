@@ -1,25 +1,65 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import IconButton from '../IconButton';
 import { useRouter } from 'next/navigation';
 import { ICONS_NAME } from '../constants/iconName';
-import HorizontalPhotoGallery from '../cemetery/HorizontalPhotoGallery';
+import urlJoin from 'url-join';
+import { AWS_BASE_URL, MONTH } from '../constants/constants';
+import StoneHorizontalGallery from './StoneHorizontalGallery';
+import { StoneUploadWindow } from './StoneUploadWindow';
+import { SoldierStoneOut } from '@/openapi';
 
-export const PreviewerStone = () => {
+export interface IStone {
+  created_at: string;
+  senderName: string;
+  senderEmail: string;
+  photoUrl: string;
+  uuid: string;
+}
+
+const stonePhotosGalleryBE: IStone[] = [
+  {
+    created_at: '2020-01-30 8:26:13',
+    senderName: 'Daniel Katz',
+    photoUrl: '/images/photos/stonePhoto.jpg',
+    senderEmail: 'r',
+    uuid: 'string',
+  },
+];
+
+interface IStonePreviewerProps {
+  stones: SoldierStoneOut[];
+  soldierUuid: string;
+}
+
+export const PreviewerStone = ({
+  stones,
+  soldierUuid,
+}: IStonePreviewerProps) => {
+  const [isUploadWindowOpen, setUploadWindowOpen] = useState<boolean>(false);
+  const [stonePhotosGallery, setStonePhotosGallery] =
+    useState<IStone[]>(stonePhotosGalleryBE);
+
   const router = useRouter();
 
+  const handleUploadWindowClose = () => {
+    setTimeout(() => {
+      setUploadWindowOpen(false);
+    }, 1000);
+  };
   return (
     <>
-      <div className="text-indigo-100 py-6 px-3 flex flex-col gap-4">
-        <div className="w-full flex justify-between">
+      <div className="text-indigo-100 py-4 flex flex-col gap-8">
+        {isUploadWindowOpen && <div className="filter-indigo" />}
+        <div className="w-full flex justify-between px-[18px]">
           <div onClick={router.back}>
             <IconButton iconName={ICONS_NAME.arrow} className="w-4 h-4" />
           </div>
-          <h1 className="text-sm font-medium flex-grow text-center">
+          <h1 className="text-sm font-medium flex-grow text-center leading-5">
             Lay a stone
           </h1>
         </div>
-        <div className="flex flex-col gap-3 px-3 ">
+        <div className="flex flex-col gap-3 px-8 leading-6">
           <p>
             Jews traditionally mark a visit to a grave with the laying of a
             small stone on the grave or headstone. By visiting an ancestor or
@@ -41,13 +81,27 @@ export const PreviewerStone = () => {
             bonds of eternal life.
           </p>
         </div>
-        <HorizontalPhotoGallery text="" solders={[]} className="z-0" />
+        <StoneHorizontalGallery
+          stonePhotosGallery={stonePhotosGallery}
+          setStonePhotosGallery={setStonePhotosGallery}
+        />
       </div>
-      <div className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end">
-        <button className="w-10/12 bg-turquoise-100 text-white p-3 rounded-lg font-semibold m-3">
+      <div
+        className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end"
+        onClick={() => setUploadWindowOpen(true)}
+      >
+        <button className="w-[350px] bg-turquoise-100 text-white p-3 rounded-lg font-semibold m-3 mb-11">
           Add headstone photo
         </button>
       </div>
+      {isUploadWindowOpen && (
+        <StoneUploadWindow
+          handleUploadWindowClose={handleUploadWindowClose}
+          stonePhotosGallery={stonePhotosGallery}
+          setStonePhotosGallery={setStonePhotosGallery}
+          soldierUuid={soldierUuid}
+        />
+      )}
     </>
   );
 };

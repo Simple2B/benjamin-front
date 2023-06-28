@@ -6,6 +6,7 @@ import type { CemeteryOut } from '../models/CemeteryOut';
 import type { Metadata } from '../models/Metadata';
 import type { SoldierOut } from '../models/SoldierOut';
 import type { Soldiers } from '../models/Soldiers';
+import type { SoldierStoneCreate } from '../models/SoldierStoneCreate';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -94,6 +95,52 @@ export class ApiService {
             url: '/api/soldier/{soldier_uuid}',
             path: {
                 'soldier_uuid': soldierUuid,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Create Soldier Stone
+     * @param soldierUuid
+     * @param requestBody
+     * @returns any Successful Response
+     * @throws ApiError
+     */
+    public static createSoldierStone(
+        soldierUuid: string,
+        requestBody: SoldierStoneCreate,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/soldier/{soldier_uuid}/stone',
+            path: {
+                'soldier_uuid': soldierUuid,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Delete Stone
+     * @param stoneUuid
+     * @returns any Successful Response
+     * @throws ApiError
+     */
+    public static deleteStone(
+        stoneUuid: string,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
+            url: '/api/stone/{stone_uuid}',
+            path: {
+                'stone_uuid': stoneUuid,
             },
             errors: {
                 422: `Validation Error`,

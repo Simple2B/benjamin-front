@@ -24,6 +24,7 @@ import urlJoin from 'url-join';
 import { AWS_BASE_URL } from '@/components/constants/constants';
 import { formatDate } from './PreviewerSoldier.utils';
 import { SoldierOut } from '@/openapi';
+import { ProjectCreatorInfo } from '../ProjectCreatorInfo';
 
 interface IPreviewerSoldierProps {
   soldier: SoldierOut;
@@ -174,6 +175,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
               imageDescription={'Killed In Action (KIA) Telegram'}
             />
           )}
+          <ProjectCreatorInfo />
         </ClosebleInfo>
 
         {soldier?.replacementCeremonyVideo && (
@@ -194,7 +196,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
           </ClosebleInfo>
         )} */}
       </div>
-      <RememberSoldier name={soldier?.name} />
+      <RememberSoldier name={soldier?.name} soldierUuid={soldier.uuid} />
     </div>
   );
 }

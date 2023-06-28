@@ -13,6 +13,7 @@ export const PreviewerMessage = () => {
   const maxLength: number = 500;
 
   const handleMessage = (event: ChangeEvent<HTMLTextAreaElement>): void => {
+    console.log(event.target.value);
     setMessage(event.target.value);
   };
 
@@ -28,63 +29,65 @@ export const PreviewerMessage = () => {
   };
 
   return (
-    <div className="h-[calc(100dvh)] flex flex-col items-start px-3 py-6 text-indigo-100 justify-between gap-3">
-      <div className="w-full flex justify-between">
-        <div onClick={router.back}>
-          <IconButton iconName={ICONS_NAME.arrow} className="w-4 h-4" />
+    <>
+      <div className="flex flex-col items-start py-4 text-indigo-100 gap-6">
+        <div className="w-full flex justify-between px-[18px]">
+          <div onClick={router.back}>
+            <IconButton iconName={ICONS_NAME.arrow} className="w-4 h-4" />
+          </div>
+          <h1 className="text-sm font-medium flex-grow text-center leading-5">
+            Write a message to the family
+          </h1>
         </div>
-        <h1 className="text-sm font-medium flex-grow text-center">
-          Write a message to the family
-        </h1>
+        <div className="px-8 flex flex-col gap-6 leading-[22px]">
+          <p>
+            It is very meaningful for families to have the service and sacrifice
+            of their family members acknowledged. In some cases, soldiers’
+            families have been identified and, in others, families have yet to
+            be contacted. All messages will be sent to Operation Benjamin, and
+            our team will forward the message to the family at the earliest
+            opportunity.
+          </p>
+
+          <div className="flex flex-col w-full">
+            <h3 className="font-semibold leading-6">EMAIL</h3>
+            <input
+              type="email"
+              id="email"
+              className="border border-gray-300 text-sm rounded-lg p-3 w-full h-[55px]"
+              placeholder="Type your email"
+              onChange={handleEmail}
+              required
+            />
+            <p
+              className={`text-xs text-red-600 ${isEmailValid && 'invisible'}`}
+            >
+              Please enter accurate email address
+            </p>
+          </div>
+          <div className="flex flex-col w-full mb-24">
+            <h3 className="font-semibold leading-6">MESSAGE</h3>
+            <textarea
+              maxLength={500}
+              rows={10}
+              onChange={handleMessage}
+              className=" resize-none p-3 text-sm rounded-lg border border-gray-300 w-full h-[323px]"
+              placeholder="Type your message"
+            ></textarea>
+            <p className="text-sm self-end text-grey-20">
+              {message.length}/{maxLength}
+            </p>
+          </div>
+        </div>
       </div>
-      <div className="flex flex-col items-start gap-3 px-3">
-        <p>
-          It is very meaningful for families to have the service and sacrifice
-          of their family members acknowledged. In some cases, soldiers’
-          families have been identified and, in others, families have yet to be
-          contacted.
-        </p>
-        <p>
-          All messages will be sent to Operation Benjamin, and our team will
-          forward the message to the family at the earliest opportunity.
-        </p>
-      </div>
-      <div className="flex flex-col w-full px-3">
-        <h3 className="font-semibold">EMAIL</h3>
-        <input
-          type="email"
-          id="email"
-          className="border border-gray-300 text-sm rounded-lg p-3"
-          placeholder="Type your email"
-          onChange={handleEmail}
-          required
-        />
-        <p className={`text-xs text-red-600 ${isEmailValid && 'invisible'}`}>
-          Please enter accurate email address
-        </p>
-      </div>
-      <div className="flex flex-col w-full px-3">
-        <h3 className="font-semibold">MESSAGE</h3>
-        <textarea
-          maxLength={500}
-          rows={10}
-          value={message}
-          onChange={handleMessage}
-          className="resize-none p-3 text-sm w-full rounded-lg border border-gray-300"
-          placeholder="Type your message"
-        ></textarea>
-        <p className="text-sm self-end text-grey-20">
-          {message.length}/{maxLength}
-        </p>
-      </div>
-      <div className="px-3 w-full">
+      <div className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end">
         <button
-          className="bg-turquoise-100 w-full text-white p-3 rounded-lg font-semibold"
+          className="w-[350px] bg-turquoise-100 text-white p-3 rounded-lg font-semibold m-3 mb-11"
           onClick={handleSend}
         >
           Send message
         </button>
       </div>
-    </div>
+    </>
   );
 };
