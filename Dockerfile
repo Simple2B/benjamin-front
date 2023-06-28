@@ -3,6 +3,7 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 # install dependencies
 RUN yarn install --frozen-lockfile
+RUN sh update_action_size_limit.sh
 COPY . .
 
 EXPOSE 3000
