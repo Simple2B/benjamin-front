@@ -16,7 +16,6 @@ export const StoneHorizontalGallery = ({
   const [isPending, startTransition] = useTransition();
 
   const { currentStones, setCurrentStone } = useAppStore();
-  console.log(currentStones);
 
   const handleDelete = (deletingPhotoUuid: string) => {
     startTransition(() => deleteStonePhoto(deletingPhotoUuid));
