@@ -29,4 +29,5 @@ export const ICONS_NAME = {
   cross: 'cross',
   upload: 'upload',
   fullscreen: 'fullscreen',
+  crossWhite: 'cross-white',
 };
