@@ -18,7 +18,7 @@ const SoldierAdditionalImage = ({
           <img
             src={imageUrl}
             alt="document"
-            className="w-full h-[215] rounded-lg bg-grey-30"
+            className="w-full h-[215] rounded-lg bg-grey-30 photo-shadow"
           />
         )}
       </div>

@@ -18,7 +18,6 @@ import {
 import IconButton from '@/components/IconButton';
 import { ICONS_NAME } from '@/components/constants/iconName';
 import { useRouter } from 'next/navigation';
-import { useAppStore } from '@/lib/slices/store';
 import { PATH } from '@/components/constants/path.constants';
 import urlJoin from 'url-join';
 import { AWS_BASE_URL } from '@/components/constants/constants';
@@ -132,7 +131,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
           />
         )}
         {soldier?.soldierAudioTour && (
-          <div className="w-full bg-grey-10 rounded-lg p-4">
+          <div className=" bg-grey-10 rounded-lg p-4 w-[350px]">
             <p className="text-sm text-grey-20">Audio Tour</p>
             <AudioPlayer
               audioSourse={urlJoin(
