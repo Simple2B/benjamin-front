@@ -6,7 +6,6 @@ import IconButton from '../IconButton';
 import { ICONS_NAME } from '../constants/iconName';
 import { useAppStore } from '@/lib/slices/store';
 import { IStone } from './PreviewerStone';
-import moment from 'moment';
 import { uploadStonePhoto } from '@/app/actions';
 
 type ISendPhotoFormProps = {
@@ -33,29 +32,11 @@ export const SendPhotoForm = ({
   const [uploadedPhoto, setUploadedPhoto] = useState<string>();
   const [uploadedPhotoForm, setUploadedPhotoForm] = useState<Blob>();
   const [isNext, setNext] = useState<boolean>(false);
-  const [photoSrc, setPhotoSrc] = useState<string>();
   const [isPending, startTransition] = useTransition();
 
   const handleSubmit = async (values: typeof formInitialValues) => {
     if (uploadedPhoto) {
-      const uploadPhotoInfo = {
-        date: moment().format('YYYY-MM-D HH:mm:ss'),
-        sender: values.name,
-        email: values.email,
-        photoSrc: uploadedPhoto,
-      };
-
-      if (currentStones) {
-        setCurrentStone([uploadPhotoInfo, ...currentStones]);
-      } else {
-        setCurrentStone([uploadPhotoInfo]);
-      }
       if (uploadedPhotoForm) {
-        const formData = new FormData();
-        formData.append('sender_name', values.name);
-        formData.append('sender_email', values.email);
-        formData.append('photo', uploadedPhotoForm);
-
         const reader = new FileReader();
         reader.readAsDataURL(uploadedPhotoForm);
         reader.onloadend = () => {
@@ -67,13 +48,27 @@ export const SendPhotoForm = ({
                 base64data,
                 values.email,
                 values.name
-              )
+              ).then((res) => {
+                if (currentStones) {
+                  setCurrentStone([res, ...currentStones]);
+                } else {
+                  setCurrentStone([res]);
+                }
+                const uploadedPhotoInfo = {
+                  created_at: res.created_at,
+                  senderName: res.senderName,
+                  senderEmail: res.senderEmail,
+                  photoUrl: uploadedPhoto,
+                  uuid: res.uuid,
+                };
+                setStonePhotosGallery([
+                  uploadedPhotoInfo,
+                  ...stonePhotosGallery,
+                ]);
+              })
             );
           }
         };
-
-        const updatedStoneGallery = [uploadPhotoInfo, ...stonePhotosGallery];
-        setStonePhotosGallery(updatedStoneGallery);
       }
     }
     setNext(true);

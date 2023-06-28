@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useTransition } from 'react';
 import { IStone } from './PreviewerStone';
 import { StoneProfile } from './StoneProfile/StoneProfile';
 import { useAppStore } from '@/lib/slices/store';
+import { deleteStonePhoto } from '@/app/actions';
 
 type IStoneHorizontalGalleryProps = {
   stonePhotosGallery: IStone[];
@@ -12,21 +13,26 @@ export const StoneHorizontalGallery = ({
   stonePhotosGallery,
   setStonePhotosGallery,
 }: IStoneHorizontalGalleryProps) => {
-  const { currentStones, setCurrentStone } = useAppStore();
+  const [isPending, startTransition] = useTransition();
 
-  const handleDelete = (deletingPhoto: string | undefined) => {
+  const { currentStones, setCurrentStone } = useAppStore();
+  console.log(currentStones);
+
+  const handleDelete = (deletingPhotoUuid: string) => {
+    startTransition(() => deleteStonePhoto(deletingPhotoUuid));
+
     const filteredStones = stonePhotosGallery.filter(
-      ({ date, sender, photoSrc, email }) => {
-        if (photoSrc !== deletingPhoto) {
-          return { date, sender, photoSrc, email };
+      ({ created_at, senderName, photoUrl, senderEmail, uuid }) => {
+        if (uuid !== deletingPhotoUuid) {
+          return { created_at, senderName, photoUrl, senderEmail, uuid };
         }
       }
     );
 
     const filteredUploadedStones = currentStones?.filter(
-      ({ date, sender, photoSrc, email }) => {
-        if (photoSrc !== deletingPhoto) {
-          return { date, sender, photoSrc, email };
+      ({ created_at, senderName, photoUrl, senderEmail, uuid }) => {
+        if (uuid !== deletingPhotoUuid) {
+          return { created_at, senderName, photoUrl, senderEmail, uuid };
         }
       }
     );

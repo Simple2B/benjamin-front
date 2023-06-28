@@ -15,7 +15,7 @@ env:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: benjamin-front
     steps:
       - uses: actions/checkout@v3
       - name: install packages
@@ -25,7 +25,7 @@ jobs:
       - name: check lint
         run: yarn lint
   build:
-    runs-on: [ubuntu-latest]
+    runs-on: [benjamin-front]
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
     needs: test
     steps:

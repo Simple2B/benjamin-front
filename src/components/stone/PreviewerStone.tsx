@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import IconButton from '../IconButton';
 import { useRouter } from 'next/navigation';
 import { ICONS_NAME } from '../constants/iconName';
@@ -7,40 +7,23 @@ import urlJoin from 'url-join';
 import { AWS_BASE_URL, MONTH } from '../constants/constants';
 import StoneHorizontalGallery from './StoneHorizontalGallery';
 import { StoneUploadWindow } from './StoneUploadWindow';
-import { useAppStore } from '@/lib/slices/store';
 import { SoldierStoneOut } from '@/openapi';
 
 export interface IStone {
-  date: string;
-  sender: string;
-  email: string;
-  photoSrc: string;
+  created_at: string;
+  senderName: string;
+  senderEmail: string;
+  photoUrl: string;
+  uuid: string;
 }
 
 const stonePhotosGalleryBE: IStone[] = [
   {
-    date: '2020-01-30 8:26:13',
-    sender: 'Daniel Katz',
-    photoSrc: '/images/photos/stonePhoto.jpg',
-    email: 'r',
-  },
-  {
-    date: '2020-05-14 13:14:15',
-    sender: 'LA',
-    photoSrc: '/images/photos/stonePhoto.jpg',
-    email: 'r',
-  },
-  {
-    date: '2020-07-28 10:30:55',
-    sender: 'John',
-    photoSrc: '/images/photos/stonePhoto.jpg',
-    email: 'r',
-  },
-  {
-    date: '2020-09-01 5:45:12',
-    sender: 'Marta',
-    photoSrc: '/images/photos/stonePhoto.jpg',
-    email: 'r',
+    created_at: '2020-01-30 8:26:13',
+    senderName: 'Daniel Katz',
+    photoUrl: '/images/photos/stonePhoto.jpg',
+    senderEmail: 'r',
+    uuid: 'string',
   },
 ];
 
@@ -53,7 +36,6 @@ export const PreviewerStone = ({
   stones,
   soldierUuid,
 }: IStonePreviewerProps) => {
-  console.log(stones);
   const [isUploadWindowOpen, setUploadWindowOpen] = useState<boolean>(false);
   const [stonePhotosGallery, setStonePhotosGallery] =
     useState<IStone[]>(stonePhotosGalleryBE);
