@@ -4,6 +4,7 @@ import { ICONS_NAME } from '../../constants/iconName';
 import { formatDate } from './StoneProfile.utils';
 import { IStone } from '../PreviewerStone';
 import { stoneTimer } from '@/components/constants/constants';
+import { useAppStore } from '@/lib/slices/store';
 
 type IStoneProfileProps = {
   item: IStone;
@@ -15,12 +16,12 @@ export const StoneProfile = ({ item, handleDelete }: IStoneProfileProps) => {
   const [isRemovable, setRemovable] = useState<boolean>(false);
 
   useEffect(() => {
+    setRemovable(false);
     const timeNow = new Date();
     const timeStarted = new Date(created_at);
     const timeDifference = timeNow.getTime() - timeStarted.getTime();
     const timeDifferenceMilliSeconds = Math.floor(timeDifference);
-    console.log(timeDifference);
-    console.log(stoneTimer - timeDifferenceMilliSeconds);
+
     if (timeDifferenceMilliSeconds < stoneTimer) {
       setRemovable(true);
 

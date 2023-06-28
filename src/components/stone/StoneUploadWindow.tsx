@@ -27,7 +27,9 @@ export const StoneUploadWindow = ({
 
   return (
     <div
-      className={`fixed z-[101] h-[838px] w-full bg-white flex flex-col items-center bottom-0 rounded-t-xl 
+      className={`fixed z-[101] ${
+        window.innerHeight <= 830 ? 'h-[780px]' : 'h-[838px]'
+      } w-full bg-white flex flex-col items-center bottom-0 rounded-t-xl max-h-screen
       ${isClosing ? 'upload-window-disappear' : 'upload-window-appear'}`}
     >
       <div
