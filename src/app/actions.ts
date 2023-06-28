@@ -1,6 +1,5 @@
 'use server';
-
-import { SoldiersService } from '@/openapi';
+import { SoldiersService, StonesService } from '@/openapi';
 
 export async function searchSoldier(searchValue: string) {
   console.log({ searchValue });
@@ -20,10 +19,11 @@ export const uploadStonePhoto = async (
     senderName,
   };
 
-  console.log(formData);
+  return await SoldiersService.createSoldierStone(soldierUuid, formData);
+};
 
-  const uploadStone = await SoldiersService.createSoldierStone(
-    soldierUuid,
-    formData
-  ).then((res) => console.log(res));
+export const deleteStonePhoto = async (stoneUuid: string) => {
+  const deleteStone = await StonesService.deleteStone(stoneUuid).then((res) =>
+    console.log(res)
+  );
 };
