@@ -3,6 +3,16 @@
 const nextConfig = {
   reactStrictMode: false,
   output: 'standalone',
+  experimental: {
+    serverActions: true,
+    serverActionsBodySizeLimit: '10mb',
+  },
+  // api: {
+  //   bodyParser: {
+  //     sizeLimit: '20mb', // Set desired value here
+  //   },
+  // },
+
   // api: {
   //   externalResolver: true,
   // },

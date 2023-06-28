@@ -1,0 +1,1 @@
+sed -i 's/const actionData = await parseBody(req, "1mb") || "";/const actionData = await parseBody(req, "10mb") || "";/g' node_modules/next/dist/server/app-render/action-handler.js
