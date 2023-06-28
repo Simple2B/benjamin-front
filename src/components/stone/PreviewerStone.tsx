@@ -8,6 +8,7 @@ import { AWS_BASE_URL, MONTH } from '../constants/constants';
 import StoneHorizontalGallery from './StoneHorizontalGallery';
 import { StoneUploadWindow } from './StoneUploadWindow';
 import { useAppStore } from '@/lib/slices/store';
+import { SoldierStoneOut } from '@/openapi';
 
 export interface IStone {
   date: string;
@@ -43,7 +44,16 @@ const stonePhotosGalleryBE: IStone[] = [
   },
 ];
 
-export const PreviewerStone = () => {
+interface IStonePreviewerProps {
+  stones: SoldierStoneOut[];
+  soldierUuid: string;
+}
+
+export const PreviewerStone = ({
+  stones,
+  soldierUuid,
+}: IStonePreviewerProps) => {
+  console.log(stones);
   const [isUploadWindowOpen, setUploadWindowOpen] = useState<boolean>(false);
   const [stonePhotosGallery, setStonePhotosGallery] =
     useState<IStone[]>(stonePhotosGalleryBE);
@@ -107,6 +117,7 @@ export const PreviewerStone = () => {
           handleUploadWindowClose={handleUploadWindowClose}
           stonePhotosGallery={stonePhotosGallery}
           setStonePhotosGallery={setStonePhotosGallery}
+          soldierUuid={soldierUuid}
         />
       )}
     </>

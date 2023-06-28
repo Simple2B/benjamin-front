@@ -18,9 +18,9 @@ const Page = async ({ params }: IStonePageProps) => {
   const { stoneSoldierUuid } = params;
 
   const soldier = await SoldiersService.getSoldier(stoneSoldierUuid);
-  console.log(soldier);
+  const stones = soldier.verified_stones;
 
-  return <PreviewerStone />;
+  return <PreviewerStone stones={stones} soldierUuid={stoneSoldierUuid} />;
 };
 
 export default Page;

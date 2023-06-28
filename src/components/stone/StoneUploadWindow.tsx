@@ -9,12 +9,14 @@ type IStoneUploadWindowProps = {
   handleUploadWindowClose: () => void;
   stonePhotosGallery: IStone[];
   setStonePhotosGallery: (arg: IStone[]) => void;
+  soldierUuid: string;
 };
 
 export const StoneUploadWindow = ({
   handleUploadWindowClose,
   stonePhotosGallery,
   setStonePhotosGallery,
+  soldierUuid,
 }: IStoneUploadWindowProps) => {
   const [isClosing, setClosing] = useState<boolean>(false);
 
@@ -39,6 +41,7 @@ export const StoneUploadWindow = ({
         handleUploadWindowClose={handleUploadWindowClose}
         stonePhotosGallery={stonePhotosGallery}
         setStonePhotosGallery={setStonePhotosGallery}
+        soldierUuid={soldierUuid}
       />
     </div>
   );

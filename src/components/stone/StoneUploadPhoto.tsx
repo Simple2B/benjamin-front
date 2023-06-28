@@ -4,10 +4,12 @@ import { ICONS_NAME } from '../constants/iconName';
 
 type IStoneUploadPhotoProps = {
   setUploadedPhoto: (photoSrc: string) => void;
+  setUploadedPhotoForm: (photoSrc: Blob) => void;
 };
 
 export const StoneUploadPhoto = ({
   setUploadedPhoto,
+  setUploadedPhotoForm,
 }: IStoneUploadPhotoProps) => {
   const [photoSrc, setPhotoSrc] = useState<string | undefined>();
 
@@ -23,6 +25,7 @@ export const StoneUploadPhoto = ({
         image.src = reader.result as string;
         setPhotoSrc(image.src);
         setUploadedPhoto(image.src);
+        setUploadedPhotoForm(file);
       };
       reader.readAsDataURL(file);
     }

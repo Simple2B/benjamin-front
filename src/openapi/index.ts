@@ -15,11 +15,14 @@ export type { SoldierCardWithPhoto } from './models/SoldierCardWithPhoto';
 export type { SoldierOut } from './models/SoldierOut';
 export type { Soldiers } from './models/Soldiers';
 export type { SoldiersFiltered } from './models/SoldiersFiltered';
+export type { SoldierStoneCreate } from './models/SoldierStoneCreate';
+export type { SoldierStoneOut } from './models/SoldierStoneOut';
 export type { ValidationError } from './models/ValidationError';
 
 export { ApiService } from './services/ApiService';
 export { CemeteriesService } from './services/CemeteriesService';
 export { SoldiersService } from './services/SoldiersService';
+export { StonesService } from './services/StonesService';
 
 import { OpenAPI } from './core/OpenAPI';
 
