@@ -3,7 +3,7 @@ import IconButton from '../../IconButton';
 import { ICONS_NAME } from '../../constants/iconName';
 import { formatDate } from './StoneProfile.utils';
 import { IStone } from '../PreviewerStone';
-import { stoneTimer } from '@/components/constants/constants';
+import { useAppStore } from '@/lib/slices/store';
 
 type IStoneProfileProps = {
   item: IStone;
@@ -14,22 +14,15 @@ export const StoneProfile = ({ item, handleDelete }: IStoneProfileProps) => {
   const { created_at, photoUrl, senderName, uuid } = item;
   const [isRemovable, setRemovable] = useState<boolean>(false);
 
+  const { currentStones } = useAppStore();
+
   useEffect(() => {
-    const timeNow = new Date();
-    const timeStarted = new Date(created_at);
-    const timeDifference = timeNow.getTime() - timeStarted.getTime();
-    const timeDifferenceMilliSeconds = Math.floor(timeDifference);
+    const isUploadedRecently = currentStones?.some(
+      (stone) => stone.uuid === uuid
+    );
 
-    if (timeDifferenceMilliSeconds < stoneTimer) {
+    if (isUploadedRecently) {
       setRemovable(true);
-
-      const timer = setTimeout(() => {
-        setRemovable(false);
-      }, stoneTimer - timeDifferenceMilliSeconds);
-
-      return () => {
-        clearTimeout(timer);
-      };
     } else {
       setRemovable(false);
     }

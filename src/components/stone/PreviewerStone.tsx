@@ -1,10 +1,8 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import IconButton from '../IconButton';
 import { useRouter } from 'next/navigation';
 import { ICONS_NAME } from '../constants/iconName';
-import urlJoin from 'url-join';
-import { AWS_BASE_URL, MONTH } from '../constants/constants';
 import StoneHorizontalGallery from './StoneHorizontalGallery';
 import { StoneUploadWindow } from './StoneUploadWindow';
 import { SoldierStoneOut } from '@/openapi';
@@ -39,6 +37,15 @@ export const PreviewerStone = ({
   const [isUploadWindowOpen, setUploadWindowOpen] = useState<boolean>(false);
   const [stonePhotosGallery, setStonePhotosGallery] =
     useState<IStone[]>(stonePhotosGalleryBE);
+
+  const userUploadedPhoto = localStorage.getItem('uploadedStonePhoto');
+
+  useEffect(() => {
+    const userUploadedPhotoObj = JSON.parse(userUploadedPhoto || '{}');
+    const stonesforSoldier = userUploadedPhotoObj[soldierUuid] || [];
+    const allStones = [...stonesforSoldier, ...stonePhotosGalleryBE];
+    setStonePhotosGallery(allStones);
+  }, [userUploadedPhoto]);
 
   const router = useRouter();
 
@@ -84,6 +91,7 @@ export const PreviewerStone = ({
         <StoneHorizontalGallery
           stonePhotosGallery={stonePhotosGallery}
           setStonePhotosGallery={setStonePhotosGallery}
+          soldierUuid={soldierUuid}
         />
       </div>
       <div
@@ -98,7 +106,6 @@ export const PreviewerStone = ({
         <StoneUploadWindow
           handleUploadWindowClose={handleUploadWindowClose}
           stonePhotosGallery={stonePhotosGallery}
-          setStonePhotosGallery={setStonePhotosGallery}
           soldierUuid={soldierUuid}
         />
       )}

@@ -12,7 +12,6 @@ type ISendPhotoFormProps = {
   setClosing: (ard: boolean) => void;
   handleUploadWindowClose: () => void;
   stonePhotosGallery: IStone[];
-  setStonePhotosGallery: (arg: IStone[]) => void;
   soldierUuid: string;
 };
 
@@ -25,7 +24,6 @@ export const SendPhotoForm = ({
   setClosing,
   handleUploadWindowClose,
   stonePhotosGallery,
-  setStonePhotosGallery,
   soldierUuid,
 }: ISendPhotoFormProps) => {
   const { currentStones, setCurrentStone } = useAppStore();
@@ -33,6 +31,10 @@ export const SendPhotoForm = ({
   const [uploadedPhotoForm, setUploadedPhotoForm] = useState<Blob>();
   const [isNext, setNext] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
+
+  const prewiousUploadedStones = localStorage.getItem('uploadedStonePhoto');
+  const prewiousUploadedStonesObj = JSON.parse(prewiousUploadedStones || '[]');
+  const stonesforSoldier = prewiousUploadedStonesObj[soldierUuid] || [];
 
   const handleSubmit = async (values: typeof formInitialValues) => {
     if (uploadedPhotoForm && uploadedPhoto) {
@@ -60,7 +62,15 @@ export const SendPhotoForm = ({
                 photoUrl: uploadedPhoto,
                 uuid: res.uuid,
               };
-              setStonePhotosGallery([uploadedPhotoInfo, ...stonePhotosGallery]);
+
+              stonesforSoldier.push(uploadedPhotoInfo);
+              localStorage.setItem(
+                'uploadedStonePhoto',
+                JSON.stringify({
+                  ...prewiousUploadedStonesObj,
+                  [soldierUuid]: stonesforSoldier,
+                })
+              );
             })
           );
         }
