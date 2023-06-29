@@ -106,7 +106,6 @@ export const PreviewerStone = ({
       {isUploadWindowOpen && (
         <StoneUploadWindow
           handleUploadWindowClose={handleUploadWindowClose}
-          stonePhotosGallery={stonePhotosGallery}
           soldierUuid={soldierUuid}
         />
       )}

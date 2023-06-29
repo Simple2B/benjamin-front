@@ -3,20 +3,18 @@ import React, { useState } from 'react';
 import IconButton from '../IconButton';
 import { ICONS_NAME } from '../constants/iconName';
 import { SendPhotoForm } from './SendPhotoForm';
-import { IStone } from './PreviewerStone';
 
 type IStoneUploadWindowProps = {
   handleUploadWindowClose: () => void;
-  stonePhotosGallery: IStone[];
   soldierUuid: string;
 };
 
 export const StoneUploadWindow = ({
   handleUploadWindowClose,
-  stonePhotosGallery,
   soldierUuid,
 }: IStoneUploadWindowProps) => {
   const [isClosing, setClosing] = useState<boolean>(false);
+  const [isPreviewSending, setPreviewSending] = useState<boolean>(false);
 
   const handleClose = () => {
     handleUploadWindowClose();
@@ -28,6 +26,7 @@ export const StoneUploadWindow = ({
       className={`fixed z-[101] ${
         window.innerHeight <= 830 ? 'h-[780px]' : 'h-[838px]'
       } w-full bg-white flex flex-col items-center bottom-0 rounded-t-xl max-h-screen
+      ${isPreviewSending && 'h-[707px]'}
       ${isClosing ? 'upload-window-disappear' : 'upload-window-appear'}`}
     >
       <div
@@ -40,6 +39,7 @@ export const StoneUploadWindow = ({
         setClosing={setClosing}
         handleUploadWindowClose={handleUploadWindowClose}
         soldierUuid={soldierUuid}
+        setPreviewSending={setPreviewSending}
       />
     </div>
   );

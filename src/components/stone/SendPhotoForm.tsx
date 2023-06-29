@@ -10,6 +10,7 @@ import { uploadStonePhoto } from '@/app/actions';
 type ISendPhotoFormProps = {
   setClosing: (ard: boolean) => void;
   handleUploadWindowClose: () => void;
+  setPreviewSending: (ard: boolean) => void;
   soldierUuid: string;
 };
 
@@ -22,6 +23,7 @@ export const SendPhotoForm = ({
   setClosing,
   handleUploadWindowClose,
   soldierUuid,
+  setPreviewSending,
 }: ISendPhotoFormProps) => {
   const { currentStones, setCurrentStone } = useAppStore();
   const [uploadedPhoto, setUploadedPhoto] = useState<string>();
@@ -74,6 +76,7 @@ export const SendPhotoForm = ({
       };
     }
     setNext(true);
+    setPreviewSending(true);
   };
 
   const handleNext = () => {
