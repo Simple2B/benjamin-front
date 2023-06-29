@@ -1,10 +1,8 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import IconButton from '../IconButton';
 import { useRouter } from 'next/navigation';
 import { ICONS_NAME } from '../constants/iconName';
-import urlJoin from 'url-join';
-import { AWS_BASE_URL, MONTH } from '../constants/constants';
 import StoneHorizontalGallery from './StoneHorizontalGallery';
 import { StoneUploadWindow } from './StoneUploadWindow';
 import { SoldierStoneOut } from '@/openapi';
@@ -40,6 +38,15 @@ export const PreviewerStone = ({
   const [stonePhotosGallery, setStonePhotosGallery] =
     useState<IStone[]>(stonePhotosGalleryBE);
 
+  const userUploadedPhoto = localStorage.getItem('uploadedStonePhoto');
+
+  useEffect(() => {
+    const userUploadedPhotoObj = JSON.parse(userUploadedPhoto || '{}');
+    const stonesforSoldier = userUploadedPhotoObj[soldierUuid] || [];
+    const allStones = [...stonesforSoldier, ...stonePhotosGalleryBE];
+    setStonePhotosGallery(allStones);
+  }, [userUploadedPhoto]);
+
   const router = useRouter();
 
   const handleUploadWindowClose = () => {
@@ -71,9 +78,10 @@ export const PreviewerStone = ({
           <p>
             An intriguing explanation for the laying of stones refers to the
             inscription on many Jewish gravestones. The Hebrew abbreviation taf,
-            nun, tsadi, bet, hey stands for “teheye nishmato tsrurah b’tsror ha-
-            chayyim,” a phrase usually translated as “May his soul be bound up
-            in the bonds of eternal life.”
+            nun, tsadi, bet, hey stands for{' '}
+            <i>“teheye nishmato tsrurah b’tsror ha- chayyim,”</i> a phrase
+            usually translated as{' '}
+            <i>“May his soul be bound up in the bonds of eternal life.”</i>
           </p>
           <p>
             Tsror also mean a stone, in Hebrew. The placing of a stone might be
@@ -84,6 +92,7 @@ export const PreviewerStone = ({
         <StoneHorizontalGallery
           stonePhotosGallery={stonePhotosGallery}
           setStonePhotosGallery={setStonePhotosGallery}
+          soldierUuid={soldierUuid}
         />
       </div>
       <div
@@ -97,8 +106,6 @@ export const PreviewerStone = ({
       {isUploadWindowOpen && (
         <StoneUploadWindow
           handleUploadWindowClose={handleUploadWindowClose}
-          stonePhotosGallery={stonePhotosGallery}
-          setStonePhotosGallery={setStonePhotosGallery}
           soldierUuid={soldierUuid}
         />
       )}

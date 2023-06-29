@@ -7,11 +7,13 @@ import { deleteStonePhoto } from '@/app/actions';
 type IStoneHorizontalGalleryProps = {
   stonePhotosGallery: IStone[];
   setStonePhotosGallery: (arg: IStone[]) => void;
+  soldierUuid: string;
 };
 
 export const StoneHorizontalGallery = ({
   stonePhotosGallery,
   setStonePhotosGallery,
+  soldierUuid,
 }: IStoneHorizontalGalleryProps) => {
   const [isPending, startTransition] = useTransition();
 
@@ -34,6 +36,23 @@ export const StoneHorizontalGallery = ({
           return { created_at, senderName, photoUrl, senderEmail, uuid };
         }
       }
+    );
+
+    const userUploadedPhoto = localStorage.getItem('uploadedStonePhoto');
+    const userUploadedPhotoObj = JSON.parse(userUploadedPhoto || '{}');
+    const stonesforSoldier: IStone[] = userUploadedPhotoObj[soldierUuid] || [];
+    const filteredUploadedStonesObj = stonesforSoldier.filter(
+      ({ created_at, senderName, photoUrl, senderEmail, uuid }) => {
+        if (uuid !== deletingPhotoUuid) {
+          return { created_at, senderName, photoUrl, senderEmail, uuid };
+        }
+      }
+    );
+    localStorage.setItem(
+      'uploadedStonePhoto',
+      JSON.stringify({
+        [soldierUuid]: filteredUploadedStonesObj,
+      })
     );
 
     setStonePhotosGallery(filteredStones);

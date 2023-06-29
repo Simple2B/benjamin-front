@@ -5,14 +5,12 @@ import { StoneUploadPhoto } from './StoneUploadPhoto';
 import IconButton from '../IconButton';
 import { ICONS_NAME } from '../constants/iconName';
 import { useAppStore } from '@/lib/slices/store';
-import { IStone } from './PreviewerStone';
 import { uploadStonePhoto } from '@/app/actions';
 
 type ISendPhotoFormProps = {
   setClosing: (ard: boolean) => void;
   handleUploadWindowClose: () => void;
-  stonePhotosGallery: IStone[];
-  setStonePhotosGallery: (arg: IStone[]) => void;
+  setPreviewSending: (ard: boolean) => void;
   soldierUuid: string;
 };
 
@@ -24,15 +22,18 @@ const formInitialValues = {
 export const SendPhotoForm = ({
   setClosing,
   handleUploadWindowClose,
-  stonePhotosGallery,
-  setStonePhotosGallery,
   soldierUuid,
+  setPreviewSending,
 }: ISendPhotoFormProps) => {
   const { currentStones, setCurrentStone } = useAppStore();
   const [uploadedPhoto, setUploadedPhoto] = useState<string>();
   const [uploadedPhotoForm, setUploadedPhotoForm] = useState<Blob>();
   const [isNext, setNext] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
+
+  const prewiousUploadedStones = localStorage.getItem('uploadedStonePhoto');
+  const prewiousUploadedStonesObj = JSON.parse(prewiousUploadedStones || '[]');
+  const stonesforSoldier = prewiousUploadedStonesObj[soldierUuid] || [];
 
   const handleSubmit = async (values: typeof formInitialValues) => {
     if (uploadedPhotoForm && uploadedPhoto) {
@@ -60,13 +61,22 @@ export const SendPhotoForm = ({
                 photoUrl: uploadedPhoto,
                 uuid: res.uuid,
               };
-              setStonePhotosGallery([uploadedPhotoInfo, ...stonePhotosGallery]);
+
+              stonesforSoldier.unshift(uploadedPhotoInfo);
+              localStorage.setItem(
+                'uploadedStonePhoto',
+                JSON.stringify({
+                  ...prewiousUploadedStonesObj,
+                  [soldierUuid]: stonesforSoldier,
+                })
+              );
             })
           );
         }
       };
     }
     setNext(true);
+    setPreviewSending(true);
   };
 
   const handleNext = () => {
