@@ -5,13 +5,11 @@ import { StoneUploadPhoto } from './StoneUploadPhoto';
 import IconButton from '../IconButton';
 import { ICONS_NAME } from '../constants/iconName';
 import { useAppStore } from '@/lib/slices/store';
-import { IStone } from './PreviewerStone';
 import { uploadStonePhoto } from '@/app/actions';
 
 type ISendPhotoFormProps = {
   setClosing: (ard: boolean) => void;
   handleUploadWindowClose: () => void;
-  stonePhotosGallery: IStone[];
   soldierUuid: string;
 };
 
@@ -23,7 +21,6 @@ const formInitialValues = {
 export const SendPhotoForm = ({
   setClosing,
   handleUploadWindowClose,
-  stonePhotosGallery,
   soldierUuid,
 }: ISendPhotoFormProps) => {
   const { currentStones, setCurrentStone } = useAppStore();
@@ -63,7 +60,7 @@ export const SendPhotoForm = ({
                 uuid: res.uuid,
               };
 
-              stonesforSoldier.push(uploadedPhotoInfo);
+              stonesforSoldier.unshift(uploadedPhotoInfo);
               localStorage.setItem(
                 'uploadedStonePhoto',
                 JSON.stringify({

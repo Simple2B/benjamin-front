@@ -39,7 +39,6 @@ export const StoneUploadWindow = ({
       <SendPhotoForm
         setClosing={setClosing}
         handleUploadWindowClose={handleUploadWindowClose}
-        stonePhotosGallery={stonePhotosGallery}
         soldierUuid={soldierUuid}
       />
     </div>

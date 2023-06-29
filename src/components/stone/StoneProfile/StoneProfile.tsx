@@ -13,7 +13,7 @@ type IStoneProfileProps = {
 export const StoneProfile = ({ item, handleDelete }: IStoneProfileProps) => {
   const { created_at, photoUrl, senderName, uuid } = item;
   const [isRemovable, setRemovable] = useState<boolean>(false);
-
+  const [isDeleting, setDeleting] = useState<boolean>(false);
   const { currentStones } = useAppStore();
 
   useEffect(() => {
@@ -28,13 +28,18 @@ export const StoneProfile = ({ item, handleDelete }: IStoneProfileProps) => {
     }
   }, [item.uuid]);
 
+  const handleComfirmDeletePhoto = () => {
+    handleDelete(uuid);
+    setDeleting(false);
+  };
+
   return (
     <div className={`w-[148px] flex-shrink-0`}>
       <div className="w-full flex flex-col items-end">
         {isRemovable ? (
           <div
             className={`flex justify-center w-8 h-8 bg-indigo-100 items-center sticky top-4 -mr-2 rounded-full `}
-            onClick={() => handleDelete(uuid)}
+            onClick={() => setDeleting(true)}
           >
             <IconButton iconName={ICONS_NAME.crossWhite} className="w-4 h-4" />
           </div>
@@ -58,6 +63,28 @@ export const StoneProfile = ({ item, handleDelete }: IStoneProfileProps) => {
       <p className="text-xs text-center leading-6">
         {senderName ? senderName : 'Anonymous'}
       </p>
+      {isDeleting && <div className="filter-indigo" />}
+      {isDeleting && (
+        <div className="w-full fixed h-52 bg-white bottom-0 left-0 z-50 rounded-t-xl flex flex-col items-center">
+          <p className="mt-8 leading-5 font-medium px-10">
+            Are you sure you want to delete this photo?
+          </p>
+          <div className="flex gap-8 text-white font-semibold leading-6 mt-10">
+            <button
+              className="h-12 w-[158px] bg-turquoise-100 rounded-lg"
+              onClick={handleComfirmDeletePhoto}
+            >
+              Yes
+            </button>
+            <button
+              className="bg-grey-20 h-12 w-[158px] rounded-lg"
+              onClick={() => setDeleting(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

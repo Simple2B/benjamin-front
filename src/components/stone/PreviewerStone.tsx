@@ -78,9 +78,10 @@ export const PreviewerStone = ({
           <p>
             An intriguing explanation for the laying of stones refers to the
             inscription on many Jewish gravestones. The Hebrew abbreviation taf,
-            nun, tsadi, bet, hey stands for “teheye nishmato tsrurah b’tsror ha-
-            chayyim,” a phrase usually translated as “May his soul be bound up
-            in the bonds of eternal life.”
+            nun, tsadi, bet, hey stands for{' '}
+            <i>“teheye nishmato tsrurah b’tsror ha- chayyim,”</i> a phrase
+            usually translated as{' '}
+            <i>“May his soul be bound up in the bonds of eternal life.”</i>
           </p>
           <p>
             Tsror also mean a stone, in Hebrew. The placing of a stone might be
