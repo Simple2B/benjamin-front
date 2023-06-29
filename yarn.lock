@@ -2392,11 +2392,6 @@ react-fast-compare@^2.0.1:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.4.tgz#e84b4d455b0fec113e0402c329352715196f81f9"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
 
-react-fullscreen-crossbrowser@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/react-fullscreen-crossbrowser/-/react-fullscreen-crossbrowser-1.1.2.tgz#643380a71c0de40531c22b75b29f7553bd4a972d"
-  integrity sha512-GA9tVJbU8e8iuYPI1h6PemtKDeQgnsgcRTVhC/8L7NpzMj7WBtzWSiqy6rzaXRAItDmuw7D2WgmZozdIBV+uVg==
-
 react-howler@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/react-howler/-/react-howler-5.2.0.tgz#fceef108f7c691f570155afee1c1436265218219"
@@ -2558,11 +2553,6 @@ scheduler@^0.23.0:
   integrity sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==
   dependencies:
     loose-envify "^1.1.0"
-
-screenfull@^6.0.2:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/screenfull/-/screenfull-6.0.2.tgz#3dbe4b8c4f8f49fb8e33caa8f69d0bca730ab238"
-  integrity sha512-AQdy8s4WhNvUZ6P8F6PB21tSPIYKniic+Ogx0AacBMjKP1GUHN2E9URxQHtCusiwxudnCKkdy4GrHXPPJSkCCw==
 
 semver@^6.3.0:
   version "6.3.0"
