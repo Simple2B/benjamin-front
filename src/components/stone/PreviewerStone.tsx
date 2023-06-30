@@ -15,18 +15,8 @@ export interface IStone {
   uuid: string;
 }
 
-const stonePhotosGalleryBE: IStone[] = [
-  {
-    created_at: '2020-01-30 8:26:13',
-    senderName: 'Daniel Katz',
-    photoUrl: '/images/photos/stonePhoto.jpg',
-    senderEmail: 'r',
-    uuid: 'string',
-  },
-];
-
 interface IStonePreviewerProps {
-  stones: SoldierStoneOut[];
+  stones: IStone[];
   soldierUuid: string;
 }
 
@@ -35,15 +25,23 @@ export const PreviewerStone = ({
   soldierUuid,
 }: IStonePreviewerProps) => {
   const [isUploadWindowOpen, setUploadWindowOpen] = useState<boolean>(false);
+
+  const stonesFromBEWithUuid = stones.map((stone) => {
+    if (stone.uuid === undefined) {
+      stone.uuid = '';
+    }
+    return stone;
+  });
+
   const [stonePhotosGallery, setStonePhotosGallery] =
-    useState<IStone[]>(stonePhotosGalleryBE);
+    useState<IStone[]>(stonesFromBEWithUuid);
 
   const userUploadedPhoto = localStorage.getItem('uploadedStonePhoto');
 
   useEffect(() => {
     const userUploadedPhotoObj = JSON.parse(userUploadedPhoto || '{}');
     const stonesforSoldier = userUploadedPhotoObj[soldierUuid] || [];
-    const allStones = [...stonesforSoldier, ...stonePhotosGalleryBE];
+    const allStones = [...stonesforSoldier, ...stonesFromBEWithUuid];
     setStonePhotosGallery(allStones);
   }, [userUploadedPhoto]);
 
@@ -56,7 +54,7 @@ export const PreviewerStone = ({
   };
   return (
     <>
-      <div className="text-indigo-100 py-4 flex flex-col gap-8">
+      <div className="text-indigo-100 py-4 flex flex-col gap-8 mb-16">
         {isUploadWindowOpen && <div className="filter-indigo" />}
         <div className="w-full flex justify-between px-[18px]">
           <div onClick={router.back}>
