@@ -7,11 +7,13 @@ import { SendPhotoForm } from './SendPhotoForm';
 type IStoneUploadWindowProps = {
   handleUploadWindowClose: () => void;
   soldierUuid: string;
+  setGallaryUpdating: (value: boolean) => void;
 };
 
 export const StoneUploadWindow = ({
   handleUploadWindowClose,
   soldierUuid,
+  setGallaryUpdating,
 }: IStoneUploadWindowProps) => {
   const [isClosing, setClosing] = useState<boolean>(false);
   const [isPreviewSending, setPreviewSending] = useState<boolean>(false);
@@ -40,6 +42,7 @@ export const StoneUploadWindow = ({
         handleUploadWindowClose={handleUploadWindowClose}
         soldierUuid={soldierUuid}
         setPreviewSending={setPreviewSending}
+        setGallaryUpdating={setGallaryUpdating}
       />
     </div>
   );

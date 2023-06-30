@@ -13,7 +13,6 @@ export const PreviewerMessage = () => {
   const maxLength: number = 500;
 
   const handleMessage = (event: ChangeEvent<HTMLTextAreaElement>): void => {
-    console.log(event.target.value);
     setMessage(event.target.value);
   };
 

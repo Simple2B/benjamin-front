@@ -5,28 +5,19 @@ import { useRouter } from 'next/navigation';
 import { ICONS_NAME } from '../constants/iconName';
 import StoneHorizontalGallery from './StoneHorizontalGallery';
 import { StoneUploadWindow } from './StoneUploadWindow';
-import { SoldierStoneOut } from '@/openapi';
+import { useAppStore } from '@/lib/slices/store';
+import Spinner from '../Spinner';
 
 export interface IStone {
-  created_at: string;
-  senderName: string;
-  senderEmail: string;
-  photoUrl: string;
+  created_at: string | undefined;
+  senderName: string | undefined;
+  senderEmail: string | undefined;
+  photoUrl: string | undefined;
   uuid: string;
 }
 
-const stonePhotosGalleryBE: IStone[] = [
-  {
-    created_at: '2020-01-30 8:26:13',
-    senderName: 'Daniel Katz',
-    photoUrl: '/images/photos/stonePhoto.jpg',
-    senderEmail: 'r',
-    uuid: 'string',
-  },
-];
-
 interface IStonePreviewerProps {
-  stones: SoldierStoneOut[];
+  stones: IStone[];
   soldierUuid: string;
 }
 
@@ -36,28 +27,39 @@ export const PreviewerStone = ({
 }: IStonePreviewerProps) => {
   const [isUploadWindowOpen, setUploadWindowOpen] = useState<boolean>(false);
   const [stonePhotosGallery, setStonePhotosGallery] =
-    useState<IStone[]>(stonePhotosGalleryBE);
-
-  const userUploadedPhoto = localStorage.getItem('uploadedStonePhoto');
-
-  useEffect(() => {
-    const userUploadedPhotoObj = JSON.parse(userUploadedPhoto || '{}');
-    const stonesforSoldier = userUploadedPhotoObj[soldierUuid] || [];
-    const allStones = [...stonesforSoldier, ...stonePhotosGalleryBE];
-    setStonePhotosGallery(allStones);
-  }, [userUploadedPhoto]);
+    useState<IStone[]>(stones);
+  const [isGallaryUpdating, setGallaryUpdating] = useState<boolean>(false);
+  const [isRemoveComfirmWindowOpen, setRemoveComfirmWindowOpen] =
+    useState<boolean>(false);
 
   const router = useRouter();
+  const { currentStones } = useAppStore();
+
+  useEffect(() => {
+    const userUploadedPhoto = localStorage.getItem('uploadedStonePhoto');
+    const userUploadedPhotoObj = JSON.parse(userUploadedPhoto || '{}');
+    const stonesforSoldier = userUploadedPhotoObj[soldierUuid] || [];
+    const allStones = [...stonesforSoldier, ...stones];
+    setStonePhotosGallery(allStones);
+    if (currentStones) {
+      document.getElementById('page')?.scrollTo({
+        top: window.screen.height,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }
+  }, [currentStones]);
 
   const handleUploadWindowClose = () => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setUploadWindowOpen(false);
-    }, 1000);
+    }, 600);
+    return () => clearTimeout(timer);
   };
   return (
     <>
-      <div className="text-indigo-100 py-4 flex flex-col gap-8">
-        {isUploadWindowOpen && <div className="filter-indigo" />}
+      <div className="text-indigo-100 py-4 flex flex-col gap-8 mb-16">
+        {isUploadWindowOpen && <div className="filter-indigo z-[100]" />}
         <div className="w-full flex justify-between px-[18px]">
           <div onClick={router.back}>
             <IconButton iconName={ICONS_NAME.arrow} className="w-4 h-4" />
@@ -78,9 +80,9 @@ export const PreviewerStone = ({
           <p>
             An intriguing explanation for the laying of stones refers to the
             inscription on many Jewish gravestones. The Hebrew abbreviation taf,
-            nun, tsadi, bet, hey stands for{' '}
+            nun, tsadi, bet, hey stands for
             <i>“teheye nishmato tsrurah b’tsror ha- chayyim,”</i> a phrase
-            usually translated as{' '}
+            usually translated as
             <i>“May his soul be bound up in the bonds of eternal life.”</i>
           </p>
           <p>
@@ -89,24 +91,35 @@ export const PreviewerStone = ({
             bonds of eternal life.
           </p>
         </div>
-        <StoneHorizontalGallery
-          stonePhotosGallery={stonePhotosGallery}
-          setStonePhotosGallery={setStonePhotosGallery}
-          soldierUuid={soldierUuid}
-        />
+        {!isRemoveComfirmWindowOpen && (
+          <div className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end z-10">
+            <button
+              className="w-[350px] bg-turquoise-100 text-white p-3 rounded-lg font-semibold m-3 mb-11"
+              onClick={() => setUploadWindowOpen(true)}
+            >
+              Add headstone photo
+            </button>
+          </div>
+        )}
+        {isGallaryUpdating ? (
+          <div className="w-full h-[144px] pb-4 -mt-3 flex justify-center items-center">
+            <Spinner />
+          </div>
+        ) : (
+          <StoneHorizontalGallery
+            stonePhotosGallery={stonePhotosGallery}
+            setStonePhotosGallery={setStonePhotosGallery}
+            soldierUuid={soldierUuid}
+            setRemoveComfirmWindowOpen={setRemoveComfirmWindowOpen}
+          />
+        )}
       </div>
-      <div
-        className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end"
-        onClick={() => setUploadWindowOpen(true)}
-      >
-        <button className="w-[350px] bg-turquoise-100 text-white p-3 rounded-lg font-semibold m-3 mb-11">
-          Add headstone photo
-        </button>
-      </div>
+
       {isUploadWindowOpen && (
         <StoneUploadWindow
           handleUploadWindowClose={handleUploadWindowClose}
           soldierUuid={soldierUuid}
+          setGallaryUpdating={setGallaryUpdating}
         />
       )}
     </>

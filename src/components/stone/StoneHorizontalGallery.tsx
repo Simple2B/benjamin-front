@@ -8,12 +8,14 @@ type IStoneHorizontalGalleryProps = {
   stonePhotosGallery: IStone[];
   setStonePhotosGallery: (arg: IStone[]) => void;
   soldierUuid: string;
+  setRemoveComfirmWindowOpen: (arg: boolean) => void;
 };
 
 export const StoneHorizontalGallery = ({
   stonePhotosGallery,
   setStonePhotosGallery,
   soldierUuid,
+  setRemoveComfirmWindowOpen,
 }: IStoneHorizontalGalleryProps) => {
   const [isPending, startTransition] = useTransition();
 
@@ -62,9 +64,14 @@ export const StoneHorizontalGallery = ({
   return (
     <>
       {stonePhotosGallery.length ? (
-        <div className="flex gap-4 overflow-x-auto pb-4 text-indigo-100 px-8 w-full whitespace-nowrap mb-16 -mt-3">
+        <div className="flex gap-4 overflow-x-auto pb-4 text-indigo-100 px-8 w-full whitespace-nowrap -mt-3">
           {stonePhotosGallery.map((item, index) => (
-            <StoneProfile item={item} handleDelete={handleDelete} key={index} />
+            <StoneProfile
+              item={item}
+              handleDelete={handleDelete}
+              key={index}
+              setRemoveComfirmWindowOpen={setRemoveComfirmWindowOpen}
+            />
           ))}
         </div>
       ) : null}
