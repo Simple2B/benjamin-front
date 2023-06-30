@@ -100,7 +100,7 @@ html {
   bottom: -100%;
   left: 50%;
   transform: translateX(-50%);
-  animation: smooth-appear 1s ease forwards;
+  animation: smooth-appear 0.8s ease forwards;
 }
 
 @keyframes smooth-disappear {
@@ -116,7 +116,7 @@ html {
   opacity: 1;
   left: 50%;
   transform: translateX(-50%);
-  animation: smooth-disappear 1s ease forwards;
+  animation: smooth-disappear 0.8s ease forwards;
 }
 
 .negative {
@@ -132,5 +132,5 @@ html {
   bottom: -100%;
   left: 50%;
   transform: translateX(-50%);
-  animation: smooth-appear 0.5s ease forwards;
+  animation: smooth-appear 0.3s ease forwards;
 }

@@ -63,9 +63,9 @@ export const StoneProfile = ({ item, handleDelete }: IStoneProfileProps) => {
       <p className="text-xs text-center leading-6">
         {senderName ? senderName : 'Anonymous'}
       </p>
-      {isDeleting && <div className="filter-indigo" />}
+      {isDeleting && <div className="filter-indigo z-[100]" />}
       {isDeleting && (
-        <div className="w-full fixed h-52 bg-white bottom-0 left-0 z-50 rounded-t-xl flex flex-col items-center confirm-window-appear">
+        <div className="w-full fixed h-52 bg-white bottom-0 left-0 z-[100] rounded-t-xl flex flex-col items-center confirm-window-appear">
           <p className="mt-8 leading-5 font-medium px-10">
             Are you sure you want to delete this photo?
           </p>

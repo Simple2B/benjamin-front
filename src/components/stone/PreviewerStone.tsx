@@ -6,6 +6,7 @@ import { ICONS_NAME } from '../constants/iconName';
 import StoneHorizontalGallery from './StoneHorizontalGallery';
 import { StoneUploadWindow } from './StoneUploadWindow';
 import { SoldierStoneOut } from '@/openapi';
+import { useAppStore } from '@/lib/slices/store';
 
 export interface IStone {
   created_at: string | undefined;
@@ -25,30 +26,30 @@ export const PreviewerStone = ({
   soldierUuid,
 }: IStonePreviewerProps) => {
   const [isUploadWindowOpen, setUploadWindowOpen] = useState<boolean>(false);
-
   const [stonePhotosGallery, setStonePhotosGallery] =
     useState<IStone[]>(stones);
 
-  const userUploadedPhoto = localStorage.getItem('uploadedStonePhoto');
+  const router = useRouter();
+  const { currentStones } = useAppStore();
 
   useEffect(() => {
+    console.log('+');
+    const userUploadedPhoto = localStorage.getItem('uploadedStonePhoto');
     const userUploadedPhotoObj = JSON.parse(userUploadedPhoto || '{}');
     const stonesforSoldier = userUploadedPhotoObj[soldierUuid] || [];
     const allStones = [...stonesforSoldier, ...stones];
     setStonePhotosGallery(allStones);
-  }, [userUploadedPhoto]);
-
-  const router = useRouter();
+  }, [currentStones]);
 
   const handleUploadWindowClose = () => {
     setTimeout(() => {
       setUploadWindowOpen(false);
-    }, 1000);
+    }, 600);
   };
   return (
     <>
       <div className="text-indigo-100 py-4 flex flex-col gap-8 mb-16">
-        {isUploadWindowOpen && <div className="filter-indigo" />}
+        {isUploadWindowOpen && <div className="filter-indigo z-[100]" />}
         <div className="w-full flex justify-between px-[18px]">
           <div onClick={router.back}>
             <IconButton iconName={ICONS_NAME.arrow} className="w-4 h-4" />
@@ -87,7 +88,7 @@ export const PreviewerStone = ({
         />
       </div>
       <div
-        className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end"
+        className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end z-[30]"
         onClick={() => setUploadWindowOpen(true)}
       >
         <button className="w-[350px] bg-turquoise-100 text-white p-3 rounded-lg font-semibold m-3 mb-11">
