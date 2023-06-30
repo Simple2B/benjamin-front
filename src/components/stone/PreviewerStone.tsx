@@ -42,9 +42,10 @@ export const PreviewerStone = ({
   }, [currentStones]);
 
   const handleUploadWindowClose = () => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setUploadWindowOpen(false);
     }, 600);
+    return () => clearTimeout(timer);
   };
   return (
     <>
