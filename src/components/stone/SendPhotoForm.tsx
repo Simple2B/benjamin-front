@@ -12,6 +12,7 @@ type ISendPhotoFormProps = {
   handleUploadWindowClose: () => void;
   setPreviewSending: (ard: boolean) => void;
   soldierUuid: string;
+  setGallaryUpdating: (value: boolean) => void;
 };
 
 const formInitialValues = {
@@ -24,6 +25,7 @@ export const SendPhotoForm = ({
   handleUploadWindowClose,
   soldierUuid,
   setPreviewSending,
+  setGallaryUpdating,
 }: ISendPhotoFormProps) => {
   const { currentStones, setCurrentStone } = useAppStore();
   const [uploadedPhoto, setUploadedPhoto] = useState<string>();
@@ -36,6 +38,7 @@ export const SendPhotoForm = ({
   const stonesforSoldier = prewiousUploadedStonesObj[soldierUuid] || [];
 
   const handleSubmit = async (values: typeof formInitialValues) => {
+    setGallaryUpdating(true);
     if (uploadedPhotoForm && uploadedPhoto) {
       const reader = new FileReader();
       reader.readAsDataURL(uploadedPhotoForm);
@@ -70,6 +73,7 @@ export const SendPhotoForm = ({
                   [soldierUuid]: stonesforSoldier,
                 })
               );
+              setGallaryUpdating(false);
             })
           );
         }

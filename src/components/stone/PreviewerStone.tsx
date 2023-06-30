@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import { ICONS_NAME } from '../constants/iconName';
 import StoneHorizontalGallery from './StoneHorizontalGallery';
 import { StoneUploadWindow } from './StoneUploadWindow';
-import { SoldierStoneOut } from '@/openapi';
 import { useAppStore } from '@/lib/slices/store';
+import Spinner from '../Spinner';
 
 export interface IStone {
   created_at: string | undefined;
@@ -28,12 +28,12 @@ export const PreviewerStone = ({
   const [isUploadWindowOpen, setUploadWindowOpen] = useState<boolean>(false);
   const [stonePhotosGallery, setStonePhotosGallery] =
     useState<IStone[]>(stones);
+  const [isGallaryUpdating, setGallaryUpdating] = useState<boolean>(false);
 
   const router = useRouter();
   const { currentStones } = useAppStore();
 
   useEffect(() => {
-    console.log('+');
     const userUploadedPhoto = localStorage.getItem('uploadedStonePhoto');
     const userUploadedPhotoObj = JSON.parse(userUploadedPhoto || '{}');
     const stonesforSoldier = userUploadedPhotoObj[soldierUuid] || [];
@@ -81,11 +81,17 @@ export const PreviewerStone = ({
             bonds of eternal life.
           </p>
         </div>
-        <StoneHorizontalGallery
-          stonePhotosGallery={stonePhotosGallery}
-          setStonePhotosGallery={setStonePhotosGallery}
-          soldierUuid={soldierUuid}
-        />
+        {isGallaryUpdating ? (
+          <div className="w-full h-[144px] pb-4 -mt-3 flex justify-center items-center">
+            <Spinner />
+          </div>
+        ) : (
+          <StoneHorizontalGallery
+            stonePhotosGallery={stonePhotosGallery}
+            setStonePhotosGallery={setStonePhotosGallery}
+            soldierUuid={soldierUuid}
+          />
+        )}
       </div>
       <div
         className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end z-[30]"
@@ -99,6 +105,7 @@ export const PreviewerStone = ({
         <StoneUploadWindow
           handleUploadWindowClose={handleUploadWindowClose}
           soldierUuid={soldierUuid}
+          setGallaryUpdating={setGallaryUpdating}
         />
       )}
     </>
