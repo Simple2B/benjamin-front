@@ -71,9 +71,9 @@ export const PreviewerStone = ({
           <p>
             An intriguing explanation for the laying of stones refers to the
             inscription on many Jewish gravestones. The Hebrew abbreviation taf,
-            nun, tsadi, bet, hey stands for{' '}
+            nun, tsadi, bet, hey stands for
             <i>“teheye nishmato tsrurah b’tsror ha- chayyim,”</i> a phrase
-            usually translated as{' '}
+            usually translated as
             <i>“May his soul be bound up in the bonds of eternal life.”</i>
           </p>
           <p>
@@ -81,6 +81,14 @@ export const PreviewerStone = ({
             an affirmation of the wishes that the departed be enveloped in the
             bonds of eternal life.
           </p>
+        </div>
+        <div className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end z-10">
+          <button
+            className="w-[350px] bg-turquoise-100 text-white p-3 rounded-lg font-semibold m-3 mb-11"
+            onClick={() => setUploadWindowOpen(true)}
+          >
+            Add headstone photo
+          </button>
         </div>
         {isGallaryUpdating ? (
           <div className="w-full h-[144px] pb-4 -mt-3 flex justify-center items-center">
@@ -94,14 +102,7 @@ export const PreviewerStone = ({
           />
         )}
       </div>
-      <div
-        className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end z-[30]"
-        onClick={() => setUploadWindowOpen(true)}
-      >
-        <button className="w-[350px] bg-turquoise-100 text-white p-3 rounded-lg font-semibold m-3 mb-11">
-          Add headstone photo
-        </button>
-      </div>
+
       {isUploadWindowOpen && (
         <StoneUploadWindow
           handleUploadWindowClose={handleUploadWindowClose}

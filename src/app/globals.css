@@ -130,7 +130,10 @@ html {
 .confirm-window-appear {
   position: fixed;
   bottom: -100%;
-  left: 50%;
   transform: translateX(-50%);
   animation: smooth-appear 0.3s ease forwards;
+}
+
+.position-iphone {
+  transform: translateZ(30px);
 }
