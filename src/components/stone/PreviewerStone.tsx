@@ -8,10 +8,10 @@ import { StoneUploadWindow } from './StoneUploadWindow';
 import { SoldierStoneOut } from '@/openapi';
 
 export interface IStone {
-  created_at: string;
-  senderName: string;
-  senderEmail: string;
-  photoUrl: string;
+  created_at: string | undefined;
+  senderName: string | undefined;
+  senderEmail: string | undefined;
+  photoUrl: string | undefined;
   uuid: string;
 }
 
@@ -26,22 +26,15 @@ export const PreviewerStone = ({
 }: IStonePreviewerProps) => {
   const [isUploadWindowOpen, setUploadWindowOpen] = useState<boolean>(false);
 
-  const stonesFromBEWithUuid = stones.map((stone) => {
-    if (stone.uuid === undefined) {
-      stone.uuid = '';
-    }
-    return stone;
-  });
-
   const [stonePhotosGallery, setStonePhotosGallery] =
-    useState<IStone[]>(stonesFromBEWithUuid);
+    useState<IStone[]>(stones);
 
   const userUploadedPhoto = localStorage.getItem('uploadedStonePhoto');
 
   useEffect(() => {
     const userUploadedPhotoObj = JSON.parse(userUploadedPhoto || '{}');
     const stonesforSoldier = userUploadedPhotoObj[soldierUuid] || [];
-    const allStones = [...stonesforSoldier, ...stonesFromBEWithUuid];
+    const allStones = [...stonesforSoldier, ...stones];
     setStonePhotosGallery(allStones);
   }, [userUploadedPhoto]);
 

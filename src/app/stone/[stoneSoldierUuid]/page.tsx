@@ -1,4 +1,4 @@
-import { PreviewerStone } from '@/components/stone/PreviewerStone';
+import { IStone, PreviewerStone } from '@/components/stone/PreviewerStone';
 import { SoldiersService } from '@/openapi';
 import React from 'react';
 
@@ -20,7 +20,15 @@ const Page = async ({ params }: IStonePageProps) => {
   const soldier = await SoldiersService.getSoldier(stoneSoldierUuid);
   const stones = soldier.verified_stones;
 
-  return <PreviewerStone stones={stones} soldierUuid={stoneSoldierUuid} />;
+  const stonesWithUuid: IStone[] = stones.map(
+    ({ created_at, senderName, photoUrl, senderEmail }) => {
+      return { created_at, senderName, photoUrl, senderEmail, uuid: '' };
+    }
+  );
+
+  return (
+    <PreviewerStone stones={stonesWithUuid} soldierUuid={stoneSoldierUuid} />
+  );
 };
 
 export default Page;
