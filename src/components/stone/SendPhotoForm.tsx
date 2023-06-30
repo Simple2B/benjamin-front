@@ -39,46 +39,49 @@ export const SendPhotoForm = ({
 
   const handleSubmit = async (values: typeof formInitialValues) => {
     setGallaryUpdating(true);
-    if (uploadedPhotoForm && uploadedPhoto) {
-      const reader = new FileReader();
-      reader.readAsDataURL(uploadedPhotoForm);
-      reader.onloadend = () => {
-        const base64data = reader.result;
-        if (typeof base64data === 'string') {
-          startTransition(() =>
-            uploadStonePhoto(
-              soldierUuid,
-              base64data,
-              values.email,
-              values.name
-            ).then((res) => {
-              if (currentStones) {
-                setCurrentStone([res, ...currentStones]);
-              } else {
-                setCurrentStone([res]);
-              }
-              const uploadedPhotoInfo = {
-                created_at: res.created_at,
-                senderName: res.senderName,
-                senderEmail: res.senderEmail,
-                photoUrl: uploadedPhoto,
-                uuid: res.uuid,
-              };
-
-              stonesforSoldier.unshift(uploadedPhotoInfo);
-              localStorage.setItem(
-                'uploadedStonePhoto',
-                JSON.stringify({
-                  ...prewiousUploadedStonesObj,
-                  [soldierUuid]: stonesforSoldier,
-                })
-              );
-              setGallaryUpdating(false);
-            })
-          );
-        }
-      };
+    if (!uploadedPhotoForm || !uploadedPhoto) {
+      return;
     }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(uploadedPhotoForm);
+    reader.onloadend = () => {
+      const base64data = reader.result;
+      if (typeof base64data !== 'string') {
+        return;
+      }
+
+      startTransition(async () => {
+        const res = await uploadStonePhoto(
+          soldierUuid,
+          base64data,
+          values.email,
+          values.name
+        );
+
+        if (currentStones) {
+          setCurrentStone([res, ...currentStones]);
+        } else {
+          setCurrentStone([res]);
+        }
+        const uploadedPhotoInfo = {
+          created_at: res.created_at,
+          senderName: res.senderName,
+          senderEmail: res.senderEmail,
+          photoUrl: uploadedPhoto,
+          uuid: res.uuid,
+        };
+        stonesforSoldier.unshift(uploadedPhotoInfo);
+        const dataToStore = JSON.stringify({
+          ...prewiousUploadedStonesObj,
+          [soldierUuid]: stonesforSoldier,
+        });
+
+        localStorage.setItem('uploadedStonePhoto', dataToStore);
+        setGallaryUpdating(false);
+      });
+    };
+
     setNext(true);
     setPreviewSending(true);
   };

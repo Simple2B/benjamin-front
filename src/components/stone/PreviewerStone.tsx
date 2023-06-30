@@ -29,6 +29,8 @@ export const PreviewerStone = ({
   const [stonePhotosGallery, setStonePhotosGallery] =
     useState<IStone[]>(stones);
   const [isGallaryUpdating, setGallaryUpdating] = useState<boolean>(false);
+  const [isRemoveComfirmWindowOpen, setRemoveComfirmWindowOpen] =
+    useState<boolean>(false);
 
   const router = useRouter();
   const { currentStones } = useAppStore();
@@ -39,6 +41,13 @@ export const PreviewerStone = ({
     const stonesforSoldier = userUploadedPhotoObj[soldierUuid] || [];
     const allStones = [...stonesforSoldier, ...stones];
     setStonePhotosGallery(allStones);
+    if (currentStones) {
+      document.getElementById('page')?.scrollTo({
+        top: window.screen.height,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }
   }, [currentStones]);
 
   const handleUploadWindowClose = () => {
@@ -82,14 +91,16 @@ export const PreviewerStone = ({
             bonds of eternal life.
           </p>
         </div>
-        <div className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end z-10">
-          <button
-            className="w-[350px] bg-turquoise-100 text-white p-3 rounded-lg font-semibold m-3 mb-11"
-            onClick={() => setUploadWindowOpen(true)}
-          >
-            Add headstone photo
-          </button>
-        </div>
+        {!isRemoveComfirmWindowOpen && (
+          <div className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end z-10">
+            <button
+              className="w-[350px] bg-turquoise-100 text-white p-3 rounded-lg font-semibold m-3 mb-11"
+              onClick={() => setUploadWindowOpen(true)}
+            >
+              Add headstone photo
+            </button>
+          </div>
+        )}
         {isGallaryUpdating ? (
           <div className="w-full h-[144px] pb-4 -mt-3 flex justify-center items-center">
             <Spinner />
@@ -99,6 +110,7 @@ export const PreviewerStone = ({
             stonePhotosGallery={stonePhotosGallery}
             setStonePhotosGallery={setStonePhotosGallery}
             soldierUuid={soldierUuid}
+            setRemoveComfirmWindowOpen={setRemoveComfirmWindowOpen}
           />
         )}
       </div>

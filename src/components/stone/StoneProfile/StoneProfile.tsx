@@ -8,9 +8,14 @@ import { useAppStore } from '@/lib/slices/store';
 type IStoneProfileProps = {
   item: IStone;
   handleDelete: (arg: string) => void;
+  setRemoveComfirmWindowOpen: (arg: boolean) => void;
 };
 
-export const StoneProfile = ({ item, handleDelete }: IStoneProfileProps) => {
+export const StoneProfile = ({
+  item,
+  handleDelete,
+  setRemoveComfirmWindowOpen,
+}: IStoneProfileProps) => {
   const { created_at, photoUrl, senderName, uuid } = item;
   const [isRemovable, setRemovable] = useState<boolean>(false);
   const [isDeleting, setDeleting] = useState<boolean>(false);
@@ -31,6 +36,18 @@ export const StoneProfile = ({ item, handleDelete }: IStoneProfileProps) => {
   const handleComfirmDeletePhoto = () => {
     handleDelete(uuid);
     setDeleting(false);
+    setRemoveComfirmWindowOpen(false);
+  };
+
+  const handleCancelDeletePhoto = () => {
+    setDeleting(false);
+    setRemoveComfirmWindowOpen(false);
+  };
+
+  const handleShowComfirmWindow = () => {
+    console.log('dd');
+    setRemoveComfirmWindowOpen(true);
+    setDeleting(true);
   };
 
   return (
@@ -39,7 +56,7 @@ export const StoneProfile = ({ item, handleDelete }: IStoneProfileProps) => {
         {isRemovable ? (
           <div
             className={`flex justify-center w-8 h-8 bg-indigo-100 items-center sticky top-4 -mr-2 rounded-full `}
-            onClick={() => setDeleting(true)}
+            onClick={handleShowComfirmWindow}
           >
             <IconButton iconName={ICONS_NAME.crossWhite} className="w-4 h-4" />
           </div>
@@ -78,7 +95,7 @@ export const StoneProfile = ({ item, handleDelete }: IStoneProfileProps) => {
             </button>
             <button
               className="bg-grey-20 h-12 w-[158px] rounded-lg"
-              onClick={() => setDeleting(false)}
+              onClick={handleCancelDeletePhoto}
             >
               Cancel
             </button>
