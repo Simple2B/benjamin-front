@@ -40,7 +40,7 @@ export const StoneHorizontalGallery = ({
       }
     );
 
-    const userUploadedPhoto = localStorage.getItem('uploadedStonePhoto');
+    const userUploadedPhoto = sessionStorage.getItem('uploadedStonePhoto');
     const userUploadedPhotoObj = JSON.parse(userUploadedPhoto || '{}');
     const stonesforSoldier: IStone[] = userUploadedPhotoObj[soldierUuid] || [];
     const filteredUploadedStonesObj = stonesforSoldier.filter(
@@ -50,7 +50,7 @@ export const StoneHorizontalGallery = ({
         }
       }
     );
-    localStorage.setItem(
+    sessionStorage.setItem(
       'uploadedStonePhoto',
       JSON.stringify({
         [soldierUuid]: filteredUploadedStonesObj,

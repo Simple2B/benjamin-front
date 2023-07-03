@@ -36,7 +36,7 @@ export const PreviewerStone = ({
   const { currentStones } = useAppStore();
 
   useEffect(() => {
-    const userUploadedPhoto = localStorage.getItem('uploadedStonePhoto');
+    const userUploadedPhoto = sessionStorage.getItem('uploadedStonePhoto');
     const userUploadedPhotoObj = JSON.parse(userUploadedPhoto || '{}');
     const stonesforSoldier = userUploadedPhotoObj[soldierUuid] || [];
     const allStones = [...stonesforSoldier, ...stones];

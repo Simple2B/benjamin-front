@@ -33,7 +33,7 @@ export const SendPhotoForm = ({
   const [isNext, setNext] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
 
-  const prewiousUploadedStones = localStorage.getItem('uploadedStonePhoto');
+  const prewiousUploadedStones = sessionStorage.getItem('uploadedStonePhoto');
   const prewiousUploadedStonesObj = JSON.parse(prewiousUploadedStones || '[]');
   const stonesforSoldier = prewiousUploadedStonesObj[soldierUuid] || [];
 
@@ -77,7 +77,7 @@ export const SendPhotoForm = ({
           [soldierUuid]: stonesforSoldier,
         });
 
-        localStorage.setItem('uploadedStonePhoto', dataToStore);
+        sessionStorage.setItem('uploadedStonePhoto', dataToStore);
         setGallaryUpdating(false);
       });
     };
