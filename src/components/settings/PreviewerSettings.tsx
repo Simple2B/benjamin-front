@@ -59,7 +59,7 @@ export default function PreviewerSettings({
           className="w-4 h-4 rotate-180"
         />
 
-        <h1 className="text-2xl font-semibold flex-grow text-center font-rajdhani">
+        <h1 className="text-2xl font-semibold flex-grow text-center leading-7">
           Settings
         </h1>
       </div>
