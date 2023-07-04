@@ -74,7 +74,7 @@ const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
             <IconButton
               iconName={ICONS_NAME.settings}
               className={
-                'inline-flex items-center justify-center h-9 w-9 bg-turquoise-100 rounded-full p-2.5 mr-[6px]'
+                'inline-flex items-center justify-center h-9 w-9 bg-turquoise-100 rounded p-2.5 mr-[6px]'
               }
             />
           </Link>

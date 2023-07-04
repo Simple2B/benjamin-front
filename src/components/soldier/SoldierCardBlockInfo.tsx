@@ -9,14 +9,14 @@ const SoldierCardBlockInfo = ({ solderInfo }: ISoldierCardBlockInfoProps) => {
   return (
     <>
       {Object.values(solderInfo).map(({ header, value }) => (
-        <>
+        <div key={header}>
           {value && (
-            <div key={header} className="mt-3">
+            <div className="mt-3">
               <p className="text-sm text-grey-20 leading-7">{header}</p>
               <p className="font-medium leading-6 ">{value}</p>
             </div>
           )}
-        </>
+        </div>
       ))}
     </>
   );
