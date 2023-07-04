@@ -4,6 +4,8 @@ import { ICONS_NAME } from '../../constants/iconName';
 import { formatDate } from './StoneProfile.utils';
 import { IStone } from '../PreviewerStone';
 import { useAppStore } from '@/lib/slices/store';
+import { AWS_BASE_URL } from '@/components/constants/constants';
+import urlJoin from 'url-join';
 
 type IStoneProfileProps = {
   item: IStone;
@@ -19,6 +21,8 @@ export const StoneProfile = ({
   const { created_at, photoUrl, senderName, uuid } = item;
   const [isRemovable, setRemovable] = useState<boolean>(false);
   const [isDeleting, setDeleting] = useState<boolean>(false);
+  const [photoSrc, setPhotoSrc] = useState<string>();
+
   const { currentStones } = useAppStore();
 
   useEffect(() => {
@@ -31,6 +35,22 @@ export const StoneProfile = ({
     } else {
       setRemovable(false);
     }
+
+    const userUploadedPhoto = sessionStorage.getItem('uploadedStonePhoto');
+    const userUploadedPhotoObj: { [key: string]: IStone[] } = JSON.parse(
+      userUploadedPhoto || '{}'
+    );
+
+    setPhotoSrc(urlJoin(AWS_BASE_URL || '', photoUrl || ''));
+
+    Object.values(userUploadedPhotoObj).forEach((stones: IStone[]) => {
+      stones.forEach((stone: IStone) => {
+        if (stone.uuid === uuid && stone.photoUrl) {
+          setPhotoSrc(stone.photoUrl);
+          console.log('stone');
+        }
+      });
+    });
   }, [item.uuid]);
 
   const handleComfirmDeletePhoto = () => {
@@ -45,7 +65,6 @@ export const StoneProfile = ({
   };
 
   const handleShowComfirmWindow = () => {
-    console.log('dd');
     setRemoveComfirmWindowOpen(true);
     setDeleting(true);
   };
@@ -63,9 +82,9 @@ export const StoneProfile = ({
         ) : (
           <div className="flex justify-center w-8 h-8 items-center sticky top-4 -mr-2 rounded-full"></div>
         )}
-        {photoUrl ? (
+        {photoUrl && AWS_BASE_URL ? (
           <img
-            src={photoUrl}
+            src={photoSrc}
             alt="stone"
             className="w-[148px] h-[144px] rounded-lg bg-grey-30 soldier-shawdow"
           />

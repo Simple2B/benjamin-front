@@ -12,6 +12,7 @@ const PreviewerHomePage = () => {
   const router = useRouter();
 
   const handleVideoEnd = () => {
+    localStorage.removeItem('uploadedStonePhoto');
     if (localStorage.getItem('isVideoWatched')) {
       router.push(PATH.location);
       return;

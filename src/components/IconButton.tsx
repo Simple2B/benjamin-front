@@ -9,9 +9,7 @@ type IIconButtonProps = {
 
 const IconButton = ({ iconName, className }: IIconButtonProps) => {
   return (
-    <div
-      className={`${className} inline-flex items-center justify-center`}
-    >
+    <div className={`${className} inline-flex items-center justify-center`}>
       <Image
         src={`/images/icons/${iconName}.svg`}
         width={500}
