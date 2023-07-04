@@ -33,6 +33,7 @@ interface IPreviewerSoldierProps {
 export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
   const [isScrolledDown, setScrolledDown] = useState<boolean>(false);
 
+  const scrollRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -124,7 +125,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
   };
 
   return (
-    <div>
+    <div id="soldier-page">
       <div className="flex flex-col justify-center items-center mx-7 gap-4 my-4 text-indigo-100 leading-7 mb-56">
         <div
           className="w-full flex items-baseline justify-between mb-2"
