@@ -67,12 +67,12 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
         </div>
         <div className="px-8 flex flex-col gap-6 leading-[22px]">
           <p>
-            dd It is very meaningful for families to have the service and
-            sacrifice of their family members acknowledged. In some cases,
-            soldiers’ families have been identified and, in others, families
-            have yet to be contacted. All messages will be sent to Operation
-            Benjamin, and our team will forward the message to the family at the
-            earliest opportunity.
+            It is very meaningful for families to have the service and sacrifice
+            of their family members acknowledged. In some cases, soldiers’
+            families have been identified and, in others, families have yet to
+            be contacted. All messages will be sent to Operation Benjamin, and
+            our team will forward the message to the family at the earliest
+            opportunity.
           </p>
 
           <div className="flex flex-col w-full">
