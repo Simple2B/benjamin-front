@@ -1,19 +1,21 @@
-type ISoldierMessages = {
-  messages: IMessages[];
-};
+import { SoldierMessageOut } from '@/openapi';
+import { messageSender } from '../constants/constants';
 
 type IMessages = {
-  sender: string;
-  text: string;
+  messages: SoldierMessageOut[];
+  soldierName: string;
 };
 
-export const SoldierMessages = (props: ISoldierMessages) => {
+export const SoldierMessages = ({ messages, soldierName }: IMessages) => {
   return (
     <div>
-      {props.messages.map(({ sender, text }) => (
-        <div key={text} className="mt-3">
-          <p className="text-sm text-grey-20 leading-7">{sender}</p>
-          <p className="font-medium leading-6">“{text}“</p>
+      {messages.map(({ messageText, messageType }, index) => (
+        <div key={index} className="mt-3">
+          <p className="text-sm text-grey-20 leading-7">
+            Message from {messageType == 1 && soldierName}`s{' '}
+            {messageSender[messageType]}
+          </p>
+          <p className="font-medium leading-6">“{messageText}“</p>
         </div>
       ))}
     </div>

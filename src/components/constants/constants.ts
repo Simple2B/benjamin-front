@@ -17,3 +17,12 @@ export const MONTH = [
 ];
 
 export const stoneTimer = 100000;
+
+export const maxMessageLength: number = 500;
+export const messageTimer = 5000;
+
+export const messageSender = {
+  1: 'Family',
+  2: 'Operation Bengamin',
+  3: 'unsigned',
+};

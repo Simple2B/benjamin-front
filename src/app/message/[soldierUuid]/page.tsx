@@ -12,5 +12,5 @@ interface ISoldierParams {
 export default function Page({ params }: ISoldierPageProps) {
   const { soldierUuid } = params;
 
-  return <PreviewerMessage />;
+  return <PreviewerMessage soldierUuid={soldierUuid} />;
 }

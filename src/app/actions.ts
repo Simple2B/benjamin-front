@@ -27,3 +27,17 @@ export const deleteStonePhoto = async (stoneUuid: string) => {
     console.log(res)
   );
 };
+
+export const sendMessage = async (
+  soldierUuid: string,
+  message: string,
+  email: string
+) => {
+  const formData = {
+    senderEmail: email,
+    messageText: message,
+    messageType: 3,
+  };
+
+  return await SoldiersService.createSoldierMessage(soldierUuid, formData);
+};

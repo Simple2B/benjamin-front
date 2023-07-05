@@ -7,6 +7,7 @@ import IconButton from '../IconButton';
 type IRememberSoldierProps = {
   name: string | undefined;
   soldierUuid: string;
+  isScrolledDown: boolean;
 };
 
 const REMEMBERING = [
@@ -27,30 +28,58 @@ const REMEMBERING = [
   },
 ];
 
-const RememberSoldier = ({ name, soldierUuid }: IRememberSoldierProps) => {
+const RememberSoldier = ({
+  name,
+  soldierUuid,
+  isScrolledDown,
+}: IRememberSoldierProps) => {
   return (
-    <div className="w-full px-8 pt-3 bg-gradient-to-b from-[#217890] to-indigo-100 text-center">
-      <h2 className="text-white mb-4 leading-6">
-        REMEMBER {name?.toLocaleUpperCase()}
-      </h2>
-      <div className="flex justify-center pb-12 gap-4">
-        {REMEMBERING.map(({ image, text, link }) => {
-          return (
-            <Link
-              key="text"
-              href={urlJoin(PATH[link as keyof typeof PATH], soldierUuid)}
-            >
-              <div className="w-[106px] flex flex-col justify-evenly items-center">
-                <IconButton iconName={image} className={'h-10 w-10'} />
-                <p className="text-white text-xs text-center leading-7 mt-1">
-                  {text}
-                </p>
-              </div>
-            </Link>
-          );
-        })}
+    <>
+      <div
+        className={`w-full px-8 pt-3 z-10 text-black text-center fixed bottom-0 h-52 ${
+          isScrolledDown
+            ? 'text-black transition-all duration-[1500ms]'
+            : 'text-white transition-all duration-[500ms]'
+        }`}
+      >
+        <h2 className=" mb-4 leading-6">Remember {name}</h2>
+        <div className="flex justify-center pb-12 gap-4">
+          {REMEMBERING.map(({ image, text, link }) => {
+            return (
+              <Link
+                key="text"
+                href={urlJoin(PATH[link as keyof typeof PATH], soldierUuid)}
+              >
+                <div className="w-[106px] flex flex-col justify-evenly items-center">
+                  <div
+                    className={`w-[52px] h-[52px] flex justify-center items-center rounded-lg ${
+                      isScrolledDown
+                        ? 'bg-gradient-to-b from-[#1f7088] to-[#15415a] '
+                        : 'bg-transparent'
+                    }`}
+                  >
+                    <IconButton iconName={image} className={'h-10 w-10'} />
+                  </div>
+                  <p className="text-xs text-center leading-7 mt-1">{text}</p>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </div>
-    </div>
+
+      <div
+        className={`bottom-0 h-52 w-full px-8 pt-3 ${
+          isScrolledDown
+            ? 'bg-white transition-all duration-[2000ms] '
+            : 'bg-transparent transition-all duration-[2000ms]'
+        } fixed z-[5]`}
+      ></div>
+      <div
+        className={`bottom-0 h-52 w-full px-8 pt-3 
+             bg-gradient-to-b from-[#217890] to-indigo-100 t fixed z-0`}
+      ></div>
+    </>
   );
 };
 

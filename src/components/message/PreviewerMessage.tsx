@@ -1,16 +1,31 @@
 'use client';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState, useTransition } from 'react';
 import IconButton from '../IconButton';
 import { ICONS_NAME } from '../constants/iconName';
 import { useRouter } from 'next/navigation';
+import { sendMessage } from '@/app/actions';
+import { maxMessageLength, messageTimer } from '../constants/constants';
 
-export const PreviewerMessage = () => {
+type IPreviewerSoldierProps = {
+  soldierUuid: string;
+};
+
+export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
   const [message, setMessage] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [isEmailValid, setEmailValid] = useState<boolean>(true);
+  const [isSent, setSent] = useState<boolean>(false);
+
   const router = useRouter();
 
-  const maxLength: number = 500;
+  useEffect(() => {
+    if (isSent) {
+      const timer = setTimeout(() => {
+        setSent(false);
+      }, messageTimer);
+      return () => clearTimeout(timer);
+    }
+  }, [isSent]);
 
   const handleMessage = (event: ChangeEvent<HTMLTextAreaElement>): void => {
     setMessage(event.target.value);
@@ -20,16 +35,28 @@ export const PreviewerMessage = () => {
     setEmail(event.target.value);
   };
 
-  const handleSend = () => {
+  const handleSend = async () => {
     setEmailValid(/\S+@\S+\.\S+/.test(email));
     if (isEmailValid || message.length >= 8) {
-      console.log('sending');
+      await sendMessage(soldierUuid, message, email).then(() => {
+        setSent(true);
+        setMessage('');
+        setEmail('');
+      });
     }
   };
 
   return (
     <>
       <div className="flex flex-col items-start py-4 text-indigo-100 gap-6">
+        {isSent && (
+          <div className="fixed w-full flex justify-center top-10">
+            <div className=" w-[343px] h-[52px] bg-indigo-50 text-white flex items-center pl-4 rounded-lg">
+              <p className="leading-6 font-semibold">Message sent</p>
+            </div>
+          </div>
+        )}
+
         <div className="w-full flex justify-between px-[18px]">
           <div onClick={router.back}>
             <IconButton iconName={ICONS_NAME.arrow} className="w-4 h-4" />
@@ -56,6 +83,7 @@ export const PreviewerMessage = () => {
               className="border border-gray-300 text-sm rounded-lg p-3 w-full h-[55px]"
               placeholder="Type your email"
               onChange={handleEmail}
+              value={email}
               required
             />
             <p
@@ -72,9 +100,10 @@ export const PreviewerMessage = () => {
               onChange={handleMessage}
               className=" resize-none p-3 text-sm rounded-lg border border-gray-300 w-full h-[323px]"
               placeholder="Type your message"
+              value={message}
             ></textarea>
             <p className="text-sm self-end text-grey-20">
-              {message.length}/{maxLength}
+              {message.length}/{maxMessageLength}
             </p>
           </div>
         </div>

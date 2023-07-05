@@ -6,7 +6,7 @@ import SoldierAdditionalVideo from '@/components/soldier/SoldierAdditionaVideo';
 import SoldierAdditionalImage from '@/components/soldier/SoldierAdditionalImage';
 import SoldierCardBlockInfo from '@/components/soldier/SoldierCardBlockInfo';
 import SoldierMainInfoCard from '@/components/soldier/SoldierMainInfoCard';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { SoldierCoordinates } from '../SoldierCoordinates';
 import { SoldierMessages } from '../SoldierMessages';
 import { Ilife, IService, IDeath } from '../soldier.types';
@@ -31,6 +31,9 @@ interface IPreviewerSoldierProps {
 }
 
 export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
+  const [isScrolledDown, setScrolledDown] = useState<boolean>(false);
+
+  const scrollRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -39,13 +42,29 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
     }
   }, [soldier, router]);
 
+  useEffect(() => {
+    document
+      .getElementById('soldier-page')
+      ?.addEventListener('touchmove', (e) => {
+        const { y, height } = (
+          e.currentTarget as Element
+        )?.getBoundingClientRect();
+        console.log(Math.abs(y), height);
+        if (height - Math.abs(y) <= 650) {
+          setScrolledDown(true);
+        } else {
+          setScrolledDown(false);
+        }
+      });
+  }, []);
+
   let awardsInPreview = '';
 
-  if (soldier?.soldier_awards.length) {
+  if (soldier?.soldierAwards.length) {
     awardsInPreview =
-      soldier?.soldier_awards.length >= 1
-        ? `${soldier?.soldier_awards[0]}, other awards`
-        : soldier?.soldier_awards[0];
+      soldier?.soldierAwards.length >= 1
+        ? `${soldier?.soldierAwards[0]}, other awards`
+        : soldier?.soldierAwards[0];
   }
 
   const life: Ilife = {
@@ -82,7 +101,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
     },
     awards: {
       header: SOLDIER_SERVICE_HEADERS.awards,
-      value: soldier?.soldier_awards.join(', '),
+      value: soldier?.soldierAwards.join(', '),
     },
   };
 
@@ -106,8 +125,8 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
   };
 
   return (
-    <div>
-      <div className="flex flex-col justify-center items-center mx-7 gap-4 my-4 text-indigo-100 leading-7 mb-32">
+    <div id="soldier-page">
+      <div className="flex flex-col justify-center items-center mx-7 gap-4 my-4 text-indigo-100 leading-7 mb-56">
         <div
           className="w-full flex items-baseline justify-between mb-2"
           onClick={router.back}
@@ -191,13 +210,20 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
           </ClosebleInfo>
         )}
 
-        {/* {soldier.messages.length && (
+        {soldier.verifiedMessages.length ? (
           <ClosebleInfo heading="ADDITIONAL INFO" isOpened={false}>
-            <SoldierMessages messages={soldier.messages} />
+            <SoldierMessages
+              messages={soldier.verifiedMessages}
+              soldierName={soldier.name}
+            />
           </ClosebleInfo>
-        )} */}
+        ) : null}
       </div>
-      <RememberSoldier name={soldier?.name} soldierUuid={soldier.uuid} />
+      <RememberSoldier
+        name={soldier?.name}
+        soldierUuid={soldier.uuid}
+        isScrolledDown={isScrolledDown}
+      />
     </div>
   );
 }

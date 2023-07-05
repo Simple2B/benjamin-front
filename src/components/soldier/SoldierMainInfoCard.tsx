@@ -43,11 +43,13 @@ const SoldierMainInfoCard = ({
 
   return (
     <div className="flex justify-start gap-4 w-[350px] mb-2 ">
-      <img
-        src={photoUrl}
-        alt="Soldier"
-        className="w-[126px] h-[123px] rounded-lg bg-grey-30"
-      />
+      {photoUrl && (
+        <img
+          src={photoUrl}
+          alt="Soldier"
+          className="w-[126px] h-[123px] rounded-lg bg-grey-30"
+        />
+      )}
       <div className="flex flex-col gap-2">
         <p className="text-xl font-semibold leading-7">{name}</p>
         {militaryInfo.map(({ heading, text, icon }) => {
