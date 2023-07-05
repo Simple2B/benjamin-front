@@ -51,9 +51,15 @@ export class ApiService {
 
     /**
      * Get Soldiers
-     * Get all cemeteries with pagination
      * @param cemeteryUuid
      * @param q
+     * @param birthYear
+     * @param birthMonth
+     * @param birthDay
+     * @param deathYear
+     * @param deathMonth
+     * @param deathDay
+     * @param birthLocation
      * @param page
      * @param perPage
      * @returns Soldiers Successful Response
@@ -62,6 +68,13 @@ export class ApiService {
     public static getCemeterySoldiers(
         cemeteryUuid: string,
         q?: string,
+        birthYear?: number,
+        birthMonth?: number,
+        birthDay?: number,
+        deathYear?: number,
+        deathMonth?: number,
+        deathDay?: number,
+        birthLocation?: string,
         page: number = 1,
         perPage: number = 10,
     ): CancelablePromise<Soldiers> {
@@ -73,6 +86,13 @@ export class ApiService {
             },
             query: {
                 'q': q,
+                'birth_year': birthYear,
+                'birth_month': birthMonth,
+                'birth_day': birthDay,
+                'death_year': deathYear,
+                'death_month': deathMonth,
+                'death_day': deathDay,
+                'birth_location': birthLocation,
                 'page': page,
                 'per_page': perPage,
             },
