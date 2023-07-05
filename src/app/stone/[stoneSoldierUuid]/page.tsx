@@ -18,7 +18,7 @@ const Page = async ({ params }: IStonePageProps) => {
   const { stoneSoldierUuid } = params;
 
   const soldier = await SoldiersService.getSoldier(stoneSoldierUuid);
-  const stones = soldier.verified_stones;
+  const stones = soldier.verifiedStones;
 
   const stonesWithUuid: IStone[] = stones.map(
     ({ created_at, senderName, photoUrl, senderEmail }) => {
