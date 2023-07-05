@@ -12,6 +12,9 @@ export type { HTTPValidationError } from './models/HTTPValidationError';
 export type { Metadata } from './models/Metadata';
 export type { SoldierCard } from './models/SoldierCard';
 export type { SoldierCardWithPhoto } from './models/SoldierCardWithPhoto';
+export type { SoldierMessageCreate } from './models/SoldierMessageCreate';
+export type { SoldierMessageOut } from './models/SoldierMessageOut';
+export { SoldierMessageType } from './models/SoldierMessageType';
 export type { SoldierOut } from './models/SoldierOut';
 export type { Soldiers } from './models/Soldiers';
 export type { SoldiersFiltered } from './models/SoldiersFiltered';
@@ -21,6 +24,7 @@ export type { ValidationError } from './models/ValidationError';
 
 export { ApiService } from './services/ApiService';
 export { CemeteriesService } from './services/CemeteriesService';
+export { MessagesService } from './services/MessagesService';
 export { SoldiersService } from './services/SoldiersService';
 export { StonesService } from './services/StonesService';
 

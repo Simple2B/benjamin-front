@@ -60,11 +60,11 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
 
   let awardsInPreview = '';
 
-  if (soldier?.soldier_awards.length) {
+  if (soldier?.soldierAwards.length) {
     awardsInPreview =
-      soldier?.soldier_awards.length >= 1
-        ? `${soldier?.soldier_awards[0]}, other awards`
-        : soldier?.soldier_awards[0];
+      soldier?.soldierAwards.length >= 1
+        ? `${soldier?.soldierAwards[0]}, other awards`
+        : soldier?.soldierAwards[0];
   }
 
   const life: Ilife = {
@@ -101,7 +101,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
     },
     awards: {
       header: SOLDIER_SERVICE_HEADERS.awards,
-      value: soldier?.soldier_awards.join(', '),
+      value: soldier?.soldierAwards.join(', '),
     },
   };
 
@@ -210,11 +210,11 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
           </ClosebleInfo>
         )}
 
-        {/* {soldier.messages.length && (
+        {soldier.verifiedMessages.length ? (
           <ClosebleInfo heading="ADDITIONAL INFO" isOpened={false}>
-            <SoldierMessages messages={soldier.messages} />
+            <SoldierMessages messages={soldier.verifiedMessages} />
           </ClosebleInfo>
-        )} */}
+        ) : null}
       </div>
       <RememberSoldier
         name={soldier?.name}

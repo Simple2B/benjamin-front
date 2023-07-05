@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { SoldierMessageOut } from './SoldierMessageOut';
 import type { SoldierStoneOut } from './SoldierStoneOut';
 
 export type SoldierOut = {
@@ -21,8 +22,9 @@ export type SoldierOut = {
     position?: string;
     initialBurialLocation?: string;
     finalBurialLocation?: string;
-    verified_stones: Array<SoldierStoneOut>;
-    soldier_awards: Array<string>;
+    verifiedStones: Array<SoldierStoneOut>;
+    verifiedMessages: Array<SoldierMessageOut>;
+    soldierAwards: Array<string>;
     jewishServicemansCard?: string;
     kiaTelegram?: string;
     replacementCeremonyVideo?: string;
