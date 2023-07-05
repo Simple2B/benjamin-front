@@ -4,12 +4,11 @@ import IconButton from '../IconButton';
 import { ICONS_NAME } from '../constants/iconName';
 import { useRouter } from 'next/navigation';
 import { sendMessage } from '@/app/actions';
+import { maxMessageLength, messageTimer } from '../constants/constants';
 
 type IPreviewerSoldierProps = {
   soldierUuid: string;
 };
-
-const maxLength: number = 500;
 
 export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
   const [message, setMessage] = useState<string>('');
@@ -23,7 +22,7 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
     if (isSent) {
       const timer = setTimeout(() => {
         setSent(false);
-      }, 5000);
+      }, messageTimer);
       return () => clearTimeout(timer);
     }
   }, [isSent]);
@@ -104,7 +103,7 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
               value={message}
             ></textarea>
             <p className="text-sm self-end text-grey-20">
-              {message.length}/{maxLength}
+              {message.length}/{maxMessageLength}
             </p>
           </div>
         </div>

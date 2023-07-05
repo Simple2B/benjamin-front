@@ -212,7 +212,10 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
 
         {soldier.verifiedMessages.length ? (
           <ClosebleInfo heading="ADDITIONAL INFO" isOpened={false}>
-            <SoldierMessages messages={soldier.verifiedMessages} />
+            <SoldierMessages
+              messages={soldier.verifiedMessages}
+              soldierName={soldier.name}
+            />
           </ClosebleInfo>
         ) : null}
       </div>
