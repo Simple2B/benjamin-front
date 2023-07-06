@@ -3,6 +3,7 @@
 /* eslint-disable */
 
 export type SoldierStoneOut = {
+    uuid: string;
     photoUrl: string;
     created_at: string;
     senderName?: string;

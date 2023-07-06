@@ -10,7 +10,7 @@ import Spinner from '../Spinner';
 type IFilteredSoldiersProps = {
   filterResult: SoldierCard[];
   isFetched: boolean;
-  filterText: (string | null)[];
+  filterText: string;
 };
 
 export const FilteredSoldiers = ({
@@ -120,6 +120,9 @@ export const FilteredSoldiers = ({
         className={`w-full flex flex-col gap-[21px] bg-white rounded-t-xl px-6  z-[9]`}
         id={'cemetery-main-info'}
       >
+        <div className="flex w-full justify-center">
+          <div className="h-[3px] w-16 bg-grey-50 mt-2 rounded-3xl"></div>
+        </div>
         <p className="text-2xl leading-7 py-5">
           {filterText} ({filterResult?.length})
         </p>

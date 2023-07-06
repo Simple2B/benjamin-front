@@ -7,6 +7,8 @@ export type SoldierCardWithPhoto = {
     serviceNumber: string;
     name: string;
     birthLocation?: string;
+    burialLocationLatitude?: number;
+    burialLocationLongitude?: number;
     soldierTitlePhoto?: string;
 };
 

@@ -1,6 +1,6 @@
 'use client';
-import React, { useState, useEffect, use } from 'react';
-import MapCemetery from './MapCemetery';
+import React, { useState, useEffect } from 'react';
+import MapCemetery, { ICoordinates } from './MapCemetery';
 import SearchBar from '../SearchBar';
 import { redirect } from 'next/navigation';
 import { PATH } from '../constants/path.constants';
@@ -11,21 +11,7 @@ import { useSearchParams } from 'next/navigation';
 import { CemeteriesService, CemeteryOut } from '@/openapi';
 import { useQuery } from '@tanstack/react-query';
 import SearchFilterBar from '../SearchFilterBar';
-
-const MONTHS: { [key: string]: number } = {
-  January: 1,
-  February: 2,
-  March: 3,
-  April: 4,
-  May: 5,
-  June: 6,
-  July: 7,
-  August: 8,
-  September: 9,
-  October: 10,
-  November: 11,
-  December: 12,
-};
+import { MONTHS } from '../constants/constants';
 
 export type ISolderPhotoGallery = {
   uuid: string;
@@ -46,6 +32,35 @@ export default function PreviewCemetery() {
   const deathMonth = searchParams.get('deathMonth');
   const deathYear = searchParams.get('deathYear');
   const birthLocation = searchParams.get('birthLocation');
+
+  const values: (string | null)[] = [
+    birthLocation,
+    birthMonth,
+    birthDay,
+    birthYear,
+    deathMonth,
+    deathDay,
+    deathYear,
+  ];
+
+  const filterTitle: Record<string, string> = {
+    birthDay: 'Born on',
+    birthMonth: 'Born in',
+    birthYear: 'Born in',
+    deathDay: 'Died on',
+    deathMonth: 'Died in',
+    deathYear: 'Died in',
+    birthLocation: 'Born in',
+  };
+
+  const filteredValues: string[] = values
+    .filter((value) => value !== null && value !== undefined)
+    .map(
+      (value, index) =>
+        `${filterTitle[Object.keys(filterTitle)[index]]} ${value}`
+    );
+
+  const filterName = filteredValues.join('. ');
 
   useEffect(() => {
     if (
@@ -96,25 +111,28 @@ export default function PreviewCemetery() {
     redirect(PATH.location);
   }
 
+  const center: ICoordinates = {
+    lat: currentCemetery?.latitude ?? 45,
+    lng: currentCemetery?.longitude ?? 45,
+  };
+
+  const markers = currentCemetery?.filtered_soldiers?.soldiers.map(
+    (soldier) => {
+      return {
+        lat: soldier.burialLocationLatitude ?? 45,
+        lng: soldier.burialLocationLongitude ?? 45,
+      };
+    }
+  );
+
   return (
     <div>
       <div className={`flex flex-col items-baseline w-full bg-white h-full`}>
         <div className="fixed w-screen">
-          <MapCemetery />
+          <MapCemetery center={center} markers={markers ? markers : []} />
           <div className="flex flex-col items-center">
             {soldiersQuery.isFetched && isFilter ? (
-              <SearchFilterBar
-                filterText={[
-                  birthDay,
-                  birthMonth,
-                  birthYear,
-                  deathDay,
-                  deathMonth,
-                  deathYear,
-                  birthLocation,
-                ]}
-                setFilter={setFilter}
-              />
+              <SearchFilterBar filterText={filterName} setFilter={setFilter} />
             ) : (
               <SearchBar
                 setInputSoldier={setInputSoldier}
@@ -128,15 +146,7 @@ export default function PreviewCemetery() {
         <FilteredSoldiers
           filterResult={soldiersQuery.data.items}
           isFetched={soldiersQuery.isFetched}
-          filterText={[
-            birthDay,
-            birthMonth,
-            birthYear,
-            deathDay,
-            deathMonth,
-            deathYear,
-            birthLocation,
-          ]}
+          filterText={filterName}
         />
       ) : (
         <CemeteryInfo cemetery={currentCemetery} />

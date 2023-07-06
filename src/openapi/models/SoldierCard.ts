@@ -7,5 +7,7 @@ export type SoldierCard = {
     serviceNumber: string;
     name: string;
     birthLocation?: string;
+    burialLocationLatitude?: number;
+    burialLocationLongitude?: number;
 };
 

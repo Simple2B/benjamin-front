@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="20px" viewBox="0 0 16 20" version="1.1">
+    <title>Pin/Jewish</title>
+    <g id="Pin/Jewish" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Combined-Shape">
+            <path stroke="#FFFFFF" stroke-width="0.5" d="M8,-0.25 C10.2781746,-0.25 12.3406746,0.673412704 13.8336309,2.16636906 C15.3265873,3.65932541 16.25,5.72182541 16.25,8 C16.25,10.9835301 13.5859501,15.0505446 8.17196933,20.1814567 C2.4140499,15.0505446 -0.25,10.9835301 -0.25,8 C-0.25,5.72182541 0.673412704,3.65932541 2.16636906,2.16636906 C3.65932541,0.673412704 5.72182541,-0.25 8,-0.25 Z" fill="#2693AB" fill-rule="evenodd"/>
+        </g>
+        <g id="Group-6" transform="translate(3.5, 3)" stroke="#FFFFFF" stroke-linejoin="round" stroke-width="0.5">
+            <polygon id="Triangle" points="4.5 0 9 8 0 8"/>
+            <polygon id="Triangle" transform="translate(4.5, 7) rotate(180) translate(-4.5, -7)" points="4.5 3 9 11 0 11"/>
+        </g>
+    </g>
+</svg>
