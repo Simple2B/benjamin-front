@@ -1,16 +1,21 @@
 'use client';
-import React from 'react';
+import React, { use } from 'react';
 import IconButton from './IconButton';
 import { ICONS_NAME } from './constants/iconName';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { useAppStore } from '@/lib/slices/store';
+import urlJoin from 'url-join';
+import { PATH } from './constants/path.constants';
 
 type ISearchBarProps = {
-  filterText: (string | null)[];
+  filterText: string;
   setFilter: (value: boolean) => void;
 };
 
 const SearchFilterBar = ({ filterText, setFilter }: ISearchBarProps) => {
   const router = useRouter();
+  const { currentCemetery } = useAppStore();
 
   return (
     <div className="mt-10">
@@ -21,15 +26,23 @@ const SearchFilterBar = ({ filterText, setFilter }: ISearchBarProps) => {
         }}
       >
         <p className="leading-6">{filterText} </p>
-        <div
-          className="flex justify-center items-center"
-          onClick={() => setFilter(false)}
+        <Link
+          href={
+            currentCemetery?.uuid
+              ? urlJoin(PATH.cemetery, currentCemetery?.uuid)
+              : PATH.location
+          }
         >
-          <IconButton
-            iconName={ICONS_NAME.cross}
-            className="w-4 h-4 rotate-180"
-          />
-        </div>
+          <div
+            className="flex justify-center items-center"
+            onClick={() => setFilter(false)}
+          >
+            <IconButton
+              iconName={ICONS_NAME.cross}
+              className="w-4 h-4 rotate-180"
+            />
+          </div>
+        </Link>
       </div>
     </div>
   );
