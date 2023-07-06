@@ -1,6 +1,6 @@
 'use client';
-import React, { useState, useEffect, use } from 'react';
-import MapCemetery from './MapCemetery';
+import React, { useState, useEffect } from 'react';
+import MapCemetery, { ICoordinates } from './MapCemetery';
 import SearchBar from '../SearchBar';
 import { redirect } from 'next/navigation';
 import { PATH } from '../constants/path.constants';
@@ -96,11 +96,27 @@ export default function PreviewCemetery() {
     redirect(PATH.location);
   }
 
+  const center: ICoordinates = {
+    lat: currentCemetery?.latitude ?? 45,
+    lng: currentCemetery?.longitude ?? 45,
+  };
+
+  const markers = [
+    {
+      lat: 45.006,
+      lng: 45.007,
+    },
+    {
+      lat: 44.005,
+      lng: 45.007,
+    },
+  ];
+
   return (
     <div>
       <div className={`flex flex-col items-baseline w-full bg-white h-full`}>
         <div className="fixed w-screen">
-          <MapCemetery />
+          <MapCemetery center={center} markers={markers} />
           <div className="flex flex-col items-center">
             {soldiersQuery.isFetched && isFilter ? (
               <SearchFilterBar
