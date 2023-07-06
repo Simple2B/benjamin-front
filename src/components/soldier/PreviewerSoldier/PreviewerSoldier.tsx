@@ -49,7 +49,6 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
         const { y, height } = (
           e.currentTarget as Element
         )?.getBoundingClientRect();
-        console.log(Math.abs(y), height);
         if (height - Math.abs(y) <= 650) {
           setScrolledDown(true);
         } else {

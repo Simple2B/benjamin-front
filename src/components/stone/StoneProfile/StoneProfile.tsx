@@ -47,7 +47,6 @@ export const StoneProfile = ({
       stones.forEach((stone: IStone) => {
         if (stone.uuid === uuid && stone.photoUrl) {
           setPhotoSrc(stone.photoUrl);
-          console.log('stone');
         }
       });
     });
