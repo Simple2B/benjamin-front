@@ -40,7 +40,13 @@ export const PreviewerStone = ({
     const userUploadedPhotoObj = JSON.parse(userUploadedPhoto || '{}');
     const stonesforSoldier = userUploadedPhotoObj[soldierUuid] || [];
     const allStones = [...stonesforSoldier, ...stones];
-    setStonePhotosGallery(allStones);
+
+    const uniqueStones: IStone[] = allStones.filter(
+      (stone, index, self) =>
+        index === self.findIndex((s) => s.uuid === stone.uuid)
+    );
+    setStonePhotosGallery(uniqueStones);
+
     if (currentStones) {
       document.getElementById('page')?.scrollTo({
         top: window.screen.height,
