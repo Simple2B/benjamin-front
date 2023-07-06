@@ -91,12 +91,6 @@ export default function PreviewCemetery() {
       enabled: !!currentCemetery,
     }
   );
-  if (soldiersQuery.isFetched) {
-    if (soldiersQuery.data) {
-      console.log(soldiersQuery.data.items);
-      console.log(isFilter);
-    }
-  }
 
   if (!currentCemetery) {
     redirect(PATH.location);

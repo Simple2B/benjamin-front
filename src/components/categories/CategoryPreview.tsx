@@ -11,9 +11,9 @@ import urlJoin from 'url-join';
 import { PATH } from '../constants/path.constants';
 import Link from 'next/link';
 
-const YEAR = ['1920', '1921', '1922', '1923', '1924', '1925', '1926', '2023'];
+const YEAR = ['1920', '1921', '1922', '1923', '1924', '1925', '1926'];
 
-const CITY = ['New York', 'California', 'Delaware', 'LA'];
+const CITY = ['New York', 'California', 'Delaware'];
 
 export const CategoryPreview = () => {
   const { currentCemetery } = useAppStore();

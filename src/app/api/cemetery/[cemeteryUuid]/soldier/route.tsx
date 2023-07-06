@@ -47,17 +47,7 @@ export async function GET(request: Request, context: IContext) {
   }
 
   const { cemeteryUuid } = params;
-  console.log({
-    cemeteryUuid,
-    q,
-    birthYear,
-    birthMonth,
-    birthDate,
-    deathYear,
-    deathMonth,
-    deathDate,
-    birthLocation,
-  });
+
   const response = await CemeteriesService.getCemeterySoldiers(
     cemeteryUuid,
     q,

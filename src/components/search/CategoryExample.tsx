@@ -24,15 +24,9 @@ export const CategoryExample = () => {
     },
     {
       iconName: ICONS_NAME.calendar,
-      iconDescription: 'Born in 2023',
+      iconDescription: 'Born in 1924',
       queryParam: 'birthYear',
-      value: '2023',
-    },
-    {
-      iconName: ICONS_NAME.locationPin,
-      iconDescription: 'Born in LA',
-      queryParam: 'birthLocation',
-      value: 'LA',
+      value: '1924',
     },
     {
       iconName: ICONS_NAME.calendar,
