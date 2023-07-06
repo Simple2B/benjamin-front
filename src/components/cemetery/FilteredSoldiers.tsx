@@ -1,22 +1,29 @@
-import { useRef, useState, useEffect, use } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { redirect } from 'next/navigation';
 import { PATH } from '../constants/path.constants';
 import { useAppStore } from '@/lib/slices/store';
+import { SoldierCard } from '@/openapi';
+import Link from 'next/link';
+import urlJoin from 'url-join';
+import Spinner from '../Spinner';
 
-export const FilteredSoldiers = () => {
+type IFilteredSoldiersProps = {
+  filterResult: SoldierCard[];
+  isFetched: boolean;
+  filterText: (string | null)[];
+};
+
+export const FilteredSoldiers = ({
+  filterResult,
+  isFetched,
+  filterText,
+}: IFilteredSoldiersProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [touchStart, setTouchStart] = useState<number>(0);
   const [touchEnd, setTouchEnd] = useState<number>(0);
   const [isInfoBoxFullScreen, setInfoBoxFullScreen] = useState<boolean>(false);
   const [isScrolableArea, setScrollableArea] = useState<boolean>(false);
-
-  const {
-    currentCemetery,
-    currentFilteredSoldiers,
-    currentFilterTitle,
-    setCurrentFilterTitle,
-    setCurrentFilteredSoldiers,
-  } = useAppStore();
+  const { currentCemetery } = useAppStore();
 
   if (!currentCemetery) {
     redirect(PATH.location);
@@ -114,21 +121,29 @@ export const FilteredSoldiers = () => {
         id={'cemetery-main-info'}
       >
         <p className="text-2xl leading-7 py-5">
-          {currentFilterTitle} in ({currentFilteredSoldiers?.length})
+          {filterText} ({filterResult?.length})
         </p>
       </div>
-      <div className="flex flex-wrap px-6 gap-3">
-        {currentFilteredSoldiers?.map((soldier, index) => (
-          <div key={index} className="w-[140px]">
-            <img
-              src={'soldier?.photo'}
-              alt="soldier"
-              className="w-[140px] h-[132px] rounded-lg bg-slate-400"
-            />
-            <p className="leading-5 text-center">{soldier.name}</p>
-          </div>
-        ))}
-      </div>
+      {isFetched ? (
+        <div className="flex flex-wrap px-6 gap-3">
+          {filterResult?.map((soldier, index) => (
+            <Link key={index} href={urlJoin(PATH.soldier, soldier.uuid)}>
+              <div className="w-[140px]">
+                <img
+                  src={'soldier?.photo'}
+                  alt="soldier"
+                  className="w-[140px] h-[132px] rounded-lg bg-slate-400"
+                />
+                <p className="leading-5 text-center">{soldier.name}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <div className="flex justify-center w-full">
+          <Spinner />
+        </div>
+      )}
     </div>
   );
 };
