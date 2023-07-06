@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation';
 import { PATH } from '../constants/path.constants';
 import { useAppStore } from '@/lib/slices/store';
 import { CemeteryInfo } from './cemeteryInfo';
+import { FilteredSoldiers } from './FilteredSoldiers';
 
 export type ISolderPhotoGallery = {
   uuid: string;
@@ -15,7 +16,7 @@ export type ISolderPhotoGallery = {
 
 export default function PreviewCemetery() {
   const [inputSoldier, setInputSoldier] = useState<string>('');
-  const { currentCemetery } = useAppStore();
+  const { currentCemetery, currentFilteredSoldiers } = useAppStore();
 
   if (!currentCemetery) {
     redirect(PATH.location);
@@ -34,7 +35,11 @@ export default function PreviewCemetery() {
           </div>
         </div>
       </div>
-      <CemeteryInfo cemetery={currentCemetery} />
+      {currentFilteredSoldiers?.length ? (
+        <FilteredSoldiers />
+      ) : (
+        <CemeteryInfo cemetery={currentCemetery} />
+      )}
     </div>
   );
 }

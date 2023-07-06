@@ -32,6 +32,13 @@ export const PreviewerSearch = () => {
       CemeteriesService.getCemeterySoldiers(
         (currentCemetery as CemeteryOut).uuid,
         inputSoldier,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
         1,
         10
       ),
