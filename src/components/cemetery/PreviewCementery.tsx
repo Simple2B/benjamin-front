@@ -101,22 +101,20 @@ export default function PreviewCemetery() {
     lng: currentCemetery?.longitude ?? 45,
   };
 
-  const markers = [
-    {
-      lat: 45.006,
-      lng: 45.007,
-    },
-    {
-      lat: 44.005,
-      lng: 45.007,
-    },
-  ];
+  const markers = currentCemetery?.filtered_soldiers?.soldiers.map(
+    (soldier) => {
+      return {
+        lat: soldier.burialLocationLatitude ?? 45,
+        lng: soldier.burialLocationLongitude ?? 45,
+      };
+    }
+  );
 
   return (
     <div>
       <div className={`flex flex-col items-baseline w-full bg-white h-full`}>
         <div className="fixed w-screen">
-          <MapCemetery center={center} markers={markers} />
+          <MapCemetery center={center} markers={markers ? markers : []} />
           <div className="flex flex-col items-center">
             {soldiersQuery.isFetched && isFilter ? (
               <SearchFilterBar
