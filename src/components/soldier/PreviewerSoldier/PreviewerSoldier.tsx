@@ -177,7 +177,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
           isOpened={soldier?.replacementCeremonyVideo ? false : true}
         >
           <SoldierCardBlockInfo solderInfo={life} />
-          <PhotoCarrousel />
+          <PhotoCarrousel photos={soldier.photoPaths} />
         </ClosebleInfo>
 
         <ClosebleInfo heading="SERVICE" isOpened={false}>
