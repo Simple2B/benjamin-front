@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28.0597457px" height="30px" viewBox="0 0 28.0597457 30" version="1.1">
+    <title>Path 17</title>
+    <defs>
+        <linearGradient x1="41.5189654%" y1="17.9803493%" x2="83.5052741%" y2="93.5801755%" id="linearGradient-1">
+            <stop stop-color="#EEEEEE" stop-opacity="0" offset="0%"/>
+            <stop stop-color="#EBB6B3" stop-opacity="0.18635271" offset="45.0284091%"/>
+            <stop stop-color="#E7716B" offset="100%"/>
+        </linearGradient>
+    </defs>
+    <g id="Final-app" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Where-I-am?" transform="translate(-237.0887, -301)" fill="url(#linearGradient-1)">
+            <polygon id="Path-17" points="258.5 331 237.088746 315 255.562293 301 265.148492 326"/>
+        </g>
+    </g>
+</svg>
