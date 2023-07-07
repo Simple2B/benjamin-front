@@ -5,6 +5,6 @@ export const formatDate = (date: string | undefined) => {
     return;
   }
   const [year, mouth, day] = date.split('-');
-  const mounthNumber = parseInt(mouth);
+  const mounthNumber = parseInt(mouth) - 1;
   return `${MONTH[mounthNumber]} ${day}th, ${year}`;
 };
