@@ -1,7 +1,6 @@
 import PreviewerSoldier from '@/components/soldier/PreviewerSoldier/PreviewerSoldier';
 import { SoldiersService } from '@/openapi';
 import React from 'react';
-import { isConditionalExpression } from 'typescript';
 
 // export const dynamic = 'force-dynamic';
 export const fetchCache = 'default-cache';
