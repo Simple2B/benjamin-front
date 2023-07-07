@@ -6,6 +6,7 @@ import { SoldierCard } from '@/openapi';
 import Link from 'next/link';
 import urlJoin from 'url-join';
 import Spinner from '../Spinner';
+import { AWS_BASE_URL } from '../constants/constants';
 
 type IFilteredSoldiersProps = {
   filterResult: SoldierCard[];
@@ -132,11 +133,15 @@ export const FilteredSoldiers = ({
           {filterResult?.map((soldier, index) => (
             <Link key={index} href={urlJoin(PATH.soldier, soldier.uuid)}>
               <div className="w-[140px]">
-                <img
-                  src={'soldier?.photo'}
-                  alt="soldier"
-                  className="w-[140px] h-[132px] rounded-lg bg-slate-400"
-                />
+                {soldier?.mainPhoto && AWS_BASE_URL ? (
+                  <img
+                    src={urlJoin(AWS_BASE_URL, soldier?.mainPhoto)}
+                    alt="soldier"
+                    className="w-[140px] h-[132px] rounded-lg bg-slate-400"
+                  />
+                ) : (
+                  <div className="w-[140px] h-[132px] rounded-lg bg-slate-400"></div>
+                )}
                 <p className="leading-5 text-center">{soldier.name}</p>
               </div>
             </Link>

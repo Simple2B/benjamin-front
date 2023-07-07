@@ -1,6 +1,7 @@
 export interface Ilife {
   birthDate: iSoldierDataMap;
   birthLocation: iSoldierDataMap;
+  parentsNames: iSoldierDataMap;
 }
 
 export interface IService {

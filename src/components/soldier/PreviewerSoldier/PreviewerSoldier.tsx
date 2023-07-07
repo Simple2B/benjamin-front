@@ -75,6 +75,10 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
       header: SOLDIER_LIFE_HEADERS.birthLocation,
       value: soldier?.birthLocation,
     },
+    parentsNames: {
+      header: SOLDIER_LIFE_HEADERS.parentsNames,
+      value: soldier?.parents,
+    },
   };
 
   const service: IService = {
@@ -161,8 +165,11 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
         )}
 
         <SoldierCoordinates
-          finalBurialCoordinates={soldier?.finalBurialLocation}
-          finalBurialLocation={soldier?.finalBurialLocation}
+          finalBurialCoordinates={[
+            soldier?.burialLocationLatitude,
+            soldier?.burialLocationLongitude,
+          ]}
+          finalBurialLocation={soldier?.burialLocationName}
         />
 
         <ClosebleInfo
@@ -194,6 +201,15 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
               imageDescription={'Killed In Action (KIA) Telegram'}
             />
           )}
+          {soldier?.verifiedStones.length ? (
+            <SoldierAdditionalImage
+              imageUrl={urlJoin(
+                AWS_BASE_URL || '',
+                soldier.verifiedStones[0].photoUrl
+              )}
+              imageDescription={'Headstone Photo'}
+            />
+          ) : null}
           <ProjectCreatorInfo />
         </ClosebleInfo>
 
