@@ -161,8 +161,11 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
         )}
 
         <SoldierCoordinates
-          finalBurialCoordinates={soldier?.finalBurialLocation}
-          finalBurialLocation={soldier?.finalBurialLocation}
+          finalBurialCoordinates={[
+            soldier?.burialLocationLatitude,
+            soldier?.burialLocationLongitude,
+          ]}
+          finalBurialLocation={soldier?.burialLocationName}
         />
 
         <ClosebleInfo
