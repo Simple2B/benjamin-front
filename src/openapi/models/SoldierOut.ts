@@ -24,6 +24,7 @@ export type SoldierOut = {
     finalBurialLocation?: string;
     verifiedStones: Array<SoldierStoneOut>;
     verifiedMessages: Array<SoldierMessageOut>;
+    parents?: string;
     soldierAwards: Array<string>;
     jewishServicemansCard?: string;
     kiaTelegram?: string;

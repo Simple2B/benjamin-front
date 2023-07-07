@@ -77,7 +77,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
     },
     parentsNames: {
       header: SOLDIER_LIFE_HEADERS.parentsNames,
-      value: 'Judith and Andrew Fink',
+      value: soldier?.parents,
     },
   };
 
