@@ -70,7 +70,10 @@ export default function MapCemetery({ center, markers }: IMapCemeteryProps) {
         <CurrentLocationMarker />
       </MapContainer>
 
-      <div className="flex w-12 h-12 justify-center items-center bg-white rounded-3xl rotate-45 mb-[22px] mr-2 absolute">
+      <div
+        className="flex w-12 h-12 justify-center items-center bg-white rounded-3xl rotate-45 mb-[22px] mr-2 absolute"
+        id="navigation-button"
+      >
         <IconButton iconName={ICONS_NAME.navigation} className="w-5 h-5" />
       </div>
     </div>
@@ -79,14 +82,20 @@ export default function MapCemetery({ center, markers }: IMapCemeteryProps) {
 
 const CurrentLocationMarker = () => {
   const [position, setPosition] = useState<ICoordinates | null>(null);
+  const navigationButton = document.getElementById('navigation-button');
+
   const map = useMapEvents({
     click() {
       map.locate();
     },
     locationfound(e) {
       setPosition(e.latlng);
-      map.flyTo(e.latlng, map.getZoom());
     },
+  });
+
+  navigationButton?.addEventListener('click', () => {
+    if (position === null) return;
+    map.flyTo(position, map.getZoom());
   });
 
   return position === null ? null : (
