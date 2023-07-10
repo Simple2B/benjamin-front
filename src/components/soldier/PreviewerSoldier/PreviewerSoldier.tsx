@@ -146,7 +146,9 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
                 ? urlJoin(AWS_BASE_URL || '', soldier.photoPaths[0])
                 : ''
             }
-            name={soldier?.name}
+            sufix={soldier?.suffix}
+            firstName={soldier?.firstName}
+            lastName={soldier?.lastName}
             serviceNumber={soldier?.serviceNumber}
             branchOfService={soldier?.serviceBranch}
             awards={awardsInPreview}
@@ -229,13 +231,17 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
           <ClosebleInfo heading="ADDITIONAL INFO" isOpened={false}>
             <SoldierMessages
               messages={soldier.verifiedMessages}
-              soldierName={soldier.name}
+              soldierFirstName={soldier.firstName}
+              soldierLastName={soldier.lastName}
+              soldierSufix={soldier?.suffix}
             />
           </ClosebleInfo>
         ) : null}
       </div>
       <RememberSoldier
-        name={soldier?.name}
+        soldierFirstName={soldier.firstName}
+        soldierLastName={soldier.lastName}
+        soldierSufix={soldier?.suffix}
         soldierUuid={soldier.uuid}
         isScrolledDown={isScrolledDown}
       />

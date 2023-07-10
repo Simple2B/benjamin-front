@@ -5,7 +5,9 @@ import { PATH } from '../constants/path.constants';
 import IconButton from '../IconButton';
 
 type IRememberSoldierProps = {
-  name: string | undefined;
+  soldierFirstName: string;
+  soldierLastName: string;
+  soldierSufix: string | undefined;
   soldierUuid: string;
   isScrolledDown: boolean;
 };
@@ -29,7 +31,9 @@ const REMEMBERING = [
 ];
 
 const RememberSoldier = ({
-  name,
+  soldierFirstName,
+  soldierLastName,
+  soldierSufix,
   soldierUuid,
   isScrolledDown,
 }: IRememberSoldierProps) => {
@@ -42,7 +46,9 @@ const RememberSoldier = ({
             : 'text-white transition-all duration-[500ms]'
         }`}
       >
-        <h2 className=" mb-4 leading-6">Remember {name}</h2>
+        <h2 className=" mb-4 leading-6">
+          Remember {soldierSufix} {soldierFirstName} {soldierLastName}
+        </h2>
         <div className="flex justify-center pb-12 gap-4">
           {REMEMBERING.map(({ image, text, link }) => {
             return (

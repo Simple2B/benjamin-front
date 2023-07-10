@@ -3,17 +3,26 @@ import { messageSender } from '../constants/constants';
 
 type IMessages = {
   messages: SoldierMessageOut[];
-  soldierName: string;
+  soldierFirstName: string;
+  soldierLastName: string;
+  soldierSufix: string | undefined;
 };
 
-export const SoldierMessages = ({ messages, soldierName }: IMessages) => {
+export const SoldierMessages = ({
+  messages,
+  soldierFirstName,
+  soldierLastName,
+  soldierSufix,
+}: IMessages) => {
   return (
     <div>
       {messages.map(({ messageText, messageType }, index) => (
         <div key={index} className="mt-3">
           <p className="text-sm text-grey-20 leading-7">
-            Message from {messageType == 1 && soldierName}`s{' '}
-            {messageSender[messageType]}
+            Message from{' '}
+            {messageType == 1 &&
+              `${soldierSufix} ${soldierFirstName} ${soldierLastName}`}
+            `s {messageSender[messageType]}
           </p>
           <p className="font-medium leading-6">“{messageText}“</p>
         </div>
