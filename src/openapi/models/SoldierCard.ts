@@ -4,8 +4,10 @@
 
 export type SoldierCard = {
     uuid: string;
+    suffix?: string;
     serviceNumber: string;
-    name: string;
+    firstName: string;
+    lastName: string;
     birthLocation?: string;
     burialLocationLatitude?: number;
     burialLocationLongitude?: number;

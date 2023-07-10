@@ -8,6 +8,7 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { Cemeteries } from './models/Cemeteries';
 export type { CemeteryOut } from './models/CemeteryOut';
+export type { Grave } from './models/Grave';
 export type { HTTPValidationError } from './models/HTTPValidationError';
 export type { Metadata } from './models/Metadata';
 export type { SoldierCard } from './models/SoldierCard';

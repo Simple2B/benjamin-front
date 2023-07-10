@@ -8,7 +8,7 @@ export interface IService {
   serviceNumber: iSoldierDataMap;
   stateEnteredServiceFrom: iSoldierDataMap;
   branchOfService: iSoldierDataMap;
-  assignment: iSoldierDataMap;
+  unit: iSoldierDataMap;
   position: iSoldierDataMap;
   awards: iSoldierDataMap;
 }

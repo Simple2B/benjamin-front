@@ -8,7 +8,7 @@ export const SOLDIER_SERVICE_HEADERS = {
   serviceNumber: 'Service number',
   stateEnteredServiceFrom: 'Service number',
   branchOfService: 'Branch of service',
-  assignment: 'Assignment',
+  unit: 'Unit',
   position: 'Position',
   awards: 'Awards',
 };
