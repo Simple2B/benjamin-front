@@ -23,14 +23,18 @@ const HorizontalPhotoGallery = ({
             {text}
           </p>
           <div className="flex gap-3 overflow-x-auto pb-4  text-indigo-100 px-6">
-            {solders.map(({ soldierTitlePhoto, name, uuid }, index) => (
-              <SoldierProfile
-                photoUrl={soldierTitlePhoto}
-                name={name}
-                uuid={uuid}
-                key={index}
-              />
-            ))}
+            {solders.map(
+              ({ mainPhoto, firstName, lastName, suffix, uuid }, index) => (
+                <SoldierProfile
+                  photoUrl={mainPhoto}
+                  firstName={firstName}
+                  lastName={lastName}
+                  suffix={suffix}
+                  uuid={uuid}
+                  key={index}
+                />
+              )
+            )}
           </div>
           {dash && (
             <div className="mx-6">

@@ -6,9 +6,9 @@ export const SOLDIER_LIFE_HEADERS = {
 
 export const SOLDIER_SERVICE_HEADERS = {
   serviceNumber: 'Service number',
-  stateEnteredServiceFrom: 'Service number',
+  stateEnteredServiceFrom: 'State entered service from',
   branchOfService: 'Branch of service',
-  assignment: 'Assignment',
+  unit: 'Unit',
   position: 'Position',
   awards: 'Awards',
 };

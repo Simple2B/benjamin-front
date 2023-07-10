@@ -9,11 +9,11 @@ import { useAppStore } from '@/lib/slices/store';
 import Spinner from '../Spinner';
 
 export interface IStone {
-  created_at: string | undefined;
-  senderName: string | undefined;
-  senderEmail: string | undefined;
-  photoUrl: string | undefined;
   uuid: string;
+  photoUrl: string;
+  created_at: string;
+  senderName?: string;
+  senderEmail: string;
 }
 
 interface IStonePreviewerProps {

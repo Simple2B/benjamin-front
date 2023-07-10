@@ -4,10 +4,12 @@ import SoldierMainInfo from './SoldierMainInfo';
 
 type ISoldierMainInfoProps = {
   photoUrl: string | undefined;
-  name: string | undefined;
+  sufix: string | undefined;
   serviceNumber: string | undefined;
   branchOfService: string | undefined;
   awards: string | undefined;
+  firstName: string;
+  lastName: string;
 };
 
 interface IMilitaryInfo {
@@ -18,7 +20,9 @@ interface IMilitaryInfo {
 
 const SoldierMainInfoCard = ({
   photoUrl,
-  name,
+  sufix,
+  firstName,
+  lastName,
   serviceNumber,
   branchOfService,
   awards,
@@ -51,7 +55,9 @@ const SoldierMainInfoCard = ({
         />
       )}
       <div className="flex flex-col gap-2">
-        <p className="text-xl font-semibold leading-7">{name}</p>
+        <p className="text-xl font-semibold leading-7">
+          {sufix} {firstName} {lastName}
+        </p>
         {militaryInfo.map(({ heading, text, icon }) => {
           return (
             <SoldierMainInfo

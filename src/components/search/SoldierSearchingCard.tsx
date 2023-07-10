@@ -5,13 +5,17 @@ import urlJoin from 'url-join';
 import { PATH } from '../constants/path.constants';
 
 type ISoldierSearchingCard = {
-  name: string;
+  firstName: string;
+  lastName: string;
+  suffix?: string;
   number: string;
   city?: string;
   soldierUuid: string;
 };
 export const SoldierSearchingCard = ({
-  name,
+  firstName,
+  lastName,
+  suffix,
   number,
   city,
   soldierUuid,
@@ -19,7 +23,9 @@ export const SoldierSearchingCard = ({
   return (
     <Link href={urlJoin(PATH.soldier, soldierUuid)}>
       <div className="w-[350px] rounded-lg text-indigo-100 p-3 shadow-box">
-        <h2 className="font-semibold">{name}</h2>
+        <h2 className="font-semibold">
+          {firstName} {lastName} {suffix}
+        </h2>
         <div className="inline-flex gap-2 text-sm">
           <p>{number}</p>
           <p>{UNICODE_DOT}</p>

@@ -1,6 +1,12 @@
 import React from 'react';
 
-export const ProjectCreatorInfo = () => {
+type IGuardiansOfHeroesProps = {
+  guardiansOfHeroes: string[];
+};
+
+export const GuardiansOfHeroes = ({
+  guardiansOfHeroes,
+}: IGuardiansOfHeroesProps) => {
   return (
     <div className="mt-4">
       <p className="text-sm text-grey-20">Guardian of Heroes</p>
@@ -8,8 +14,9 @@ export const ProjectCreatorInfo = () => {
         What is the Guardian of Heroes program?
       </p>
       <div className="leading-6">
-        <p>Peninah and Eitan Kaplansky</p>
-        <p>Akiva and Bracha Berger</p>
+        {guardiansOfHeroes.map((guardian, index) => (
+          <p key={index}>{guardian}</p>
+        ))}
       </div>
     </div>
   );

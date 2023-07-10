@@ -59,7 +59,9 @@ export const PreviewerSearch = () => {
           soldiersQuery.data.items.map((soldier, index) => (
             <div key={index}>
               <SoldierSearchingCard
-                name={soldier.name}
+                firstName={soldier.firstName}
+                lastName={soldier.lastName}
+                suffix={soldier.suffix}
                 number={soldier.serviceNumber}
                 city={soldier.birthLocation}
                 soldierUuid={soldier.uuid}

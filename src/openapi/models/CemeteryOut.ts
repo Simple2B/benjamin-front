@@ -2,6 +2,8 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { Grave } from './Grave';
+import type { SoldierCard } from './SoldierCard';
 import type { SoldiersFiltered } from './SoldiersFiltered';
 
 export type CemeteryOut = {
@@ -20,5 +22,7 @@ export type CemeteryOut = {
     war?: string;
     audio_tours: Array<string>;
     filtered_soldiers?: SoldiersFiltered;
+    graves_coordinates: Array<Grave>;
+    soldies_headstones_changed: Array<SoldierCard>;
 };
 

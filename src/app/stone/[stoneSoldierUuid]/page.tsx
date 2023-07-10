@@ -20,15 +20,7 @@ const Page = async ({ params }: IStonePageProps) => {
   const soldier = await SoldiersService.getSoldier(stoneSoldierUuid);
   const stones = soldier.verifiedStones;
 
-  const stonesWithUuid: IStone[] = stones.map(
-    ({ created_at, senderName, photoUrl, senderEmail }) => {
-      return { created_at, senderName, photoUrl, senderEmail, uuid: '' };
-    }
-  );
-
-  return (
-    <PreviewerStone stones={stonesWithUuid} soldierUuid={stoneSoldierUuid} />
-  );
+  return <PreviewerStone stones={stones} soldierUuid={stoneSoldierUuid} />;
 };
 
 export default Page;

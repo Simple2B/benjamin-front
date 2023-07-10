@@ -23,8 +23,9 @@ import urlJoin from 'url-join';
 import { AWS_BASE_URL } from '@/components/constants/constants';
 import { formatDate } from './PreviewerSoldier.utils';
 import { SoldierOut } from '@/openapi';
-import { ProjectCreatorInfo } from '../ProjectCreatorInfo';
+
 import { PhotoCarrousel } from '../PhotoCarrousel';
+import { GuardiansOfHeroes } from '../GuardiansOfHeroes';
 
 interface IPreviewerSoldierProps {
   soldier: SoldierOut;
@@ -88,19 +89,19 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
     },
     stateEnteredServiceFrom: {
       header: SOLDIER_SERVICE_HEADERS.stateEnteredServiceFrom,
-      value: soldier?.stateEnteredServiceFrom,
+      value: soldier?.soldierStatesEnteredFrom.join(', '),
     },
     branchOfService: {
       header: SOLDIER_SERVICE_HEADERS.branchOfService,
       value: soldier?.serviceBranch,
     },
-    assignment: {
-      header: SOLDIER_SERVICE_HEADERS.assignment,
-      value: soldier?.assignment,
+    unit: {
+      header: SOLDIER_SERVICE_HEADERS.unit,
+      value: soldier?.soldierMilitaryUnits.join(', '),
     },
     position: {
       header: SOLDIER_SERVICE_HEADERS.position,
-      value: soldier?.position,
+      value: soldier?.soldierPositions.join(', '),
     },
     awards: {
       header: SOLDIER_SERVICE_HEADERS.awards,
@@ -139,14 +140,16 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
             className="w-6 h-6 rotate-180"
           />
         </div>
-        {soldier?.photoPaths && (
+        {soldier?.mainPhoto && (
           <SoldierMainInfoCard
             photoUrl={
-              soldier.photoPaths[0]
-                ? urlJoin(AWS_BASE_URL || '', soldier.photoPaths[0])
+              soldier.mainPhoto
+                ? urlJoin(AWS_BASE_URL || '', soldier.mainPhoto)
                 : ''
             }
-            name={soldier?.name}
+            sufix={soldier?.suffix}
+            firstName={soldier?.firstName}
+            lastName={soldier?.lastName}
             serviceNumber={soldier?.serviceNumber}
             branchOfService={soldier?.serviceBranch}
             awards={awardsInPreview}
@@ -177,11 +180,17 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
           isOpened={soldier?.replacementCeremonyVideo ? false : true}
         >
           <SoldierCardBlockInfo solderInfo={life} />
-          <PhotoCarrousel />
+          <PhotoCarrousel photos={soldier.photoPaths} />
         </ClosebleInfo>
 
         <ClosebleInfo heading="SERVICE" isOpened={false}>
           <SoldierCardBlockInfo solderInfo={service} />
+          {soldier?.wwDraftCard && (
+            <SoldierAdditionalImage
+              imageUrl={urlJoin(AWS_BASE_URL || '', soldier.wwDraftCard)}
+              imageDescription={'WWII Draft Card'}
+            />
+          )}
           {soldier?.jewishServicemansCard && (
             <SoldierAdditionalImage
               imageUrl={urlJoin(
@@ -201,6 +210,14 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
               imageDescription={'Killed In Action (KIA) Telegram'}
             />
           )}
+          {soldier?.hirImage && (
+            <SoldierAdditionalImage
+              imageUrl={urlJoin(AWS_BASE_URL || '', soldier.hirImage)}
+              imageDescription={
+                'HIR (Headstone Interment Record) for Military Cemeteries on Foreign Soil '
+              }
+            />
+          )}
           {soldier?.verifiedStones.length ? (
             <SoldierAdditionalImage
               imageUrl={urlJoin(
@@ -210,7 +227,9 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
               imageDescription={'Headstone Photo'}
             />
           ) : null}
-          <ProjectCreatorInfo />
+          {soldier?.guardiansOfHeroes.length ? (
+            <GuardiansOfHeroes guardiansOfHeroes={soldier.guardiansOfHeroes} />
+          ) : null}
         </ClosebleInfo>
 
         {soldier?.replacementCeremonyVideo && (
@@ -229,13 +248,17 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
           <ClosebleInfo heading="ADDITIONAL INFO" isOpened={false}>
             <SoldierMessages
               messages={soldier.verifiedMessages}
-              soldierName={soldier.name}
+              soldierFirstName={soldier.firstName}
+              soldierLastName={soldier.lastName}
+              soldierSufix={soldier?.suffix}
             />
           </ClosebleInfo>
         ) : null}
       </div>
       <RememberSoldier
-        name={soldier?.name}
+        soldierFirstName={soldier.firstName}
+        soldierLastName={soldier.lastName}
+        soldierSufix={soldier?.suffix}
         soldierUuid={soldier.uuid}
         isScrolledDown={isScrolledDown}
       />
