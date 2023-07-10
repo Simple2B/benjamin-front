@@ -24,7 +24,7 @@ export const SoldierSearchingCard = ({
     <Link href={urlJoin(PATH.soldier, soldierUuid)}>
       <div className="w-[350px] rounded-lg text-indigo-100 p-3 shadow-box">
         <h2 className="font-semibold">
-          {firstName} {lastName} {suffix}
+          {suffix} {firstName} {lastName}
         </h2>
         <div className="inline-flex gap-2 text-sm">
           <p>{number}</p>

@@ -143,7 +143,7 @@ export const FilteredSoldiers = ({
                   <div className="w-[140px] h-[132px] rounded-lg bg-slate-400"></div>
                 )}
                 <p className="leading-5 text-center">
-                  {soldier.firstName} {soldier.lastName} {soldier.suffix}
+                  {soldier.suffix} {soldier.firstName} {soldier.lastName}
                 </p>
               </div>
             </Link>

@@ -83,7 +83,7 @@ export default function MapCemetery({
               key={index}
             >
               <Popup>
-                {firstName} {lastName} {suffix}
+                {suffix} {firstName} {lastName}
               </Popup>
             </Marker>
           )
