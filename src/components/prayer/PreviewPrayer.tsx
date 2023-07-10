@@ -7,7 +7,9 @@ import IconButton from '../IconButton';
 import { useRouter } from 'next/navigation';
 import { prayers } from './PreviewPrayer.constants';
 
-export const PreviewPrayer = () => {
+type IPreviewPrayerProps = { elMaleh: string | undefined };
+
+export const PreviewPrayer = ({ elMaleh }: IPreviewPrayerProps) => {
   const router = useRouter();
 
   return (
@@ -20,7 +22,7 @@ export const PreviewPrayer = () => {
           Recite a prayer
         </h1>
       </div>
-      <div className="w-[350px]">
+      <div className="w-[350px] mt-8">
         <Tab.Group>
           <Tab.List className="flex w-full space-x-1 text-indigo-100">
             {Object.keys(prayers).map((prayer) => (
@@ -31,7 +33,9 @@ export const PreviewPrayer = () => {
                  ${selected ? 'font-semibold underline' : 'text-grey-30'}`
                 }
               >
-                {prayer}
+                {prayer === 'EL MALEH'
+                  ? `EL MALEH ${elMaleh?.toUpperCase()}`
+                  : prayer}
               </Tab>
             ))}
           </Tab.List>

@@ -98,7 +98,7 @@ export const prayers = {
       ],
     },
   ],
-  'EL MALEH RAHAMIM': [
+  'EL MALEH': [
     {
       description:
         'El Maleh Rahamim (God who is full of compassion) is a haunting and soulful prayer traditionally recited at a graveside, in which we ask God for Divine protection for the departed, and pledge to give charity in their memory.  ',
