@@ -1,17 +1,18 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import MapCemetery, { ICoordinates } from './MapCemetery';
-import SearchBar from '../SearchBar';
+import MapCemetery, { ICoordinates } from '../MapCemetery';
+import SearchBar from '../../SearchBar';
 import { redirect } from 'next/navigation';
-import { PATH } from '../constants/path.constants';
+import { PATH } from '../../constants/path.constants';
 import { useAppStore } from '@/lib/slices/store';
-import { CemeteryInfo } from './cemeteryInfo';
-import { FilteredSoldiers } from './FilteredSoldiers';
+import { CemeteryInfo } from '../cemeteryInfo';
+import { FilteredSoldiers } from '../FilteredSoldiers';
 import { useSearchParams } from 'next/navigation';
-import { CemeteriesService, CemeteryOut } from '@/openapi';
+import { CemeteriesService, CemeteryOut, Grave } from '@/openapi';
 import { useQuery } from '@tanstack/react-query';
-import SearchFilterBar from '../SearchFilterBar';
-import { MONTHS } from '../constants/constants';
+import SearchFilterBar from '../../SearchFilterBar';
+import { MONTHS } from '../../constants/constants';
+import { getFilterTitle } from './PreviewCementery.utils';
 
 export type ISolderPhotoGallery = {
   uuid: string;
@@ -23,6 +24,7 @@ export default function PreviewCemetery() {
   const [inputSoldier, setInputSoldier] = useState<string>('');
   const { currentCemetery, currentFilteredSoldiers } = useAppStore();
   const [isFilter, setFilter] = useState<boolean>(true);
+  const [gravesCoordinates, setGravesCoordinates] = useState<Grave[]>([]);
   const searchParams = useSearchParams();
 
   const birthDay = searchParams.get('birthDay');
@@ -42,25 +44,6 @@ export default function PreviewCemetery() {
     deathDay,
     deathYear,
   ];
-
-  const filterTitle: Record<string, string> = {
-    birthDay: 'Born on',
-    birthMonth: 'Born in',
-    birthYear: 'Born in',
-    deathDay: 'Died on',
-    deathMonth: 'Died in',
-    deathYear: 'Died in',
-    birthLocation: 'Born in',
-  };
-
-  const filteredValues: string[] = values
-    .filter((value) => value !== null && value !== undefined)
-    .map(
-      (value, index) =>
-        `${filterTitle[Object.keys(filterTitle)[index]]} ${value}`
-    );
-
-  const filterName = filteredValues.join('. ');
 
   useEffect(() => {
     if (
@@ -110,29 +93,49 @@ export default function PreviewCemetery() {
   if (!currentCemetery) {
     redirect(PATH.location);
   }
+  useEffect(() => {
+    if (soldiersQuery.data?.items.length && isFilter) {
+      const graveMarkers: Grave[] = soldiersQuery.data?.items.map(
+        ({
+          uuid,
+          suffix,
+          firstName,
+          lastName,
+          burialLocationLatitude,
+          burialLocationLongitude,
+        }) => {
+          return {
+            uuid,
+            suffix,
+            firstName,
+            lastName,
+            burialLocationLatitude,
+            burialLocationLongitude,
+          };
+        }
+      );
+      setGravesCoordinates(graveMarkers);
+    } else {
+      setGravesCoordinates(currentCemetery?.graves_coordinates);
+    }
+  }, [isFilter]);
 
   const center: ICoordinates = {
     lat: currentCemetery?.latitude ?? 45,
     lng: currentCemetery?.longitude ?? 45,
   };
 
-  const markers = currentCemetery?.filtered_soldiers?.soldiers.map(
-    (soldier) => {
-      return {
-        lat: soldier.burialLocationLatitude ?? 45,
-        lng: soldier.burialLocationLongitude ?? 45,
-      };
-    }
-  );
-
   return (
     <div>
       <div className={`flex flex-col items-baseline w-full bg-white h-full`}>
         <div className="fixed w-screen">
-          <MapCemetery center={center} markers={markers ? markers : []} />
+          <MapCemetery center={center} graves_coordinates={gravesCoordinates} />
           <div className="flex flex-col items-center">
             {soldiersQuery.isFetched && isFilter ? (
-              <SearchFilterBar filterText={filterName} setFilter={setFilter} />
+              <SearchFilterBar
+                filterText={getFilterTitle(values)}
+                setFilter={setFilter}
+              />
             ) : (
               <SearchBar
                 setInputSoldier={setInputSoldier}
@@ -146,7 +149,7 @@ export default function PreviewCemetery() {
         <FilteredSoldiers
           filterResult={soldiersQuery.data.items}
           isFetched={soldiersQuery.isFetched}
-          filterText={filterName}
+          filterText={getFilterTitle(values)}
         />
       ) : (
         <CemeteryInfo cemetery={currentCemetery} />

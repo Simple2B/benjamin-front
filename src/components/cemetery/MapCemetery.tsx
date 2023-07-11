@@ -11,6 +11,7 @@ import {
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import * as L from 'leaflet';
+import { Grave } from '@/openapi';
 
 export type ICoordinates = {
   lat: number;
@@ -19,7 +20,7 @@ export type ICoordinates = {
 
 type IMapCemeteryProps = {
   center: ICoordinates;
-  markers: ICoordinates[];
+  graves_coordinates: Array<Grave>;
 };
 
 const davidStarIcon = L.icon({
@@ -42,7 +43,10 @@ const currentPositionIcon = L.icon({
   popupAnchor: [-3, -76],
 });
 
-export default function MapCemetery({ center, markers }: IMapCemeteryProps) {
+export default function MapCemetery({
+  center,
+  graves_coordinates,
+}: IMapCemeteryProps) {
   return (
     <div
       className={`w-full absolute flex justify-end items-end t-0 l-0 h-[calc(100vh-175px)]`}
@@ -58,15 +62,32 @@ export default function MapCemetery({ center, markers }: IMapCemeteryProps) {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {markers.map((marker, index) => (
-          <Marker
-            position={[marker.lat, marker.lng]}
-            icon={davidStarIcon}
-            key={index}
-          >
-            <Popup>Marker</Popup>
-          </Marker>
-        ))}
+        {graves_coordinates.map(
+          (
+            {
+              uuid,
+              suffix,
+              firstName,
+              lastName,
+              burialLocationLatitude,
+              burialLocationLongitude,
+            },
+            index
+          ) => (
+            <Marker
+              position={[
+                burialLocationLatitude ?? 0,
+                burialLocationLongitude ?? 0,
+              ]}
+              icon={davidStarIcon}
+              key={index}
+            >
+              <Popup>
+                {suffix} {firstName} {lastName}
+              </Popup>
+            </Marker>
+          )
+        )}
         <CurrentLocationMarker />
       </MapContainer>
 

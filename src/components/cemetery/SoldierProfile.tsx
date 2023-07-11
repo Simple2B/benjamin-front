@@ -33,7 +33,7 @@ const SoldierProfile = ({
         )}
 
         <p className="text-base text-center leading-5 mt-2">
-          {firstName} {lastName} {suffix}
+          {suffix} {firstName} {lastName}
         </p>
       </div>
     </Link>

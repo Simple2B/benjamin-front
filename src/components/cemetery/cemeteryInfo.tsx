@@ -136,7 +136,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
           <>
             <HorizontalPhotoGallery
               text={'Soldiers with Headstone Changes'}
-              solders={cemetery.filtered_soldiers.soldiers}
+              solders={cemetery.soldies_headstones_changed}
               className="z-10"
               dash={true}
             />
