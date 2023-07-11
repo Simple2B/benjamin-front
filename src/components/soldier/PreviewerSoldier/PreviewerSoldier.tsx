@@ -101,7 +101,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
     },
     position: {
       header: SOLDIER_SERVICE_HEADERS.position,
-      value: soldier?.soldierPositions.join(', '),
+      value: soldier?.position,
     },
     awards: {
       header: SOLDIER_SERVICE_HEADERS.awards,
@@ -227,8 +227,8 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
               imageDescription={'Headstone Photo'}
             />
           ) : null}
-          {soldier?.guardiansOfHeroes.length ? (
-            <GuardiansOfHeroes guardiansOfHeroes={soldier.guardiansOfHeroes} />
+          {soldier?.guardians.length ? (
+            <GuardiansOfHeroes guardiansOfHeroes={soldier.guardians} />
           ) : null}
         </ClosebleInfo>
 
