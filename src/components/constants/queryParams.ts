@@ -1,5 +1,5 @@
 export const QUERY_PARAMS = {
-  birthDate: 'birthDate',
+  birthDay: 'birthDay',
   birthMonth: 'birthMonth',
   birthYear: 'birthYear',
   deathDate: 'deathDate',

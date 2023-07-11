@@ -69,7 +69,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
 
   const life: Ilife = {
     birthDate: {
-      header: SOLDIER_LIFE_HEADERS.birthDate,
+      header: SOLDIER_LIFE_HEADERS.birthDay,
       value: formatDate(soldier?.birthDate),
     },
     birthLocation: {

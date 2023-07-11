@@ -22,7 +22,7 @@ export async function GET(request: Request, context: IContext) {
     ? Number(searchParams.get('birth_year'))
     : undefined;
 
-  const birthDate = searchParams.get('birth_day')
+  const birthDay = searchParams.get('birth_day')
     ? Number(searchParams.get('birth_day'))
     : undefined;
 
@@ -41,6 +41,15 @@ export async function GET(request: Request, context: IContext) {
     ? searchParams.get('birth_location')
     : undefined;
 
+  const isHeadstoneChanged = searchParams.get('is_headstone_changed')
+    ? !!searchParams.get('is_headstone_changed')
+    : undefined;
+
+  const statesEnteredFrom =
+    searchParams.get('states_entered_from') ?? undefined;
+
+  console.log(statesEnteredFrom);
+
   const { params } = context;
   if (!params.cemeteryUuid) {
     return NextResponse.json({ msg: 'specify cemetery uuid' });
@@ -53,13 +62,13 @@ export async function GET(request: Request, context: IContext) {
     q,
     birthYear,
     birthMonth,
-    birthDate,
+    birthDay,
     deathYear,
     deathMonth,
     deathDate,
-    birthLocation ? birthLocation : undefined,
-    1,
-    500
+    isHeadstoneChanged,
+    statesEnteredFrom,
+    birthLocation ? birthLocation : undefined
   );
 
   return NextResponse.json(response);
