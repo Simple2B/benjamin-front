@@ -1,19 +1,17 @@
 'use client';
 import React, { useEffect } from 'react';
-import IconButton from '../IconButton';
-import { ICONS_NAME } from '../constants/iconName';
+import IconButton from '../../IconButton';
+import { ICONS_NAME } from '../../constants/iconName';
 import { useRouter } from 'next/navigation';
-import { FilteredCategoryExample } from './FilteredCategoryExample';
-import { CategoryBlock } from './CategoryBlock';
-import { MONTH } from '../constants/constants';
+import { FilteredCategoryExample } from '../FilteredCategoryExample';
+import { CategoryBlock } from '../CategoryBlock';
+import { MONTH } from '../../constants/constants';
 import { useAppStore } from '@/lib/slices/store';
 import urlJoin from 'url-join';
-import { PATH } from '../constants/path.constants';
+import { PATH } from '../../constants/path.constants';
 import Link from 'next/link';
-
-const YEAR = ['1920', '1921', '1922', '1923', '1924', '1925', '1926'];
-
-const CITY = ['New York', 'California', 'Delaware'];
+import { QUERY_PARAMS } from '../../constants/queryParams';
+import { YEAR, CITY } from './сategoryPreview.constants';
 
 export const CategoryPreview = () => {
   const { currentCemetery } = useAppStore();
@@ -74,27 +72,27 @@ export const CategoryPreview = () => {
         <CategoryBlock
           categoryHeader={'Birth year'}
           categoryText={YEAR}
-          queryParam={'birthYear'}
+          queryParam={QUERY_PARAMS.birthYear}
         />
         <CategoryBlock
           categoryHeader={'Birth month'}
           categoryText={MONTH}
-          queryParam={'birthMonth'}
+          queryParam={QUERY_PARAMS.birthMonth}
         />
         <CategoryBlock
           categoryHeader={'Enlisted from'}
           categoryText={CITY}
-          queryParam={'birthLocation'}
+          queryParam={QUERY_PARAMS.statesEnteredFrom}
         />
         <CategoryBlock
           categoryHeader={'Month died'}
           categoryText={MONTH}
-          queryParam={'deathMonth'}
+          queryParam={QUERY_PARAMS.deathMonth}
         />
         <CategoryBlock
           categoryHeader={'Year died'}
           categoryText={YEAR}
-          queryParam={'deathYear'}
+          queryParam={QUERY_PARAMS.deathYear}
         />
       </div>
     </div>

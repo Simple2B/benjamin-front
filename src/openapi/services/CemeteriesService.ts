@@ -55,6 +55,8 @@ export class CemeteriesService {
      * @param deathYear
      * @param deathMonth
      * @param deathDay
+     * @param isHeadstoneChanged
+     * @param statesEnteredFrom
      * @param birthLocation
      * @param page
      * @param perPage
@@ -70,6 +72,8 @@ export class CemeteriesService {
         deathYear?: number,
         deathMonth?: number,
         deathDay?: number,
+        isHeadstoneChanged?: boolean,
+        statesEnteredFrom?: string,
         birthLocation?: string,
         page: number = 1,
         perPage: number = 10,
@@ -88,6 +92,8 @@ export class CemeteriesService {
                 'death_year': deathYear,
                 'death_month': deathMonth,
                 'death_day': deathDay,
+                'is_headstone_changed': isHeadstoneChanged,
+                'states_entered_from': statesEnteredFrom,
                 'birth_location': birthLocation,
                 'page': page,
                 'per_page': perPage,

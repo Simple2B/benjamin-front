@@ -1,5 +1,5 @@
 export const SOLDIER_LIFE_HEADERS = {
-  birthDate: 'Birth date',
+  birthDay: 'Birth date',
   birthLocation: 'Birth location',
   parentsNames: 'Parents names',
 };

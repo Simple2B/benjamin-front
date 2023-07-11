@@ -4,12 +4,18 @@ export const getFilterTitle = (values: (string | null)[]) => {
   if (!values) {
     return '';
   }
-  const filteredValues = values
-    .filter((value) => value !== null && value !== undefined)
-    .map(
-      (value, index) =>
-        `${filterTitle[Object.keys(filterTitle)[index]]} ${value}`
-    );
+
+  const filteredValues = values.reduce((acc: string[], value, index) => {
+    if (value) {
+      if (value === 'True') {
+        acc.push(`${filterTitle[Object.keys(filterTitle)[index]]}`);
+      } else {
+        acc.push(`${filterTitle[Object.keys(filterTitle)[index]]} ${value}`);
+      }
+    }
+    return acc;
+  }, []);
+
   const filterName = filteredValues.join('. ');
   return filterName;
 };

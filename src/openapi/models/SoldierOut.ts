@@ -28,8 +28,7 @@ export type SoldierOut = {
     verifiedMessages: Array<SoldierMessageOut>;
     parents?: string;
     elMaleh?: string;
-    guardiansOfHeroes: Array<string>;
-    soldierPositions: Array<string>;
+    guardians: Array<string>;
     soldierAwards: Array<string>;
     soldierStatesEnteredFrom: Array<string>;
     soldierRanks: Array<string>;

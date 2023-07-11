@@ -34,6 +34,8 @@ export default function PreviewCemetery() {
   const deathMonth = searchParams.get('deathMonth');
   const deathYear = searchParams.get('deathYear');
   const birthLocation = searchParams.get('birthLocation');
+  const isHeadstoneChanged = searchParams.get('isHeadstoneChanged');
+  const statesEnteredFrom = searchParams.get('statesEnteredFrom');
 
   const values: (string | null)[] = [
     birthLocation,
@@ -43,6 +45,8 @@ export default function PreviewCemetery() {
     deathMonth,
     deathDay,
     deathYear,
+    isHeadstoneChanged,
+    statesEnteredFrom,
   ];
 
   useEffect(() => {
@@ -53,7 +57,9 @@ export default function PreviewCemetery() {
       !deathDay &&
       !deathMonth &&
       !deathYear &&
-      !birthLocation
+      !birthLocation &&
+      !isHeadstoneChanged &&
+      !statesEnteredFrom
     ) {
       setFilter(false);
     } else {
@@ -70,6 +76,8 @@ export default function PreviewCemetery() {
       deathMonth,
       deathDay,
       deathYear,
+      isHeadstoneChanged,
+      statesEnteredFrom,
     ],
     () =>
       CemeteriesService.getCemeterySoldiers(
@@ -81,9 +89,9 @@ export default function PreviewCemetery() {
         deathYear ? parseInt(deathYear) : undefined,
         deathMonth ? MONTHS[deathMonth] : undefined,
         deathDay ? parseInt(deathDay) : undefined,
-        birthLocation ? birthLocation : undefined,
-        1,
-        10
+        isHeadstoneChanged ? !!isHeadstoneChanged : undefined,
+        statesEnteredFrom ? statesEnteredFrom : undefined,
+        birthLocation ? birthLocation : undefined
       ),
     {
       enabled: !!currentCemetery,
