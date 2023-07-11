@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import SearchBar from '../SearchBar';
-import { CategoryExample } from './CategoryExample';
+import { CategoryExample } from './categoreExample/CategoryExample';
 import { SoldierSearchingCard } from './SoldierSearchingCard';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';

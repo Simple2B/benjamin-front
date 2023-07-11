@@ -1,40 +1,14 @@
 import React from 'react';
-import IconButton from '../IconButton';
-import { ICONS_NAME } from '../constants/iconName';
-import { PATH } from '../constants/path.constants';
+import IconButton from '../../IconButton';
+import { ICONS_NAME } from '../../constants/iconName';
+import { PATH } from '../../constants/path.constants';
 import Link from 'next/link';
 import urlJoin from 'url-join';
 import { useAppStore } from '@/lib/slices/store';
+import { filterExamples } from './CategoryExample.constants';
 
 export const CategoryExample = () => {
   const { currentCemetery } = useAppStore();
-
-  const filterExamples = [
-    {
-      iconName: ICONS_NAME.locationPin,
-      iconDescription: 'Born in New York',
-      queryParam: 'birthLocation',
-      value: 'New York',
-    },
-    {
-      iconName: ICONS_NAME.calendar,
-      iconDescription: 'Born in April',
-      queryParam: 'deathMonth',
-      value: 'April',
-    },
-    {
-      iconName: ICONS_NAME.calendar,
-      iconDescription: 'Born in 1924',
-      queryParam: 'birthYear',
-      value: '1924',
-    },
-    {
-      iconName: ICONS_NAME.calendar,
-      iconDescription: 'Born in June',
-      queryParam: 'birthMonth',
-      value: 'June',
-    },
-  ];
 
   return (
     <>
