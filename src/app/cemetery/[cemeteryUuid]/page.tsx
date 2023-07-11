@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import { CemeteriesService } from '@/openapi';
-import PreviewCemetery from '@/components/cemetery/PreviewCementery';
+import PreviewCemetery from '@/components/cemetery/PreviewCemetery/PreviewCementery';
 import { PATH } from '@/components/constants/path.constants';
 
 // export const dynamic = 'force-dynamic';
