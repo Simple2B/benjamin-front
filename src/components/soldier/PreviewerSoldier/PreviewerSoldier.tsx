@@ -26,6 +26,7 @@ import { SoldierOut } from '@/openapi';
 
 import { PhotoCarrousel } from '../PhotoCarrousel';
 import { GuardiansOfHeroes } from '../GuardiansOfHeroes';
+import { SoldierHeadstonePhoto } from '../SoldierHeadstonePhoto';
 
 interface IPreviewerSoldierProps {
   soldier: SoldierOut;
@@ -219,12 +220,11 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
             />
           )}
           {soldier?.verifiedStones.length ? (
-            <SoldierAdditionalImage
+            <SoldierHeadstonePhoto
               imageUrl={urlJoin(
                 AWS_BASE_URL || '',
                 soldier.verifiedStones[0].photoUrl
               )}
-              imageDescription={'Headstone Photo'}
             />
           ) : null}
           {soldier?.guardians.length ? (
