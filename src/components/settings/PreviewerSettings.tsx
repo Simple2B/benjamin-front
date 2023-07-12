@@ -38,6 +38,14 @@ export default function PreviewerSettings({
     redirect(PATH.location);
   }
 
+  const handleRouterBack = () => {
+    if (selectedCemetery) {
+      router.push(urlJoin(PATH.cemetery, selectedCemetery.uuid));
+    } else {
+      router.back();
+    }
+  };
+
   const links: { [key: string]: string } = {};
 
   (Object.keys(settingsData) as (keyof typeof settingsData)[]).forEach(
@@ -52,7 +60,7 @@ export default function PreviewerSettings({
     <div className="flex flex-col items-start m-6 gap-8 bg-white">
       <div
         className="w-full flex items-baseline justify-between"
-        onClick={router.back}
+        onClick={handleRouterBack}
       >
         <IconButton
           iconName={ICONS_NAME.selectingArrow}

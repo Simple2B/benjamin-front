@@ -20,9 +20,13 @@ export type ISolderPhotoGallery = {
   name: string;
 };
 
-export default function PreviewCemetery() {
+interface ISoldier {
+  cemetery: CemeteryOut;
+}
+
+export default function PreviewCemetery({ cemetery }: ISoldier) {
   const [inputSoldier, setInputSoldier] = useState<string>('');
-  const { currentCemetery, currentFilteredSoldiers } = useAppStore();
+  const { currentCemetery, setCurrentCemetery } = useAppStore();
   const [isFilter, setFilter] = useState<boolean>(true);
   const [gravesCoordinates, setGravesCoordinates] = useState<Grave[]>([]);
   const searchParams = useSearchParams();
@@ -48,6 +52,10 @@ export default function PreviewCemetery() {
     isHeadstoneChanged,
     statesEnteredFrom,
   ];
+
+  useEffect(() => {
+    setCurrentCemetery(cemetery);
+  }, [cemetery]);
 
   useEffect(() => {
     if (
@@ -81,7 +89,7 @@ export default function PreviewCemetery() {
     ],
     () =>
       CemeteriesService.getCemeterySoldiers(
-        (currentCemetery as CemeteryOut).uuid,
+        (cemetery as CemeteryOut).uuid,
         undefined,
         birthYear ? parseInt(birthYear) : undefined,
         birthMonth ? MONTHS[birthMonth] : undefined,
@@ -94,11 +102,11 @@ export default function PreviewCemetery() {
         birthLocation ? birthLocation : undefined
       ),
     {
-      enabled: !!currentCemetery,
+      enabled: !!cemetery,
     }
   );
 
-  if (!currentCemetery) {
+  if (!cemetery) {
     redirect(PATH.location);
   }
   useEffect(() => {
@@ -124,7 +132,7 @@ export default function PreviewCemetery() {
       );
       setGravesCoordinates(graveMarkers);
     } else {
-      setGravesCoordinates(currentCemetery?.graves_coordinates);
+      setGravesCoordinates(cemetery?.graves_coordinates);
     }
   }, [isFilter]);
 
@@ -160,7 +168,7 @@ export default function PreviewCemetery() {
           filterText={getFilterTitle(values)}
         />
       ) : (
-        <CemeteryInfo cemetery={currentCemetery} />
+        <CemeteryInfo cemetery={cemetery} />
       )}
     </div>
   );

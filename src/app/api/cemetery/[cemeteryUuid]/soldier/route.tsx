@@ -48,8 +48,6 @@ export async function GET(request: Request, context: IContext) {
   const statesEnteredFrom =
     searchParams.get('states_entered_from') ?? undefined;
 
-  console.log(statesEnteredFrom);
-
   const { params } = context;
   if (!params.cemeteryUuid) {
     return NextResponse.json({ msg: 'specify cemetery uuid' });
