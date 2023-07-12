@@ -50,10 +50,10 @@ const RememberSoldier = ({
           Remember {soldierSufix} {soldierFirstName} {soldierLastName}
         </h2>
         <div className="flex justify-center pb-12 gap-4">
-          {REMEMBERING.map(({ image, text, link }) => {
+          {REMEMBERING.map(({ image, text, link }, index) => {
             return (
               <Link
-                key="text"
+                key={index}
                 href={urlJoin(PATH[link as keyof typeof PATH], soldierUuid)}
               >
                 <div className="w-[106px] flex flex-col justify-evenly items-center">
@@ -83,7 +83,7 @@ const RememberSoldier = ({
       ></div>
       <div
         className={`bottom-0 h-52 w-full px-8 pt-3 
-             bg-gradient-to-b from-[#217890] to-indigo-100 t fixed z-0`}
+             bg-gradient-to-b from-[#217890] to-indigo-100 t fixed z-[4]`}
       ></div>
     </>
   );
