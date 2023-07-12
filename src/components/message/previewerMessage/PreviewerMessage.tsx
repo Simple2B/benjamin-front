@@ -24,7 +24,7 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
     if (isSent) {
       const timer = setTimeout(() => {
         setSent(false);
-      }, messageTimer);
+      }, 10000);
       return () => clearTimeout(timer);
     }
   }, [isSent]);
@@ -39,13 +39,15 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
 
   const handleSend = async () => {
     setEmailValid(/\S+@\S+\.\S+/.test(email));
-    if (isEmailValid || message.length >= 8) {
-      await sendMessage(soldierUuid, message, email).then(() => {
-        setSent(true);
-        setMessage('');
-        setEmail('');
-      });
+
+    if (!isEmailValid || message.length <= 8) {
+      return;
     }
+
+    await sendMessage(soldierUuid, message, email);
+    setSent(true);
+    setMessage('');
+    setEmail('');
   };
 
   return (
@@ -87,7 +89,7 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
               maxLength={500}
               rows={10}
               onChange={handleMessage}
-              className=" resize-none p-3 text-sm rounded-lg border border-gray-300 w-full h-[323px]"
+              className=" resize-none p-3 text-sm rounded-lg border border-gray-300 w-full h-[323px]  z-0"
               placeholder="Type your message"
               value={message}
             ></textarea>
