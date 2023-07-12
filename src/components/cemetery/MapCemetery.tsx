@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import IconButton from '../IconButton';
 import { ICONS_NAME } from '../constants/iconName';
 import {
@@ -47,6 +47,39 @@ export default function MapCemetery({
   center,
   graves_coordinates,
 }: IMapCemeteryProps) {
+  const [hasPermition, setHasPermition] = useState<boolean>(false);
+
+  useEffect(() => {
+    navigator.permissions
+      .query({
+        name: 'geolocation',
+      })
+      .then(function (result) {
+        const onLocationFetchSuccess = (position: GeolocationPosition) => {
+          setHasPermition(true);
+        };
+
+        const onLocationFetchFailure = (error = {}) => {
+          setHasPermition(false);
+        };
+
+        navigator.geolocation.getCurrentPosition(
+          onLocationFetchSuccess,
+          onLocationFetchFailure
+        );
+
+        if (result.state === 'denied') {
+          onLocationFetchFailure();
+        }
+
+        // This will still work for Chrome
+        result.onchange = function () {
+          if (result.state === 'denied') {
+            onLocationFetchFailure();
+          }
+        };
+      });
+  }, []);
   return (
     <div
       className={`w-full absolute flex justify-end items-end t-0 l-0 h-[calc(100vh-175px)]`}
@@ -91,12 +124,14 @@ export default function MapCemetery({
         <CurrentLocationMarker />
       </MapContainer>
 
-      <div
-        className="flex w-12 h-12 justify-center items-center bg-white rounded-3xl rotate-45 mb-[22px] mr-2 absolute"
-        id="navigation-button"
-      >
-        <IconButton iconName={ICONS_NAME.navigation} className="w-5 h-5" />
-      </div>
+      {hasPermition && (
+        <div
+          className="flex w-12 h-12 justify-center items-center bg-white rounded-3xl rotate-45 mb-[22px] mr-2 absolute"
+          id="navigation-button"
+        >
+          <IconButton iconName={ICONS_NAME.navigation} className="w-5 h-5" />
+        </div>
+      )}
     </div>
   );
 }
