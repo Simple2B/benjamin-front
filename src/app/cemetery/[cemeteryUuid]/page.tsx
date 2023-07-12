@@ -28,7 +28,7 @@ const Page = async ({ params }: ICemeteryPageProps) => {
     redirect(PATH.location);
   }
 
-  return <PreviewCemetery />;
+  return <PreviewCemetery cemetery={cemetery} />;
 };
 
 export default Page;

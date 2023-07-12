@@ -17,7 +17,7 @@ export const PhotoCarrousel = ({ photos }: IPhotoCarrouselProps) => {
       {photos.length ? (
         <div className="rounded-xl mt-3">
           <p className="text-sm text-grey-20 leading-7">Photos</p>
-          <div className="flex justify-center items-center gap-60 mt-[100px] absolute w-[318px]">
+          <div className="flex justify-center items-center gap-60 mt-[100px] absolute w-[318px] z-[1]">
             <button onClick={() => prev()}>
               <IconButton
                 iconName={ICONS_NAME.selectingArrow}

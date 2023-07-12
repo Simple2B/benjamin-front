@@ -6,6 +6,7 @@ import CemeteryMainInfo from './cemeteryMainInfo/CemeteryMainInfo';
 import { CemeteryOut } from '@/openapi';
 import { redirect } from 'next/navigation';
 import { PATH } from '../constants/path.constants';
+import { isIOS } from '../utils/isIphone';
 
 interface ICemeteryInfoProps {
   cemetery: CemeteryOut;
@@ -51,6 +52,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
   }, [scrollRef]);
 
   useEffect(() => {
+    const scrollToTopValue = isIOS() ? 290 : 182;
     if (scrollRef.current) {
       if (touchEnd > touchStart && isScrolableArea) {
         document.getElementById('page')?.scrollTo({
@@ -68,7 +70,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
         const offset = (elemRect?.top ?? 0) - bodyRect.top;
         if (offset > 0) {
           document.getElementById('page')?.scrollTo({
-            top: window.screen.height - 182,
+            top: window.screen.height - scrollToTopValue,
             left: 0,
             behavior: 'smooth',
           });
@@ -76,7 +78,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
         }
       } else if (touchEnd < touchStart && !isInfoBoxFullScreen) {
         document.getElementById('page')?.scrollTo({
-          top: window.screen.height - 182,
+          top: window.screen.height - scrollToTopValue,
           left: 0,
           behavior: 'smooth',
         });

@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 
 type ISoldierAdditionalImageProps = {
   imageUrl: string | undefined;
@@ -12,13 +11,13 @@ const SoldierAdditionalImage = ({
 }: ISoldierAdditionalImageProps) => {
   return (
     <>
-      <div className="mt-3">
-        <p className="text-sm text-grey-20 mb-3">{imageDescription}</p>
+      <div className="mt-4">
+        <p className="text-sm text-grey-20 mb-2">{imageDescription}</p>
         {imageUrl && (
           <img
             src={imageUrl}
             alt="document"
-            className="w-full h-[215] rounded-lg bg-grey-30 photo-shadow"
+            className="w-full h-[215px] rounded-lg bg-grey-30 photo-shadow object-cover"
           />
         )}
       </div>

@@ -64,16 +64,23 @@ export const StoneHorizontalGallery = ({
   return (
     <>
       {stonePhotosGallery.length ? (
-        <div className="flex gap-4 overflow-x-auto pb-4 text-indigo-100 px-8 w-full whitespace-nowrap -mt-3">
-          {stonePhotosGallery.map((item, index) => (
-            <StoneProfile
-              item={item}
-              handleDelete={handleDelete}
-              key={index}
-              setRemoveComfirmWindowOpen={setRemoveComfirmWindowOpen}
-            />
-          ))}
-        </div>
+        <>
+          {stonePhotosGallery.length < 3 ? '' : ''}
+          <div
+            className={`flex gap-4 overflow-x-auto pb-4 text-indigo-100 px-8 w-full whitespace-nowrap -mt-3 ${
+              stonePhotosGallery.length < 3 ? 'justify-center' : ''
+            }`}
+          >
+            {stonePhotosGallery.map((item, index) => (
+              <StoneProfile
+                item={item}
+                handleDelete={handleDelete}
+                key={index}
+                setRemoveComfirmWindowOpen={setRemoveComfirmWindowOpen}
+              />
+            ))}
+          </div>
+        </>
       ) : null}
     </>
   );

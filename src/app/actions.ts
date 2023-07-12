@@ -23,9 +23,11 @@ export const uploadStonePhoto = async (
 };
 
 export const deleteStonePhoto = async (stoneUuid: string) => {
-  const deleteStone = await StonesService.deleteStone(stoneUuid).then((res) =>
-    console.log(res)
-  );
+  try {
+    await StonesService.deleteStone(stoneUuid);
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const sendMessage = async (
