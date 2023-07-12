@@ -1,4 +1,4 @@
-import { PreviewerMessage } from '@/components/message/PreviewerMessage';
+import { PreviewerMessage } from '@/components/message/previewerMessage/PreviewerMessage';
 import React from 'react';
 
 interface ISoldierPageProps {
