@@ -33,30 +33,28 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
   useEffect(() => {
     const mainPage = document.getElementById('page') as HTMLElement;
     const intervalId = setInterval(() => {
-      if (isScrolableArea) {
+      if (!isScrolableArea) {
         console.log('no scroll');
         return;
       }
-
       if (isUp) {
+        console.log('scroll to up');
         const scrollToTopValue = isIOS() ? 290 : 230;
         mainPage.scrollTo({
           top: screen.height - scrollToTopValue,
           left: 0,
-          behavior: 'smooth',
+          behavior: 'instant',
         });
       } else {
         console.log('Scroll to down');
         mainPage.scrollTo({
           top: 0,
           left: 0,
-          behavior: 'smooth',
+          behavior: 'instant',
         });
       }
-    }, 10);
-    console.log('interval', intervalId);
+    }, 3);
     return () => {
-      console.log('clear interval');
       clearInterval(intervalId);
     };
   }, [isUp, isScrolableArea]);
@@ -87,94 +85,38 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
 
       // Main container events
       mainInfoContainer.addEventListener('touchstart', () => {
-        setScrollableArea(true);
-        // mainInfoContainer.classList.add('touch-auto');
-        // mainInfoContainer.classList.remove('touch-none');
+        setScrollableArea(false);
       });
       mainInfoContainer.addEventListener('touchmove', () => {});
       mainInfoContainer.addEventListener('touchend', (e) => {
-        // e.preventDefault();
-        // mainInfoContainer.classList.remove('touch-auto');
-        // mainInfoContainer.classList.add('touch-none');
-
         const posY = mainInfoContainer.getBoundingClientRect().top;
         if (posY <= screen.height / 2) {
           setIsUp(true);
         } else {
           setIsUp(false);
         }
-        setScrollableArea(false);
+        console.log('touchend');
+        setScrollableArea(true);
         // setScrollableArea(true);
       });
 
-      // additionalInfoConteiner.addEventListener('touchmove', () => {
-      //   console.log('touched');
-      // });
-
       // // Additional container events
-      // additionalInfoConteiner.addEventListener('touchstart', () => {
-      //   const posY = mainInfoContainer.getBoundingClientRect().top;
-      //   console.log(mainInfoContainer.getBoundingClientRect());
-      //   setTouchStart(posY);
-      //   setScrollableArea(false);
-      // });
+      additionalInfoConteiner.addEventListener('touchstart', () => {
+        setScrollableArea(false);
+      });
 
-      // additionalInfoConteiner.addEventListener('touchend', () => {
-      //   const posY = mainInfoContainer.getBoundingClientRect().top;
-      //   console.log(touchStart, posY);
-      //   if (touchStart - posY < 0) {
-      //     mainPage.scrollTo({
-      //       top: screen.height - scrollToTopValue,
-      //       left: 0,
-      //       behavior: 'smooth',
-      //     });
-      //   } else {
-      //     console.log('Down');
-      //   }
-      //   setScrollableArea(false);
-
-      //   if (posY > 0) {
-      //     mainPage.scrollTo({
-      //       top: screen.height - scrollToTopValue,
-      //       left: 0,
-      //       behavior: 'smooth',
-      //     });
-      //   }
-      // });
+      additionalInfoConteiner.addEventListener('touchend', () => {
+        const posY = mainInfoContainer.getBoundingClientRect().top;
+        console.log(posY);
+        if (posY > 0) {
+          setIsUp(true);
+          setScrollableArea(true);
+        }
+      });
     }
   }, [touchStart]);
 
   useEffect(() => {}, [touchStart]);
-
-  useEffect(() => {
-    const scrollToTopValue = isIOS() ? 290 : 230;
-
-    if (isScrolableArea && additionalInfoRef && cemeteryMainInfoRef) {
-      const mainPage = document.getElementById('page') as HTMLElement;
-      const mainInfoContainer = cemeteryMainInfoRef.current as HTMLDivElement;
-      const additionalInfoConteiner =
-        additionalInfoRef.current as HTMLDivElement;
-
-      setScrollableArea(false);
-
-      const posY = mainInfoContainer.getBoundingClientRect().top;
-      const screenHalf = screen.height / 2;
-
-      if (posY >= screenHalf) {
-        mainPage.scrollTo({
-          top: 0,
-          left: 0,
-          behavior: 'smooth',
-        });
-      } else {
-        mainPage.scrollTo({
-          top: screen.height - scrollToTopValue,
-          left: 0,
-          behavior: 'smooth',
-        });
-      }
-    }
-  }, [isScrolableArea]);
 
   return (
     <div
