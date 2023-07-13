@@ -60,8 +60,6 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
       const threshold =
         pageHeight + rememberSoldierContainer.offsetHeight + 220;
 
-      console.log(posY, threshold);
-
       if (posY >= threshold) {
         setScrolledDown(true);
       } else {
@@ -155,7 +153,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
             className="w-6 h-6 rotate-180"
           />
         </div>
-        {soldier?.mainPhoto && (
+        {soldier?.firstName && (
           <SoldierMainInfoCard
             photoUrl={
               soldier.mainPhoto
