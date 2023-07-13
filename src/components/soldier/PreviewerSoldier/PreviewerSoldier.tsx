@@ -155,7 +155,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
             className="w-6 h-6 rotate-180"
           />
         </div>
-        {soldier?.mainPhoto && (
+        {soldier?.firstName && (
           <SoldierMainInfoCard
             photoUrl={
               soldier.mainPhoto
