@@ -76,7 +76,7 @@ export const FilteredSoldiers = ({
         const offset = (elemRect?.top ?? 0) - bodyRect.top;
         if (offset > 0) {
           document.getElementById('page')?.scrollTo({
-            top: window.screen.height - 182,
+            top: window.screen.height - 230,
             left: 0,
             behavior: 'smooth',
           });
@@ -84,7 +84,7 @@ export const FilteredSoldiers = ({
         }
       } else if (touchEnd < touchStart && !isInfoBoxFullScreen) {
         document.getElementById('page')?.scrollTo({
-          top: window.screen.height - 182,
+          top: window.screen.height - 230,
           left: 0,
           behavior: 'smooth',
         });
@@ -113,7 +113,7 @@ export const FilteredSoldiers = ({
 
   return (
     <div
-      className="absolute w-full z-10 bg-white rounded-t-xl mt-[calc(100vh-182px)]"
+      className="absolute w-full z-10 bg-white rounded-t-xl mt-[calc(100vh-230px)]"
       id="cemetery-scrollable"
       ref={scrollRef}
     >

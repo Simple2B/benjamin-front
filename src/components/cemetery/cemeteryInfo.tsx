@@ -52,7 +52,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
   }, [scrollRef]);
 
   useEffect(() => {
-    const scrollToTopValue = isIOS() ? 290 : 182;
+    const scrollToTopValue = isIOS() ? 290 : 230;
     if (scrollRef.current) {
       if (touchEnd > touchStart && isScrolableArea) {
         document.getElementById('page')?.scrollTo({
@@ -107,7 +107,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
 
   return (
     <div
-      className="absolute w-full z-10 bg-white rounded-t-xl mt-[calc(100vh-182px)]"
+      className="absolute w-full z-10 bg-white rounded-t-xl mt-[calc(100vh-230px)]"
       id="cemetery-scrollable"
       ref={scrollRef}
     >
