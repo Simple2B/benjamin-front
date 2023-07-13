@@ -60,8 +60,6 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
       const threshold =
         pageHeight + rememberSoldierContainer.offsetHeight + 220;
 
-      console.log(posY, threshold);
-
       if (posY >= threshold) {
         setScrolledDown(true);
       } else {

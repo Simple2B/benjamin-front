@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, use } from 'react';
 import HorizontalPhotoGallery from './HorizontalPhotoGallery';
 import CemeteryAdditionalInfo from './cemeteryAdditionalInfo/CemeteryAdditionalInfo';
 import { CemeteryAudioBox } from './cemeteryMainInfo/CemeteryAudioBox';
@@ -14,96 +14,167 @@ interface ICemeteryInfoProps {
 
 export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const cemeteryMainInfoRef = useRef<HTMLDivElement>(null);
+  const additionalInfoRef = useRef<HTMLDivElement>(null);
+
   const [touchStart, setTouchStart] = useState<number>(0);
+  const [isUp, setIsUp] = useState<boolean>(false);
+
   const [touchEnd, setTouchEnd] = useState<number>(0);
   const [isInfoBoxFullScreen, setInfoBoxFullScreen] = useState<boolean>(false);
   const [isScrolableArea, setScrollableArea] = useState<boolean>(false);
+  const [isUserTouchedAdditionalInfo, setUserTouchedAdditionalInfo] =
+    useState<boolean>(false);
 
   if (!cemetery) {
     redirect(PATH.location);
   }
 
   useEffect(() => {
-    if (scrollRef.current) {
-      document
-        .getElementById('cemetery-main-info')
-        ?.addEventListener('touchstart', (e) => {
-          setScrollableArea(true);
+    const mainPage = document.getElementById('page') as HTMLElement;
+    const intervalId = setInterval(() => {
+      if (isScrolableArea) {
+        console.log('no scroll');
+        return;
+      }
+
+      if (isUp) {
+        const scrollToTopValue = isIOS() ? 290 : 230;
+        mainPage.scrollTo({
+          top: screen.height - scrollToTopValue,
+          left: 0,
+          behavior: 'smooth',
         });
-    }
-  }, [scrollRef]);
+      } else {
+        console.log('Scroll to down');
+        mainPage.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        });
+      }
+    }, 10);
+    console.log('interval', intervalId);
+    return () => {
+      console.log('clear interval');
+      clearInterval(intervalId);
+    };
+  }, [isUp, isScrolableArea]);
+
+  // useEffect(() => {
+  //   if (scrollRef.current) {
+  //     cemeteryMainInfoRef.current?.addEventListener('touchstart', (e) => {
+  //       setScrollableArea(true);
+  //     });
+  //     cemeteryMainInfoRef.current?.addEventListener('touchend', (e) => {
+  //       setScrollableArea(false);
+  //     });
+  //     additionalInfoRef.current?.addEventListener('touchstart', (e) => {
+  //       setUserTouchedAdditionalInfo(true);
+  //     });
+  //     additionalInfoRef.current?.addEventListener('touchend', (e) => {
+  //       setUserTouchedAdditionalInfo(false);
+  //     });
+  //   }
+  // }, [scrollRef]);
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current?.addEventListener('touchstart', (e) => {
-        const currentYPos = (
-          e.currentTarget as Element
-        )?.getBoundingClientRect().y;
-        setTouchStart(currentYPos);
+    if (additionalInfoRef && cemeteryMainInfoRef) {
+      const mainPage = document.getElementById('page') as HTMLElement;
+      const mainInfoContainer = cemeteryMainInfoRef.current as HTMLDivElement;
+      const additionalInfoConteiner =
+        additionalInfoRef.current as HTMLDivElement;
+
+      // Main container events
+      mainInfoContainer.addEventListener('touchstart', () => {
+        setScrollableArea(true);
+        // mainInfoContainer.classList.add('touch-auto');
+        // mainInfoContainer.classList.remove('touch-none');
+      });
+      mainInfoContainer.addEventListener('touchmove', () => {});
+      mainInfoContainer.addEventListener('touchend', (e) => {
+        // e.preventDefault();
+        // mainInfoContainer.classList.remove('touch-auto');
+        // mainInfoContainer.classList.add('touch-none');
+
+        const posY = mainInfoContainer.getBoundingClientRect().top;
+        if (posY <= screen.height / 2) {
+          setIsUp(true);
+        } else {
+          setIsUp(false);
+        }
+        setScrollableArea(false);
+        // setScrollableArea(true);
       });
 
-      scrollRef.current?.addEventListener('touchend', (e) => {
-        const currentYPos = (
-          e.currentTarget as Element
-        )?.getBoundingClientRect().y;
-        setTouchEnd(currentYPos);
-      });
+      // additionalInfoConteiner.addEventListener('touchmove', () => {
+      //   console.log('touched');
+      // });
+
+      // // Additional container events
+      // additionalInfoConteiner.addEventListener('touchstart', () => {
+      //   const posY = mainInfoContainer.getBoundingClientRect().top;
+      //   console.log(mainInfoContainer.getBoundingClientRect());
+      //   setTouchStart(posY);
+      //   setScrollableArea(false);
+      // });
+
+      // additionalInfoConteiner.addEventListener('touchend', () => {
+      //   const posY = mainInfoContainer.getBoundingClientRect().top;
+      //   console.log(touchStart, posY);
+      //   if (touchStart - posY < 0) {
+      //     mainPage.scrollTo({
+      //       top: screen.height - scrollToTopValue,
+      //       left: 0,
+      //       behavior: 'smooth',
+      //     });
+      //   } else {
+      //     console.log('Down');
+      //   }
+      //   setScrollableArea(false);
+
+      //   if (posY > 0) {
+      //     mainPage.scrollTo({
+      //       top: screen.height - scrollToTopValue,
+      //       left: 0,
+      //       behavior: 'smooth',
+      //     });
+      //   }
+      // });
     }
-  }, [scrollRef]);
+  }, [touchStart]);
+
+  useEffect(() => {}, [touchStart]);
 
   useEffect(() => {
     const scrollToTopValue = isIOS() ? 290 : 230;
-    if (scrollRef.current) {
-      if (touchEnd > touchStart && isScrolableArea) {
-        document.getElementById('page')?.scrollTo({
+
+    if (isScrolableArea && additionalInfoRef && cemeteryMainInfoRef) {
+      const mainPage = document.getElementById('page') as HTMLElement;
+      const mainInfoContainer = cemeteryMainInfoRef.current as HTMLDivElement;
+      const additionalInfoConteiner =
+        additionalInfoRef.current as HTMLDivElement;
+
+      setScrollableArea(false);
+
+      const posY = mainInfoContainer.getBoundingClientRect().top;
+      const screenHalf = screen.height / 2;
+
+      if (posY >= screenHalf) {
+        mainPage.scrollTo({
           top: 0,
           left: 0,
           behavior: 'smooth',
         });
-        setInfoBoxFullScreen(false);
-        return;
-      } else if (touchEnd > touchStart && !isScrolableArea) {
-        const bodyRect = document.body.getBoundingClientRect();
-        const elemRect = document
-          .getElementById('cemetery-scrollable')
-          ?.getBoundingClientRect();
-        const offset = (elemRect?.top ?? 0) - bodyRect.top;
-        if (offset > 0) {
-          document.getElementById('page')?.scrollTo({
-            top: window.screen.height - scrollToTopValue,
-            left: 0,
-            behavior: 'smooth',
-          });
-          setInfoBoxFullScreen(true);
-        }
-      } else if (touchEnd < touchStart && !isInfoBoxFullScreen) {
-        document.getElementById('page')?.scrollTo({
-          top: window.screen.height - scrollToTopValue,
+      } else {
+        mainPage.scrollTo({
+          top: screen.height - scrollToTopValue,
           left: 0,
           behavior: 'smooth',
         });
-        setInfoBoxFullScreen(true);
       }
     }
-
-    onwheel = (event: WheelEvent) => {
-      if (event.deltaY < 0) {
-        document.getElementById('page')?.scrollTo({
-          top: 0,
-          left: 0,
-          behavior: 'smooth',
-        });
-        setInfoBoxFullScreen(false);
-      }
-      if (event.deltaY > 0) {
-        document.getElementById('cemetery-scrollable')?.scrollIntoView({
-          behavior: 'smooth',
-        });
-        setInfoBoxFullScreen(true);
-      }
-    };
-    setScrollableArea(false);
-  }, [touchEnd, isInfoBoxFullScreen]);
+  }, [isScrolableArea]);
 
   return (
     <div
@@ -111,45 +182,49 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
       id="cemetery-scrollable"
       ref={scrollRef}
     >
-      <CemeteryMainInfo
-        name={cemetery.name}
-        location={cemetery.location ? cemetery.location : ''}
-        phone={cemetery.phone}
-        email={cemetery.email}
-        webUrl={cemetery.webUrl}
-      />
+      <div ref={cemeteryMainInfoRef}>
+        <CemeteryMainInfo
+          name={cemetery.name}
+          location={cemetery.location ? cemetery.location : ''}
+          phone={cemetery.phone}
+          email={cemetery.email}
+          webUrl={cemetery.webUrl}
+        />
+      </div>
 
       {cemetery.audio_tours.length ? (
         <CemeteryAudioBox audio_tours={cemetery.audio_tours} />
       ) : null}
 
-      <div className="flex flex-col gap-6 items-center w-full px-6 z-10 bg-white pt-5 relative">
-        <CemeteryAdditionalInfo
-          superintendent={cemetery.superintendent}
-          war={cemetery.war}
-          numberOfSoldiersBuried={cemetery.amountBuriedSoldiersCommon}
-          numberOfJewishSoldiersBuried={cemetery.amountBuriedSoldiersJewish}
-          listedAsMissingSoldiers={cemetery.amountBuriedSoldiersMissing}
-        />
-      </div>
+      <div ref={additionalInfoRef}>
+        <div className="flex flex-col gap-6 items-center w-full px-6 z-10 bg-white pt-5 relative">
+          <CemeteryAdditionalInfo
+            superintendent={cemetery.superintendent}
+            war={cemetery.war}
+            numberOfSoldiersBuried={cemetery.amountBuriedSoldiersCommon}
+            numberOfJewishSoldiersBuried={cemetery.amountBuriedSoldiersJewish}
+            listedAsMissingSoldiers={cemetery.amountBuriedSoldiersMissing}
+          />
+        </div>
 
-      <div className="relative flex flex-col gap-6 items-center pb-8 w-full z-10 bg-white pt-6">
-        {cemetery.filtered_soldiers && (
-          <>
-            <HorizontalPhotoGallery
-              text={'Soldiers with Headstone Changes'}
-              solders={cemetery.soldies_headstones_changed}
-              className="z-10"
-              dash={true}
-            />
-            <HorizontalPhotoGallery
-              text={cemetery.filtered_soldiers.title}
-              solders={cemetery.filtered_soldiers.soldiers}
-              className="z-10"
-              dash={true}
-            />
-          </>
-        )}
+        <div className="relative flex flex-col gap-6 items-center pb-8 w-full z-10 bg-white pt-6">
+          {cemetery.filtered_soldiers && (
+            <>
+              <HorizontalPhotoGallery
+                text={'Soldiers with Headstone Changes'}
+                solders={cemetery.soldies_headstones_changed}
+                className="z-10"
+                dash={true}
+              />
+              <HorizontalPhotoGallery
+                text={cemetery.filtered_soldiers.title}
+                solders={cemetery.filtered_soldiers.soldiers}
+                className="z-10"
+                dash={true}
+              />
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
