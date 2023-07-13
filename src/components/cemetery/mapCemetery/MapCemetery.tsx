@@ -1,7 +1,7 @@
 'use client';
 import React, { use, useEffect, useState } from 'react';
-import IconButton from '../IconButton';
-import { ICONS_NAME } from '../constants/iconName';
+import IconButton from '../../IconButton';
+import { ICONS_NAME } from '../../constants/iconName';
 import {
   MapContainer,
   Marker,
@@ -12,6 +12,7 @@ import {
 import 'leaflet/dist/leaflet.css';
 import * as L from 'leaflet';
 import { Grave } from '@/openapi';
+import { davidStarIcon, currentPositionIcon } from './mapCemetery.constants';
 
 export type ICoordinates = {
   lat: number;
@@ -22,26 +23,6 @@ type IMapCemeteryProps = {
   center: ICoordinates;
   graves_coordinates: Array<Grave>;
 };
-
-const davidStarIcon = L.icon({
-  iconUrl: '/images/icons/location-pin-davig-star.svg',
-  shadowUrl: '',
-  iconSize: [20, 65],
-  shadowSize: [30, 44],
-  iconAnchor: [12, 84],
-  shadowAnchor: [4, 62],
-  popupAnchor: [-3, -76],
-});
-
-const currentPositionIcon = L.icon({
-  iconUrl: '/images/icons/current-position-location-pin.svg',
-  shadowUrl: '',
-  iconSize: [20, 65],
-  shadowSize: [30, 44],
-  iconAnchor: [12, 84],
-  shadowAnchor: [4, 62],
-  popupAnchor: [-3, -76],
-});
 
 export default function MapCemetery({
   center,
@@ -126,7 +107,7 @@ export default function MapCemetery({
 
       {hasPermition && (
         <div
-          className="flex w-12 h-12 justify-center items-center bg-white rounded-3xl rotate-45 mb-[22px] mr-2 absolute"
+          className="flex w-12 h-12 justify-center items-center bg-white rounded-3xl rotate-45 mb-[70px] mr-2 absolute"
           id="navigation-button"
         >
           <IconButton iconName={ICONS_NAME.navigation} className="w-5 h-5" />
