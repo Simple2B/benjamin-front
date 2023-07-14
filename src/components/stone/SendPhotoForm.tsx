@@ -40,6 +40,7 @@ export const SendPhotoForm = ({
   const handleSubmit = async (values: typeof formInitialValues) => {
     setGallaryUpdating(true);
     if (!uploadedPhotoForm || !uploadedPhoto) {
+      setGallaryUpdating(false);
       return;
     }
 
