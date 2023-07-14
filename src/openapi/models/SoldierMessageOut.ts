@@ -7,6 +7,5 @@ import type { SoldierMessageType } from './SoldierMessageType';
 export type SoldierMessageOut = {
     messageText: string;
     messageType: SoldierMessageType;
-    senderEmail: string;
 };
 

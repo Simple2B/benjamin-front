@@ -23,7 +23,6 @@ import urlJoin from 'url-join';
 import { AWS_BASE_URL } from '@/components/constants/constants';
 import { formatDate } from './PreviewerSoldier.utils';
 import { SoldierOut } from '@/openapi';
-
 import { PhotoCarrousel } from '../PhotoCarrousel';
 import { GuardiansOfHeroes } from '../GuardiansOfHeroes';
 import { SoldierHeadstonePhoto } from '../SoldierHeadstonePhoto';
@@ -59,8 +58,6 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
       const pageHeight = soldierPage.offsetHeight;
       const threshold =
         pageHeight + rememberSoldierContainer.offsetHeight + 220;
-
-      console.log(posY, threshold);
 
       if (posY >= threshold) {
         setScrolledDown(true);
@@ -155,7 +152,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
             className="w-6 h-6 rotate-180"
           />
         </div>
-        {soldier?.mainPhoto && (
+        {soldier?.firstName && (
           <SoldierMainInfoCard
             photoUrl={
               soldier.mainPhoto
@@ -233,12 +230,9 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
               }
             />
           )}
-          {soldier?.verifiedStones.length ? (
+          {soldier?.headstonePhoto ? (
             <SoldierHeadstonePhoto
-              imageUrl={urlJoin(
-                AWS_BASE_URL || '',
-                soldier.verifiedStones[0].photoUrl
-              )}
+              imageUrl={urlJoin(AWS_BASE_URL || '', soldier.headstonePhoto)}
             />
           ) : null}
           {soldier?.guardians.length ? (

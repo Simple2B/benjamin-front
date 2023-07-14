@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import MapCemetery, { ICoordinates } from '../MapCemetery';
+import MapCemetery, { ICoordinates } from '../mapCemetery/MapCemetery';
 import SearchBar from '../../SearchBar';
 import { redirect } from 'next/navigation';
 import { PATH } from '../../constants/path.constants';

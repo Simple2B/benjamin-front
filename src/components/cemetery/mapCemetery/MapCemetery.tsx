@@ -1,7 +1,7 @@
 'use client';
 import React, { use, useEffect, useState } from 'react';
-import IconButton from '../IconButton';
-import { ICONS_NAME } from '../constants/iconName';
+import IconButton from '../../IconButton';
+import { ICONS_NAME } from '../../constants/iconName';
 import {
   MapContainer,
   Marker,
@@ -10,8 +10,9 @@ import {
   useMapEvents,
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import * as L from 'leaflet';
 import { Grave } from '@/openapi';
+import { davidStarIcon, currentPositionIcon } from './mapCemetery.constants';
+import { calculateDistance } from './mapCemetery.utils';
 
 export type ICoordinates = {
   lat: number;
@@ -22,26 +23,6 @@ type IMapCemeteryProps = {
   center: ICoordinates;
   graves_coordinates: Array<Grave>;
 };
-
-const davidStarIcon = L.icon({
-  iconUrl: '/images/icons/location-pin-davig-star.svg',
-  shadowUrl: '',
-  iconSize: [20, 65],
-  shadowSize: [30, 44],
-  iconAnchor: [12, 84],
-  shadowAnchor: [4, 62],
-  popupAnchor: [-3, -76],
-});
-
-const currentPositionIcon = L.icon({
-  iconUrl: '/images/icons/current-position-location-pin.svg',
-  shadowUrl: '',
-  iconSize: [20, 65],
-  shadowSize: [30, 44],
-  iconAnchor: [12, 84],
-  shadowAnchor: [4, 62],
-  popupAnchor: [-3, -76],
-});
 
 export default function MapCemetery({
   center,
@@ -92,8 +73,8 @@ export default function MapCemetery({
         style={{ height: '100%', width: '100%', zIndex: 0 }}
       >
         <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
         />
         {graves_coordinates.map(
           (
@@ -121,12 +102,12 @@ export default function MapCemetery({
             </Marker>
           )
         )}
-        <CurrentLocationMarker />
+        <CurrentLocationMarker center={center} />
       </MapContainer>
 
       {hasPermition && (
         <div
-          className="flex w-12 h-12 justify-center items-center bg-white rounded-3xl rotate-45 mb-[22px] mr-2 absolute"
+          className="flex w-12 h-12 justify-center items-center bg-white rounded-3xl rotate-45 mb-[70px] mr-2 absolute"
           id="navigation-button"
         >
           <IconButton iconName={ICONS_NAME.navigation} className="w-5 h-5" />
@@ -136,7 +117,11 @@ export default function MapCemetery({
   );
 }
 
-const CurrentLocationMarker = () => {
+type ICurrentLocationMarkerProps = {
+  center: ICoordinates;
+};
+
+const CurrentLocationMarker = ({ center }: ICurrentLocationMarkerProps) => {
   const [position, setPosition] = useState<ICoordinates | null>(null);
   const navigationButton = document.getElementById('navigation-button');
 
@@ -145,7 +130,14 @@ const CurrentLocationMarker = () => {
       map.locate();
     },
     locationfound(e) {
-      setPosition(e.latlng);
+      const distance = calculateDistance(center, e.latlng);
+      if (distance > 5) {
+        setPosition(center);
+        map.flyTo(center, map.getZoom());
+      } else {
+        setPosition(e.latlng);
+        map.flyTo(e.latlng, map.getZoom());
+      }
     },
   });
 

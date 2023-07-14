@@ -40,7 +40,7 @@ const RememberSoldier = ({
   return (
     <>
       <div
-        className={`w-full px-8 pt-3 z-10 text-black text-center fixed bottom-0 h-52 ${
+        className={`w-full px-8 pt-3 z-10 text-black text-center fixed bottom-0 h-40 ${
           isScrolledDown
             ? 'text-black transition-all duration-[1500ms]'
             : 'text-white transition-all duration-[500ms]'
@@ -75,14 +75,14 @@ const RememberSoldier = ({
       </div>
 
       <div
-        className={`bottom-0 h-52 w-full px-8 pt-3 ${
+        className={`bottom-0 h-40 w-full px-8 pt-3 ${
           isScrolledDown
             ? 'bg-white transition-all duration-[2000ms] '
             : 'bg-transparent transition-all duration-[2000ms]'
         } fixed z-[5]`}
       ></div>
       <div
-        className={`bottom-0 h-52 w-full px-8 pt-3 
+        className={`bottom-0 h-40 w-full px-8 pt-3 
              bg-gradient-to-b from-[#217890] to-indigo-100 t fixed z-[4]`}
       ></div>
     </>
