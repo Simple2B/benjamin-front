@@ -26,30 +26,39 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
   }
 
   useEffect(() => {
-    const mainPage = document.getElementById('page') as HTMLElement;
-    const intervalId = setInterval(() => {
-      if (!isScrolableArea) {
-        return;
-      }
-      if (isUp) {
-        const scrollToTopValue = isIOS() ? 290 : 230;
-        mainPage.scrollTo({
-          top: screen.height - scrollToTopValue,
-          left: 0,
-          behavior: 'smooth',
-        });
-      } else {
-        mainPage.scrollTo({
-          top: 0,
-          left: 0,
-          behavior: 'smooth',
-        });
-      }
-    }, 100);
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [isUp, isScrolableArea]);
+    if (additionalInfoRef && cemeteryMainInfoRef) {
+      const mainInfoContainer = cemeteryMainInfoRef.current as HTMLDivElement;
+
+      const mainPage = document.getElementById('page') as HTMLElement;
+      const intervalId = setInterval(() => {
+        const posY = mainInfoContainer.getBoundingClientRect().top;
+        if (!isScrolableArea) {
+          return;
+        }
+        if (isUp) {
+          const scrollToTopValue = isIOS() ? 290 : 230;
+          if (posY < 0) {
+            return;
+          }
+
+          mainPage.scrollTo({
+            top: screen.height - scrollToTopValue,
+            left: 0,
+            behavior: 'smooth',
+          });
+        } else {
+          mainPage.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+          });
+        }
+      }, 100);
+      return () => {
+        clearInterval(intervalId);
+      };
+    }
+  }, [isUp, isScrolableArea, cemeteryMainInfoRef]);
 
   useEffect(() => {
     if (additionalInfoRef && cemeteryMainInfoRef) {
@@ -61,15 +70,20 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
       mainInfoContainer.addEventListener('touchstart', () => {
         setScrollableArea(false);
       });
+
+      mainInfoContainer.addEventListener('click', () => {
+        setScrollableArea(false);
+      });
+
       mainInfoContainer.addEventListener('touchmove', () => {});
       mainInfoContainer.addEventListener('touchend', (e) => {
+        setScrollableArea(true);
         const posY = mainInfoContainer.getBoundingClientRect().top;
         if (posY <= screen.height / 2) {
           setIsUp(true);
         } else {
           setIsUp(false);
         }
-        setScrollableArea(true);
       });
 
       // // Additional container events
@@ -77,12 +91,14 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
         setScrollableArea(false);
       });
 
+      additionalInfoConteiner.addEventListener('click', () => {
+        setScrollableArea(false);
+      });
+
       additionalInfoConteiner.addEventListener('touchend', () => {
         const posY = mainInfoContainer.getBoundingClientRect().top;
-        if (posY > 0) {
-          setIsUp(true);
-          setScrollableArea(true);
-        }
+        setIsUp(true);
+        setScrollableArea(true);
       });
     }
   }, []);
