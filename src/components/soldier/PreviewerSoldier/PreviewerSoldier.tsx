@@ -23,7 +23,6 @@ import urlJoin from 'url-join';
 import { AWS_BASE_URL } from '@/components/constants/constants';
 import { formatDate } from './PreviewerSoldier.utils';
 import { SoldierOut } from '@/openapi';
-
 import { PhotoCarrousel } from '../PhotoCarrousel';
 import { GuardiansOfHeroes } from '../GuardiansOfHeroes';
 import { SoldierHeadstonePhoto } from '../SoldierHeadstonePhoto';
@@ -231,12 +230,9 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
               }
             />
           )}
-          {soldier?.verifiedStones.length ? (
+          {soldier?.headstonePhoto ? (
             <SoldierHeadstonePhoto
-              imageUrl={urlJoin(
-                AWS_BASE_URL || '',
-                soldier.verifiedStones[0].photoUrl
-              )}
+              imageUrl={urlJoin(AWS_BASE_URL || '', soldier.headstonePhoto)}
             />
           ) : null}
           {soldier?.guardians.length ? (

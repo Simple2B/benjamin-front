@@ -36,6 +36,7 @@ export type SoldierOut = {
     mainPhoto?: string;
     jewishServicemansCard?: string;
     kiaTelegram?: string;
+    headstonePhoto?: string;
     replacementCeremonyVideo?: string;
     photoPaths: Array<string>;
     soldierAudioTour?: string;
