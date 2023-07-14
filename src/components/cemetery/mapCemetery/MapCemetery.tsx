@@ -10,9 +10,9 @@ import {
   useMapEvents,
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import * as L from 'leaflet';
 import { Grave } from '@/openapi';
 import { davidStarIcon, currentPositionIcon } from './mapCemetery.constants';
+import { calculateDistance } from './mapCemetery.utils';
 
 export type ICoordinates = {
   lat: number;
@@ -73,8 +73,8 @@ export default function MapCemetery({
         style={{ height: '100%', width: '100%', zIndex: 0 }}
       >
         <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
         />
         {graves_coordinates.map(
           (
@@ -102,7 +102,7 @@ export default function MapCemetery({
             </Marker>
           )
         )}
-        <CurrentLocationMarker />
+        <CurrentLocationMarker center={center} />
       </MapContainer>
 
       {hasPermition && (
@@ -117,7 +117,11 @@ export default function MapCemetery({
   );
 }
 
-const CurrentLocationMarker = () => {
+type ICurrentLocationMarkerProps = {
+  center: ICoordinates;
+};
+
+const CurrentLocationMarker = ({ center }: ICurrentLocationMarkerProps) => {
   const [position, setPosition] = useState<ICoordinates | null>(null);
   const navigationButton = document.getElementById('navigation-button');
 
@@ -126,7 +130,14 @@ const CurrentLocationMarker = () => {
       map.locate();
     },
     locationfound(e) {
-      setPosition(e.latlng);
+      const distance = calculateDistance(center, e.latlng);
+      if (distance > 5) {
+        setPosition(center);
+        map.flyTo(center, map.getZoom());
+      } else {
+        setPosition(e.latlng);
+        map.flyTo(e.latlng, map.getZoom());
+      }
     },
   });
 
