@@ -27,9 +27,9 @@ const ClosebleInfo = ({
         <h2 className="text-lg font-semibold leading-6">{heading}</h2>
         <div onClick={handleClick}>
           {isOpen ? (
-            <IconButton iconName={ICONS_NAME.line} className={'h-4 w-8'} />
+            <IconButton iconName={ICONS_NAME.line} className={'h-4 w-4'} />
           ) : (
-            <IconButton iconName={ICONS_NAME.plus} className={'h-4 w-8'} />
+            <IconButton iconName={ICONS_NAME.plus} className={'h-4 w-4'} />
           )}
         </div>
       </div>
