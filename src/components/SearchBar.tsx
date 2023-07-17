@@ -51,7 +51,7 @@ const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
             }
           >
             <IconButton
-              iconName={ICONS_NAME.selectingArrow}
+              iconName={ICONS_NAME.navigateBack}
               className="w-4 h-4 rotate-180"
             />
           </Link>

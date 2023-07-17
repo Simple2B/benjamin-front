@@ -118,7 +118,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
           onClick={router.back}
         >
           <IconButton
-            iconName={ICONS_NAME.selectingArrow}
+            iconName={ICONS_NAME.navigateBack}
             className="w-6 h-6 rotate-180"
           />
         </div>

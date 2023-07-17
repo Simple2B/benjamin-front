@@ -59,12 +59,12 @@ export default function PreviewerSettings({
   return (
     <div className="flex flex-col items-start m-6 gap-8 bg-white">
       <div
-        className="w-full flex items-baseline justify-between"
+        className="w-full flex items-center justify-between"
         onClick={handleRouterBack}
       >
         <IconButton
-          iconName={ICONS_NAME.selectingArrow}
-          className="w-4 h-4 rotate-180"
+          iconName={ICONS_NAME.navigateBack}
+          className="w-6 h-6 rotate-180"
         />
 
         <h1 className="text-2xl font-semibold flex-grow text-center leading-7">
