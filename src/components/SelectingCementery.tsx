@@ -48,7 +48,7 @@ const SelectingCemetery = ({
                 </span>
                 <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4">
                   <IconButton
-                    iconName={ICONS_NAME.selectingArrow}
+                    iconName={ICONS_NAME.selectCemeteryArrow}
                     className={`h-4 w-4 m-1 ${open && 'rotate-90'}`}
                   />
                 </span>

@@ -7,7 +7,7 @@ type IProjectInfoProps = {
 
 const ProjectInfo = ({ heading, text }: IProjectInfoProps) => {
   return (
-    <div className="flex flex-col p-6 gap-2 text-indigo-100">
+    <div className="flex flex-col p-8 gap-4 text-indigo-100">
       <h1 className={`text-[22px] font-semibold leading-none tracking-tight`}>
         {heading}
       </h1>
