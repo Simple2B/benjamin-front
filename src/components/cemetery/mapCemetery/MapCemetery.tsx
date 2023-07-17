@@ -164,7 +164,6 @@ const CurrentLocationMarker = ({ center }: ICurrentLocationMarkerProps) => {
   function onLocationFound(e: any) {
     const currentCoordinates: ICoordinates = e.latlng;
     const distance = calculateDistance(center, currentCoordinates);
-    console.log(currentCoordinates);
     if (distance > 5) {
       setPosition(center);
       map.flyTo(center, map.getZoom());
@@ -175,7 +174,6 @@ const CurrentLocationMarker = ({ center }: ICurrentLocationMarkerProps) => {
   }
 
   navigationButton?.addEventListener('click', () => {
-    console.log('click');
     map.locate();
     map.on('locationfound', onLocationFound);
   });

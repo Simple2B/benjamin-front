@@ -12,12 +12,12 @@ const PreviewerHomePage = () => {
   const router = useRouter();
 
   const handleVideoEnd = () => {
-    localStorage.removeItem('uploadedStonePhoto');
-    if (localStorage.getItem('isVideoWatched')) {
-      router.push(PATH.location);
-      return;
-    }
     videoPreviewTimeoutRef.current = setTimeout(() => {
+      localStorage.removeItem('uploadedStonePhoto');
+      if (localStorage.getItem('isVideoWatched')) {
+        router.push(PATH.location);
+        return;
+      }
       setDisplayVideoPreview(false);
     }, 1500);
   };

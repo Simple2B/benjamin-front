@@ -7,7 +7,7 @@ type ICurrentPointerProps = {
 
 export const CurrentPointer = ({ currentInfoIndex }: ICurrentPointerProps) => {
   return (
-    <div className="flex w-12 justify-between mb-14">
+    <div className="flex w-12 justify-between mb-14 self-center">
       {PROJECT_INFO_TO_DISPLAY.map((item, index) => {
         return (
           <div
