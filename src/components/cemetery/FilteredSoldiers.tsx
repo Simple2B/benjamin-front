@@ -86,19 +86,8 @@ export const FilteredSoldiers = ({
         }
       });
 
-      // mainInfoContainer.addEventListener('click', () => {
-      //   setScrollableArea(false);
-      // });
-
       mainInfoContainer.addEventListener('touchmove', () => {});
       mainInfoContainer.addEventListener('touchend', (e) => {
-        // setScrollableArea(true);
-        // const posY = mainInfoContainer.getBoundingClientRect().top;
-        // if (posY <= screen.height / 2) {
-        //   setIsUp(true);
-        // } else {
-        //   setIsUp(false);
-        // }
         setScrollableArea(true);
         const posY = e.changedTouches[0].clientY;
         if (previousMainInfoPosition < posY) {
@@ -126,6 +115,10 @@ export const FilteredSoldiers = ({
     }
   }, [previousMainInfoPosition]);
 
+  const filterResultText = filterResult?.length
+    ? `${filterText} (${filterResult?.length})`
+    : 'No soldiers found';
+
   return (
     <div
       className="absolute w-full z-10 bg-white rounded-t-xl mt-[calc(100vh-230px)]"
@@ -140,9 +133,7 @@ export const FilteredSoldiers = ({
           <div className="flex w-full justify-center">
             <div className="h-[3px] w-16 bg-grey-50 mt-2 rounded-3xl"></div>
           </div>
-          <p className="text-2xl leading-7 py-5">
-            {filterText} ({filterResult?.length})
-          </p>
+          <p className="text-2xl leading-7 py-5">{filterResultText}</p>
         </div>
       </div>
       <div ref={additionalInfoRef}>
