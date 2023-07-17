@@ -53,7 +53,7 @@ const SoldierMainInfoCard = ({
         className="w-[126px] h-[123px] rounded-lg bg-grey-30 object-cover"
       />
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2.5">
         <p className="text-xl font-semibold leading-7">
           {sufix} {firstName} {lastName}
         </p>

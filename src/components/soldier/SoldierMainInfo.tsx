@@ -12,9 +12,9 @@ const SoldierMainInfo = ({ heading, text, icon }: ISoldierMainInfoProps) => {
     <>
       {text && (
         <div>
-          <div className="flex">
+          <div className="flex items-center">
             <IconButton iconName={icon} className="h-3 w-3 m-1" />
-            <p className="text-sm text-grey-20">{heading}</p>
+            <p className="text-sm text-grey-20 leading-7">{heading}</p>
           </div>
           <p className="ml-4 font-medium leading-6">{text}</p>
         </div>
