@@ -147,7 +147,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
                 text={cemetery.filtered_soldiers.title}
                 solders={cemetery.filtered_soldiers.soldiers}
                 className="z-10"
-                dash={true}
+                dash={false}
               />
             </>
           )}

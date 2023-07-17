@@ -74,7 +74,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
               className={'h-4 w-4'}
             />
           </div>
-          <p className="text-xs text-grey-20">
+          <p className="text-xs text-grey-20 ml-2">
             {formatTime(audioRef.current ? audioRef.current.seek() : 0)}
           </p>
           <input

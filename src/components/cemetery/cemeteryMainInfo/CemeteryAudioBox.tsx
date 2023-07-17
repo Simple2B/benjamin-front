@@ -10,7 +10,7 @@ type ICemeteryAudioBoxProps = {
 export const CemeteryAudioBox = ({ audio_tours }: ICemeteryAudioBoxProps) => {
   return (
     <div
-      className="w-full flex flex-col gap-6 bg-white px-6 z-10 pt-5"
+      className="w-full flex flex-col gap-6 bg-white px-6 z-10 pt-8"
       id={'cemetery-main-info'}
     >
       <div className="flex flex-col gap-2">
@@ -23,8 +23,6 @@ export const CemeteryAudioBox = ({ audio_tours }: ICemeteryAudioBoxProps) => {
           </div>
         ))}
       </div>
-
-      <hr className="border-indigo-100 border-opacity-10" />
     </div>
   );
 };
