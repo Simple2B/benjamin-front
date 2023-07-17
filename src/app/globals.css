@@ -137,3 +137,10 @@ html {
 .position-iphone {
   transform: translateZ(30px);
 }
+
+@media only screen and (orientation: landscape) {
+  html {
+    height: 100vw;
+    transform: rotate(90deg);
+  }
+}
