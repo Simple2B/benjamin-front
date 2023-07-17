@@ -30,4 +30,6 @@ export const ICONS_NAME = {
   upload: 'upload',
   crossWhite: 'cross-white',
   plus: 'plus',
+  globe: 'globe',
+  map: 'map',
 };
