@@ -32,10 +32,6 @@ interface IPreviewerSoldierProps {
 }
 
 export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
-  const [isScrolledDown, setScrolledDown] = useState<boolean>(false);
-
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const rememberSoldierRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -43,31 +39,6 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
       router.push(PATH.search);
     }
   }, [soldier, router]);
-
-  useEffect(() => {
-    if (!scrollRef.current || !rememberSoldierRef) {
-      return;
-    }
-    const intervalId = setInterval(() => {
-      const soldierPage = scrollRef.current as HTMLDivElement;
-      const rememberSoldierContainer =
-        rememberSoldierRef.current as HTMLDivElement;
-
-      const posY = screen.height - soldierPage.getBoundingClientRect().top;
-      const pageHeight = soldierPage.offsetHeight;
-      const threshold =
-        pageHeight + rememberSoldierContainer.offsetHeight + 220;
-
-      if (posY >= threshold) {
-        setScrolledDown(true);
-      } else {
-        setScrolledDown(false);
-      }
-    }, 100);
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
 
   let awardsInPreview = '';
 
@@ -140,8 +111,8 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
   };
 
   return (
-    <div id="soldier-page" ref={scrollRef}>
-      <div className="flex flex-col justify-center items-center mx-7 gap-4 my-4 text-indigo-100 leading-7 mb-56">
+    <div id="soldier-page">
+      <div className="flex flex-col justify-center items-center mx-7 gap-4 my-4 text-indigo-100 leading-7 mb-8">
         <div
           className="w-full flex items-baseline justify-between mb-2"
           onClick={router.back}
@@ -262,15 +233,12 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
           </ClosebleInfo>
         ) : null}
       </div>
-      <div ref={rememberSoldierRef}>
-        <RememberSoldier
-          soldierFirstName={soldier.firstName}
-          soldierLastName={soldier.lastName}
-          soldierSufix={soldier?.suffix}
-          soldierUuid={soldier.uuid}
-          isScrolledDown={isScrolledDown}
-        />
-      </div>
+      <RememberSoldier
+        soldierFirstName={soldier.firstName}
+        soldierLastName={soldier.lastName}
+        soldierSufix={soldier?.suffix}
+        soldierUuid={soldier.uuid}
+      />
     </div>
   );
 }
