@@ -31,14 +31,16 @@ export const CategoryPreview = () => {
   return (
     <div className="flex flex-col items-start m-6 gap-5 bg-white">
       <div
-        className="w-full flex items-baseline justify-between"
+        className="w-full flex items-center justify-between "
         onClick={router.back}
       >
         <IconButton
-          iconName={ICONS_NAME.selectingArrow}
-          className="ml-2 w-4 h-4 rotate-180"
+          iconName={ICONS_NAME.navigateBack}
+          className="ml-2 w-6 h-6 rotate-180"
         />
-        <h1 className="text-xl font-semibold flex-grow text-center">Filters</h1>
+        <h1 className="text-xl font-semibold flex-grow text-center mr-5">
+          Filters
+        </h1>
       </div>
 
       <div className="flex flex-col items-start mx-2 gap-6 bg-white">
