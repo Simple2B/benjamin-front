@@ -8,6 +8,7 @@ import ProjectInfo from './projectInfo/ProjectInfo';
 import { PROJECT_INFO_TO_DISPLAY } from './projectInfo/projectInfo.constants';
 import { CurrentPointer } from './CurrentPointer';
 import Spinner from '../Spinner';
+import { ProgressBar } from './ProgressBar';
 
 interface IPreviewProjectInfoProps {
   currentInfoIndex: number;
@@ -16,7 +17,8 @@ interface IPreviewProjectInfoProps {
 
 const loadSrcVideo = (
   videoSrc: string,
-  onBlobLoaded: (blobURL: string) => void
+  onBlobLoaded: (blobURL: string) => void,
+  onProgress: (progress: number) => void
 ) => {
   const xhr = new XMLHttpRequest();
   xhr.open('GET', videoSrc, true);
@@ -41,7 +43,7 @@ const loadSrcVideo = (
       const pc = Math.round((event.loaded / event.total) * 100);
       if (pc != prev_pc) {
         prev_pc = pc;
-        console.log('progress', pc);
+        onProgress(pc);
       }
     }
   });
@@ -58,6 +60,10 @@ const PreviewProjectInfo = ({
   const [secondVideoSrc, setSecondVideoSrc] = useState<string | null>(null);
   const [thirdVideoSrc, setThirdVideoSrc] = useState<string | null>(null);
 
+  const [firstVideoProgress, setFirstVideoProgress] = useState<number>(0);
+  const [secondVideoProgress, setSecondVideoProgress] = useState<number>(0);
+  const [thirdVideoProgress, setThirdVideoProgress] = useState<number>(0);
+
   const isLastPage = currentInfoIndex == PROJECT_INFO_TO_DISPLAY.length - 1;
 
   const handleVideoEnd = () => {
@@ -65,9 +71,21 @@ const PreviewProjectInfo = ({
   };
 
   useEffect(() => {
-    loadSrcVideo(PROJECT_INFO_TO_DISPLAY[0].videoUrl, setFirstVideoSrc);
-    loadSrcVideo(PROJECT_INFO_TO_DISPLAY[1].videoUrl, setSecondVideoSrc);
-    loadSrcVideo(PROJECT_INFO_TO_DISPLAY[2].videoUrl, setThirdVideoSrc);
+    loadSrcVideo(
+      PROJECT_INFO_TO_DISPLAY[0].videoUrl,
+      setFirstVideoSrc,
+      setFirstVideoProgress
+    );
+    loadSrcVideo(
+      PROJECT_INFO_TO_DISPLAY[1].videoUrl,
+      setSecondVideoSrc,
+      setSecondVideoProgress
+    );
+    loadSrcVideo(
+      PROJECT_INFO_TO_DISPLAY[2].videoUrl,
+      setThirdVideoSrc,
+      setThirdVideoProgress
+    );
   }, []);
 
   useEffect(() => {
@@ -86,22 +104,20 @@ const PreviewProjectInfo = ({
     height: window.screen.height - window.screen.width,
   };
 
-  const videoStyle = {
-    height: window.screen.width,
-  };
-
   return (
     <>
       <div className="flex flex-col items-center all-height bg-white">
-        {currentInfoIndex == 0 && firstVideoSrc ? (
-          <VideoPlayer srcVideo={firstVideoSrc} onVideoEnd={handleVideoEnd} />
-        ) : (
-          <div
-            className="w-full bg-gradient-to-r from-indigo-20 to-indigo-30 flex justify-center items-center"
-            style={videoStyle}
-          >
-            <Spinner />
-          </div>
+        {currentInfoIndex == 0 && (
+          <>
+            {firstVideoSrc ? (
+              <VideoPlayer
+                srcVideo={firstVideoSrc}
+                onVideoEnd={handleVideoEnd}
+              />
+            ) : (
+              <ProgressBar presentLoaded={firstVideoProgress} />
+            )}
+          </>
         )}
         {currentInfoIndex == 1 && (
           <>
@@ -111,12 +127,7 @@ const PreviewProjectInfo = ({
                 onVideoEnd={handleVideoEnd}
               />
             ) : (
-              <div
-                className="w-full bg-gradient-to-r from-indigo-20 to-indigo-30 flex justify-center items-center"
-                style={videoStyle}
-              >
-                <Spinner />
-              </div>
+              <ProgressBar presentLoaded={secondVideoProgress} />
             )}
           </>
         )}
@@ -128,12 +139,7 @@ const PreviewProjectInfo = ({
                 onVideoEnd={handleVideoEnd}
               />
             ) : (
-              <div
-                className="w-full bg-gradient-to-r from-indigo-20 to-indigo-30 flex justify-center items-center"
-                style={videoStyle}
-              >
-                <Spinner />
-              </div>
+              <ProgressBar presentLoaded={thirdVideoProgress} />
             )}
           </>
         )}

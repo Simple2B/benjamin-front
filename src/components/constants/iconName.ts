@@ -32,4 +32,5 @@ export const ICONS_NAME = {
   plus: 'plus',
   globe: 'globe',
   map: 'map',
+  selectCemeteryArrow: 'selectCemeteryArrow',
 };

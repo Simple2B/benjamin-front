@@ -30,7 +30,7 @@ const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
   return (
     <div className="bg-gradient-to-r from-indigo-20 to-indigo-30 w-screen flex flex-col justify-start gap-8 px-8 items-center all-height">
       <h1
-        className={`text-xl leading-[30px] text-white text-center mt-40 font-semibold`}
+        className={`text-xl leading-[30px] text-white text-center mt-52 font-semibold`}
       >
         Which American military cemetery would you like to explore?
       </h1>
