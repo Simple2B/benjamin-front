@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 type IVideoPlayerProps = {
-  srcVideo: string;
+  srcVideo: string | null;
   onVideoEnd?: () => void;
 };
 
@@ -23,7 +23,10 @@ const VideoPlayer = ({ srcVideo, onVideoEnd }: IVideoPlayerProps) => {
 
   useEffect(() => {
     if (videoRef && videoRef.current) {
-      videoRef.current.setAttribute('src', srcVideo);
+      videoRef.current.addEventListener('loadeddata', () => {
+        console.log('video loaded');
+        videoRef.current?.play();
+      });
     }
   }, [srcVideo]);
 
@@ -32,14 +35,14 @@ const VideoPlayer = ({ srcVideo, onVideoEnd }: IVideoPlayerProps) => {
   };
 
   return (
-    <video
-      autoPlay
-      muted
-      ref={videoRef}
-      playsInline
-      className="w-full bg-gradient-to-r from-indigo-20 to-indigo-30"
-      style={videoStyle}
-    ></video>
+    <>
+      <div
+        className="w-full bg-gradient-to-r from-indigo-20 to-indigo-30"
+        style={videoStyle}
+      >
+        <video muted ref={videoRef} playsInline src={srcVideo ?? ''}></video>
+      </div>
+    </>
   );
 };
 
