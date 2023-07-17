@@ -47,13 +47,12 @@ const SoldierMainInfoCard = ({
 
   return (
     <div className="flex justify-start gap-4 w-[350px] mb-2 ">
-      {photoUrl && (
-        <img
-          src={photoUrl}
-          alt="Soldier"
-          className="w-[126px] h-[123px] rounded-lg bg-grey-30"
-        />
-      )}
+      <img
+        src={photoUrl ? photoUrl : '/images/photos/soldeirProfilePhoto.jpg'}
+        alt="Soldier"
+        className="w-[126px] h-[123px] rounded-lg bg-grey-30 object-cover"
+      />
+
       <div className="flex flex-col gap-2">
         <p className="text-xl font-semibold leading-7">
           {sufix} {firstName} {lastName}

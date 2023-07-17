@@ -139,15 +139,16 @@ export const FilteredSoldiers = ({
             {filterResult?.map((soldier, index) => (
               <Link key={index} href={urlJoin(PATH.soldier, soldier.uuid)}>
                 <div className="w-[140px]">
-                  {soldier?.mainPhoto && AWS_BASE_URL ? (
-                    <img
-                      src={urlJoin(AWS_BASE_URL, soldier?.mainPhoto)}
-                      alt="soldier"
-                      className="w-[140px] h-[132px] rounded-lg bg-slate-400"
-                    />
-                  ) : (
-                    <div className="w-[140px] h-[132px] rounded-lg bg-slate-400"></div>
-                  )}
+                  <img
+                    src={
+                      soldier?.mainPhoto && AWS_BASE_URL
+                        ? urlJoin(AWS_BASE_URL, soldier?.mainPhoto)
+                        : '/images/photos/soldeirProfilePhoto.jpg'
+                    }
+                    alt="soldier"
+                    className="w-[140px] h-[132px] rounded-lg bg-slate-400 object-cover"
+                  />
+
                   <p className="leading-5 text-center">
                     {soldier.suffix} {soldier.firstName} {soldier.lastName}
                   </p>
