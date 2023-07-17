@@ -5,6 +5,8 @@ import { ICONS_NAME } from './constants/iconName';
 import Link from 'next/link';
 import { PATH } from './constants/path.constants';
 import { useRouter } from 'next/navigation';
+import { useAppStore } from '@/lib/slices/store';
+import urlJoin from 'url-join';
 
 type ISearchBarProps = {
   displaySettings: boolean;
@@ -14,6 +16,8 @@ type ISearchBarProps = {
 const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
   const [userInput, setUserInput] = useState<string>('');
   const router = useRouter();
+
+  const { currentCemetery } = useAppStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
@@ -38,15 +42,19 @@ const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
             />
           </div>
         ) : (
-          <div
+          <Link
             className="pl-4 flex justify-center items-center"
-            onClick={router.back}
+            href={
+              currentCemetery?.uuid
+                ? urlJoin(PATH.cemetery, currentCemetery?.uuid)
+                : PATH.location
+            }
           >
             <IconButton
               iconName={ICONS_NAME.selectingArrow}
               className="w-4 h-4 rotate-180"
             />
-          </div>
+          </Link>
         )}
         {displaySettings ? (
           <Link href={PATH.search}>
