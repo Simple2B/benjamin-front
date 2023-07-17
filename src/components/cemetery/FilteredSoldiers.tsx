@@ -24,11 +24,10 @@ export const FilteredSoldiers = ({
   const cemeteryMainInfoRef = useRef<HTMLDivElement>(null);
   const additionalInfoRef = useRef<HTMLDivElement>(null);
 
-  const [touchStart, setTouchStart] = useState<number>(0);
-  const [touchEnd, setTouchEnd] = useState<number>(0);
-  const [isInfoBoxFullScreen, setInfoBoxFullScreen] = useState<boolean>(false);
   const [isScrolableArea, setScrollableArea] = useState<boolean>(false);
   const [isUp, setIsUp] = useState<boolean>(false);
+  const [previousMainInfoPosition, setPreviousMainInfoPosition] =
+    useState<number>(0);
 
   const { currentCemetery } = useAppStore();
 
@@ -78,23 +77,36 @@ export const FilteredSoldiers = ({
         additionalInfoRef.current as HTMLDivElement;
 
       // Main container events
-      mainInfoContainer.addEventListener('touchstart', () => {
+      mainInfoContainer.addEventListener('touchstart', (e: TouchEvent) => {
         setScrollableArea(false);
+        if (e.touches.length) {
+          setPreviousMainInfoPosition(e.touches[0].clientY);
+        } else {
+          console.log('no touch');
+        }
       });
 
-      mainInfoContainer.addEventListener('click', () => {
-        setScrollableArea(false);
-      });
+      // mainInfoContainer.addEventListener('click', () => {
+      //   setScrollableArea(false);
+      // });
 
       mainInfoContainer.addEventListener('touchmove', () => {});
       mainInfoContainer.addEventListener('touchend', (e) => {
+        // setScrollableArea(true);
+        // const posY = mainInfoContainer.getBoundingClientRect().top;
+        // if (posY <= screen.height / 2) {
+        //   setIsUp(true);
+        // } else {
+        //   setIsUp(false);
+        // }
         setScrollableArea(true);
-        const posY = mainInfoContainer.getBoundingClientRect().top;
-        if (posY <= screen.height / 2) {
-          setIsUp(true);
-        } else {
+        const posY = e.changedTouches[0].clientY;
+        if (previousMainInfoPosition < posY) {
           setIsUp(false);
+        } else {
+          setIsUp(true);
         }
+        setPreviousMainInfoPosition(posY);
       });
 
       // // Additional container events
@@ -112,7 +124,7 @@ export const FilteredSoldiers = ({
         setScrollableArea(true);
       });
     }
-  }, []);
+  }, [previousMainInfoPosition]);
 
   return (
     <div
