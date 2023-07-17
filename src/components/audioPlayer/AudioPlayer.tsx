@@ -27,7 +27,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
     intervalRef.current = setInterval(() => {
       setCurrentTime(audioRef.current?.seek() ?? 0);
       console.log('interval called');
-    }, SECOND);
+    }, 3);
   };
 
   const handleStop = () => {
