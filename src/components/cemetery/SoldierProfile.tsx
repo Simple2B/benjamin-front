@@ -22,15 +22,15 @@ const SoldierProfile = ({
   return (
     <Link href={urlJoin(PATH.soldier, uuid)}>
       <div className={`w-[140px] flex-shrink-0`}>
-        {photoUrl ? (
-          <img
-            src={urlJoin(AWS_BASE_URL || '', photoUrl)}
-            alt="Soldier"
-            className="w-[140px] h-[132px] rounded-lg bg-grey-30 soldier-shawdow"
-          />
-        ) : (
-          <div className="w-[140px] h-[132px] rounded-lg bg-grey-30 soldier-shawdow"></div>
-        )}
+        <img
+          src={
+            photoUrl
+              ? urlJoin(AWS_BASE_URL || '', photoUrl)
+              : '/images/photos/soldeirProfilePhoto.jpg'
+          }
+          alt="Soldier"
+          className="w-[140px] h-[132px] rounded-lg bg-grey-30 soldier-shawdow object-cover"
+        />
 
         <p className="text-base text-center leading-5 mt-2">
           {suffix} {firstName} {lastName}

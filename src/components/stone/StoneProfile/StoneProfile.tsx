@@ -85,7 +85,7 @@ export const StoneProfile = ({
           <img
             src={photoSrc}
             alt="stone"
-            className="w-[148px] h-[144px] rounded-lg bg-grey-30 soldier-shawdow"
+            className="w-[148px] h-[144px] rounded-lg bg-grey-30 soldier-shawdow object-cover"
           />
         ) : (
           <div className="w-[148px] h-[144px] rounded-lg bg-grey-30 soldier-shawdow"></div>

@@ -1,11 +1,8 @@
 'use client';
-import React, { use } from 'react';
+import React from 'react';
 import IconButton from './IconButton';
 import { ICONS_NAME } from './constants/iconName';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useAppStore } from '@/lib/slices/store';
-import urlJoin from 'url-join';
 import { PATH } from './constants/path.constants';
 
 type ISearchBarProps = {
@@ -14,9 +11,6 @@ type ISearchBarProps = {
 };
 
 const SearchFilterBar = ({ filterText, setFilter }: ISearchBarProps) => {
-  const router = useRouter();
-  const { currentCemetery } = useAppStore();
-
   return (
     <div className="mt-10">
       <div
@@ -25,14 +19,8 @@ const SearchFilterBar = ({ filterText, setFilter }: ISearchBarProps) => {
           boxShadow: '0 2px 24px 0 rgba(0, 0, 0, 0.2)',
         }}
       >
-        <p className="leading-6">{filterText} </p>
-        <Link
-          href={
-            currentCemetery?.uuid
-              ? urlJoin(PATH.cemetery, currentCemetery?.uuid)
-              : PATH.location
-          }
-        >
+        <p className="leading-6">{filterText}</p>
+        <Link href={PATH.search}>
           <div
             className="flex justify-center items-center"
             onClick={() => setFilter(false)}

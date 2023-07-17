@@ -161,9 +161,9 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
           </div>
         </div>
       </div>
-      {soldiersQuery.data?.items.length && isFilter ? (
+      {isFilter ? (
         <FilteredSoldiers
-          filterResult={soldiersQuery.data.items}
+          filterResult={soldiersQuery.data ? soldiersQuery.data.items : []}
           isFetched={soldiersQuery.isFetched}
           filterText={getFilterTitle(values)}
         />

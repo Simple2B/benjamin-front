@@ -33,4 +33,5 @@ export const ICONS_NAME = {
   globe: 'globe',
   map: 'map',
   selectCemeteryArrow: 'selectCemeteryArrow',
+  filter: 'filter',
 };

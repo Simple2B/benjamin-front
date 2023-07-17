@@ -24,11 +24,10 @@ export const FilteredSoldiers = ({
   const cemeteryMainInfoRef = useRef<HTMLDivElement>(null);
   const additionalInfoRef = useRef<HTMLDivElement>(null);
 
-  const [touchStart, setTouchStart] = useState<number>(0);
-  const [touchEnd, setTouchEnd] = useState<number>(0);
-  const [isInfoBoxFullScreen, setInfoBoxFullScreen] = useState<boolean>(false);
   const [isScrolableArea, setScrollableArea] = useState<boolean>(false);
   const [isUp, setIsUp] = useState<boolean>(false);
+  const [previousMainInfoPosition, setPreviousMainInfoPosition] =
+    useState<number>(0);
 
   const { currentCemetery } = useAppStore();
 
@@ -78,23 +77,25 @@ export const FilteredSoldiers = ({
         additionalInfoRef.current as HTMLDivElement;
 
       // Main container events
-      mainInfoContainer.addEventListener('touchstart', () => {
+      mainInfoContainer.addEventListener('touchstart', (e: TouchEvent) => {
         setScrollableArea(false);
-      });
-
-      mainInfoContainer.addEventListener('click', () => {
-        setScrollableArea(false);
+        if (e.touches.length) {
+          setPreviousMainInfoPosition(e.touches[0].clientY);
+        } else {
+          console.log('no touch');
+        }
       });
 
       mainInfoContainer.addEventListener('touchmove', () => {});
       mainInfoContainer.addEventListener('touchend', (e) => {
         setScrollableArea(true);
-        const posY = mainInfoContainer.getBoundingClientRect().top;
-        if (posY <= screen.height / 2) {
-          setIsUp(true);
-        } else {
+        const posY = e.changedTouches[0].clientY;
+        if (previousMainInfoPosition < posY) {
           setIsUp(false);
+        } else {
+          setIsUp(true);
         }
+        setPreviousMainInfoPosition(posY);
       });
 
       // // Additional container events
@@ -112,7 +113,11 @@ export const FilteredSoldiers = ({
         setScrollableArea(true);
       });
     }
-  }, []);
+  }, [previousMainInfoPosition]);
+
+  const filterResultText = filterResult?.length
+    ? `${filterText} (${filterResult?.length})`
+    : 'No soldiers found';
 
   return (
     <div
@@ -128,9 +133,7 @@ export const FilteredSoldiers = ({
           <div className="flex w-full justify-center">
             <div className="h-[3px] w-16 bg-grey-50 mt-2 rounded-3xl"></div>
           </div>
-          <p className="text-2xl leading-7 py-5">
-            {filterText} ({filterResult?.length})
-          </p>
+          <p className="text-2xl leading-7 py-5">{filterResultText}</p>
         </div>
       </div>
       <div ref={additionalInfoRef}>
@@ -139,15 +142,16 @@ export const FilteredSoldiers = ({
             {filterResult?.map((soldier, index) => (
               <Link key={index} href={urlJoin(PATH.soldier, soldier.uuid)}>
                 <div className="w-[140px]">
-                  {soldier?.mainPhoto && AWS_BASE_URL ? (
-                    <img
-                      src={urlJoin(AWS_BASE_URL, soldier?.mainPhoto)}
-                      alt="soldier"
-                      className="w-[140px] h-[132px] rounded-lg bg-slate-400"
-                    />
-                  ) : (
-                    <div className="w-[140px] h-[132px] rounded-lg bg-slate-400"></div>
-                  )}
+                  <img
+                    src={
+                      soldier?.mainPhoto && AWS_BASE_URL
+                        ? urlJoin(AWS_BASE_URL, soldier?.mainPhoto)
+                        : '/images/photos/soldeirProfilePhoto.jpg'
+                    }
+                    alt="soldier"
+                    className="w-[140px] h-[132px] rounded-lg bg-slate-400 object-cover"
+                  />
+
                   <p className="leading-5 text-center">
                     {soldier.suffix} {soldier.firstName} {soldier.lastName}
                   </p>
