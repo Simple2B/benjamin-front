@@ -38,9 +38,7 @@ export const CategoryPreview = () => {
           iconName={ICONS_NAME.selectingArrow}
           className="ml-2 w-4 h-4 rotate-180"
         />
-        <h1 className="text-2xl font-semibold flex-grow text-center font-rajdhani">
-          Categories
-        </h1>
+        <h1 className="text-xl font-semibold flex-grow text-center">Filters</h1>
       </div>
 
       <div className="flex flex-col items-start mx-2 gap-6 bg-white">

@@ -67,7 +67,7 @@ const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
           </Link>
         ) : (
           <input
-            className="flex-shrink w-[250px] outline-none"
+            className="flex-shrink w-[210px] outline-none"
             type="text"
             placeholder="Search for the soldier"
             onChange={handleChange}
@@ -77,12 +77,21 @@ const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
         <div className="flex justify-center items-center">
           <IconButton iconName={ICONS_NAME.camera} className={'h-6 w-6'} />
         </div>
-        {displaySettings && (
+        {displaySettings ? (
           <Link href={PATH.settings}>
             <IconButton
               iconName={ICONS_NAME.settings}
               className={
                 'inline-flex items-center justify-center h-9 w-9 bg-turquoise-100 rounded p-2.5 mr-[6px]'
+              }
+            />
+          </Link>
+        ) : (
+          <Link href={PATH.category}>
+            <IconButton
+              iconName={ICONS_NAME.filter}
+              className={
+                'inline-flex items-center justify-center h-9 w-9 bg-[#EDF8FB] rounded p-1.5 mr-[6px]'
               }
             />
           </Link>
