@@ -8,5 +8,5 @@ export const ADDITONAL_INFO_HEADERS: Record<
   war: 'War',
   numberOfSoldiersBuried: 'Number of soldiers buried',
   numberOfJewishSoldiersBuried: 'Number of jewish soldiers buried',
-  listedAsMissingSoldiers: 'Listed as Missing Soldiers',
+  listedAsMissingSoldiers: 'Number of Missing Soldiers',
 };

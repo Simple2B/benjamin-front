@@ -51,9 +51,7 @@ const CemeteryMainInfo = ({
         <div className="h-[3px] w-16 bg-grey-50 mt-2 rounded-3xl"></div>
       </div>
       <div className="flex flex-col gap-2">
-        <h1
-          className={`font-roboto text-2xl font-medium  text-indigo-100 leading-7`}
-        >
+        <h1 className={`text-xl font-semibold  text-indigo-100 leading-7`}>
           {name}
         </h1>
         <p className="text-sm leading-5">{location}</p>

@@ -7,6 +7,7 @@ import {
   Marker,
   Popup,
   TileLayer,
+  useMap,
   useMapEvents,
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -29,6 +30,7 @@ export default function MapCemetery({
   graves_coordinates,
 }: IMapCemeteryProps) {
   const [hasPermition, setHasPermition] = useState<boolean>(false);
+  const [isTerrian, setIsTerrian] = useState<boolean>(true);
 
   useEffect(() => {
     navigator.permissions
@@ -61,6 +63,10 @@ export default function MapCemetery({
         };
       });
   }, []);
+
+  const handleChangeView = () => {
+    setIsTerrian(!isTerrian);
+  };
   return (
     <div
       className={`w-full absolute flex justify-end items-end t-0 l-0 h-[calc(100vh-175px)]`}
@@ -73,8 +79,16 @@ export default function MapCemetery({
         style={{ height: '100%', width: '100%', zIndex: 0 }}
       >
         <TileLayer
-          attribution='<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
+          attribution={
+            isTerrian
+              ? 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+              : '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          }
+          url={
+            isTerrian
+              ? 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+              : 'https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png'
+          }
         />
         {graves_coordinates.map(
           (
@@ -104,15 +118,30 @@ export default function MapCemetery({
         )}
         <CurrentLocationMarker center={center} />
       </MapContainer>
-
-      {hasPermition && (
+      <>
         <div
-          className="flex w-12 h-12 justify-center items-center bg-white rounded-3xl rotate-45 mb-[70px] mr-2 absolute"
+          className="flex w-10 h-10 justify-center items-center bg-[#EDF8FB] rounded-3xl mb-[120px] mr-2 absolute"
           id="navigation-button"
         >
           <IconButton iconName={ICONS_NAME.navigation} className="w-5 h-5" />
         </div>
-      )}
+
+        {isTerrian ? (
+          <div
+            className="flex w-10 h-10 justify-center items-center bg-[#EDF8FB] rounded-3xl mb-[70px] mr-2 absolute"
+            onClick={handleChangeView}
+          >
+            <IconButton iconName={ICONS_NAME.globe} className="w-5 h-5" />
+          </div>
+        ) : (
+          <div
+            className="flex w-10 h-10 justify-center items-center bg-white rounded-3xl mb-[70px] mr-2 absolute"
+            onClick={handleChangeView}
+          >
+            <IconButton iconName={ICONS_NAME.map} className="w-5 h-5" />
+          </div>
+        )}
+      </>
     </div>
   );
 }
@@ -123,27 +152,28 @@ type ICurrentLocationMarkerProps = {
 
 const CurrentLocationMarker = ({ center }: ICurrentLocationMarkerProps) => {
   const [position, setPosition] = useState<ICoordinates | null>(null);
+
   const navigationButton = document.getElementById('navigation-button');
 
-  const map = useMapEvents({
-    click() {
-      map.locate();
-    },
-    locationfound(e) {
-      const distance = calculateDistance(center, e.latlng);
-      if (distance > 5) {
-        setPosition(center);
-        map.flyTo(center, map.getZoom());
-      } else {
-        setPosition(e.latlng);
-        map.flyTo(e.latlng, map.getZoom());
-      }
-    },
-  });
+  const map = useMap();
+
+  function onLocationFound(e: any) {
+    const currentCoordinates: ICoordinates = e.latlng;
+    const distance = calculateDistance(center, currentCoordinates);
+    console.log(currentCoordinates);
+    if (distance > 5) {
+      setPosition(center);
+      map.flyTo(center, map.getZoom());
+    } else {
+      setPosition(currentCoordinates);
+      map.flyTo(currentCoordinates, map.getZoom());
+    }
+  }
 
   navigationButton?.addEventListener('click', () => {
-    if (position === null) return;
-    map.flyTo(position, map.getZoom());
+    console.log('click');
+    map.locate();
+    map.on('locationfound', onLocationFound);
   });
 
   return position === null ? null : (

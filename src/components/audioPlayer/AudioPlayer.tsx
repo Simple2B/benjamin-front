@@ -27,7 +27,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
     intervalRef.current = setInterval(() => {
       setCurrentTime(audioRef.current?.seek() ?? 0);
       console.log('interval called');
-    }, SECOND);
+    }, 3);
   };
 
   const handleStop = () => {
@@ -74,7 +74,7 @@ const AudioPlayer = ({ audioSourse }: IAudioPlayerProps) => {
               className={'h-4 w-4'}
             />
           </div>
-          <p className="text-xs text-grey-20">
+          <p className="text-xs text-grey-20 ml-2">
             {formatTime(audioRef.current ? audioRef.current.seek() : 0)}
           </p>
           <input
