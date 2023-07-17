@@ -51,3 +51,5 @@ export const categoryFilterNames = {
   deathDay: 'Died on',
   deathYear: 'Died in',
 };
+
+export const MAP_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAP_ACCESS_TOKEN;

@@ -14,6 +14,7 @@ import 'leaflet/dist/leaflet.css';
 import { Grave } from '@/openapi';
 import { davidStarIcon, currentPositionIcon } from './mapCemetery.constants';
 import { calculateDistance } from './mapCemetery.utils';
+import { MAP_ACCESS_TOKEN } from '@/components/constants/constants';
 
 export type ICoordinates = {
   lat: number;
@@ -78,18 +79,21 @@ export default function MapCemetery({
         zoomControl={false}
         style={{ height: '100%', width: '100%', zIndex: 0 }}
       >
-        <TileLayer
-          attribution={
-            isTerrian
-              ? 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-              : '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          }
-          url={
-            isTerrian
-              ? 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
-              : 'https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png'
-          }
-        />
+        {isTerrian ? (
+          <TileLayer
+            attribution={
+              'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+            }
+            url={`https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}`}
+          />
+        ) : (
+          <TileLayer
+            attribution={
+              '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }
+            url={`https://{s}.tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token=${MAP_ACCESS_TOKEN}`}
+          />
+        )}
         {graves_coordinates.map(
           (
             {
@@ -135,7 +139,7 @@ export default function MapCemetery({
           </div>
         ) : (
           <div
-            className="flex w-10 h-10 justify-center items-center bg-white rounded-3xl mb-[70px] mr-2 absolute"
+            className="flex w-10 h-10 justify-center items-center bg-[#EDF8FB] rounded-3xl mb-[70px] mr-2 absolute"
             onClick={handleChangeView}
           >
             <IconButton iconName={ICONS_NAME.map} className="w-5 h-5" />
