@@ -12,7 +12,7 @@ export const PROJECT_INFO_TO_DISPLAY: IProjectInfoToDisplay[] = [
   },
   {
     heading: 'Learn more about our soldiers',
-    text: 'The Operation Benjamin app will help you navigate the foreign American Military Cemeteries.  You’ll be able to find Jewish soldiers, learn more about their lives and their incredible sacrifices. Explore with us!',
+    text: 'The Operation Benjamin app will help you navigate the foreign American Military Cemeteries.  You’ll be able to find Jewish soldiers and learn more about their lives and their incredible sacrifices. Explore with us!',
     vireoUrl: '/video/onboarding_2.mp4',
   },
   {

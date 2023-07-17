@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 type IVideoPlayerProps = {
   srcVideo: string;
@@ -27,16 +27,19 @@ const VideoPlayer = ({ srcVideo, onVideoEnd }: IVideoPlayerProps) => {
     }
   }, [srcVideo]);
 
+  const videoStyle = {
+    height: window.screen.width,
+  };
+
   return (
-    <>
-      <video
-        autoPlay
-        muted
-        ref={videoRef}
-        playsInline
-        className="w-screen bg-gradient-to-r from-indigo-20 to-indigo-30"
-      ></video>
-    </>
+    <video
+      autoPlay
+      muted
+      ref={videoRef}
+      playsInline
+      className="w-full bg-gradient-to-r from-indigo-20 to-indigo-30"
+      style={videoStyle}
+    ></video>
   );
 };
 

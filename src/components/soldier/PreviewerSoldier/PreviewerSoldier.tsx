@@ -45,7 +45,6 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
   }, [soldier, router]);
 
   useEffect(() => {
-    console.log(scrollRef);
     if (!scrollRef.current || !rememberSoldierRef) {
       return;
     }
