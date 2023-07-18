@@ -52,7 +52,7 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
 
   return (
     <>
-      <div className="flex flex-col items-start py-4 text-indigo-100 gap-6">
+      <div className="flex flex-col items-start pt-4 text-indigo-100 gap-9">
         {isSent && <MessageSendPopUp />}
 
         <div className="w-full flex justify-between px-[18px]">
@@ -66,12 +66,12 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
         <div className="px-8 flex flex-col gap-6 leading-[22px]">
           <p>{messagePageInstruction}</p>
 
-          <div className="flex flex-col w-full">
+          <div className="flex flex-col w-full gap-2">
             <h3 className="font-semibold leading-6">EMAIL</h3>
             <input
               type="email"
               id="email"
-              className="border border-gray-300 text-sm rounded-lg p-3 w-full h-[55px]"
+              className="border border-gray-300 text-sm rounded-lg p-3 w-full h-[55px] outline-none message-textarea"
               placeholder="Type your email"
               onChange={handleEmail}
               value={email}
@@ -83,13 +83,13 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
               Please enter accurate email address
             </p>
           </div>
-          <div className="flex flex-col w-full mb-24">
+          <div className="flex flex-col w-full gap-2">
             <h3 className="font-semibold leading-6">MESSAGE</h3>
             <textarea
               maxLength={500}
               rows={10}
               onChange={handleMessage}
-              className=" resize-none p-3 text-sm rounded-lg border border-gray-300 w-full h-[323px]  z-0"
+              className=" resize-none p-3 text-sm rounded-lg border border-gray-300 w-full h-[323px] z-0 outline-none message-textarea"
               placeholder="Type your message"
               value={message}
             ></textarea>
@@ -99,7 +99,7 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
           </div>
         </div>
       </div>
-      <div className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end">
+      <div className="h-40 w-full flex justify-center items-end">
         <button
           className="w-[350px] bg-turquoise-100 text-white p-3 rounded-lg font-semibold m-3 mb-11"
           onClick={handleSend}

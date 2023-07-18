@@ -56,6 +56,10 @@ const PreviewProjectInfo = ({
   onNextButtonClick,
 }: IPreviewProjectInfoProps) => {
   const [isButtonEnabled, setIsButtonEnabled] = useState<boolean>(false);
+
+  const [projectInfoHeigth, setProjectInfoHeigth] = useState<number>(0);
+  const [videoHeigth, setVideoHeight] = useState<number>(0);
+
   const [firstVideoSrc, setFirstVideoSrc] = useState<string | null>(null);
   const [secondVideoSrc, setSecondVideoSrc] = useState<string | null>(null);
   const [thirdVideoSrc, setThirdVideoSrc] = useState<string | null>(null);
@@ -71,6 +75,9 @@ const PreviewProjectInfo = ({
   };
 
   useEffect(() => {
+    setProjectInfoHeigth(window.screen.height - window.screen.width);
+    setVideoHeight(window.screen.width);
+
     loadSrcVideo(
       PROJECT_INFO_TO_DISPLAY[0].videoUrl,
       setFirstVideoSrc,
@@ -101,14 +108,19 @@ const PreviewProjectInfo = ({
   };
 
   const projectInfoStyle = {
-    height: window.screen.height - window.screen.width,
+    height: projectInfoHeigth,
+  };
+
+  const videoStyle = {
+    height: videoHeigth,
+    width: '100%',
   };
 
   return (
     <>
       <div className="flex flex-col items-center all-height bg-white">
         {currentInfoIndex == 0 && (
-          <>
+          <div style={videoStyle}>
             {firstVideoSrc ? (
               <VideoPlayer
                 srcVideo={firstVideoSrc}
@@ -117,10 +129,10 @@ const PreviewProjectInfo = ({
             ) : (
               <ProgressBar presentLoaded={firstVideoProgress} />
             )}
-          </>
+          </div>
         )}
         {currentInfoIndex == 1 && (
-          <>
+          <div style={videoStyle}>
             {secondVideoSrc ? (
               <VideoPlayer
                 srcVideo={secondVideoSrc}
@@ -129,10 +141,10 @@ const PreviewProjectInfo = ({
             ) : (
               <ProgressBar presentLoaded={secondVideoProgress} />
             )}
-          </>
+          </div>
         )}
         {currentInfoIndex == 2 && (
-          <>
+          <div style={videoStyle}>
             {thirdVideoSrc ? (
               <VideoPlayer
                 srcVideo={thirdVideoSrc}
@@ -141,7 +153,7 @@ const PreviewProjectInfo = ({
             ) : (
               <ProgressBar presentLoaded={thirdVideoProgress} />
             )}
-          </>
+          </div>
         )}
 
         <div
@@ -153,7 +165,9 @@ const PreviewProjectInfo = ({
             heading={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].heading}
           />
           <div className="flex flex-col w-full">
-            <div className="flex flex-col items-end justify-end px-6 mb-12 w-full">
+            <div
+              className={`flex flex-col items-end justify-end px-6 mb-12 w-full`}
+            >
               <Link href={isLastPage ? PATH.location : PATH.home}>
                 <NavigationButton
                   icon={ICONS_NAME.arrowRigth}

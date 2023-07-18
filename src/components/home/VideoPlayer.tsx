@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 type IVideoPlayerProps = {
   srcVideo: string | null;
@@ -7,6 +7,7 @@ type IVideoPlayerProps = {
 
 const VideoPlayer = ({ srcVideo, onVideoEnd }: IVideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoHeigth, setVideoHeight] = useState<number>(0);
 
   useEffect(() => {
     if (!onVideoEnd) {
@@ -30,8 +31,12 @@ const VideoPlayer = ({ srcVideo, onVideoEnd }: IVideoPlayerProps) => {
     }
   }, [srcVideo]);
 
+  useEffect(() => {
+    setVideoHeight(window.screen.width);
+  }, []);
+
   const videoStyle = {
-    height: window.screen.width,
+    height: videoHeigth,
   };
 
   return (

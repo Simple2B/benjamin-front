@@ -31,8 +31,8 @@ export const PreviewPrayer = ({ elMaleh }: IPreviewPrayerProps) => {
   const elMalehText = formElMalehText(elMaleh);
 
   return (
-    <div className="flex flex-col py-6 text-indigo-100 justify-center w-full items-center px-5">
-      <div className="w-full flex justify-between">
+    <div className="flex flex-col py-6 text-indigo-100 justify-center w-full items-center">
+      <div className="w-full flex justify-between px-5">
         <div onClick={router.back}>
           <IconButton iconName={ICONS_NAME.arrow} className="w-4 h-4" />
         </div>
@@ -40,7 +40,7 @@ export const PreviewPrayer = ({ elMaleh }: IPreviewPrayerProps) => {
           Recite a prayer
         </h1>
       </div>
-      <div className="w-[350px] mt-8">
+      <div className=" mt-8 w-full px-8">
         <Tab.Group>
           <Tab.List className="flex w-full space-x-1 text-indigo-100 gap-3">
             {Object.keys(prayers).map((prayer) => (
@@ -66,7 +66,7 @@ export const PreviewPrayer = ({ elMaleh }: IPreviewPrayerProps) => {
                 <ul>
                   {posts.map((post, index) => (
                     <div key={index} className="flex flex-col gap-6">
-                      <p className="text-sm p-3 bg-turquoise-100 bg-opacity-10 rounded-lg leading-[22px]">
+                      <p className="text-sm p-4 bg-turquoise-100 bg-opacity-10 rounded-lg leading-[22px]">
                         {post.description}
                       </p>
                       {post.prayerSource.length > 0 && (

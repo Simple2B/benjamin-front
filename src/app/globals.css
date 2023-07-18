@@ -138,7 +138,7 @@ html {
   transform: translateZ(30px);
 }
 
-@media only screen and (orientation: landscape) {
+@media only screen and (orientation: landscape) and (max-width: 900px) {
   html {
     height: 100vw;
     transform: rotate(90deg);
@@ -146,6 +146,7 @@ html {
 }
 
 .white-gradient {
+  z-index: 1;
   background: rgb(255, 255, 255);
   background: linear-gradient(
     0deg,
@@ -154,4 +155,17 @@ html {
     rgba(255, 255, 255, 0.5102415966386555) 69%,
     rgba(255, 255, 255, 0) 100%
   );
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: base;
+  }
+
+  .message-textarea:focus,
+  .message-input:focus {
+    font-size: 14px;
+  }
 }
