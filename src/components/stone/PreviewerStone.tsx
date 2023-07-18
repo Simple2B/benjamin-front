@@ -49,14 +49,6 @@ export const PreviewerStone = ({
         index === self.findIndex((s) => s.uuid === stone.uuid)
     );
     setStonePhotosGallery(uniqueStones);
-
-    if (currentStones) {
-      document.getElementById('page')?.scrollTo({
-        top: window.screen.height,
-        left: 0,
-        behavior: 'smooth',
-      });
-    }
   }, [currentStones]);
 
   const handleUploadWindowClose = () => {
