@@ -149,7 +149,7 @@ export const FilteredSoldiers = ({
                         : '/images/photos/soldeirProfilePhoto.jpg'
                     }
                     alt="soldier"
-                    className="w-[140px] h-[132px] rounded-lg bg-slate-400 object-cover"
+                    className="w-[140px] h-[132px] rounded-lg bg-slate-400 object-cover photo-shadow"
                   />
 
                   <p className="leading-5 text-center">
