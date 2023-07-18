@@ -8,39 +8,39 @@ export const prayers = {
       prayerSource: ['CHAPTER 23', 'פרק כ״ג'],
       prayerText: [
         {
-          prayerInNativeLanguage: 'מִזְמוֹר לְדָוִד יְהוָה רֹעִי לֹא אֶחְסָר׃',
+          prayerInNativeLanguage: 'מִזְמוֹר לְדָוִד יְהוָה רֹעִי לֹא אֶחְסָר׃ ',
           translation:
             'A psalm of David. The LORD is my shepherd; I lack nothing.',
         },
         {
           prayerInNativeLanguage:
-            'בִּנְאוֹת דֶּשֶׁא יַרְבִּיצֵנִי עַל־מֵי מְנֻחוֹת יְנַהֲלֵנִי׃',
+            'בִּנְאוֹת דֶּשֶׁא יַרְבִּיצֵנִי עַל־מֵי מְנֻחוֹת יְנַהֲלֵנִי׃ ',
           translation:
-            'He makes me lie down in green pastures; He leads me to water in places of repose; ',
+            'In green pastures He lays me down; He leads me to restful waters.',
         },
         {
           prayerInNativeLanguage:
             'נַפְשִׁי יְשׁוֹבֵב יַנְחֵנִי בְמַעְגְּלֵי־צֶדֶק לְמַעַן שְׁמֽוֹ׃',
           translation:
-            'He renews my life; He guides me in right paths as befits His name.',
+            'He renews my soul; He guides me in just paths as befits His name.',
         },
         {
           prayerInNativeLanguage:
             'גַּם כִּי־אֵלֵךְ בְּגֵיא צַלְמָוֶת לֹא־אִירָא רָע כִּי־אַתָּה עִמָּדִי שִׁבְטְךָ וּמִשְׁעַנְתֶּךָ הֵמָּה יְנַחֲמֻנִי׃',
           translation:
-            'Though I walk through a valley of deepest darkness, I fear no harm, for You are with me; Your rod and Your staff—they comfort me.',
+            'Though I walk through a valley of the shadow of death , I fear no harm, for You are with me; Your rod and Your staff comfort me.',
         },
         {
           prayerInNativeLanguage:
-            'גַּם כִּי־אֵלֵךְ בְּגֵיא צַלְמָוֶת לֹא־אִירָא רָע כִּי־אַתָּה עִמָּדִי שִׁבְטְךָ וּמִשְׁעַנְתֶּךָ הֵמָּה יְנַחֲמֻנִי׃',
+            'תַּעֲרֹךְ לְפָנַי שֻׁלְחָן נֶגֶד צֹרְרָי דִּשַּׁנְתָּ בַשֶּׁמֶן רֹאשִׁי כּוֹסִי רְוָיָה׃',
           translation:
-            'You spread a table for me in full view of my enemies; You anoint my head with oil; my drink is abundant.',
+            'You spread a table for me in view of my tormentors; You anoint my head with oil; my cup overflows.',
         },
         {
           prayerInNativeLanguage:
             'אַךְ טוֹב וָחֶסֶד יִרְדְּפוּנִי כָּל־יְמֵ֣י חַיָּי וְשַׁבְתִּי בְּבֵית־יְ֝הוָ֗ה לְאֹרֶךְ יָמִים׃',
           translation:
-            'Only goodness and steadfast love shall pursue me all the days of my life, and I shall dwell in the house of the LORD for many long years.',
+            'May only goodness and steadfast love shall pursue me all the days of my life, and I shall dwell in the house of the LORD for many long days.',
         },
       ],
     },
@@ -56,19 +56,20 @@ export const prayers = {
       prayerText: [
         {
           prayerInNativeLanguage:
-            'יִתְגַּדַּל וְיִתְקַדַּשׁ שְׁמֵהּ רַבָּא. [קהל: אמן] ',
+            'יִתְגַּדַּל וְיִתְקַדַּשׁ שְׁמֵהּ רַבָּא. [קהל: אמן]',
+
           translation:
             'Exalted and hallowed be God’s great name (Congregation: Amen)',
         },
         {
           prayerInNativeLanguage:
-            'בְּעָלְמָא דִּי בְרָא כִרְעוּתֵהּ וְיַמְלִיךְ מַלְכוּתֵהּ בְּחַיֵּיכון וּבְיומֵיכון וּבְחַיֵּי דְכָל בֵּית יִשרָאֵל בַּעֲגָלָא וּבִזְמַן קָרִיב, וְאִמְרוּ אָמֵן: [קהל: אמן]',
+            ' בְּעָלְמָא דִּי בְרָא כִרְעוּתֵהּ וְיַמְלִיךְ מַלְכוּתֵהּ בְּחַיֵּיכון וּבְיומֵיכון וּבְחַיֵּי דְכָל בֵּית יִשרָאֵל בַּעֲגָלָא וּבִזְמַן קָרִיב, וְאִמְרוּ אָמֵן: [קהל: אמן]',
           translation:
-            'in the world which God created, according to plan. May God’s majesty be revealed in the days of our lifetime and the life of all Israel — speedily, imminently, To which we say: Amen. (Congregation: Amen)',
+            'in the world which God created, according to His plan. May God’s majesty be revealed in the days of our lifetime and the life of all Israel — speedily, imminently, To which we say: Amen. (Congregation: Amen)',
         },
         {
           prayerInNativeLanguage:
-            'יְהֵא שְׁמֵהּ רַבָּא מְבָרַךְ לְעָלַם וּלְעָלְמֵי עָלְמַיָּא: ',
+            ' יְהֵא שְׁמֵהּ רַבָּא מְבָרַךְ לְעָלַם וּלְעָלְמֵי עָלְמַיָּא: ',
           translation: 'Blessed be God’s great name to all eternity.',
         },
         {
@@ -93,7 +94,7 @@ export const prayers = {
           prayerInNativeLanguage:
             'עוֹשה שָׁלוֹם בִּמְרומָיו הוּא יַעֲשה שָׁלום עָלֵינוּ וְעַל כָּל יִשרָאֵל וְאִמְרוּ אָמֵן: [קהל: אמן] ',
           translation:
-            'He who creates peace in His celestial heights,may He create peace for us and for all Israel; and say, Amen. (Congregation: Amen)',
+            'He who creates peace in His celestial heights, May create peace for us and for all Israel; and say, Amen. (Congregation: Amen)',
         },
       ],
     },
@@ -105,14 +106,7 @@ export const prayers = {
       audioUrl:
         'https://www.bensound.com/bensound-music/bensound-tenderness.mp3',
       prayerSource: [],
-      prayerText: [
-        {
-          prayerInNativeLanguage:
-            'אֵל מָלֵא רַחֲמִים, שׁוֹכֵן בַּמְּרוֹמִים, הַמְצֵא מְנוּחָה נְכוֹנָה עַל כַּנְפֵי הַשְּׁכִינָה, בְּמַעֲלַת קְדוֹשִׁים וּטְהוֹרִים כְּזֹהַר הָרָקִיעַ מַזְהִירִים, אֶת נִשְׁמַתEL MALEH NAME שֶׁהָלַךְ לְעוֹלָמוֹ, בַּעֲבוּר שֶׁבְּלִי נֶדֶר אֶתֵּן צְדָקָה בְּעַד הַזְכַּרַת נִשְׁמָתוֹ, בְּגַן עֵדֶן תְּהֵא מְנוּחָתוֹ, לָכֵן בַּעַל הָרַחֲמִים יַסְתִּירֵהוּ בְּסֵתֶר כְּנָפָיו לְעוֹלָמִים, וְיִצְרוֹר בִּצְרוֹר הַחַיִּים אֶת נִשְׁמָתוֹ, יְיָ הוּא נַחֲלָתוֹ, וְיָנוּחַ עַל מִשְׁכָּבוֹ בְּשָׁלוֹם.  וְנֹאמַר אָמֵן. ',
-          translation:
-            'O Power, full of mercy, who dwells on high, establish proper rest upon the wings of the Divine Presence, on the levels of the holy and pure ones who shine like the splendor of the firmament, for the soul of (EL MALEH NAME) who went to his world, because I will give charity for the memory of his soul; let his rest be in the Garden of Eden. Hence, Master of mercy, cover him in the cover of His wings forever and bind his soul with the Binding of life (God). God is his inheritance and let him rest upon his place of repose in peace. And let us say Amen. ',
-        },
-      ],
+      prayerText: [],
     },
   ],
 };
