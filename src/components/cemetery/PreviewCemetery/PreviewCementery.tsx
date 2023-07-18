@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import MapCemetery, { ICoordinates } from '../mapCemetery/MapCemetery';
+import { ICoordinates } from '../mapCemetery/MapCemetery';
 import SearchBar from '../../SearchBar';
 import { redirect } from 'next/navigation';
 import { PATH } from '../../constants/path.constants';
@@ -13,6 +13,7 @@ import { useQuery } from '@tanstack/react-query';
 import SearchFilterBar from '../../SearchFilterBar';
 import { MONTHS } from '../../constants/constants';
 import { getFilterTitle } from './PreviewCementery.utils';
+import dynamic from 'next/dynamic';
 
 export type ISolderPhotoGallery = {
   uuid: string;
@@ -23,6 +24,10 @@ export type ISolderPhotoGallery = {
 interface ISoldier {
   cemetery: CemeteryOut;
 }
+
+const MapCemetery = dynamic(() => import('../mapCemetery/MapCemetery'), {
+  ssr: false,
+});
 
 export default function PreviewCemetery({ cemetery }: ISoldier) {
   const [inputSoldier, setInputSoldier] = useState<string>('');
@@ -167,6 +172,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
           filterResult={soldiersQuery.data ? soldiersQuery.data.items : []}
           isFetched={soldiersQuery.isFetched}
           filterText={getFilterTitle(values)}
+          cemetery={cemetery}
         />
       ) : (
         <CemeteryInfo cemetery={cemetery} />

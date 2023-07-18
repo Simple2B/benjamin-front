@@ -96,7 +96,7 @@ export const PreviewerStone = ({
   };
   return (
     <>
-      <div className="text-indigo-100 py-4 flex flex-col gap-8 mb-16">
+      <div className="text-indigo-100 py-4 flex flex-col gap-8 mb-32">
         {isUploadWindowOpen && <div className="filter-indigo z-[100]" />}
         <div className="w-full flex justify-between px-[18px]">
           <div onClick={router.back}>

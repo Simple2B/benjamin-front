@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { redirect } from 'next/navigation';
 import { PATH } from '../constants/path.constants';
 import { useAppStore } from '@/lib/slices/store';
-import { SoldierCard } from '@/openapi';
+import { CemeteryOut, SoldierCard } from '@/openapi';
 import Link from 'next/link';
 import urlJoin from 'url-join';
 import Spinner from '../Spinner';
@@ -13,12 +13,14 @@ type IFilteredSoldiersProps = {
   filterResult: SoldierCard[];
   isFetched: boolean;
   filterText: string;
+  cemetery: CemeteryOut;
 };
 
 export const FilteredSoldiers = ({
   filterResult,
   isFetched,
   filterText,
+  cemetery,
 }: IFilteredSoldiersProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const cemeteryMainInfoRef = useRef<HTMLDivElement>(null);
@@ -29,11 +31,11 @@ export const FilteredSoldiers = ({
   const [previousMainInfoPosition, setPreviousMainInfoPosition] =
     useState<number>(0);
 
-  const { currentCemetery } = useAppStore();
+  const { setCurrentCemetery } = useAppStore();
 
-  if (!currentCemetery) {
-    redirect(PATH.location);
-  }
+  useEffect(() => {
+    setCurrentCemetery(cemetery);
+  }, [cemetery]);
 
   useEffect(() => {
     if (additionalInfoRef && cemeteryMainInfoRef) {
@@ -133,7 +135,7 @@ export const FilteredSoldiers = ({
           <div className="flex w-full justify-center">
             <div className="h-[3px] w-16 bg-grey-50 mt-2 rounded-3xl"></div>
           </div>
-          <p className="text-2xl leading-7 py-5">{filterResultText}</p>
+          <p className="text-xl leading-7 py-5">{filterResultText}</p>
         </div>
       </div>
       <div ref={additionalInfoRef}>

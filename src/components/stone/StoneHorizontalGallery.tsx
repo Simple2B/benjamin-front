@@ -67,7 +67,7 @@ export const StoneHorizontalGallery = ({
         <>
           {stonePhotosGallery.length < 3 ? '' : ''}
           <div
-            className={`flex gap-4 overflow-x-auto pb-16 text-indigo-100 px-8 w-full whitespace-nowrap -mt-3 ${
+            className={`flex gap-4 overflow-x-auto  text-indigo-100 px-8 w-full whitespace-nowrap -mt-3 ${
               stonePhotosGallery.length < 3 ? 'justify-center' : ''
             }`}
           >
