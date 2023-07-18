@@ -1,12 +1,13 @@
 'use client';
-import React, { ChangeEvent, useEffect, useState, useTransition } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import IconButton from '../../IconButton';
 import { ICONS_NAME } from '../../constants/iconName';
 import { useRouter } from 'next/navigation';
 import { sendMessage } from '@/app/actions';
 import { maxMessageLength, messageTimer } from '../../constants/constants';
-import { MessageSendPopUp } from '../MessageSendPopUp';
+
 import { messagePageInstruction } from './previewerMessage.constants';
+import { useAppStore } from '@/lib/slices/store';
 
 type IPreviewerSoldierProps = {
   soldierUuid: string;
@@ -16,18 +17,10 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
   const [message, setMessage] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [isEmailValid, setEmailValid] = useState<boolean>(true);
-  const [isSent, setSent] = useState<boolean>(false);
 
   const router = useRouter();
 
-  useEffect(() => {
-    if (isSent) {
-      const timer = setTimeout(() => {
-        setSent(false);
-      }, 10000);
-      return () => clearTimeout(timer);
-    }
-  }, [isSent]);
+  const { setCurrentMessage } = useAppStore();
 
   const handleMessage = (event: ChangeEvent<HTMLTextAreaElement>): void => {
     setMessage(event.target.value);
@@ -45,7 +38,9 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
     }
 
     await sendMessage(soldierUuid, message, email);
-    setSent(true);
+    setCurrentMessage({ createdAt: new Date() });
+    router.back();
+
     setMessage('');
     setEmail('');
   };
@@ -53,8 +48,6 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
   return (
     <>
       <div className="flex flex-col items-start pt-4 text-indigo-100 gap-9">
-        {isSent && <MessageSendPopUp />}
-
         <div className="w-full flex justify-between px-[18px]">
           <div onClick={router.back}>
             <IconButton iconName={ICONS_NAME.arrow} className="w-4 h-4" />
