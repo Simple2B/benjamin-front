@@ -27,7 +27,7 @@ export const SoldierSearchingCard = ({
           {suffix} {firstName} {lastName}
         </h2>
         <div className="inline-flex gap-2 text-sm">
-          <p>{number}</p>
+          <p>#{number}</p>
           <p>{UNICODE_DOT}</p>
           <p>{city}</p>
         </div>
