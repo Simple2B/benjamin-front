@@ -1,5 +1,5 @@
 'use client';
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import IconButton from '../../IconButton';
 import { ICONS_NAME } from '../../constants/iconName';
 import {
@@ -15,6 +15,9 @@ import { Grave } from '@/openapi';
 import { davidStarIcon, currentPositionIcon } from './mapCemetery.constants';
 import { calculateDistance } from './mapCemetery.utils';
 import { MAP_ACCESS_TOKEN } from '@/components/constants/constants';
+import { useRouter } from 'next/navigation';
+import { PATH } from '@/components/constants/path.constants';
+import urlJoin from 'url-join';
 
 export type ICoordinates = {
   lat: number;
@@ -32,6 +35,8 @@ export default function MapCemetery({
 }: IMapCemeteryProps) {
   const [hasPermition, setHasPermition] = useState<boolean>(false);
   const [isTerrian, setIsTerrian] = useState<boolean>(true);
+
+  const router = useRouter();
 
   useEffect(() => {
     navigator.permissions
@@ -68,6 +73,7 @@ export default function MapCemetery({
   const handleChangeView = () => {
     setIsTerrian(!isTerrian);
   };
+
   return (
     <div
       className={`w-full absolute flex justify-end items-end t-0 l-0 h-[calc(100vh-175px)]`}
@@ -105,20 +111,29 @@ export default function MapCemetery({
               burialLocationLongitude,
             },
             index
-          ) => (
-            <Marker
-              position={[
-                burialLocationLatitude ?? 0,
-                burialLocationLongitude ?? 0,
-              ]}
-              icon={davidStarIcon}
-              key={index}
-            >
-              <Popup>
-                {suffix} {firstName} {lastName}
-              </Popup>
-            </Marker>
-          )
+          ) => {
+            const eventHandlers = {
+              click: () => {
+                console.log('soldier', uuid);
+                router.push(urlJoin(PATH.soldier, uuid));
+              },
+            };
+            return (
+              <Marker
+                position={[
+                  burialLocationLatitude ?? 0,
+                  burialLocationLongitude ?? 0,
+                ]}
+                icon={davidStarIcon}
+                key={index}
+                eventHandlers={eventHandlers}
+              >
+                <Popup>
+                  {suffix} {firstName} {lastName}
+                </Popup>
+              </Marker>
+            );
+          }
         )}
         <CurrentLocationMarker center={center} />
       </MapContainer>

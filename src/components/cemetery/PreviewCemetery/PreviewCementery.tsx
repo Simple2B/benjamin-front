@@ -109,6 +109,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
   if (!cemetery) {
     redirect(PATH.location);
   }
+
   useEffect(() => {
     if (soldiersQuery.data?.items.length && isFilter) {
       const graveMarkers: Grave[] = soldiersQuery.data?.items.map(

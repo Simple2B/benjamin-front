@@ -7,15 +7,8 @@ export const ProgressBar = ({ presentLoaded }: IProgressBarProps) => {
     width: `${presentLoaded}%`,
   };
 
-  const videoStyle = {
-    height: window.screen.width,
-  };
-
   return (
-    <div
-      className="w-full bg-gradient-to-r from-indigo-20 to-indigo-30 flex flex-col justify-center items-center "
-      style={videoStyle}
-    >
+    <div className="w-full bg-gradient-to-r from-indigo-20 to-indigo-30 flex flex-col justify-center items-center ">
       <p className="text-white">Loading...</p>
       <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700 p-0.5">
         <div
