@@ -138,7 +138,7 @@ html {
   transform: translateZ(30px);
 }
 
-@media only screen and (orientation: landscape) {
+@media only screen and (orientation: landscape) and (max-width: 900px) {
   html {
     height: 100vw;
     transform: rotate(90deg);
