@@ -7,6 +7,7 @@ import StoneHorizontalGallery from './StoneHorizontalGallery';
 import { StoneUploadWindow } from './StoneUploadWindow';
 import { useAppStore } from '@/lib/slices/store';
 import Spinner from '../Spinner';
+import { PREVIEWER_STONE_TEXT } from './previewerStone.constants';
 
 export interface IStone {
   uuid: string;
@@ -75,30 +76,12 @@ export const PreviewerStone = ({
           </h1>
         </div>
         <div className="flex flex-col gap-3 px-8 leading-6">
-          <p>
-            Jews traditionally mark a visit to a grave with the laying of a
-            small stone on the grave or headstone. By visiting an ancestor or
-            person of importance in our lives, we try to make their memory last.
-            Flowers are a good metaphor for the brevity of life, but stones seem
-            better suited to the permanence of memory. Stones do not die, and
-            Jews have a famously long memory.
-          </p>
-          <p>
-            An intriguing explanation for the laying of stones refers to the
-            inscription on many Jewish gravestones. The Hebrew abbreviation taf,
-            nun, tsadi, bet, hey stands for
-            <i>“teheye nishmato tsrurah b’tsror ha- chayyim,”</i> a phrase
-            usually translated as
-            <i>“May his soul be bound up in the bonds of eternal life.”</i>
-          </p>
-          <p>
-            Tsror also mean a stone, in Hebrew. The placing of a stone might be
-            an affirmation of the wishes that the departed be enveloped in the
-            bonds of eternal life.
-          </p>
+          {PREVIEWER_STONE_TEXT.map((text, index) => (
+            <p key={index}>{text}</p>
+          ))}
         </div>
         {!isRemoveComfirmWindowOpen && (
-          <div className="fixed bottom-0 h-40 bg-gradient-to-t from-white to-transparent w-full flex justify-center items-end z-10">
+          <div className="fixed bottom-0 h-40 white-gradient w-full flex justify-center items-end z-10">
             <button
               className="w-[350px] bg-turquoise-100 text-white p-3 rounded-lg font-semibold m-3 mb-11"
               onClick={() => setUploadWindowOpen(true)}

@@ -22,7 +22,7 @@ const ClosebleInfo = ({
   };
 
   return (
-    <div className="w-[350px] p-4 bg-grey-10 rounded-lg">
+    <div className="w-[350px] px-4 py-3 bg-grey-10 rounded-lg">
       <div className="flex justify-between">
         <h2 className="font-semibold leading-6">{heading}</h2>
         <div onClick={handleClick}>
