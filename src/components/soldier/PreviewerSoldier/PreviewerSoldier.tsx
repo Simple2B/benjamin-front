@@ -6,7 +6,7 @@ import SoldierAdditionalVideo from '@/components/soldier/SoldierAdditionaVideo';
 import SoldierAdditionalImage from '@/components/soldier/SoldierAdditionalImage';
 import SoldierCardBlockInfo from '@/components/soldier/SoldierCardBlockInfo';
 import SoldierMainInfoCard from '@/components/soldier/SoldierMainInfoCard';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SoldierCoordinates } from '../SoldierCoordinates';
 import { SoldierMessages } from '../SoldierMessages';
 import { Ilife, IService, IDeath } from '../soldier.types';
@@ -26,6 +26,8 @@ import { SoldierOut } from '@/openapi';
 import { PhotoCarrousel } from '../PhotoCarrousel';
 import { GuardiansOfHeroes } from '../GuardiansOfHeroes';
 import { SoldierHeadstonePhoto } from '../SoldierHeadstonePhoto';
+import { useAppStore } from '@/lib/slices/store';
+import { MessageSendPopUp } from '@/components/message/MessageSendPopUp';
 
 interface IPreviewerSoldierProps {
   soldier: SoldierOut;
@@ -33,6 +35,21 @@ interface IPreviewerSoldierProps {
 
 export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
   const router = useRouter();
+  const [isSent, setSent] = useState<boolean>(false);
+
+  const { currentMessage } = useAppStore();
+
+  useEffect(() => {
+    if (currentMessage?.createdAt) {
+      if (new Date().getTime() - currentMessage?.createdAt.getTime() < 10000) {
+        setSent(true);
+        const timer = setTimeout(() => {
+          setSent(false);
+        }, 10000);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [currentMessage]);
 
   useEffect(() => {
     if (!soldier) {
@@ -112,6 +129,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
 
   return (
     <div id="soldier-page">
+      {isSent && <MessageSendPopUp />}
       <div className="flex flex-col justify-center items-center mx-7 gap-4 my-4 text-indigo-100 leading-7 mb-8">
         <div
           className="w-full flex items-baseline justify-between mb-2"

@@ -43,7 +43,7 @@ export const MONTHS: { [key: string]: number } = {
 };
 
 export const categoryFilterNames = {
-  birthLocation: 'Birn in',
+  birthLocation: 'Born in',
   birthMonth: 'Born in',
   birthDay: 'Born on',
   birthYear: 'Born in',

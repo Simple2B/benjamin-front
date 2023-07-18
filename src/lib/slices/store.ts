@@ -6,15 +6,18 @@ import {
   FilteredSoldierSlice,
   createFilteredSoldiersSlice,
 } from './createFilteredSoldier';
+import { createMessageSlice, MessageSlice } from './createMessageScile';
 
 type StoreState = CemeterySlice &
   SoldierSlice &
   StoneSlice &
-  FilteredSoldierSlice;
+  FilteredSoldierSlice &
+  MessageSlice;
 
 export const useAppStore = create<StoreState>()((...a) => ({
   ...createCemeterySlice(...a),
   ...createSoldierSlice(...a),
   ...createStoneSlice(...a),
   ...createFilteredSoldiersSlice(...a),
+  ...createMessageSlice(...a),
 }));

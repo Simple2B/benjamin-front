@@ -110,7 +110,7 @@ export const SendPhotoForm = ({
               <Field
                 type="text"
                 name="name"
-                className="border border-gray-300 text-sm rounded-lg p-3 w-full h-[55px]"
+                className="border border-gray-300 text-sm rounded-lg p-3 w-full h-[55px] outline-none"
                 placeholder="Type your name"
               />
               <p className={`text-xs text-grey-20`}>Skip to stay anonymous</p>
@@ -123,7 +123,7 @@ export const SendPhotoForm = ({
                 type="email"
                 name="email"
                 id="email"
-                className="border border-gray-300 text-sm rounded-lg p-3 w-full h-[55px]"
+                className="border border-gray-300 text-sm rounded-lg p-3 w-full h-[55px] outline-none"
                 placeholder="Type your email"
                 validate={validateEmail}
                 required

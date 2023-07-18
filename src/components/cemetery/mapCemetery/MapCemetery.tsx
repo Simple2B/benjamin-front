@@ -1,5 +1,5 @@
 'use client';
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import IconButton from '../../IconButton';
 import { ICONS_NAME } from '../../constants/iconName';
 import {
@@ -15,6 +15,9 @@ import { Grave } from '@/openapi';
 import { davidStarIcon, currentPositionIcon } from './mapCemetery.constants';
 import { calculateDistance } from './mapCemetery.utils';
 import { MAP_ACCESS_TOKEN } from '@/components/constants/constants';
+import { useRouter } from 'next/navigation';
+import { PATH } from '@/components/constants/path.constants';
+import urlJoin from 'url-join';
 
 export type ICoordinates = {
   lat: number;
@@ -32,6 +35,8 @@ export default function MapCemetery({
 }: IMapCemeteryProps) {
   const [hasPermition, setHasPermition] = useState<boolean>(false);
   const [isTerrian, setIsTerrian] = useState<boolean>(true);
+
+  const router = useRouter();
 
   useEffect(() => {
     navigator.permissions
@@ -68,85 +73,97 @@ export default function MapCemetery({
   const handleChangeView = () => {
     setIsTerrian(!isTerrian);
   };
-  return (
-    <div
-      className={`w-full absolute flex justify-end items-end t-0 l-0 h-[calc(100vh-175px)]`}
-    >
-      <MapContainer
-        center={[center.lat, center.lng]}
-        zoom={13}
-        scrollWheelZoom={true}
-        zoomControl={false}
-        style={{ height: '100%', width: '100%', zIndex: 0 }}
-      >
-        {isTerrian ? (
-          <TileLayer
-            attribution={
-              'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-            }
-            url={`https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}`}
-          />
-        ) : (
-          <TileLayer
-            attribution={
-              '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }
-            url={`https://{s}.tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token=${MAP_ACCESS_TOKEN}`}
-          />
-        )}
-        {graves_coordinates.map(
-          (
-            {
-              uuid,
-              suffix,
-              firstName,
-              lastName,
-              burialLocationLatitude,
-              burialLocationLongitude,
-            },
-            index
-          ) => (
-            <Marker
-              position={[
-                burialLocationLatitude ?? 0,
-                burialLocationLongitude ?? 0,
-              ]}
-              icon={davidStarIcon}
-              key={index}
-            >
-              <Popup>
-                {suffix} {firstName} {lastName}
-              </Popup>
-            </Marker>
-          )
-        )}
-        <CurrentLocationMarker center={center} />
-      </MapContainer>
-      <>
-        <div
-          className="flex w-10 h-10 justify-center items-center bg-[#EDF8FB] rounded-3xl mb-[120px] mr-2 absolute"
-          id="navigation-button"
-        >
-          <IconButton iconName={ICONS_NAME.navigation} className="w-5 h-5" />
-        </div>
 
-        {isTerrian ? (
+  return (
+    <>
+      <div
+        className={`w-full absolute flex justify-end items-end t-0 l-0 h-[calc(100vh-175px)]`}
+      >
+        <MapContainer
+          center={[center.lat, center.lng]}
+          zoom={13}
+          scrollWheelZoom={true}
+          zoomControl={false}
+          style={{ height: '100%', width: '100%', zIndex: 0 }}
+        >
+          {isTerrian ? (
+            <TileLayer
+              attribution={
+                'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+              }
+              url={`https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}`}
+            />
+          ) : (
+            <TileLayer
+              attribution={
+                '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              }
+              url={`https://{s}.tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token=${MAP_ACCESS_TOKEN}`}
+            />
+          )}
+          {graves_coordinates.map(
+            (
+              {
+                uuid,
+                suffix,
+                firstName,
+                lastName,
+                burialLocationLatitude,
+                burialLocationLongitude,
+              },
+              index
+            ) => {
+              const eventHandlers = {
+                click: () => {
+                  console.log('soldier', uuid);
+                  router.push(urlJoin(PATH.soldier, uuid));
+                },
+              };
+              return (
+                <Marker
+                  position={[
+                    burialLocationLatitude ?? 0,
+                    burialLocationLongitude ?? 0,
+                  ]}
+                  icon={davidStarIcon}
+                  key={index}
+                  eventHandlers={eventHandlers}
+                >
+                  <Popup>
+                    {suffix} {firstName} {lastName}
+                  </Popup>
+                </Marker>
+              );
+            }
+          )}
+          <CurrentLocationMarker center={center} />
+        </MapContainer>
+        <>
           <div
-            className="flex w-10 h-10 justify-center items-center bg-[#EDF8FB] rounded-3xl mb-[70px] mr-2 absolute"
-            onClick={handleChangeView}
+            className="flex w-10 h-10 justify-center items-center bg-[#EDF8FB] rounded-3xl mb-[120px] mr-2 absolute"
+            id="navigation-button"
           >
-            <IconButton iconName={ICONS_NAME.globe} className="w-5 h-5" />
+            <IconButton iconName={ICONS_NAME.navigation} className="w-5 h-5" />
           </div>
-        ) : (
-          <div
-            className="flex w-10 h-10 justify-center items-center bg-[#EDF8FB] rounded-3xl mb-[70px] mr-2 absolute"
-            onClick={handleChangeView}
-          >
-            <IconButton iconName={ICONS_NAME.map} className="w-5 h-5" />
-          </div>
-        )}
-      </>
-    </div>
+
+          {isTerrian ? (
+            <div
+              className="flex w-10 h-10 justify-center items-center bg-[#EDF8FB] rounded-3xl mb-[70px] mr-2 absolute"
+              onClick={handleChangeView}
+            >
+              <IconButton iconName={ICONS_NAME.globe} className="w-5 h-5" />
+            </div>
+          ) : (
+            <div
+              className="flex w-10 h-10 justify-center items-center bg-[#EDF8FB] rounded-3xl mb-[70px] mr-2 absolute"
+              onClick={handleChangeView}
+            >
+              <IconButton iconName={ICONS_NAME.map} className="w-5 h-5" />
+            </div>
+          )}
+        </>
+      </div>
+    </>
   );
 }
 

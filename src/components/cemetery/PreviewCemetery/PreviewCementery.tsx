@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import MapCemetery, { ICoordinates } from '../mapCemetery/MapCemetery';
+import { ICoordinates } from '../mapCemetery/MapCemetery';
 import SearchBar from '../../SearchBar';
 import { redirect } from 'next/navigation';
 import { PATH } from '../../constants/path.constants';
@@ -13,6 +13,7 @@ import { useQuery } from '@tanstack/react-query';
 import SearchFilterBar from '../../SearchFilterBar';
 import { MONTHS } from '../../constants/constants';
 import { getFilterTitle } from './PreviewCementery.utils';
+import dynamic from 'next/dynamic';
 
 export type ISolderPhotoGallery = {
   uuid: string;
@@ -24,10 +25,14 @@ interface ISoldier {
   cemetery: CemeteryOut;
 }
 
+const MapCemetery = dynamic(() => import('../mapCemetery/MapCemetery'), {
+  ssr: false,
+});
+
 export default function PreviewCemetery({ cemetery }: ISoldier) {
   const [inputSoldier, setInputSoldier] = useState<string>('');
   const { currentCemetery, setCurrentCemetery } = useAppStore();
-  const [isFilter, setFilter] = useState<boolean>(true);
+  const [isFilter, setFilter] = useState<boolean>(false);
   const [gravesCoordinates, setGravesCoordinates] = useState<Grave[]>([]);
   const searchParams = useSearchParams();
 
@@ -58,6 +63,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
   }, [cemetery]);
 
   useEffect(() => {
+    setFilter(false);
     if (
       !birthDay &&
       !birthMonth &&
@@ -109,6 +115,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
   if (!cemetery) {
     redirect(PATH.location);
   }
+
   useEffect(() => {
     if (soldiersQuery.data?.items.length && isFilter) {
       const graveMarkers: Grave[] = soldiersQuery.data?.items.map(
@@ -166,6 +173,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
           filterResult={soldiersQuery.data ? soldiersQuery.data.items : []}
           isFetched={soldiersQuery.isFetched}
           filterText={getFilterTitle(values)}
+          cemetery={cemetery}
         />
       ) : (
         <CemeteryInfo cemetery={cemetery} />
