@@ -32,7 +32,7 @@ const MapCemetery = dynamic(() => import('../mapCemetery/MapCemetery'), {
 export default function PreviewCemetery({ cemetery }: ISoldier) {
   const [inputSoldier, setInputSoldier] = useState<string>('');
   const { currentCemetery, setCurrentCemetery } = useAppStore();
-  const [isFilter, setFilter] = useState<boolean>(true);
+  const [isFilter, setFilter] = useState<boolean>(false);
   const [gravesCoordinates, setGravesCoordinates] = useState<Grave[]>([]);
   const searchParams = useSearchParams();
 
@@ -63,6 +63,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
   }, [cemetery]);
 
   useEffect(() => {
+    setFilter(false);
     if (
       !birthDay &&
       !birthMonth &&
