@@ -144,3 +144,14 @@ html {
     transform: rotate(90deg);
   }
 }
+
+.white-gradient {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 55%,
+    rgba(255, 255, 255, 0.5102415966386555) 69%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}

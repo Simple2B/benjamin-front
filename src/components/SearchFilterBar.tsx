@@ -27,7 +27,7 @@ const SearchFilterBar = ({ filterText, setFilter }: ISearchBarProps) => {
           >
             <IconButton
               iconName={ICONS_NAME.cross}
-              className="w-4 h-4 rotate-180"
+              className="w-3.5 h-3.5 rotate-180"
             />
           </div>
         </Link>
