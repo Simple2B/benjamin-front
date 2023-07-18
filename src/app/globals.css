@@ -146,6 +146,7 @@ html {
 }
 
 .white-gradient {
+  z-index: 1;
   background: rgb(255, 255, 255);
   background: linear-gradient(
     0deg,
