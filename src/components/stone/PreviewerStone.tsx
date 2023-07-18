@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import IconButton from '../IconButton';
 import { useRouter } from 'next/navigation';
 import { ICONS_NAME } from '../constants/iconName';
@@ -32,6 +32,8 @@ export const PreviewerStone = ({
   const [isGallaryUpdating, setGallaryUpdating] = useState<boolean>(false);
   const [isRemoveComfirmWindowOpen, setRemoveComfirmWindowOpen] =
     useState<boolean>(false);
+  const [photoSrc, setPhotoSrc] = useState<string | undefined>();
+  const [uploadedPhotoForm, setUploadedPhotoForm] = useState<Blob>();
 
   const router = useRouter();
   const { currentStones } = useAppStore();
@@ -63,6 +65,35 @@ export const PreviewerStone = ({
     }, 600);
     return () => clearTimeout(timer);
   };
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!event.target?.files) {
+      return;
+    }
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const image = new Image();
+        image.src = reader.result as string;
+        setPhotoSrc(image.src);
+        setUploadedPhotoForm(file);
+      };
+      reader.readAsDataURL(file);
+      setUploadWindowOpen(true);
+    }
+  };
+
+  const handleChooseFile = () => {
+    const fileInput = document.getElementById('hiddenFileInput');
+    if (fileInput) {
+      fileInput.click();
+    }
+  };
+
+  const handleAddStoneButtonClick = () => {
+    handleChooseFile();
+  };
   return (
     <>
       <div className="text-indigo-100 py-4 flex flex-col gap-8 mb-16">
@@ -82,9 +113,17 @@ export const PreviewerStone = ({
         </div>
         {!isRemoveComfirmWindowOpen && (
           <div className="fixed bottom-0 h-40 white-gradient w-full flex justify-center items-end z-10">
+            <input
+              type="file"
+              id="hiddenFileInput"
+              name="img"
+              accept="image/*"
+              onChange={handleFileChange}
+              style={{ display: 'none' }}
+            />
             <button
               className="w-[350px] bg-turquoise-100 text-white p-3 rounded-lg font-semibold m-3 mb-11"
-              onClick={() => setUploadWindowOpen(true)}
+              onClick={handleAddStoneButtonClick}
             >
               Add headstone photo
             </button>
@@ -109,6 +148,8 @@ export const PreviewerStone = ({
           handleUploadWindowClose={handleUploadWindowClose}
           soldierUuid={soldierUuid}
           setGallaryUpdating={setGallaryUpdating}
+          photoSrc={photoSrc}
+          uploadedPhotoForm={uploadedPhotoForm}
         />
       )}
     </>

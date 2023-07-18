@@ -8,12 +8,16 @@ type IStoneUploadWindowProps = {
   handleUploadWindowClose: () => void;
   soldierUuid: string;
   setGallaryUpdating: (value: boolean) => void;
+  photoSrc: string | undefined;
+  uploadedPhotoForm: Blob | undefined;
 };
 
 export const StoneUploadWindow = ({
   handleUploadWindowClose,
   soldierUuid,
   setGallaryUpdating,
+  photoSrc,
+  uploadedPhotoForm,
 }: IStoneUploadWindowProps) => {
   const [isClosing, setClosing] = useState<boolean>(false);
   const [isPreviewSending, setPreviewSending] = useState<boolean>(false);
@@ -43,6 +47,8 @@ export const StoneUploadWindow = ({
         soldierUuid={soldierUuid}
         setPreviewSending={setPreviewSending}
         setGallaryUpdating={setGallaryUpdating}
+        photoSrc={photoSrc}
+        uploadedPhotoForm={uploadedPhotoForm}
       />
     </div>
   );

@@ -13,6 +13,8 @@ type ISendPhotoFormProps = {
   setPreviewSending: (ard: boolean) => void;
   soldierUuid: string;
   setGallaryUpdating: (value: boolean) => void;
+  photoSrc?: string;
+  uploadedPhotoForm?: Blob;
 };
 
 const formInitialValues = {
@@ -26,10 +28,10 @@ export const SendPhotoForm = ({
   soldierUuid,
   setPreviewSending,
   setGallaryUpdating,
+  photoSrc,
+  uploadedPhotoForm,
 }: ISendPhotoFormProps) => {
   const { currentStones, setCurrentStone } = useAppStore();
-  const [uploadedPhoto, setUploadedPhoto] = useState<string>();
-  const [uploadedPhotoForm, setUploadedPhotoForm] = useState<Blob>();
   const [isNext, setNext] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
 
@@ -39,7 +41,7 @@ export const SendPhotoForm = ({
 
   const handleSubmit = async (values: typeof formInitialValues) => {
     setGallaryUpdating(true);
-    if (!uploadedPhotoForm || !uploadedPhoto) {
+    if (!uploadedPhotoForm || !photoSrc) {
       setGallaryUpdating(false);
       return;
     }
@@ -69,7 +71,7 @@ export const SendPhotoForm = ({
           created_at: res.created_at,
           senderName: res.senderName,
           senderEmail: res.senderEmail,
-          photoUrl: uploadedPhoto,
+          photoUrl: photoSrc,
           uuid: res.uuid,
         };
         stonesforSoldier.unshift(uploadedPhotoInfo);
@@ -77,7 +79,6 @@ export const SendPhotoForm = ({
           ...prewiousUploadedStonesObj,
           [soldierUuid]: stonesforSoldier,
         });
-
         sessionStorage.setItem('uploadedStonePhoto', dataToStore);
         setGallaryUpdating(false);
       });
@@ -100,10 +101,7 @@ export const SendPhotoForm = ({
 
   return (
     <div className="flex flex-col w-full gap-6 items-center justify-center">
-      <StoneUploadPhoto
-        setUploadedPhoto={setUploadedPhoto}
-        setUploadedPhotoForm={setUploadedPhotoForm}
-      />
+      <StoneUploadPhoto photoSrc={photoSrc} />
       {!isNext ? (
         <Formik initialValues={formInitialValues} onSubmit={handleSubmit}>
           <Form className="w-full px-8 mt-2 flex flex-col gap-4 items-center">
