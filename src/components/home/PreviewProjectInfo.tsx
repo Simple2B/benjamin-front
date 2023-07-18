@@ -108,7 +108,7 @@ const PreviewProjectInfo = ({
   };
 
   const projectInfoStyle = {
-    height: projectInfoHeigth,
+    marginTop: videoHeigth,
   };
 
   const videoStyle = {
@@ -116,9 +116,11 @@ const PreviewProjectInfo = ({
     width: '100%',
   };
 
+  //all-height
+
   return (
     <>
-      <div className="flex flex-col items-center all-height bg-white">
+      <div className="flex flex-col items-center  bg-white">
         {currentInfoIndex == 0 && (
           <div style={videoStyle}>
             {firstVideoSrc ? (
@@ -156,10 +158,7 @@ const PreviewProjectInfo = ({
           </div>
         )}
 
-        <div
-          className="flex flex-col items-center justify-between"
-          style={projectInfoStyle}
-        >
+        <div className="flex flex-col items-center justify-between ">
           <ProjectInfo
             text={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].text}
             heading={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].heading}

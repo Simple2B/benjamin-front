@@ -38,19 +38,21 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
           return;
         }
         if (isUp) {
-          const scrollToTopValue = isIOS() ? 290 : 230;
+          const scrollToTopValue = isIOS() ? 325 : 230;
           if (posY < 0) {
             return;
           }
 
+          console.log('move up', posY);
           mainPage.scrollTo({
             top: screen.height - scrollToTopValue,
             left: 0,
             behavior: 'smooth',
           });
         } else {
+          console.log('move down', posY);
           mainPage.scrollTo({
-            top: 0,
+            top: 5,
             left: 0,
             behavior: 'smooth',
           });
@@ -73,25 +75,11 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
         setScrollableArea(false);
         if (e.touches.length) {
           setPreviousMainInfoPosition(e.touches[0].clientY);
-        } else {
-          console.log('no touch');
         }
       });
 
-      // mainInfoContainer.addEventListener('click', () => {
-      //   setScrollableArea(false);
-      // });
-
       mainInfoContainer.addEventListener('touchmove', () => {});
       mainInfoContainer.addEventListener('touchend', (e) => {
-        // setScrollableArea(true);
-        // const posY = mainInfoContainer.getBoundingClientRect().top;
-        // if (posY <= screen.height / 2) {
-        //   setIsUp(true);
-        // } else {
-        //   setIsUp(false);
-        // }
-        setScrollableArea(true);
         const posY = e.changedTouches[0].clientY;
         if (previousMainInfoPosition < posY) {
           setIsUp(false);
@@ -99,6 +87,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
           setIsUp(true);
         }
         setPreviousMainInfoPosition(posY);
+        setScrollableArea(true);
       });
 
       // // Additional container events

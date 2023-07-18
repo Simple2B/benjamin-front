@@ -23,15 +23,6 @@ const VideoPlayer = ({ srcVideo, onVideoEnd }: IVideoPlayerProps) => {
   }, [onVideoEnd]);
 
   useEffect(() => {
-    if (videoRef && videoRef.current) {
-      videoRef.current.addEventListener('loadeddata', () => {
-        console.log('video loaded');
-        videoRef.current?.play();
-      });
-    }
-  }, [srcVideo]);
-
-  useEffect(() => {
     setVideoHeight(window.screen.width);
   }, []);
 
@@ -45,7 +36,13 @@ const VideoPlayer = ({ srcVideo, onVideoEnd }: IVideoPlayerProps) => {
         className="w-full bg-gradient-to-r from-indigo-20 to-indigo-30"
         style={videoStyle}
       >
-        <video muted ref={videoRef} playsInline src={srcVideo ?? ''}></video>
+        <video
+          autoPlay
+          muted
+          ref={videoRef}
+          playsInline
+          src={srcVideo ?? ''}
+        ></video>
       </div>
     </>
   );
