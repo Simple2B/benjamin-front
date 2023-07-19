@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, use } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import HorizontalPhotoGallery from './HorizontalPhotoGallery';
 import CemeteryAdditionalInfo from './cemeteryAdditionalInfo/CemeteryAdditionalInfo';
 import { CemeteryAudioBox } from './cemeteryMainInfo/CemeteryAudioBox';
@@ -42,15 +42,12 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
           if (posY < 0) {
             return;
           }
-
-          console.log('move up', posY);
           mainPage.scrollTo({
             top: screen.height - scrollToTopValue,
             left: 0,
             behavior: 'smooth',
           });
         } else {
-          console.log('move down', posY);
           mainPage.scrollTo({
             top: 5,
             left: 0,

@@ -45,7 +45,7 @@ export const CategoryPreview = () => {
 
       <div className="flex flex-col items-start mx-2 gap-6 bg-white">
         {currentCemetery && (
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             <Link
               href={{
                 pathname: urlJoin(PATH.cemetery, currentCemetery.uuid),
@@ -65,6 +65,17 @@ export const CategoryPreview = () => {
             >
               <FilteredCategoryExample
                 categoryText={`Born on ${todayMonth} ${todayDay}th`}
+              />
+            </Link>
+
+            <Link
+              href={{
+                pathname: urlJoin(PATH.cemetery, currentCemetery.uuid),
+                query: { isHeadstoneChanged: true },
+              }}
+            >
+              <FilteredCategoryExample
+                categoryText={`Operation Benjamin Headstone Changes`}
               />
             </Link>
           </div>

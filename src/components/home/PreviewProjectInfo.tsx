@@ -8,7 +8,6 @@ import ProjectInfo from './projectInfo/ProjectInfo';
 import { PROJECT_INFO_TO_DISPLAY } from './projectInfo/projectInfo.constants';
 import { CurrentPointer } from './CurrentPointer';
 import Spinner from '../Spinner';
-import { ProgressBar } from './ProgressBar';
 
 interface IPreviewProjectInfoProps {
   currentInfoIndex: number;
@@ -17,8 +16,7 @@ interface IPreviewProjectInfoProps {
 
 const loadSrcVideo = (
   videoSrc: string,
-  onBlobLoaded: (blobURL: string) => void,
-  onProgress: (progress: number) => void
+  onBlobLoaded: (blobURL: string) => void
 ) => {
   const xhr = new XMLHttpRequest();
   xhr.open('GET', videoSrc, true);
@@ -43,7 +41,6 @@ const loadSrcVideo = (
       const pc = Math.round((event.loaded / event.total) * 100);
       if (pc != prev_pc) {
         prev_pc = pc;
-        onProgress(pc);
       }
     }
   });
@@ -64,10 +61,6 @@ const PreviewProjectInfo = ({
   const [secondVideoSrc, setSecondVideoSrc] = useState<string | null>(null);
   const [thirdVideoSrc, setThirdVideoSrc] = useState<string | null>(null);
 
-  const [firstVideoProgress, setFirstVideoProgress] = useState<number>(0);
-  const [secondVideoProgress, setSecondVideoProgress] = useState<number>(0);
-  const [thirdVideoProgress, setThirdVideoProgress] = useState<number>(0);
-
   const isLastPage = currentInfoIndex == PROJECT_INFO_TO_DISPLAY.length - 1;
 
   const handleVideoEnd = () => {
@@ -78,21 +71,9 @@ const PreviewProjectInfo = ({
     setProjectInfoHeigth(window.screen.height - window.screen.width);
     setVideoHeight(window.screen.width);
 
-    loadSrcVideo(
-      PROJECT_INFO_TO_DISPLAY[0].videoUrl,
-      setFirstVideoSrc,
-      setFirstVideoProgress
-    );
-    loadSrcVideo(
-      PROJECT_INFO_TO_DISPLAY[1].videoUrl,
-      setSecondVideoSrc,
-      setSecondVideoProgress
-    );
-    loadSrcVideo(
-      PROJECT_INFO_TO_DISPLAY[2].videoUrl,
-      setThirdVideoSrc,
-      setThirdVideoProgress
-    );
+    loadSrcVideo(PROJECT_INFO_TO_DISPLAY[0].videoUrl, setFirstVideoSrc);
+    loadSrcVideo(PROJECT_INFO_TO_DISPLAY[1].videoUrl, setSecondVideoSrc);
+    loadSrcVideo(PROJECT_INFO_TO_DISPLAY[2].videoUrl, setThirdVideoSrc);
   }, []);
 
   useEffect(() => {
@@ -108,7 +89,7 @@ const PreviewProjectInfo = ({
   };
 
   const projectInfoStyle = {
-    marginTop: videoHeigth,
+    height: projectInfoHeigth,
   };
 
   const videoStyle = {
@@ -122,43 +103,55 @@ const PreviewProjectInfo = ({
     <>
       <div className="flex flex-col items-center  bg-white">
         {currentInfoIndex == 0 && (
-          <div style={videoStyle}>
+          <div
+            style={videoStyle}
+            className="w-full bg-gradient-to-r from-indigo-20 to-indigo-30 flex justify-center items-center"
+          >
             {firstVideoSrc ? (
               <VideoPlayer
                 srcVideo={firstVideoSrc}
                 onVideoEnd={handleVideoEnd}
               />
             ) : (
-              <ProgressBar presentLoaded={firstVideoProgress} />
+              <Spinner />
             )}
           </div>
         )}
         {currentInfoIndex == 1 && (
-          <div style={videoStyle}>
+          <div
+            style={videoStyle}
+            className="w-full bg-gradient-to-r from-indigo-20 to-indigo-30 flex justify-center items-center"
+          >
             {secondVideoSrc ? (
               <VideoPlayer
                 srcVideo={secondVideoSrc}
                 onVideoEnd={handleVideoEnd}
               />
             ) : (
-              <ProgressBar presentLoaded={secondVideoProgress} />
+              <Spinner />
             )}
           </div>
         )}
         {currentInfoIndex == 2 && (
-          <div style={videoStyle}>
+          <div
+            style={videoStyle}
+            className="w-full bg-gradient-to-r from-indigo-20 to-indigo-30 flex justify-center items-center"
+          >
             {thirdVideoSrc ? (
               <VideoPlayer
                 srcVideo={thirdVideoSrc}
                 onVideoEnd={handleVideoEnd}
               />
             ) : (
-              <ProgressBar presentLoaded={thirdVideoProgress} />
+              <Spinner />
             )}
           </div>
         )}
 
-        <div className="flex flex-col items-center justify-between ">
+        <div
+          className="flex flex-col items-center justify-between"
+          style={projectInfoStyle}
+        >
           <ProjectInfo
             text={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].text}
             heading={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].heading}

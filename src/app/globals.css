@@ -51,11 +51,13 @@ input[type='range']::-webkit-slider-thumb {
   width: 16px;
   border-radius: 16px;
   background: #2693ab;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.15);
 }
 
 .audio-thumb::-webkit-slider-thumb {
   border-radius: 16px;
   background: #2693ab;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.15);
 }
 
 div::-webkit-scrollbar {
