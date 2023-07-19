@@ -7,7 +7,7 @@ export const getFilterTitle = (values: (string | null)[]) => {
 
   const filteredValues = values.reduce((acc: string[], value, index) => {
     if (value) {
-      if (value === 'True') {
+      if (value === 'true') {
         acc.push(`${filterTitle[Object.keys(filterTitle)[index]]}`);
       } else {
         acc.push(`${filterTitle[Object.keys(filterTitle)[index]]} ${value}`);
