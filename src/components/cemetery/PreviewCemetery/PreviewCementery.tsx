@@ -152,7 +152,11 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
     <div>
       <div className={`flex flex-col items-baseline w-full bg-white h-full`}>
         <div className="fixed w-screen">
-          <MapCemetery center={center} graves_coordinates={gravesCoordinates} />
+          <MapCemetery
+            center={center}
+            graves_coordinates={gravesCoordinates}
+            cemeteryUuid={cemetery?.uuid}
+          />
           <div className="flex flex-col items-center">
             {soldiersQuery.isFetched && isFilter ? (
               <SearchFilterBar
