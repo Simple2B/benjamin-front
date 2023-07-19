@@ -34,17 +34,15 @@ export const StoneUploadWindow = ({
 
   return (
     <div
-      className={`fixed z-[101] ${
-        windowHeight <= 830 ? 'h-[780px]' : 'h-[838px]'
-      } w-full bg-white flex flex-col items-center bottom-0 rounded-t-xl max-h-screen
-      ${isPreviewSending && 'h-[707px]'}
+      className={`fixed z-[101] h-[90%] w-full bg-white flex flex-col items-center bottom-0 rounded-t-xl
+      ${isPreviewSending && 'h-4/5'}
       ${isClosing ? 'upload-window-disappear' : 'upload-window-appear'}`}
     >
       <div
-        className="flex justify-end mt-6 mb-4 w-full px-6"
+        className="flex justify-end mt-4 mb-4 w-full px-6 "
         onClick={handleClose}
       >
-        <IconButton iconName={ICONS_NAME.cross} className="w-4 h-4" />
+        <IconButton iconName={ICONS_NAME.cross} className="w-4 h-4 fixed" />
       </div>
       <SendPhotoForm
         setClosing={setClosing}
