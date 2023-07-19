@@ -1,32 +1,32 @@
 'use client';
-import React, { useEffect } from 'react';
-import IconButton from '../../IconButton';
-import { ICONS_NAME } from '../../constants/iconName';
-import { useRouter } from 'next/navigation';
-import { FilteredCategoryExample } from '../FilteredCategoryExample';
-import { CategoryBlock } from '../CategoryBlock';
-import { MONTH } from '../../constants/constants';
-import { useAppStore } from '@/lib/slices/store';
-import urlJoin from 'url-join';
-import { PATH } from '../../constants/path.constants';
+import { SoldierFilters } from '@/openapi';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import React from 'react';
+import urlJoin from 'url-join';
+import IconButton from '../../IconButton';
+import { MONTH, MONTHS_BY_NUMBER } from '../../constants/constants';
+import { ICONS_NAME } from '../../constants/iconName';
+import { PATH } from '../../constants/path.constants';
 import { QUERY_PARAMS } from '../../constants/queryParams';
-import { YEAR, CITY } from './сategoryPreview.constants';
+import { CategoryBlock } from '../CategoryBlock';
+import { FilteredCategoryExample } from '../FilteredCategoryExample';
 
-export const CategoryPreview = () => {
-  const { currentCemetery } = useAppStore();
+type ICategoryPreviewProps = {
+  categoriesValues: SoldierFilters;
+  cemeteryUuid: string;
+};
 
-  useEffect(() => {
-    if (!currentCemetery) {
-      router.push(PATH.location);
-    }
-  }, []);
-
+export const CategoryPreview = ({
+  categoriesValues,
+  cemeteryUuid,
+}: ICategoryPreviewProps) => {
   const router = useRouter();
 
   const date = new Date();
   const todayDay = date.getDate();
-  const todayMonth = MONTH[date.getMonth()];
+  const todayMonthText = MONTHS_BY_NUMBER[date.getMonth() + 1];
+  const todayMonthNumber = date.getMonth() + 1;
 
   return (
     <div className="flex flex-col items-start m-6 gap-5 bg-white">
@@ -44,66 +44,73 @@ export const CategoryPreview = () => {
       </div>
 
       <div className="flex flex-col items-start mx-2 gap-6 bg-white">
-        {currentCemetery && (
-          <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-2 flex-wrap">
+          {categoriesValues.todayDeathdaySoldiers && (
             <Link
               href={{
-                pathname: urlJoin(PATH.cemetery, currentCemetery.uuid),
-                query: { deathMonth: todayMonth, deathDay: todayDay },
+                pathname: urlJoin(PATH.cemetery, cemeteryUuid),
+                query: { deathMonth: todayMonthNumber, deathDay: todayDay },
               }}
             >
               <FilteredCategoryExample
-                categoryText={`Died on ${todayMonth} ${todayDay}th`}
+                categoryText={`Died on ${todayMonthText} ${todayDay}th`}
               />
             </Link>
+          )}
+          {categoriesValues.todayBirthdaySoldiers && (
+            <Link
+              href={{
+                pathname: urlJoin(PATH.cemetery, cemeteryUuid),
+                query: { birthMonth: todayMonthNumber, birthDay: todayDay },
+              }}
+            >
+              <FilteredCategoryExample
+                categoryText={`Born on ${todayMonthText} ${todayDay}th`}
+              />
+            </Link>
+          )}
 
-            <Link
-              href={{
-                pathname: urlJoin(PATH.cemetery, currentCemetery.uuid),
-                query: { birthMonth: todayMonth, birthDay: todayDay },
-              }}
-            >
-              <FilteredCategoryExample
-                categoryText={`Born on ${todayMonth} ${todayDay}th`}
-              />
-            </Link>
+          <Link
+            href={{
+              pathname: urlJoin(PATH.cemetery, cemeteryUuid),
+              query: { isHeadstoneChanged: true },
+            }}
+          >
+            <FilteredCategoryExample
+              categoryText={`Operation Benjamin Headstone Changes`}
+            />
+          </Link>
+        </div>
 
-            <Link
-              href={{
-                pathname: urlJoin(PATH.cemetery, currentCemetery.uuid),
-                query: { isHeadstoneChanged: true },
-              }}
-            >
-              <FilteredCategoryExample
-                categoryText={`Operation Benjamin Headstone Changes`}
-              />
-            </Link>
-          </div>
-        )}
         <CategoryBlock
           categoryHeader={'Birth year'}
-          categoryText={YEAR}
+          categoryText={categoriesValues.birthYearFilters}
           queryParam={QUERY_PARAMS.birthYear}
+          cemeteryUuid={cemeteryUuid}
         />
         <CategoryBlock
           categoryHeader={'Birth month'}
-          categoryText={MONTH}
+          categoryText={categoriesValues.birthMonthFilters}
           queryParam={QUERY_PARAMS.birthMonth}
+          cemeteryUuid={cemeteryUuid}
         />
         <CategoryBlock
           categoryHeader={'Enlisted from'}
-          categoryText={CITY}
+          categoryText={categoriesValues.stateFilters}
           queryParam={QUERY_PARAMS.statesEnteredFrom}
+          cemeteryUuid={cemeteryUuid}
         />
         <CategoryBlock
           categoryHeader={'Month died'}
-          categoryText={MONTH}
+          categoryText={categoriesValues.deathMonthFilters}
           queryParam={QUERY_PARAMS.deathMonth}
+          cemeteryUuid={cemeteryUuid}
         />
         <CategoryBlock
           categoryHeader={'Year died'}
-          categoryText={YEAR}
+          categoryText={categoriesValues.deathYearFilters}
           queryParam={QUERY_PARAMS.deathYear}
+          cemeteryUuid={cemeteryUuid}
         />
       </div>
     </div>

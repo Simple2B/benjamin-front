@@ -131,11 +131,7 @@ export default function MapCemetery({
                   icon={davidStarIcon}
                   key={index}
                   eventHandlers={eventHandlers}
-                >
-                  <Popup>
-                    {suffix} {firstName} {lastName}
-                  </Popup>
-                </Marker>
+                ></Marker>
               );
             }
           )}

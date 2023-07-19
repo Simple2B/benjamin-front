@@ -64,26 +64,32 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
   useEffect(() => {
     if (additionalInfoRef && cemeteryMainInfoRef) {
       const mainInfoContainer = cemeteryMainInfoRef.current as HTMLDivElement;
+      // mainInfoContainer.setAttribute('style', 'touch-action: none;');
+
       const additionalInfoConteiner =
         additionalInfoRef.current as HTMLDivElement;
+
+      let previousValue = 0;
 
       // Main container events
       mainInfoContainer.addEventListener('touchstart', (e: TouchEvent) => {
         setScrollableArea(false);
         if (e.touches.length) {
           setPreviousMainInfoPosition(e.touches[0].clientY);
+          previousValue = e.touches[0].clientY;
         }
       });
 
-      mainInfoContainer.addEventListener('touchmove', () => {});
+      mainInfoContainer.addEventListener('touchmove', (e) => {});
+
       mainInfoContainer.addEventListener('touchend', (e) => {
         const posY = e.changedTouches[0].clientY;
-        if (previousMainInfoPosition < posY) {
+        if (previousValue < posY) {
           setIsUp(false);
         } else {
           setIsUp(true);
         }
-        setPreviousMainInfoPosition(posY);
+        previousValue = posY;
         setScrollableArea(true);
       });
 
@@ -106,7 +112,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
         setScrollableArea(true);
       });
     }
-  }, [previousMainInfoPosition]);
+  }, []);
 
   return (
     <div
@@ -122,12 +128,11 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
           email={cemetery.email}
           webUrl={cemetery.webUrl}
         />
+
+        {cemetery.audio_tours.length ? (
+          <CemeteryAudioBox audio_tours={cemetery.audio_tours} />
+        ) : null}
       </div>
-
-      {cemetery.audio_tours.length ? (
-        <CemeteryAudioBox audio_tours={cemetery.audio_tours} />
-      ) : null}
-
       <div ref={additionalInfoRef}>
         <div className="flex flex-col gap-6 items-center w-full px-6 z-10 bg-white pt-5 relative">
           <CemeteryAdditionalInfo
