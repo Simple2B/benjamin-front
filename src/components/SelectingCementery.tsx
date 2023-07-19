@@ -33,12 +33,12 @@ const SelectingCemetery = ({
                   transitionProperty: 'border-radius',
                   transitionDuration: '150ms',
                 }}
-                className={`relative w-full h-10 cursor-default text-sm leading-6 pl-4 ${
+                className={`relative w-full h-10 cursor-default text-sm leading-6 pl-4 py-2 ${
                   open ? 'rounded-t-3xl' : 'rounded-3xl'
-                } bg-white pt-2 text-left settings-shawdow  focus:outline-nonesm:text-sm  font-noto transition duration-500 ease-in-out `}
+                } bg-white text-left settings-shawdow  focus:outline-nonesm:text-sm  font-noto transition duration-500 ease-in-out `}
               >
                 <span
-                  className={`block truncate font-noto w-[235px] pb-1 ${
+                  className={`block truncate font-noto w-[235px] ${
                     open && 'border-b border-solid border-grey-40'
                   }`}
                 >
@@ -66,7 +66,7 @@ const SelectingCemetery = ({
                   placeholder="Select cemetery"
                   className="absolute max-h-60 w-full overflow-auto rounded-b-3xl bg-white text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {cemeteries.map((cementery) => (
+                  {cemeteries.map((cementery, index) => (
                     <div key={cementery.uuid}>
                       {cementery.uuid !== selectedCemetery?.uuid && (
                         <Listbox.Option
@@ -78,13 +78,23 @@ const SelectingCemetery = ({
                         >
                           {({ selected }) => (
                             <>
-                              <span
-                                className={`font-noto block truncate w-[235px] border-b border-solid border-[rgba(217, 218, 221, 0.5)] ${
-                                  selected ? 'font-medium' : 'font-normal'
-                                }`}
-                              >
-                                {cementery.name}
-                              </span>
+                              {index == cemeteries.length - 1 ? (
+                                <span
+                                  className={` h-10 font-noto block truncate w-[235px] pb-3 ${
+                                    selected ? 'font-medium' : 'font-normal '
+                                  } `}
+                                >
+                                  {cementery.name}
+                                </span>
+                              ) : (
+                                <span
+                                  className={`font-noto block truncate w-[235px] border-b border-solid border-[rgba(217, 218, 221, 0.5)] ${
+                                    selected ? 'font-medium' : 'font-normal'
+                                  } `}
+                                >
+                                  {cementery.name}
+                                </span>
+                              )}
                             </>
                           )}
                         </Listbox.Option>
