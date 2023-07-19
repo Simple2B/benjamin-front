@@ -64,26 +64,32 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
   useEffect(() => {
     if (additionalInfoRef && cemeteryMainInfoRef) {
       const mainInfoContainer = cemeteryMainInfoRef.current as HTMLDivElement;
+      // mainInfoContainer.setAttribute('style', 'touch-action: none;');
+
       const additionalInfoConteiner =
         additionalInfoRef.current as HTMLDivElement;
+
+      let previousValue = 0;
 
       // Main container events
       mainInfoContainer.addEventListener('touchstart', (e: TouchEvent) => {
         setScrollableArea(false);
         if (e.touches.length) {
           setPreviousMainInfoPosition(e.touches[0].clientY);
+          previousValue = e.touches[0].clientY;
         }
       });
 
-      mainInfoContainer.addEventListener('touchmove', () => {});
+      mainInfoContainer.addEventListener('touchmove', (e) => {});
+
       mainInfoContainer.addEventListener('touchend', (e) => {
         const posY = e.changedTouches[0].clientY;
-        if (previousMainInfoPosition < posY) {
+        if (previousValue < posY) {
           setIsUp(false);
         } else {
           setIsUp(true);
         }
-        setPreviousMainInfoPosition(posY);
+        previousValue = posY;
         setScrollableArea(true);
       });
 
@@ -106,7 +112,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
         setScrollableArea(true);
       });
     }
-  }, [previousMainInfoPosition]);
+  }, []);
 
   return (
     <div

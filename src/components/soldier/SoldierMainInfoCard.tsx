@@ -50,7 +50,7 @@ const SoldierMainInfoCard = ({
       <img
         src={photoUrl ? photoUrl : '/images/photos/soldeirProfilePhoto.jpg'}
         alt="Soldier"
-        className="w-[126px] h-[123px] rounded-lg bg-grey-30 object-cover"
+        className="w-[126px] h-[123px] rounded-2xl bg-grey-30 object-cover"
       />
 
       <div className="flex flex-col gap-2.5">
