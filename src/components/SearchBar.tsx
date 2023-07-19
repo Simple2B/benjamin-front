@@ -27,9 +27,7 @@ const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
   return (
     <div className="mt-10">
       <div
-        className={`rounded-lg bg-white relative flex items-center h-12  px-1.5 w-[350px] shadow-lg gap-3 ${
-          !displaySettings && 'pr-4'
-        }`}
+        className={`rounded-lg bg-white relative flex items-center h-12  pl-1.5 shadow-lg gap-3 w-[350px] `}
         style={{
           boxShadow: '0 2px 24px 0 rgba(0, 0, 0, 0.2)',
         }}
