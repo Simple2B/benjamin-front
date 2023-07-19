@@ -27,11 +27,13 @@ export type ICoordinates = {
 type IMapCemeteryProps = {
   center: ICoordinates;
   graves_coordinates: Array<Grave>;
+  cemeteryUuid: string;
 };
 
 export default function MapCemetery({
   center,
   graves_coordinates,
+  cemeteryUuid,
 }: IMapCemeteryProps) {
   const [hasPermition, setHasPermition] = useState<boolean>(false);
   const [isTerrian, setIsTerrian] = useState<boolean>(true);
@@ -115,8 +117,9 @@ export default function MapCemetery({
             ) => {
               const eventHandlers = {
                 click: () => {
-                  console.log('soldier', uuid);
-                  router.push(urlJoin(PATH.soldier, uuid));
+                  router.push(
+                    urlJoin(PATH.cemetery, cemeteryUuid, PATH.soldier, uuid)
+                  );
                 },
               };
               return (
