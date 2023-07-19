@@ -128,12 +128,11 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
           email={cemetery.email}
           webUrl={cemetery.webUrl}
         />
+
+        {cemetery.audio_tours.length ? (
+          <CemeteryAudioBox audio_tours={cemetery.audio_tours} />
+        ) : null}
       </div>
-
-      {cemetery.audio_tours.length ? (
-        <CemeteryAudioBox audio_tours={cemetery.audio_tours} />
-      ) : null}
-
       <div ref={additionalInfoRef}>
         <div className="flex flex-col gap-6 items-center w-full px-6 z-10 bg-white pt-5 relative">
           <CemeteryAdditionalInfo
