@@ -1,7 +1,7 @@
 import React from 'react';
 
 type IFilteredCategoryExampleProps = {
-  categoryText: string;
+  categoryText: string | number;
 };
 export const FilteredCategoryExample = ({
   categoryText,

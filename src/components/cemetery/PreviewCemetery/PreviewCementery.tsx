@@ -11,7 +11,7 @@ import { useSearchParams } from 'next/navigation';
 import { CemeteriesService, CemeteryOut, Grave } from '@/openapi';
 import { useQuery } from '@tanstack/react-query';
 import SearchFilterBar from '../../SearchFilterBar';
-import { MONTHS } from '../../constants/constants';
+import { MONTHS_BY_NUMBER } from '../../constants/constants';
 import { getFilterTitle } from './PreviewCementery.utils';
 import dynamic from 'next/dynamic';
 
@@ -48,10 +48,10 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
 
   const values: (string | null)[] = [
     birthLocation,
-    birthMonth,
+    birthMonth ? MONTHS_BY_NUMBER[parseInt(birthMonth)] : null,
     birthDay,
     birthYear,
-    deathMonth,
+    deathMonth ? MONTHS_BY_NUMBER[parseInt(deathMonth)] : null,
     deathDay,
     deathYear,
     isHeadstoneChanged,
@@ -98,10 +98,10 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
         (cemetery as CemeteryOut).uuid,
         undefined,
         birthYear ? parseInt(birthYear) : undefined,
-        birthMonth ? MONTHS[birthMonth] : undefined,
+        birthMonth ? parseInt(birthMonth) : undefined,
         birthDay ? parseInt(birthDay) : undefined,
         deathYear ? parseInt(deathYear) : undefined,
-        deathMonth ? MONTHS[deathMonth] : undefined,
+        deathMonth ? parseInt(deathMonth) : undefined,
         deathDay ? parseInt(deathDay) : undefined,
         isHeadstoneChanged ? !!isHeadstoneChanged : undefined,
         statesEnteredFrom ? statesEnteredFrom : undefined,

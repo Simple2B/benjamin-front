@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { SoldierFilters } from '../models/SoldierFilters';
 import type { SoldierMessageCreate } from '../models/SoldierMessageCreate';
 import type { SoldierOut } from '../models/SoldierOut';
 import type { SoldierStoneCreate } from '../models/SoldierStoneCreate';
@@ -81,6 +82,27 @@ export class SoldiersService {
             },
             body: requestBody,
             mediaType: 'application/json',
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Get Cemetery Soldier Filters
+     * @param cemeteryUuid
+     * @returns SoldierFilters Successful Response
+     * @throws ApiError
+     */
+    public static getCemeterySoldierFilters(
+        cemeteryUuid: string,
+    ): CancelablePromise<SoldierFilters> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/soldier/filters/{cemetery_uuid}',
+            path: {
+                'cemetery_uuid': cemeteryUuid,
+            },
             errors: {
                 422: `Validation Error`,
             },

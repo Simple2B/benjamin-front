@@ -2,22 +2,22 @@ import React from 'react';
 import { FilteredCategoryExample } from './FilteredCategoryExample';
 import Link from 'next/link';
 import { PATH } from '../constants/path.constants';
-import { useAppStore } from '@/lib/slices/store';
 import urlJoin from 'url-join';
+import { MONTHS_BY_NUMBER } from '../constants/constants';
 
 type ICategoryBlockProps = {
   categoryHeader: string;
-  categoryText: string[];
+  categoryText: number[] | string[];
   queryParam: string;
+  cemeteryUuid: string;
 };
 
 export const CategoryBlock = ({
   categoryHeader,
   categoryText,
   queryParam,
+  cemeteryUuid,
 }: ICategoryBlockProps) => {
-  const { currentCemetery } = useAppStore();
-
   return (
     <div>
       <p className="font-semibold leading-6 mb-3">{categoryHeader}</p>
@@ -25,14 +25,19 @@ export const CategoryBlock = ({
         {categoryText.map((text, index) => (
           <Link
             href={{
-              pathname: currentCemetery
-                ? urlJoin(PATH.cemetery, currentCemetery.uuid)
-                : PATH.location,
+              pathname: urlJoin(PATH.cemetery, cemeteryUuid),
               query: { [queryParam]: text },
             }}
             key={index}
           >
-            <FilteredCategoryExample categoryText={text} key={text} />
+            {queryParam == 'deathMonth' || queryParam == 'birthMonth' ? (
+              <FilteredCategoryExample
+                categoryText={MONTHS_BY_NUMBER[text as number]}
+                key={text}
+              />
+            ) : (
+              <FilteredCategoryExample categoryText={text} key={text} />
+            )}
           </Link>
         ))}
       </div>

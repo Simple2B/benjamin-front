@@ -13,6 +13,7 @@ export type { HTTPValidationError } from './models/HTTPValidationError';
 export type { Metadata } from './models/Metadata';
 export type { SoldierCard } from './models/SoldierCard';
 export type { SoldierCardWithPhoto } from './models/SoldierCardWithPhoto';
+export type { SoldierFilters } from './models/SoldierFilters';
 export type { SoldierMessageCreate } from './models/SoldierMessageCreate';
 export type { SoldierMessageOut } from './models/SoldierMessageOut';
 export { SoldierMessageType } from './models/SoldierMessageType';

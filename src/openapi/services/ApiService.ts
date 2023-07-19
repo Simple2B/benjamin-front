@@ -4,6 +4,7 @@
 import type { Cemeteries } from '../models/Cemeteries';
 import type { CemeteryOut } from '../models/CemeteryOut';
 import type { Metadata } from '../models/Metadata';
+import type { SoldierFilters } from '../models/SoldierFilters';
 import type { SoldierMessageCreate } from '../models/SoldierMessageCreate';
 import type { SoldierOut } from '../models/SoldierOut';
 import type { Soldiers } from '../models/Soldiers';
@@ -178,6 +179,27 @@ export class ApiService {
             },
             body: requestBody,
             mediaType: 'application/json',
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Get Cemetery Soldier Filters
+     * @param cemeteryUuid
+     * @returns SoldierFilters Successful Response
+     * @throws ApiError
+     */
+    public static getCemeterySoldierFilters(
+        cemeteryUuid: string,
+    ): CancelablePromise<SoldierFilters> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/soldier/filters/{cemetery_uuid}',
+            path: {
+                'cemetery_uuid': cemeteryUuid,
+            },
             errors: {
                 422: `Validation Error`,
             },

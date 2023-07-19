@@ -85,7 +85,13 @@ const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
             />
           </Link>
         ) : (
-          <Link href={PATH.category}>
+          <Link
+            href={
+              currentCemetery?.uuid
+                ? urlJoin(PATH.category, currentCemetery?.uuid)
+                : PATH.location
+            }
+          >
             <IconButton
               iconName={ICONS_NAME.filter}
               className={
