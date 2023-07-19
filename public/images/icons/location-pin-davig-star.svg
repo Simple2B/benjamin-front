@@ -1,7 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="20px" viewBox="0 0 16 20" version="1.1">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50px" height="54px" viewBox="0 0 50 54" version="1.1">
     <title>Pin/Jewish</title>
-    <g id="Pin/Jewish" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <defs>
+        <path d="M8,20 C13.3333333,14.9455187 16,10.9455187 16,8 C16,3.581722 12.418278,0 8,0 C3.581722,0 0,3.581722 0,8 C0,10.9455187 2.66666667,14.9455187 8,20 Z" id="path-1"/>
+        <filter x="-162.5%" y="-115.0%" width="425.0%" height="359.3%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"/>
+            <feOffset dx="0" dy="3" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur stdDeviation="8" in="shadowOffsetOuter1" result="shadowBlurOuter1"/>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"/>
+        </filter>
+    </defs>
+    <g id="Pin/Jewish" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(17, 14)">
         <g id="Combined-Shape">
+            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"/>
             <path stroke="#FFFFFF" stroke-width="0.5" d="M8,-0.25 C10.2781746,-0.25 12.3406746,0.673412704 13.8336309,2.16636906 C15.3265873,3.65932541 16.25,5.72182541 16.25,8 C16.25,10.9835301 13.5859501,15.0505446 8.17196933,20.1814567 C2.4140499,15.0505446 -0.25,10.9835301 -0.25,8 C-0.25,5.72182541 0.673412704,3.65932541 2.16636906,2.16636906 C3.65932541,0.673412704 5.72182541,-0.25 8,-0.25 Z" fill="#2693AB" fill-rule="evenodd"/>
         </g>
         <g id="Group-6" transform="translate(3.5, 3)" stroke="#FFFFFF" stroke-linejoin="round" stroke-width="0.5">

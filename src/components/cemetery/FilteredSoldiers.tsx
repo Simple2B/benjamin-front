@@ -111,7 +111,11 @@ export const FilteredSoldiers = ({
 
       additionalInfoConteiner.addEventListener('touchend', () => {
         const posY = mainInfoContainer.getBoundingClientRect().top;
-        setIsUp(true);
+        if (posY < 0) {
+          setIsUp(true);
+        } else {
+          setIsUp(false);
+        }
         setScrollableArea(true);
       });
     }
