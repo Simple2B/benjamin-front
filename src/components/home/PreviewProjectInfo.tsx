@@ -7,7 +7,7 @@ import { PATH } from '../constants/path.constants';
 import ProjectInfo from './projectInfo/ProjectInfo';
 import { PROJECT_INFO_TO_DISPLAY } from './projectInfo/projectInfo.constants';
 import { CurrentPointer } from './CurrentPointer';
-import Spinner from '../Spinner';
+import VideoSpinner from './VideoSpinner';
 
 interface IPreviewProjectInfoProps {
   currentInfoIndex: number;
@@ -108,7 +108,7 @@ const PreviewProjectInfo = ({
 
   return (
     <>
-      <div className="flex flex-col items-center bg-white all-height">
+      <div className="flex flex-col items-center bg-white">
         {currentInfoIndex == 0 && (
           <div
             style={videoStyle}
@@ -117,7 +117,7 @@ const PreviewProjectInfo = ({
             {firstVideoSrc ? (
               <VideoPlayer srcVideo={firstVideoSrc} />
             ) : (
-              <Spinner />
+              <VideoSpinner />
             )}
           </div>
         )}
@@ -129,7 +129,7 @@ const PreviewProjectInfo = ({
             {secondVideoSrc ? (
               <VideoPlayer srcVideo={secondVideoSrc} />
             ) : (
-              <Spinner />
+              <VideoSpinner />
             )}
           </div>
         )}
@@ -141,7 +141,7 @@ const PreviewProjectInfo = ({
             {thirdVideoSrc ? (
               <VideoPlayer srcVideo={thirdVideoSrc} />
             ) : (
-              <Spinner />
+              <VideoSpinner />
             )}
           </div>
         )}
