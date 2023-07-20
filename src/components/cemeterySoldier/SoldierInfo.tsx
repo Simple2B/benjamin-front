@@ -228,8 +228,8 @@ export default function SoldierInfo({ soldier }: IPreviewerSoldierProps) {
         />
         <div ref={additionalInfoRef} className="flex flex-col gap-4">
           {soldier?.soldierAudioTour && (
-            <div className=" bg-grey-10 rounded-lg p-4 w-[350px]">
-              <p className="text-sm text-grey-20">Audio Tour</p>
+            <div className=" bg-grey-10 rounded-lg py-4 px-5 w-[350px]">
+              <p className="text-sm text-grey-20 pb-1.5">Audio Tour</p>
               <AudioPlayer
                 audioSourse={urlJoin(
                   AWS_BASE_URL || '',

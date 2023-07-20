@@ -11,7 +11,7 @@ const ProjectInfo = ({ heading, text }: IProjectInfoProps) => {
       <h1 className={`text-[22px] font-semibold leading-none tracking-tight`}>
         {heading}
       </h1>
-      <p className="h-[100px]">{text}</p>
+      <p>{text}</p>
     </div>
   );
 };
