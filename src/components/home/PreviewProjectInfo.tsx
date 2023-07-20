@@ -66,7 +66,7 @@ const PreviewProjectInfo = ({
   const isLastPage = currentInfoIndex == PROJECT_INFO_TO_DISPLAY.length - 1;
 
   useEffect(() => {
-    setProjectInfoHeigth(window.screen.height - window.screen.width);
+    setProjectInfoHeigth(window.screen.height - window.screen.width - 125);
     setVideoHeight(window.screen.width);
 
     loadSrcVideo(PROJECT_INFO_TO_DISPLAY[0].videoUrl, setFirstVideoSrc);
@@ -108,7 +108,7 @@ const PreviewProjectInfo = ({
 
   return (
     <>
-      <div className="flex flex-col items-center bg-white">
+      <div className="flex flex-col items-center bg-white all-height">
         {currentInfoIndex == 0 && (
           <div
             style={videoStyle}
@@ -147,14 +147,14 @@ const PreviewProjectInfo = ({
         )}
 
         <div
-          className="flex flex-col items-center justify-between"
+          className="flex flex-col items-center justify-between bg-red-300 gap-4"
           style={projectInfoStyle}
         >
           <ProjectInfo
             text={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].text}
             heading={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].heading}
           />
-          <div className="flex flex-col w-full justify-around h-full">
+          <div className="flex flex-col w-full justify-between h-full">
             <div className={`flex flex-col items-end justify-end px-6 w-full`}>
               <Link href={isLastPage ? PATH.location : PATH.home}>
                 <NavigationButton
