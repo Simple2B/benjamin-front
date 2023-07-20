@@ -40,6 +40,7 @@ const PreviewerHomePage = () => {
         <PreviewProjectInfo
           currentInfoIndex={currentInfoIndex}
           onNextButtonClick={handleClick}
+          setCurrentInfoIndex={setCurrentInfoIndex}
         />
       )}
     </>

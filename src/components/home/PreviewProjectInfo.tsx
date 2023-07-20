@@ -12,6 +12,7 @@ import Spinner from '../Spinner';
 interface IPreviewProjectInfoProps {
   currentInfoIndex: number;
   onNextButtonClick: () => void;
+  setCurrentInfoIndex: (index: number) => void;
 }
 
 const loadSrcVideo = (
@@ -51,6 +52,7 @@ const loadSrcVideo = (
 const PreviewProjectInfo = ({
   currentInfoIndex,
   onNextButtonClick,
+  setCurrentInfoIndex,
 }: IPreviewProjectInfoProps) => {
   const [isButtonEnabled, setIsButtonEnabled] = useState<boolean>(false);
 
@@ -173,7 +175,10 @@ const PreviewProjectInfo = ({
                 />
               </Link>
             </div>
-            <CurrentPointer currentInfoIndex={currentInfoIndex} />
+            <CurrentPointer
+              currentInfoIndex={currentInfoIndex}
+              setCurrentInfoIndex={setCurrentInfoIndex}
+            />
           </div>
         </div>
       </div>
