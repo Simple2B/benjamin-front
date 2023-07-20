@@ -104,23 +104,11 @@ const PreviewProjectInfo = ({
     width: '100%',
   };
 
-  const checkButtonEnabled = () => {
-    if (currentInfoIndex == 0 && firstVideoSrc) {
-      setIsButtonEnabled(true);
-    }
-    if (currentInfoIndex == 1 && secondVideoSrc) {
-      setIsButtonEnabled(true);
-    }
-    if (currentInfoIndex == 2 && thirdVideoSrc) {
-      setIsButtonEnabled(true);
-    }
-  };
-
   //all-height
 
   return (
     <>
-      <div className="flex flex-col items-center  bg-white">
+      <div className="flex flex-col items-center bg-white all-height">
         {currentInfoIndex == 0 && (
           <div
             style={videoStyle}
@@ -166,10 +154,8 @@ const PreviewProjectInfo = ({
             text={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].text}
             heading={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].heading}
           />
-          <div className="flex flex-col w-full">
-            <div
-              className={`flex flex-col items-end justify-end px-6 mb-12 w-full`}
-            >
+          <div className="flex flex-col w-full justify-around h-full">
+            <div className={`flex flex-col items-end justify-end px-6 w-full`}>
               <Link href={isLastPage ? PATH.location : PATH.home}>
                 <NavigationButton
                   icon={ICONS_NAME.arrowRigth}

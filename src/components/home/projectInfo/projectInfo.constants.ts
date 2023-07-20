@@ -12,12 +12,12 @@ export const PROJECT_INFO_TO_DISPLAY: IProjectInfoToDisplay[] = [
   },
   {
     heading: 'Learn more about our soldiers',
-    text: 'The Operation Benjamin app will help you navigate the foreign American Military Cemeteries.  You’ll be able to find Jewish soldiers and learn more about their lives and their incredible sacrifices. Explore with us!',
+    text: 'With this app, you’ll be able to find Jewish soldiers in American military cemeteries and learn more about their lives and incredible sacrifices. Explore with us!',
     videoUrl: '/video/onboarding_2.mp4',
   },
   {
     heading: 'Remember our soldiers',
-    text: 'When visiting individual graves, you can commemorate the soldiers through prayers, mourners Kaddish, and even leave a message for the family in the virtual visitors book.',
+    text: 'With this app, you’ll be able to locate Jewish soldiers’ graves in American military cemeteries and learn more about their lives and incredible sacrifices. Explore with us!',
     videoUrl: '/video/onboarding_3.mp4',
   },
 ];
