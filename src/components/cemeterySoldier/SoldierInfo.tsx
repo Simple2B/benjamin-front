@@ -204,7 +204,7 @@ export default function SoldierInfo({ soldier }: IPreviewerSoldierProps) {
     <div
       id="soldier-page"
       ref={scrollRef}
-      className="absolute w-full z-10 bg-white rounded-t-xl mt-[calc(100vh-230px)]"
+      className="absolute w-full z-10 bg-white rounded-t-xl mt-[calc(100vh-230px)] min-h-screen"
     >
       <div
         className="flex flex-col justify-center items-center mx-7 gap-4 text-indigo-100 leading-7 mb-8"

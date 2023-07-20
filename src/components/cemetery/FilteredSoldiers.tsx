@@ -144,10 +144,10 @@ export const FilteredSoldiers = ({
       </div>
       <div ref={additionalInfoRef}>
         {isFetched ? (
-          <div className="flex flex-wrap px-6 gap-3">
+          <div className="flex flex-wrap pb-6 gap-3">
             {filterResult?.map((soldier, index) => (
               <Link key={index} href={urlJoin(PATH.soldier, soldier.uuid)}>
-                <div className="w-[140px]">
+                <div className="w-[140px] flex flex-col gap-2">
                   <img
                     src={
                       soldier?.mainPhoto && AWS_BASE_URL
