@@ -140,13 +140,6 @@ html {
   transform: translateZ(30px);
 }
 
-@media only screen and (orientation: landscape) and (max-width: 1000px) {
-  html {
-    height: 100vw;
-    transform: rotate(90deg);
-  }
-}
-
 .white-gradient {
   z-index: 1;
   background: rgb(255, 255, 255);
@@ -169,5 +162,15 @@ html {
   .message-textarea:focus,
   .message-input:focus {
     font-size: 14px;
+  }
+}
+
+#rotation-warning {
+  display: none;
+}
+
+@media only screen and (orientation: landscape) {
+  #page {
+    display: none !important;
   }
 }
