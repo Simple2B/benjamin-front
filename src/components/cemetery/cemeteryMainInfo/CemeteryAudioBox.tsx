@@ -14,7 +14,7 @@ export const CemeteryAudioBox = ({ audio_tours }: ICemeteryAudioBoxProps) => {
       id={'cemetery-main-info'}
     >
       <div className="flex flex-col gap-2">
-        <p className="font-semibold text-indigo-100">Audio Tour</p>
+        <p className="font-semibold text-indigo-100">Audio Intro</p>
         {audio_tours.map((melody, index) => (
           <div key={index}>
             {AWS_BASE_URL && (

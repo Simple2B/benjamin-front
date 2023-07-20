@@ -58,7 +58,7 @@ const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
           <Link href={PATH.search}>
             <input
               type="text"
-              placeholder="Search for the soldier"
+              placeholder="Search for a soldier"
               className="flex-shrink w-[210px] outline-none"
               defaultValue={userInput}
             />
@@ -67,7 +67,7 @@ const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
           <input
             className="flex-shrink w-[210px] outline-none"
             type="text"
-            placeholder="Search for the soldier"
+            placeholder="Search for a soldier"
             onChange={handleChange}
             defaultValue={userInput}
           />
