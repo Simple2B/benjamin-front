@@ -7,11 +7,12 @@ import { PATH } from '../constants/path.constants';
 import ProjectInfo from './projectInfo/ProjectInfo';
 import { PROJECT_INFO_TO_DISPLAY } from './projectInfo/projectInfo.constants';
 import { CurrentPointer } from './CurrentPointer';
-import Spinner from '../Spinner';
+import VideoSpinner from './VideoSpinner';
 
 interface IPreviewProjectInfoProps {
   currentInfoIndex: number;
   onNextButtonClick: () => void;
+  setCurrentInfoIndex: (index: number) => void;
 }
 
 const loadSrcVideo = (
@@ -51,6 +52,7 @@ const loadSrcVideo = (
 const PreviewProjectInfo = ({
   currentInfoIndex,
   onNextButtonClick,
+  setCurrentInfoIndex,
 }: IPreviewProjectInfoProps) => {
   const [isButtonEnabled, setIsButtonEnabled] = useState<boolean>(false);
 
@@ -63,10 +65,6 @@ const PreviewProjectInfo = ({
 
   const isLastPage = currentInfoIndex == PROJECT_INFO_TO_DISPLAY.length - 1;
 
-  const handleVideoEnd = () => {
-    setIsButtonEnabled(true);
-  };
-
   useEffect(() => {
     setProjectInfoHeigth(window.screen.height - window.screen.width);
     setVideoHeight(window.screen.width);
@@ -78,7 +76,16 @@ const PreviewProjectInfo = ({
 
   useEffect(() => {
     setIsButtonEnabled(false);
-  }, [currentInfoIndex]);
+    if (currentInfoIndex == 0 && firstVideoSrc) {
+      setIsButtonEnabled(true);
+    }
+    if (currentInfoIndex == 1 && secondVideoSrc) {
+      setIsButtonEnabled(true);
+    }
+    if (currentInfoIndex == 2 && thirdVideoSrc) {
+      setIsButtonEnabled(true);
+    }
+  }, [currentInfoIndex, firstVideoSrc, secondVideoSrc, thirdVideoSrc]);
 
   const handleClick = () => {
     if (isLastPage) {
@@ -101,19 +108,16 @@ const PreviewProjectInfo = ({
 
   return (
     <>
-      <div className="flex flex-col items-center  bg-white">
+      <div className="flex flex-col items-center bg-white">
         {currentInfoIndex == 0 && (
           <div
             style={videoStyle}
             className="w-full bg-gradient-to-r from-indigo-20 to-indigo-30 flex justify-center items-center"
           >
             {firstVideoSrc ? (
-              <VideoPlayer
-                srcVideo={firstVideoSrc}
-                onVideoEnd={handleVideoEnd}
-              />
+              <VideoPlayer srcVideo={firstVideoSrc} />
             ) : (
-              <Spinner />
+              <VideoSpinner />
             )}
           </div>
         )}
@@ -123,12 +127,9 @@ const PreviewProjectInfo = ({
             className="w-full bg-gradient-to-r from-indigo-20 to-indigo-30 flex justify-center items-center"
           >
             {secondVideoSrc ? (
-              <VideoPlayer
-                srcVideo={secondVideoSrc}
-                onVideoEnd={handleVideoEnd}
-              />
+              <VideoPlayer srcVideo={secondVideoSrc} />
             ) : (
-              <Spinner />
+              <VideoSpinner />
             )}
           </div>
         )}
@@ -138,12 +139,9 @@ const PreviewProjectInfo = ({
             className="w-full bg-gradient-to-r from-indigo-20 to-indigo-30 flex justify-center items-center"
           >
             {thirdVideoSrc ? (
-              <VideoPlayer
-                srcVideo={thirdVideoSrc}
-                onVideoEnd={handleVideoEnd}
-              />
+              <VideoPlayer srcVideo={thirdVideoSrc} />
             ) : (
-              <Spinner />
+              <VideoSpinner />
             )}
           </div>
         )}
@@ -156,10 +154,8 @@ const PreviewProjectInfo = ({
             text={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].text}
             heading={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].heading}
           />
-          <div className="flex flex-col w-full">
-            <div
-              className={`flex flex-col items-end justify-end px-6 mb-12 w-full`}
-            >
+          <div className="flex flex-col w-full justify-around h-full">
+            <div className={`flex flex-col items-end justify-end px-6 w-full`}>
               <Link href={isLastPage ? PATH.location : PATH.home}>
                 <NavigationButton
                   icon={ICONS_NAME.arrowRigth}
@@ -173,7 +169,10 @@ const PreviewProjectInfo = ({
                 />
               </Link>
             </div>
-            <CurrentPointer currentInfoIndex={currentInfoIndex} />
+            <CurrentPointer
+              currentInfoIndex={currentInfoIndex}
+              setCurrentInfoIndex={setCurrentInfoIndex}
+            />
           </div>
         </div>
       </div>

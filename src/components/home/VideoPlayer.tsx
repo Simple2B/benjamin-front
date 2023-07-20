@@ -2,25 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 
 type IVideoPlayerProps = {
   srcVideo: string | null;
-  onVideoEnd?: () => void;
 };
 
-const VideoPlayer = ({ srcVideo, onVideoEnd }: IVideoPlayerProps) => {
+const VideoPlayer = ({ srcVideo }: IVideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoHeigth, setVideoHeight] = useState<number>(0);
-
-  useEffect(() => {
-    if (!onVideoEnd) {
-      return;
-    }
-    const timerId = setInterval(() => {
-      if (videoRef.current?.ended) {
-        onVideoEnd();
-        clearInterval(timerId);
-      }
-    }, 100);
-    return () => clearInterval(timerId);
-  }, [onVideoEnd]);
 
   useEffect(() => {
     setVideoHeight(window.screen.width);

@@ -154,7 +154,7 @@ export default function MapCemetery({
             </div>
           ) : (
             <div
-              className="flex w-10 h-10 justify-center items-center bg-[#EDF8FB] rounded-3xl mb-[70px] mr-2 absolute"
+              className="flex w-10 h-10 justify-center items-center bg-[#EDF8FB] rounded-3xl mb-[250px] mr-2 absolute"
               onClick={handleChangeView}
             >
               <IconButton iconName={ICONS_NAME.map} className="w-5 h-5" />
