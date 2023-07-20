@@ -79,7 +79,7 @@ export default function MapCemetery({
   return (
     <>
       <div
-        className={`w-full absolute flex justify-end items-end t-0 l-0 h-[calc(100vh-175px)]`}
+        className={`w-full absolute flex justify-end items-end t-0 l-0 h-screen`}
       >
         <MapContainer
           center={[center.lat, center.lng]}
@@ -139,7 +139,7 @@ export default function MapCemetery({
         </MapContainer>
         <>
           <div
-            className="flex w-10 h-10 justify-center items-center bg-[#EDF8FB] rounded-3xl mb-[120px] mr-2 absolute"
+            className="flex w-10 h-10 justify-center items-center bg-[#EDF8FB] rounded-3xl mb-[305px] mr-2 absolute"
             id="navigation-button"
           >
             <IconButton iconName={ICONS_NAME.navigation} className="w-5 h-5" />
@@ -147,7 +147,7 @@ export default function MapCemetery({
 
           {isTerrian ? (
             <div
-              className="flex w-10 h-10 justify-center items-center bg-[#EDF8FB] rounded-3xl mb-[70px] mr-2 absolute"
+              className="flex w-10 h-10 justify-center items-center bg-[#EDF8FB] rounded-3xl mb-[250px] mr-2 absolute"
               onClick={handleChangeView}
             >
               <IconButton iconName={ICONS_NAME.globe} className="w-5 h-5" />

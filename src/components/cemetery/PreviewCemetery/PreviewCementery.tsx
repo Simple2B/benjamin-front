@@ -47,13 +47,13 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
   const statesEnteredFrom = searchParams.get('statesEnteredFrom');
 
   const values: (string | null)[] = [
-    birthLocation,
-    birthMonth ? MONTHS_BY_NUMBER[parseInt(birthMonth)] : null,
     birthDay,
+    birthMonth ? MONTHS_BY_NUMBER[parseInt(birthMonth)] : null,
     birthYear,
-    deathMonth ? MONTHS_BY_NUMBER[parseInt(deathMonth)] : null,
     deathDay,
+    deathMonth ? MONTHS_BY_NUMBER[parseInt(deathMonth)] : null,
     deathYear,
+    birthLocation,
     isHeadstoneChanged,
     statesEnteredFrom,
   ];
