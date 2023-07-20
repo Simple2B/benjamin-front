@@ -181,7 +181,7 @@ const CurrentLocationMarker = ({ center }: ICurrentLocationMarkerProps) => {
     const currentCoordinates: ICoordinates = e.latlng;
     const distance = calculateDistance(center, currentCoordinates);
     if (distance > 5) {
-      setPosition(center);
+      setPosition(null);
       map.flyTo(center, map.getZoom());
     } else {
       setPosition(currentCoordinates);

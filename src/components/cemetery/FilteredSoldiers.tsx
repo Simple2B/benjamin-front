@@ -53,14 +53,12 @@ export const FilteredSoldiers = ({
             return;
           }
 
-          console.log('move up', posY);
           mainPage.scrollTo({
             top: screen.height - scrollToTopValue,
             left: 0,
             behavior: 'smooth',
           });
         } else {
-          console.log('move down', posY);
           mainPage.scrollTo({
             top: 5,
             left: 0,

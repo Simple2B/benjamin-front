@@ -32,7 +32,7 @@ const CemeteriesBox = ({ cemeteries }: ICemeteriesBox) => {
       <h1
         className={`text-xl leading-[30px] text-white text-center mt-40 font-semibold`}
       >
-        Which American military cemetery would you like to explore?
+        Which cemetery would you like to explore?
       </h1>
       <SelectingCemetery
         selectedCemetery={selectedCemetery}
