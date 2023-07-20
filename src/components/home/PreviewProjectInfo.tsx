@@ -65,10 +65,6 @@ const PreviewProjectInfo = ({
 
   const isLastPage = currentInfoIndex == PROJECT_INFO_TO_DISPLAY.length - 1;
 
-  const handleVideoEnd = () => {
-    setIsButtonEnabled(true);
-  };
-
   useEffect(() => {
     setProjectInfoHeigth(window.screen.height - window.screen.width);
     setVideoHeight(window.screen.width);
@@ -80,7 +76,16 @@ const PreviewProjectInfo = ({
 
   useEffect(() => {
     setIsButtonEnabled(false);
-  }, [currentInfoIndex]);
+    if (currentInfoIndex == 0 && firstVideoSrc) {
+      setIsButtonEnabled(true);
+    }
+    if (currentInfoIndex == 1 && secondVideoSrc) {
+      setIsButtonEnabled(true);
+    }
+    if (currentInfoIndex == 2 && thirdVideoSrc) {
+      setIsButtonEnabled(true);
+    }
+  }, [currentInfoIndex, firstVideoSrc, secondVideoSrc, thirdVideoSrc]);
 
   const handleClick = () => {
     if (isLastPage) {
@@ -99,6 +104,18 @@ const PreviewProjectInfo = ({
     width: '100%',
   };
 
+  const checkButtonEnabled = () => {
+    if (currentInfoIndex == 0 && firstVideoSrc) {
+      setIsButtonEnabled(true);
+    }
+    if (currentInfoIndex == 1 && secondVideoSrc) {
+      setIsButtonEnabled(true);
+    }
+    if (currentInfoIndex == 2 && thirdVideoSrc) {
+      setIsButtonEnabled(true);
+    }
+  };
+
   //all-height
 
   return (
@@ -110,10 +127,7 @@ const PreviewProjectInfo = ({
             className="w-full bg-gradient-to-r from-indigo-20 to-indigo-30 flex justify-center items-center"
           >
             {firstVideoSrc ? (
-              <VideoPlayer
-                srcVideo={firstVideoSrc}
-                onVideoEnd={handleVideoEnd}
-              />
+              <VideoPlayer srcVideo={firstVideoSrc} />
             ) : (
               <Spinner />
             )}
@@ -125,10 +139,7 @@ const PreviewProjectInfo = ({
             className="w-full bg-gradient-to-r from-indigo-20 to-indigo-30 flex justify-center items-center"
           >
             {secondVideoSrc ? (
-              <VideoPlayer
-                srcVideo={secondVideoSrc}
-                onVideoEnd={handleVideoEnd}
-              />
+              <VideoPlayer srcVideo={secondVideoSrc} />
             ) : (
               <Spinner />
             )}
@@ -140,10 +151,7 @@ const PreviewProjectInfo = ({
             className="w-full bg-gradient-to-r from-indigo-20 to-indigo-30 flex justify-center items-center"
           >
             {thirdVideoSrc ? (
-              <VideoPlayer
-                srcVideo={thirdVideoSrc}
-                onVideoEnd={handleVideoEnd}
-              />
+              <VideoPlayer srcVideo={thirdVideoSrc} />
             ) : (
               <Spinner />
             )}
