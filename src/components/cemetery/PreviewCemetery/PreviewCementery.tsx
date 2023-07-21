@@ -5,7 +5,7 @@ import SearchBar from '../../SearchBar';
 import { redirect } from 'next/navigation';
 import { PATH } from '../../constants/path.constants';
 import { useAppStore } from '@/lib/slices/store';
-import { CemeteryInfo } from '../cemeteryInfo';
+import { CemeteryInfo } from '../CemeteryInfo';
 import { FilteredSoldiers } from '../FilteredSoldiers';
 import { useSearchParams } from 'next/navigation';
 import { CemeteriesService, CemeteryOut, Grave } from '@/openapi';
@@ -149,40 +149,43 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
   };
 
   return (
-    <div>
-      <div className={`flex flex-col items-baseline w-full bg-white h-full`}>
-        <div className="fixed w-screen">
-          <MapCemetery
-            center={center}
-            graves_coordinates={gravesCoordinates}
-            cemeteryUuid={cemetery?.uuid}
-            zoom={13}
-          />
-          <div className="flex flex-col items-center">
-            {soldiersQuery.isFetched && isFilter ? (
-              <SearchFilterBar
-                filterText={getFilterTitle(values)}
-                setFilter={setFilter}
-              />
-            ) : (
-              <SearchBar
-                setInputSoldier={setInputSoldier}
-                displaySettings={true}
-              />
-            )}
+    <>
+      <div>
+        <div className={`flex flex-col items-baseline w-full bg-white h-full`}>
+          <div className="fixed w-screen">
+            <MapCemetery
+              center={center}
+              graves_coordinates={gravesCoordinates}
+              cemeteryUuid={cemetery?.uuid}
+              zoom={13}
+            />
+            <div className="flex flex-col items-center">
+              {soldiersQuery.isFetched && isFilter ? (
+                <SearchFilterBar
+                  filterText={getFilterTitle(values)}
+                  setFilter={setFilter}
+                />
+              ) : (
+                <SearchBar
+                  setInputSoldier={setInputSoldier}
+                  displaySettings={true}
+                />
+              )}
+            </div>
           </div>
         </div>
+        {isFilter ? (
+          <FilteredSoldiers
+            filterResult={soldiersQuery.data ? soldiersQuery.data.items : []}
+            isFetched={soldiersQuery.isFetched}
+            filterText={getFilterTitle(values)}
+            cemetery={cemetery}
+          />
+        ) : (
+          <CemeteryInfo cemetery={cemetery} />
+        )}
       </div>
-      {isFilter ? (
-        <FilteredSoldiers
-          filterResult={soldiersQuery.data ? soldiersQuery.data.items : []}
-          isFetched={soldiersQuery.isFetched}
-          filterText={getFilterTitle(values)}
-          cemetery={cemetery}
-        />
-      ) : (
-        <CemeteryInfo cemetery={cemetery} />
-      )}
-    </div>
+      <div className="fixed bottom-0 h-[220px] w-full white-gradient-cemetery z-[9]"></div>
+    </>
   );
 }

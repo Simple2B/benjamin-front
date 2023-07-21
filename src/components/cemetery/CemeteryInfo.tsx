@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, use } from 'react';
 import HorizontalPhotoGallery from './HorizontalPhotoGallery';
 import CemeteryAdditionalInfo from './cemeteryAdditionalInfo/CemeteryAdditionalInfo';
 import { CemeteryAudioBox } from './cemeteryMainInfo/CemeteryAudioBox';
@@ -144,9 +144,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
             listedAsMissingSoldiers={cemetery.amountBuriedSoldiersMissing}
           />
         </div>
-
         <CemeteryAbmc />
-
         <div className="relative flex flex-col gap-6 items-center pb-8 w-full z-10 bg-white pt-6">
           {cemetery.filtered_soldiers && (
             <>
