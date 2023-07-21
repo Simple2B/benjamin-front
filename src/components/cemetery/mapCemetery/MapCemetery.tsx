@@ -234,20 +234,15 @@ const CurrentLocationMarker = ({
   image.onload = () => {
     canvas.width = 25;
     canvas.height = 25;
-    var cache = this; //cache the local copy of image element for future reference
 
     ctx.save();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    ctx.translate(canvas.width / 2, canvas.height / 2); //let's translate
+    ctx.translate(canvas.width / 2, canvas.height / 2);
     ctx.rotate(compass * (Math.PI / 180));
-
     ctx.translate(-(canvas.width / 2), -(canvas.height / 2));
     ctx.drawImage(image, 0, 0, 25, 25);
-
     ctx?.restore();
 
-    console.log('restored');
     setIconURL(canvas.toDataURL());
   };
 
