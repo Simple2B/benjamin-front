@@ -2,22 +2,19 @@
 import React, { useEffect, useState } from 'react';
 import IconButton from '../../IconButton';
 import { ICONS_NAME } from '../../constants/iconName';
-import {
-  MapContainer,
-  Marker,
-  Popup,
-  TileLayer,
-  useMap,
-  useMapEvents,
-} from 'react-leaflet';
+import { MapContainer, Marker, TileLayer, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Grave } from '@/openapi';
-import { davidStarIcon, currentPositionIcon } from './mapCemetery.constants';
-import { calculateDistance } from './mapCemetery.utils';
+import { davidStarIcon } from './mapCemetery.constants';
+import { calculateDistance, createIcon } from './mapCemetery.utils';
 import { MAP_ACCESS_TOKEN } from '@/components/constants/constants';
 import { useRouter } from 'next/navigation';
 import { PATH } from '@/components/constants/path.constants';
 import urlJoin from 'url-join';
+
+interface DeviceOrientationEventiOS extends DeviceOrientationEvent {
+  requestPermission?: () => Promise<'granted' | 'denied'>;
+}
 
 export type ICoordinates = {
   lat: number;
@@ -37,10 +34,38 @@ export default function MapCemetery({
 }: IMapCemeteryProps) {
   const [hasPermition, setHasPermition] = useState<boolean>(false);
   const [isTerrian, setIsTerrian] = useState<boolean>(true);
+  const [compass, setCompass] = useState<number>(0);
 
   const router = useRouter();
 
+  function handler(e: any) {
+    const compass = e.webkitCompassHeading || Math.abs(e.alpha - 360);
+    setCompass(compass);
+  }
+
   useEffect(() => {
+    const isIOS = !(
+      navigator.userAgent.match(/(iPod|iPhone|iPad)/) &&
+      navigator.userAgent.match(/AppleWebKit/)
+    );
+
+    if (
+      typeof (DeviceOrientationEvent as unknown as DeviceOrientationEventiOS)
+        .requestPermission === 'function'
+    ) {
+      (DeviceMotionEvent as any)
+        .requestPermission()
+        .then((permissionState: 'granted' | 'denied') => {
+          if (permissionState === 'granted') {
+            window.addEventListener('deviceorientation', handler, true);
+          }
+        })
+        .catch(console.error);
+    } else {
+      window.addEventListener('deviceorientationabsolute', handler, true);
+    }
+
+    // start navigation
     navigator.permissions
       .query({
         name: 'geolocation',
@@ -135,7 +160,7 @@ export default function MapCemetery({
               );
             }
           )}
-          <CurrentLocationMarker center={center} />
+          <CurrentLocationMarker center={center} compass={compass} />
         </MapContainer>
         <>
           <div
@@ -168,10 +193,15 @@ export default function MapCemetery({
 
 type ICurrentLocationMarkerProps = {
   center: ICoordinates;
+  compass: number;
 };
 
-const CurrentLocationMarker = ({ center }: ICurrentLocationMarkerProps) => {
+const CurrentLocationMarker = ({
+  center,
+  compass,
+}: ICurrentLocationMarkerProps) => {
   const [position, setPosition] = useState<ICoordinates | null>(null);
+  const [iconUrl, setIconURL] = useState<string>('/images/icons/399308.png');
 
   const navigationButton = document.getElementById('navigation-button');
 
@@ -180,6 +210,7 @@ const CurrentLocationMarker = ({ center }: ICurrentLocationMarkerProps) => {
   function onLocationFound(e: any) {
     const currentCoordinates: ICoordinates = e.latlng;
     const distance = calculateDistance(center, currentCoordinates);
+
     if (distance > 5) {
       setPosition(null);
       map.flyTo(center, map.getZoom());
@@ -194,9 +225,33 @@ const CurrentLocationMarker = ({ center }: ICurrentLocationMarkerProps) => {
     map.on('locationfound', onLocationFound);
   });
 
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+
+  const image = new Image();
+  image.src = '/images/icons/399308.png';
+
+  image.onload = () => {
+    canvas.width = 25;
+    canvas.height = 25;
+    var cache = this; //cache the local copy of image element for future reference
+
+    ctx.save();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.translate(canvas.width / 2, canvas.height / 2); //let's translate
+    ctx.rotate(compass * (Math.PI / 180));
+
+    ctx.translate(-(canvas.width / 2), -(canvas.height / 2));
+    ctx.drawImage(image, 0, 0, 25, 25);
+
+    ctx?.restore();
+
+    console.log('restored');
+    setIconURL(canvas.toDataURL());
+  };
+
   return position === null ? null : (
-    <Marker position={position} icon={currentPositionIcon}>
-      <Popup>You are here</Popup>
-    </Marker>
+    <Marker position={position} icon={createIcon(iconUrl)}></Marker>
   );
 };
