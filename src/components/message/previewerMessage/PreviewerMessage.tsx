@@ -94,7 +94,7 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
       </div>
       <div className="h-40 w-full flex justify-center items-end">
         <button
-          className="w-[350px] bg-turquoise-100 text-white p-3 rounded-lg font-semibold m-3 mb-11"
+          className="w-full mx-8 bg-turquoise-100 text-white p-3 rounded-lg font-semibold mt-3 mb-11"
           onClick={handleSend}
         >
           Send message
