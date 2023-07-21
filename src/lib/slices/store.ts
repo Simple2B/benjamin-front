@@ -7,12 +7,17 @@ import {
   createFilteredSoldiersSlice,
 } from './createFilteredSoldier';
 import { createMessageSlice, MessageSlice } from './createMessageScile';
+import {
+  createMapPositionSlice,
+  MapPositionSlice,
+} from './createMapPositionSlices';
 
 type StoreState = CemeterySlice &
   SoldierSlice &
   StoneSlice &
   FilteredSoldierSlice &
-  MessageSlice;
+  MessageSlice &
+  MapPositionSlice;
 
 export const useAppStore = create<StoreState>()((...a) => ({
   ...createCemeterySlice(...a),
@@ -20,4 +25,5 @@ export const useAppStore = create<StoreState>()((...a) => ({
   ...createStoneSlice(...a),
   ...createFilteredSoldiersSlice(...a),
   ...createMessageSlice(...a),
+  ...createMapPositionSlice(...a),
 }));

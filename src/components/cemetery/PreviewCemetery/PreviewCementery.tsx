@@ -156,6 +156,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
             center={center}
             graves_coordinates={gravesCoordinates}
             cemeteryUuid={cemetery?.uuid}
+            zoom={13}
           />
           <div className="flex flex-col items-center">
             {soldiersQuery.isFetched && isFilter ? (

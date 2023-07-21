@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import { CemeteriesService, SoldiersService } from '@/openapi';
 import { PATH } from '@/components/constants/path.constants';
-import PreviewCemeterySoldier from '@/components/cemeterySoldier/PreviewCementery';
+import PreviewCemeterySoldier from '@/components/cemeterySoldier/PreviewCemeterySoldier';
 
 // export const dynamic = 'force-dynamic';
 export const fetchCache = 'default-cache';

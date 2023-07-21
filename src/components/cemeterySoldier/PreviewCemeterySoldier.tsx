@@ -34,7 +34,10 @@ export default function PreviewCemeterySoldier({
   soldier,
 }: ICemeterySoldier) {
   const [inputSoldier, setInputSoldier] = useState<string>('');
-  const { currentCemetery, setCurrentCemetery } = useAppStore();
+  const { currentCemetery, setCurrentCemetery, currentMapPosition } =
+    useAppStore();
+
+  console.log({ currentMapPosition });
 
   useEffect(() => {
     setCurrentCemetery(cemetery);
@@ -57,9 +60,10 @@ export default function PreviewCemeterySoldier({
       <div className={`flex flex-col items-baseline w-full bg-white h-full`}>
         <div className="fixed w-screen">
           <MapCemetery
-            center={center}
+            center={currentMapPosition ? currentMapPosition.latlng : center}
             graves_coordinates={cemetery?.graves_coordinates}
             cemeteryUuid={cemetery?.uuid}
+            zoom={currentMapPosition ? currentMapPosition.zoom : 13}
           />
           <div className="flex flex-col items-center">
             <SearchBar
