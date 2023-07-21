@@ -68,3 +68,6 @@ export const categoryFilterNames = {
 };
 
 export const MAP_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAP_ACCESS_TOKEN;
+
+export const GUARDIANS_OF_HEROES_LINK =
+  'https://www.operationbenjamin.org/guardians-of-heroes';
