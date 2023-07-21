@@ -56,7 +56,7 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
             Write a message to the family
           </h1>
         </div>
-        <div className="px-8 flex flex-col gap-6 leading-[22px]">
+        <div className="px-8 flex flex-col leading-[22px] gap-6">
           <p>{messagePageInstruction}</p>
 
           <div className="flex flex-col w-full gap-2">
@@ -70,13 +70,11 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
               value={email}
               required
             />
-            <p
-              className={`text-xs text-red-600 ${isEmailValid && 'invisible'}`}
-            >
+            <p className={`text-xs text-red-600 ${isEmailValid && 'hidden'}`}>
               Please enter accurate email address
             </p>
           </div>
-          <div className="flex flex-col w-full gap-2">
+          <div className="flex flex-col w-full gap-2 mt-2">
             <h3 className="font-semibold leading-6">MESSAGE</h3>
             <textarea
               maxLength={500}
@@ -92,7 +90,7 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
           </div>
         </div>
       </div>
-      <div className="h-40 w-full flex justify-center items-end">
+      <div className="w-full flex justify-center items-end mt-5">
         <button
           className="w-full mx-8 bg-turquoise-100 text-white p-3 rounded-lg font-semibold mt-3 mb-11"
           onClick={handleSend}
