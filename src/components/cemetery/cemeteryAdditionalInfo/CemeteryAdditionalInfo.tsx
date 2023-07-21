@@ -4,7 +4,7 @@ import { ICemeteryAdditionalInfo } from './CemeteryAdditionalInfo.types';
 
 const CemeteryAdditionalInfo = (props: ICemeteryAdditionalInfo) => {
   return (
-    <div className="w-full bg-grey-10 p-4 rounded-lg pb-5">
+    <div className="w-full bg-grey-10 pt-3 px-4 rounded-lg pb-5">
       <h2 className="font-semibold leading-6">Additional info</h2>
       {Object.entries(props).map(([key, value]) => {
         return (

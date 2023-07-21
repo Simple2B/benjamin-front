@@ -7,6 +7,7 @@ import { CemeteryOut } from '@/openapi';
 import { redirect } from 'next/navigation';
 import { PATH } from '../constants/path.constants';
 import { isIOS } from '../utils/isIphone';
+import { CemeteryAbmc } from './cemeteryAbmc/CemeteryAbmc';
 
 interface ICemeteryInfoProps {
   cemetery: CemeteryOut;
@@ -143,6 +144,8 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
             listedAsMissingSoldiers={cemetery.amountBuriedSoldiersMissing}
           />
         </div>
+
+        <CemeteryAbmc />
 
         <div className="relative flex flex-col gap-6 items-center pb-8 w-full z-10 bg-white pt-6">
           {cemetery.filtered_soldiers && (
