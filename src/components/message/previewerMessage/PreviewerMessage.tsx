@@ -47,8 +47,8 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
 
   return (
     <>
-      <div className="flex flex-col items-start pt-4 text-indigo-100 gap-9">
-        <div className="w-full flex justify-between px-[18px]">
+      <div className="flex flex-col items-start text-indigo-100">
+        <div className="top-0 w-full flex justify-between px-[18px] fixed bg-white py-3 pt-4">
           <div onClick={router.back}>
             <IconButton iconName={ICONS_NAME.arrow} className="w-4 h-4" />
           </div>
@@ -56,7 +56,7 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
             Write a message to the family
           </h1>
         </div>
-        <div className="px-8 flex flex-col leading-[22px] gap-6">
+        <div className="px-8 flex flex-col leading-[22px] gap-6 mt-16">
           <p>{messagePageInstruction}</p>
 
           <div className="flex flex-col w-full gap-2">

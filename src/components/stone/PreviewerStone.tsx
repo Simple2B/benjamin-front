@@ -88,9 +88,9 @@ export const PreviewerStone = ({
   };
   return (
     <>
-      <div className="text-indigo-100 py-4 flex flex-col gap-8 mb-32">
+      <div className="text-indigo-100 pb-4 flex flex-col gap-8 mb-32">
         {isUploadWindowOpen && <div className="filter-indigo z-[100]" />}
-        <div className="w-full flex justify-between px-[18px]">
+        <div className="top-0 w-full flex justify-between px-[18px] fixed bg-white py-3 pt-4">
           <div onClick={router.back}>
             <IconButton iconName={ICONS_NAME.arrow} className="w-4 h-4" />
           </div>
@@ -98,7 +98,7 @@ export const PreviewerStone = ({
             Lay a stone
           </h1>
         </div>
-        <div className="flex flex-col gap-3 px-8 leading-6">
+        <div className="flex flex-col gap-3 px-8 leading-6 mt-16">
           {PREVIEWER_STONE_TEXT.map((text, index) => (
             <p key={index}>{text}</p>
           ))}
