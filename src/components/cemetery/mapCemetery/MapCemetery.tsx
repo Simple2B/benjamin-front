@@ -2,15 +2,22 @@
 import React, { useEffect, useState } from 'react';
 import IconButton from '../../IconButton';
 import { ICONS_NAME } from '../../constants/iconName';
-import { MapContainer, Marker, TileLayer, useMap } from 'react-leaflet';
+import {
+  MapContainer,
+  Marker,
+  TileLayer,
+  useMap,
+  useMapEvents,
+} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Grave } from '@/openapi';
-import { davidStarIcon } from './mapCemetery.constants';
+import { currentSoldierIcon, davidStarIcon } from './mapCemetery.constants';
 import { calculateDistance, createIcon } from './mapCemetery.utils';
 import { MAP_ACCESS_TOKEN } from '@/components/constants/constants';
 import { useRouter } from 'next/navigation';
 import { PATH } from '@/components/constants/path.constants';
 import urlJoin from 'url-join';
+import { useAppStore } from '@/lib/slices/store';
 
 interface DeviceOrientationEventiOS extends DeviceOrientationEvent {
   requestPermission?: () => Promise<'granted' | 'denied'>;
@@ -25,12 +32,16 @@ type IMapCemeteryProps = {
   center: ICoordinates;
   graves_coordinates: Array<Grave>;
   cemeteryUuid: string;
+  zoom: number;
+  soldierUuid?: string;
 };
 
 export default function MapCemetery({
   center,
   graves_coordinates,
   cemeteryUuid,
+  zoom,
+  soldierUuid,
 }: IMapCemeteryProps) {
   const [hasPermition, setHasPermition] = useState<boolean>(false);
   const [isTerrian, setIsTerrian] = useState<boolean>(true);
@@ -38,17 +49,14 @@ export default function MapCemetery({
 
   const router = useRouter();
 
+  const { setCurrentMapPosition, currentMapPosition } = useAppStore();
+
   function handler(e: any) {
     const compass = e.webkitCompassHeading || Math.abs(e.alpha - 360);
     setCompass(compass);
   }
 
   useEffect(() => {
-    const isIOS = !(
-      navigator.userAgent.match(/(iPod|iPhone|iPad)/) &&
-      navigator.userAgent.match(/AppleWebKit/)
-    );
-
     if (
       typeof (DeviceOrientationEvent as unknown as DeviceOrientationEventiOS)
         .requestPermission === 'function'
@@ -108,7 +116,7 @@ export default function MapCemetery({
       >
         <MapContainer
           center={[center.lat, center.lng]}
-          zoom={13}
+          zoom={zoom}
           scrollWheelZoom={true}
           zoomControl={false}
           style={{ height: '100%', width: '100%', zIndex: 0 }}
@@ -130,18 +138,18 @@ export default function MapCemetery({
           )}
           {graves_coordinates.map(
             (
-              {
-                uuid,
-                suffix,
-                firstName,
-                lastName,
-                burialLocationLatitude,
-                burialLocationLongitude,
-              },
+              { uuid, burialLocationLatitude, burialLocationLongitude },
               index
             ) => {
               const eventHandlers = {
                 click: () => {
+                  setCurrentMapPosition({
+                    zoom: zoom,
+                    latlng: currentMapPosition?.latlng ?? {
+                      lat: burialLocationLatitude ?? 0,
+                      lng: burialLocationLongitude ?? 0,
+                    },
+                  });
                   router.push(
                     urlJoin(PATH.cemetery, cemeteryUuid, PATH.soldier, uuid)
                   );
@@ -153,7 +161,9 @@ export default function MapCemetery({
                     burialLocationLatitude ?? 0,
                     burialLocationLongitude ?? 0,
                   ]}
-                  icon={davidStarIcon}
+                  icon={
+                    soldierUuid == uuid ? currentSoldierIcon : davidStarIcon
+                  }
                   key={index}
                   eventHandlers={eventHandlers}
                 ></Marker>
@@ -203,9 +213,40 @@ const CurrentLocationMarker = ({
   const [position, setPosition] = useState<ICoordinates | null>(null);
   const [iconUrl, setIconURL] = useState<string>('/images/icons/399308.png');
 
+  const { setCurrentMapPosition, currentMapPosition } = useAppStore();
+
   const navigationButton = document.getElementById('navigation-button');
 
   const map = useMap();
+
+  useMapEvents({
+    zoomend(e) {
+      const currentZoom = map.getZoom();
+      const currentLocation = e.target.getCenter();
+      setCurrentMapPosition({
+        zoom: currentZoom,
+        latlng: currentLocation,
+      });
+    },
+    dragend(e) {
+      const currentLocation = e.target.getCenter();
+      const currentZoom = currentMapPosition?.zoom ?? 13;
+
+      setCurrentMapPosition({
+        zoom: currentZoom,
+        latlng: currentLocation,
+      });
+    },
+    click(e) {
+      const currentLocation = e.target.getCenter();
+      const currentZoom = currentMapPosition?.zoom ?? 13;
+
+      setCurrentMapPosition({
+        zoom: currentZoom,
+        latlng: currentLocation,
+      });
+    },
+  });
 
   function onLocationFound(e: any) {
     const currentCoordinates: ICoordinates = e.latlng;

@@ -1,12 +1,11 @@
 'use client';
 
 import { useAppStore } from '@/lib/slices/store';
-import { CemeteryOut, Grave, SoldierOut } from '@/openapi';
+import { CemeteryOut, SoldierOut } from '@/openapi';
 import dynamic from 'next/dynamic';
 import { redirect } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import SearchBar from '../SearchBar';
-import { CemeteryInfo } from '../cemetery/cemeteryInfo';
 import { ICoordinates } from '../cemetery/mapCemetery/mapCemetery.utils';
 import { PATH } from '../constants/path.constants';
 import SoldierInfo from './SoldierInfo';
@@ -34,7 +33,8 @@ export default function PreviewCemeterySoldier({
   soldier,
 }: ICemeterySoldier) {
   const [inputSoldier, setInputSoldier] = useState<string>('');
-  const { currentCemetery, setCurrentCemetery } = useAppStore();
+  const { currentCemetery, setCurrentCemetery, currentMapPosition } =
+    useAppStore();
 
   useEffect(() => {
     setCurrentCemetery(cemetery);
@@ -57,9 +57,11 @@ export default function PreviewCemeterySoldier({
       <div className={`flex flex-col items-baseline w-full bg-white h-full`}>
         <div className="fixed w-screen">
           <MapCemetery
-            center={center}
+            center={currentMapPosition ? currentMapPosition.latlng : center}
             graves_coordinates={cemetery?.graves_coordinates}
             cemeteryUuid={cemetery?.uuid}
+            zoom={currentMapPosition ? currentMapPosition.zoom : 13}
+            soldierUuid={soldier.uuid}
           />
           <div className="flex flex-col items-center">
             <SearchBar
@@ -71,6 +73,7 @@ export default function PreviewCemeterySoldier({
       </div>
 
       <SoldierInfo soldier={soldier} />
+      <div className="fixed bottom-0 h-[220px] w-full white-gradient-cemetery z-[9]"></div>
     </div>
   );
 }
