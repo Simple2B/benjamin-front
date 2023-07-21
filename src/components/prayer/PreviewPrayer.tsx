@@ -48,15 +48,10 @@ export const PreviewPrayer = ({ elMaleh }: IPreviewPrayerProps) => {
                 key={prayer}
                 className={({ selected }) =>
                   `w-full rounded-lg leading-5 bg-transparent outline-none font-semibold
-                 ${selected ? 'underline decoration-4' : 'text-grey-30'} 
-                 ${prayer == 'EL MALEH' ? 'flex-shrink-[0.6]' : ''}`
+                 ${selected ? 'underline decoration-4' : 'text-grey-30'} `
                 }
               >
-                <div>
-                  {prayer === 'EL MALEH'
-                    ? `EL MALEH ${elMaleh?.toUpperCase()}`
-                    : prayer}
-                </div>
+                <div>{prayer}</div>
               </Tab>
             ))}
           </Tab.List>
