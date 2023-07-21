@@ -12,10 +12,10 @@ export const davidStarIcon = L.icon({
 
 export const currentPositionIcon = L.icon({
   iconUrl: '/images/icons/current-position-location-pin.svg',
-  shadowUrl: '',
+  shadowUrl: '/images/icons/shadow.svg',
   iconSize: [20, 65],
-  shadowSize: [30, 44],
-  iconAnchor: [12, 84],
-  shadowAnchor: [4, 62],
+  shadowSize: [40, 64],
+  iconAnchor: [0, 0],
+  shadowAnchor: [28, 23],
   popupAnchor: [-3, -76],
 });
