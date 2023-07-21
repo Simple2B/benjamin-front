@@ -11,7 +11,7 @@ import {
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Grave } from '@/openapi';
-import { davidStarIcon } from './mapCemetery.constants';
+import { currentSoldierIcon, davidStarIcon } from './mapCemetery.constants';
 import { calculateDistance, createIcon } from './mapCemetery.utils';
 import { MAP_ACCESS_TOKEN } from '@/components/constants/constants';
 import { useRouter } from 'next/navigation';
@@ -33,6 +33,7 @@ type IMapCemeteryProps = {
   graves_coordinates: Array<Grave>;
   cemeteryUuid: string;
   zoom: number;
+  soldierUuid?: string;
 };
 
 export default function MapCemetery({
@@ -40,6 +41,7 @@ export default function MapCemetery({
   graves_coordinates,
   cemeteryUuid,
   zoom,
+  soldierUuid,
 }: IMapCemeteryProps) {
   const [hasPermition, setHasPermition] = useState<boolean>(false);
   const [isTerrian, setIsTerrian] = useState<boolean>(true);
@@ -136,14 +138,7 @@ export default function MapCemetery({
           )}
           {graves_coordinates.map(
             (
-              {
-                uuid,
-                suffix,
-                firstName,
-                lastName,
-                burialLocationLatitude,
-                burialLocationLongitude,
-              },
+              { uuid, burialLocationLatitude, burialLocationLongitude },
               index
             ) => {
               const eventHandlers = {
@@ -166,7 +161,9 @@ export default function MapCemetery({
                     burialLocationLatitude ?? 0,
                     burialLocationLongitude ?? 0,
                   ]}
-                  icon={davidStarIcon}
+                  icon={
+                    soldierUuid == uuid ? currentSoldierIcon : davidStarIcon
+                  }
                   key={index}
                   eventHandlers={eventHandlers}
                 ></Marker>
