@@ -7,6 +7,8 @@ import { useQuery } from '@tanstack/react-query';
 import { CemeteriesService, CemeteryOut } from '@/openapi';
 import { useAppStore } from '@/lib/slices/store';
 import { PATH } from '../constants/path.constants';
+import Spinner from '../Spinner';
+import { SeachErrorMessage } from './SeachErrorMessage';
 
 export const PreviewerSearch = () => {
   const [inputSoldier, setInputSoldier] = useState<string>('');
@@ -49,20 +51,26 @@ export const PreviewerSearch = () => {
         <SearchBar displaySettings={false} setInputSoldier={setInputSoldier} />
       </div>
       <div className="w-full flex flex-col items-center px-8 gap-3 mt-8">
-        {soldiersQuery.isFetched &&
-          soldiersQuery.data &&
-          soldiersQuery.data.items.map((soldier, index) => (
-            <div key={index}>
-              <SoldierSearchingCard
-                firstName={soldier.firstName}
-                lastName={soldier.lastName}
-                suffix={soldier.suffix}
-                number={soldier.serviceNumber}
-                city={soldier.birthLocation}
-                soldierUuid={soldier.uuid}
-              />
-            </div>
-          ))}
+        {soldiersQuery.isFetched ? (
+          soldiersQuery.data?.items.length !== 0 ? (
+            soldiersQuery.data?.items.map((soldier, index) => (
+              <div key={index}>
+                <SoldierSearchingCard
+                  firstName={soldier.firstName}
+                  lastName={soldier.lastName}
+                  suffix={soldier.suffix}
+                  number={soldier.serviceNumber}
+                  city={soldier.birthLocation}
+                  soldierUuid={soldier.uuid}
+                />
+              </div>
+            ))
+          ) : (
+            <SeachErrorMessage />
+          )
+        ) : (
+          <Spinner />
+        )}
       </div>
     </div>
   );
