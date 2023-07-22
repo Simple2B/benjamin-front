@@ -14,7 +14,7 @@ export const SETTINHS_INFO: SETTING_BOX_INFO[] = [
   },
   {
     iconName: ICONS_NAME.form,
-    boxName: 'Gravestone Change Form',
+    boxName: 'Headstone Change Inquiry',
     linkName: 'gravestoneFormUrl',
   },
   {

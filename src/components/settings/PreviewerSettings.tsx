@@ -10,6 +10,8 @@ import { useAppStore } from '@/lib/slices/store';
 import { CemeteryOut } from '@/openapi';
 import urlJoin from 'url-join';
 import { PATH } from '../constants/path.constants';
+import Image from 'next/image';
+import { IntroAnimationSwitcher } from './IntroAnimationSwitcher';
 
 type IPreviewerSettingsProps = {
   settingsData: Metadata;
@@ -57,31 +59,42 @@ export default function PreviewerSettings({
   );
 
   return (
-    <div className="flex flex-col items-start m-6 gap-8 bg-white">
-      <div
-        className="w-full flex items-center justify-between"
-        onClick={handleRouterBack}
-      >
-        <IconButton
-          iconName={ICONS_NAME.navigateBack}
-          className="w-6 h-6 rotate-180"
-        />
-
-        <h1 className="text-2xl font-semibold flex-grow text-center leading-7">
-          Settings
-        </h1>
+    <div className="bg-white all-height flex flex-col justify-between w-full ">
+      <div className="flex flex-col items-start m-6 gap-8 ">
+        <div
+          className="w-full flex items-center justify-between"
+          onClick={handleRouterBack}
+        >
+          <IconButton
+            iconName={ICONS_NAME.navigateBack}
+            className="w-6 h-6 rotate-180"
+          />
+          <h1 className="text-2xl font-semibold flex-grow text-center leading-7">
+            Settings
+          </h1>
+        </div>
+        <div className="flex flex-col items-center w-full">
+          <SelectingCemetery
+            selectedCemetery={currentCemetery}
+            onSelect={handleSelect}
+            cemeteries={cemeteries}
+            setSelectingOpen={setSelectingOpen}
+            boxWidth="w-[350px]"
+          />
+        </div>
+        {isSelectingOpen && <div className="filter-indigo" />}
+        <SettingBlock links={links} />
+        <div className="w-[350px] h-px bg-indigo-100 bg-opacity-10"></div>
+        <IntroAnimationSwitcher />
       </div>
-      <div className="flex flex-col items-center w-full">
-        <SelectingCemetery
-          selectedCemetery={currentCemetery}
-          onSelect={handleSelect}
-          cemeteries={cemeteries}
-          setSelectingOpen={setSelectingOpen}
-          boxWidth="w-[350px]"
+      <div className="mb-12 w-full flex justify-center">
+        <Image
+          src="/images/icons/logo.jpg"
+          width={143}
+          height={83}
+          alt="icon"
         />
       </div>
-      {isSelectingOpen && <div className="filter-indigo" />}
-      <SettingBlock links={links} />
     </div>
   );
 }

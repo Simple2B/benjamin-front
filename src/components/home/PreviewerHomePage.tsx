@@ -13,8 +13,7 @@ const PreviewerHomePage = () => {
 
   const handleVideoEnd = () => {
     videoPreviewTimeoutRef.current = setTimeout(() => {
-      localStorage.removeItem('uploadedStonePhoto');
-      if (localStorage.getItem('isVideoWatched')) {
+      if (window.localStorage.getItem('isAnimationEnabled') == 'false') {
         router.push(PATH.location);
         return;
       }
