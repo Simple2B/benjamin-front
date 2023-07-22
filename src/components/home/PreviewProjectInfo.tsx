@@ -89,7 +89,7 @@ const PreviewProjectInfo = ({
 
   const handleClick = () => {
     if (isLastPage) {
-      localStorage.setItem('isVideoWatched', 'true');
+      //localStorage.setItem('isAnimationEnabled', 'true');
       return;
     }
     onNextButtonClick();
