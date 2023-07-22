@@ -13,12 +13,7 @@ const PreviewerHomePage = () => {
 
   const handleVideoEnd = () => {
     videoPreviewTimeoutRef.current = setTimeout(() => {
-      const displayAnimation =
-        window.localStorage.getItem('isAnimationEnabled') == 'true'
-          ? true
-          : false;
-
-      if (!displayAnimation) {
+      if (window.localStorage.getItem('isAnimationEnabled') == 'false') {
         router.push(PATH.location);
         return;
       }
