@@ -35,6 +35,7 @@ type IMapCemeteryProps = {
   cemeteryUuid: string;
   zoom: number;
   soldierUuid?: string;
+  isTerrianView: boolean;
 };
 
 export default function MapCemetery({
@@ -43,9 +44,10 @@ export default function MapCemetery({
   cemeteryUuid,
   zoom,
   soldierUuid,
+  isTerrianView,
 }: IMapCemeteryProps) {
   const [hasPermition, setHasPermition] = useState<boolean>(false);
-  const [isTerrian, setIsTerrian] = useState<boolean>(true);
+  const [isTerrian, setIsTerrian] = useState<boolean>(isTerrianView);
   const [compass, setCompass] = useState<number>(0);
 
   const router = useRouter();
@@ -150,6 +152,7 @@ export default function MapCemetery({
                       lat: burialLocationLatitude ?? 0,
                       lng: burialLocationLongitude ?? 0,
                     },
+                    isTerrian: isTerrian,
                   });
                   router.push(
                     urlJoin(PATH.cemetery, cemeteryUuid, PATH.soldier, uuid)
@@ -171,7 +174,11 @@ export default function MapCemetery({
               );
             }
           )}
-          <CurrentLocationMarker center={center} compass={compass} />
+          <CurrentLocationMarker
+            center={center}
+            compass={compass}
+            isTerrian={isTerrian}
+          />
         </MapContainer>
         <>
           <div
@@ -205,11 +212,13 @@ export default function MapCemetery({
 type ICurrentLocationMarkerProps = {
   center: ICoordinates;
   compass: number;
+  isTerrian: boolean;
 };
 
 const CurrentLocationMarker = ({
   center,
   compass,
+  isTerrian,
 }: ICurrentLocationMarkerProps) => {
   const [position, setPosition] = useState<ICoordinates | null>(null);
 
@@ -226,6 +235,7 @@ const CurrentLocationMarker = ({
       setCurrentMapPosition({
         zoom: currentZoom,
         latlng: currentLocation,
+        isTerrian: isTerrian,
       });
     },
     dragend(e) {
@@ -235,6 +245,7 @@ const CurrentLocationMarker = ({
       setCurrentMapPosition({
         zoom: currentZoom,
         latlng: currentLocation,
+        isTerrian: isTerrian,
       });
     },
     click(e) {
@@ -244,6 +255,7 @@ const CurrentLocationMarker = ({
       setCurrentMapPosition({
         zoom: currentZoom,
         latlng: currentLocation,
+        isTerrian: isTerrian,
       });
     },
   });

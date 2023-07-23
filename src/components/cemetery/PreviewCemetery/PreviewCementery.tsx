@@ -34,7 +34,10 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
   const { currentCemetery, setCurrentCemetery } = useAppStore();
   const [isFilter, setFilter] = useState<boolean>(false);
   const [gravesCoordinates, setGravesCoordinates] = useState<Grave[]>([]);
+
   const searchParams = useSearchParams();
+
+  const { currentMapPosition } = useAppStore();
 
   const birthDay = searchParams.get('birthDay');
   const birthMonth = searchParams.get('birthMonth');
@@ -159,6 +162,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
               cemeteryUuid={cemetery?.uuid}
               zoom={13}
               soldierUuid=""
+              isTerrianView={currentMapPosition?.isTerrian ?? false}
             />
             <div className="flex flex-col items-center">
               {soldiersQuery.isFetched && isFilter ? (
