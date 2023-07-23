@@ -3,8 +3,7 @@ export const prayers = {
     {
       description:
         'The book of the Bible, Psalms, referred to in Hebrew as Tehillim, are traditionally recited by Jews in times of high emotion.  Often, the chapter of choice at a graveside is Chapter 23.',
-      audioUrl:
-        'https://www.bensound.com/bensound-music/bensound-tenderness.mp3',
+      audioUrl: '/audio/Psalms.mp3',
       prayerSource: ['CHAPTER 23', 'פרק כ״ג'],
       prayerText: [
         {
@@ -49,8 +48,7 @@ export const prayers = {
     {
       description:
         'The Mourner’s Kaddish, the Jewish Prayer for the dead written in Aramaic, is recited at all of the daily prayers and always in the presence of a Minyan.  A tradition spanning almost 2,000 years, the prayer speaks of the presence of God in our lives and ultimately the knowledge of the one God that will spread throughout the world.',
-      audioUrl:
-        'https://www.bensound.com/bensound-music/bensound-tenderness.mp3',
+      audioUrl: '/audio/Kaddish.mp3',
 
       prayerSource: [],
       prayerText: [
@@ -103,8 +101,7 @@ export const prayers = {
     {
       description:
         'El Maleh Rahamim (God who is full of compassion) is a haunting and soulful prayer traditionally recited at a graveside, in which we ask God for Divine protection for the departed, and pledge to give charity in their memory.  ',
-      audioUrl:
-        'https://www.bensound.com/bensound-music/bensound-tenderness.mp3',
+      audioUrl: '/audio/ElMaleh.mp3',
       prayerSource: [],
       prayerText: [],
     },
