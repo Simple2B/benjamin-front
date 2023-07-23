@@ -23,15 +23,3 @@ export const calculateDistance = (from: ICoordinates, to: ICoordinates) => {
 
   return c * r;
 };
-
-export const createIcon = (iconUrl: string) => {
-  return L.icon({
-    iconUrl: iconUrl,
-    shadowUrl: '',
-    iconSize: [35, 35],
-    shadowSize: [40, 64],
-    iconAnchor: [0, 0],
-    shadowAnchor: [28, 23],
-    popupAnchor: [-3, -76],
-  });
-};

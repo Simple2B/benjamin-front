@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40px" height="40px" viewBox="0 0 40 40" version="1.1">
+    <title>Group 4</title>
+    <defs>
+        <linearGradient x1="41.5189654%" y1="17.9803493%" x2="83.5052741%" y2="93.5801755%" id="linearGradient-1">
+            <stop stop-color="#EEEEEE" stop-opacity="0" offset="0%"/>
+            <stop stop-color="#EBB6B3" stop-opacity="0.18635271" offset="45.0284091%"/>
+            <stop stop-color="#E7716B" offset="100%"/>
+        </linearGradient>
+    </defs>
+    <g id="Final-app" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Where-I-am?" transform="translate(-237.088746, -301.000000)">
+            <g id="Group-4" transform="translate(237.088746, 301.000000)">
+                <polygon id="Path-17" fill="url(#linearGradient-1)" points="21.4112538 30 -1.65877143e-16 14 18.473547 4.16333634e-16 28.0597457 25"/>
+                <circle id="Oval" stroke="#FFFFFF" stroke-width="2" fill="#E7716B" cx="23.9112538" cy="26" r="6"/>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -73,7 +73,7 @@ export default function PreviewCemeterySoldier({
       </div>
 
       <SoldierInfo soldier={soldier} />
-      <div className="fixed bottom-0 h-[220px] w-full white-gradient-cemetery z-[9]"></div>
+      <div className="fixed bottom-0 h-[180px] w-full white-gradient-cemetery z-[9]"></div>
     </div>
   );
 }
