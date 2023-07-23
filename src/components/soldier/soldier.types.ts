@@ -1,3 +1,8 @@
+export interface IMainInfo {
+  dateOfDeath: iSoldierDataMap;
+  status: iSoldierDataMap;
+}
+
 export interface Ilife {
   birthDate: iSoldierDataMap;
   birthLocation: iSoldierDataMap;
@@ -8,6 +13,7 @@ export interface IService {
   serviceNumber: iSoldierDataMap;
   stateEnteredServiceFrom: iSoldierDataMap;
   branchOfService: iSoldierDataMap;
+  rank: iSoldierDataMap;
   unit: iSoldierDataMap;
   position: iSoldierDataMap;
   awards: iSoldierDataMap;

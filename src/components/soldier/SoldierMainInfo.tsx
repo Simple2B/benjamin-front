@@ -7,7 +7,11 @@ type ISoldierMainInfoProps = {
   icon: string;
 };
 
-const SoldierMainInfo = ({ heading, text, icon }: ISoldierMainInfoProps) => {
+export const SoldierMainInfo = ({
+  heading,
+  text,
+  icon,
+}: ISoldierMainInfoProps) => {
   return (
     <>
       {text && (
@@ -22,5 +26,3 @@ const SoldierMainInfo = ({ heading, text, icon }: ISoldierMainInfoProps) => {
     </>
   );
 };
-
-export default SoldierMainInfo;

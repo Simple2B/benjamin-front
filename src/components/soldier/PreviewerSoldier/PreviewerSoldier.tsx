@@ -1,33 +1,38 @@
 'use client';
+
 import ClosebleInfo from '@/components/ClosebleInfo';
+import IconButton from '@/components/IconButton';
 import AudioPlayer from '@/components/audioPlayer/AudioPlayer';
-import RememberSoldier from '@/components/soldier/RememberSoldier';
-import SoldierAdditionalVideo from '@/components/soldier/SoldierAdditionaVideo';
-import SoldierAdditionalImage from '@/components/soldier/SoldierAdditionalImage';
-import SoldierCardBlockInfo from '@/components/soldier/SoldierCardBlockInfo';
-import SoldierMainInfoCard from '@/components/soldier/SoldierMainInfoCard';
-import React, { useEffect, useState } from 'react';
-import { SoldierCoordinates } from '../SoldierCoordinates';
-import { SoldierMessages } from '../SoldierMessages';
-import { Ilife, IService, IDeath } from '../soldier.types';
+import { AWS_BASE_URL } from '@/components/constants/constants';
+import { ICONS_NAME } from '@/components/constants/iconName';
+import { PATH } from '@/components/constants/path.constants';
+import { MessageSendPopUp } from '@/components/message/MessageSendPopUp';
 import {
+  SoldierMessages,
+  SoldierCoordinates,
+  SoldierHeadstonePhoto,
+  GuardiansOfHeroes,
+  IMainInfo,
+  Ilife,
+  IService,
+  IDeath,
+  SoldierCardBlockInfo,
+  SoldierAdditionalImage,
+  SoldierAdditionalVideo,
+  RememberSoldier,
+  SoldierMainInfoCard,
+  SOLDIER_MAIN_INFO_HEADERS,
   SOLDIER_LIFE_HEADERS,
   SOLDIER_SERVICE_HEADERS,
   SOLDIER_DEATH_HEADERS,
-} from './PreviewerSoldier.constants';
-import IconButton from '@/components/IconButton';
-import { ICONS_NAME } from '@/components/constants/iconName';
-import { useRouter } from 'next/navigation';
-import { PATH } from '@/components/constants/path.constants';
-import urlJoin from 'url-join';
-import { AWS_BASE_URL } from '@/components/constants/constants';
-import { formatDate } from './PreviewerSoldier.utils';
-import { SoldierOut } from '@/openapi';
-import { PhotoCarrousel } from '../PhotoCarrousel';
-import { GuardiansOfHeroes } from '../GuardiansOfHeroes';
-import { SoldierHeadstonePhoto } from '../SoldierHeadstonePhoto';
+  formatDate,
+  PhotoCarrousel,
+} from '.././index';
 import { useAppStore } from '@/lib/slices/store';
-import { MessageSendPopUp } from '@/components/message/MessageSendPopUp';
+import { SoldierOut } from '@/openapi';
+import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import urlJoin from 'url-join';
 
 interface IPreviewerSoldierProps {
   soldier: SoldierOut;
@@ -66,6 +71,17 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
         : soldier?.soldierAwards[0];
   }
 
+  const mainInfo: IMainInfo = {
+    dateOfDeath: {
+      header: SOLDIER_MAIN_INFO_HEADERS.dateOfDeath,
+      value: formatDate(soldier?.deathDate),
+    },
+    status: {
+      header: SOLDIER_MAIN_INFO_HEADERS.status,
+      value: 'STATUS',
+    },
+  };
+
   const life: Ilife = {
     birthDate: {
       header: SOLDIER_LIFE_HEADERS.birthDay,
@@ -93,6 +109,10 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
     branchOfService: {
       header: SOLDIER_SERVICE_HEADERS.branchOfService,
       value: soldier?.serviceBranch,
+    },
+    rank: {
+      header: SOLDIER_SERVICE_HEADERS.rank,
+      value: soldier?.soldierRanks.join(', '),
     },
     unit: {
       header: SOLDIER_SERVICE_HEADERS.unit,
@@ -150,9 +170,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
             sufix={soldier?.suffix}
             firstName={soldier?.firstName}
             lastName={soldier?.lastName}
-            serviceNumber={soldier?.serviceNumber}
-            branchOfService={soldier?.serviceBranch}
-            awards={awardsInPreview}
+            mainInfo={mainInfo}
           />
         )}
         {soldier?.soldierAudioTour && (

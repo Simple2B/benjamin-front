@@ -5,7 +5,7 @@ type ISoldierAdditionalImageProps = {
   imageDescription: string;
 };
 
-const SoldierAdditionalImage = ({
+export const SoldierAdditionalImage = ({
   imageUrl,
   imageDescription,
 }: ISoldierAdditionalImageProps) => {
@@ -24,5 +24,3 @@ const SoldierAdditionalImage = ({
     </>
   );
 };
-
-export default SoldierAdditionalImage;
