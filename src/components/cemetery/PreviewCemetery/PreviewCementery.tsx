@@ -172,7 +172,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
               cemeteryUuid={cemetery?.uuid}
               zoom={13}
               soldierUuid=""
-              isTerrianView={currentMapPosition?.isTerrian ?? false}
+              isTerrianView={currentMapPosition?.isTerrian ?? true}
             />
             <div className="flex flex-col items-center">
               {soldiersQuery.isFetched && isFilter ? (
@@ -200,7 +200,6 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
           <CemeteryInfo cemetery={cemetery} />
         )}
       </div>
-      <div className="fixed bottom-0 h-[180px] w-full white-gradient-cemetery z-[9]"></div>
     </>
   );
 }

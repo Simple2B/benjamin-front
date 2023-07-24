@@ -36,7 +36,11 @@ export const PreviewerStone = ({
   const [uploadedPhotoForm, setUploadedPhotoForm] = useState<Blob>();
 
   const router = useRouter();
-  const { currentStones } = useAppStore();
+  const { currentStones, setCurrentSoldierScroll } = useAppStore();
+
+  useEffect(() => {
+    setCurrentSoldierScroll(true);
+  }, []);
 
   useEffect(() => {
     const userUploadedPhoto = sessionStorage.getItem('uploadedStonePhoto');

@@ -81,49 +81,62 @@ export const CategoryPreview = ({
             />
           </Link>
         </div>
-
-        <CategoryBlock
-          categoryHeader={'Birth year'}
-          categoryText={categoriesValues.birthYearFilters}
-          queryParam={QUERY_PARAMS.birthYear}
-          cemeteryUuid={cemeteryUuid}
-        />
-        <CategoryBlock
-          categoryHeader={'Birth month'}
-          categoryText={categoriesValues.birthMonthFilters}
-          queryParam={QUERY_PARAMS.birthMonth}
-          cemeteryUuid={cemeteryUuid}
-        />
-        <CategoryBlock
-          categoryHeader={'Enlisted from'}
-          categoryText={categoriesValues.stateFilters}
-          queryParam={QUERY_PARAMS.statesEnteredFrom}
-          cemeteryUuid={cemeteryUuid}
-        />
-        <CategoryBlock
-          categoryHeader={'Month died'}
-          categoryText={categoriesValues.deathMonthFilters}
-          queryParam={QUERY_PARAMS.deathMonth}
-          cemeteryUuid={cemeteryUuid}
-        />
-        <CategoryBlock
-          categoryHeader={'Year died'}
-          categoryText={categoriesValues.deathYearFilters}
-          queryParam={QUERY_PARAMS.deathYear}
-          cemeteryUuid={cemeteryUuid}
-        />
-        <CategoryBlock
-          categoryHeader={'Rank'}
-          categoryText={categoriesValues.rankFilters}
-          queryParam={QUERY_PARAMS.rank}
-          cemeteryUuid={cemeteryUuid}
-        />
-        <CategoryBlock
-          categoryHeader={'Unit'}
-          categoryText={categoriesValues.unitsFilters}
-          queryParam={QUERY_PARAMS.unit}
-          cemeteryUuid={cemeteryUuid}
-        />
+        {categoriesValues.birthYearFilters.length > 0 && (
+          <CategoryBlock
+            categoryHeader={'Birth year'}
+            categoryText={categoriesValues.birthYearFilters}
+            queryParam={QUERY_PARAMS.birthYear}
+            cemeteryUuid={cemeteryUuid}
+          />
+        )}
+        {categoriesValues.birthMonthFilters.length > 0 && (
+          <CategoryBlock
+            categoryHeader={'Birth month'}
+            categoryText={categoriesValues.birthMonthFilters}
+            queryParam={QUERY_PARAMS.birthMonth}
+            cemeteryUuid={cemeteryUuid}
+          />
+        )}
+        {categoriesValues.stateFilters.length > 0 && (
+          <CategoryBlock
+            categoryHeader={'Enlisted from'}
+            categoryText={categoriesValues.stateFilters}
+            queryParam={QUERY_PARAMS.statesEnteredFrom}
+            cemeteryUuid={cemeteryUuid}
+          />
+        )}
+        {categoriesValues.deathMonthFilters.length > 0 && (
+          <CategoryBlock
+            categoryHeader={'Month died'}
+            categoryText={categoriesValues.deathMonthFilters}
+            queryParam={QUERY_PARAMS.deathMonth}
+            cemeteryUuid={cemeteryUuid}
+          />
+        )}
+        {categoriesValues.deathYearFilters.length > 0 && (
+          <CategoryBlock
+            categoryHeader={'Year died'}
+            categoryText={categoriesValues.deathYearFilters}
+            queryParam={QUERY_PARAMS.deathYear}
+            cemeteryUuid={cemeteryUuid}
+          />
+        )}
+        {categoriesValues.rankFilters.length > 0 && (
+          <CategoryBlock
+            categoryHeader={'Rank'}
+            categoryText={categoriesValues.rankFilters}
+            queryParam={QUERY_PARAMS.rank}
+            cemeteryUuid={cemeteryUuid}
+          />
+        )}
+        {categoriesValues.unitsFilters.length > 0 && (
+          <CategoryBlock
+            categoryHeader={'Unit'}
+            categoryText={categoriesValues.unitsFilters}
+            queryParam={QUERY_PARAMS.unit}
+            cemeteryUuid={cemeteryUuid}
+          />
+        )}
       </div>
     </div>
   );
