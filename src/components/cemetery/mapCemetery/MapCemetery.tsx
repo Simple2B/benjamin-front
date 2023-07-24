@@ -148,6 +148,13 @@ export default function MapCemetery({
             chunkedLoading
             iconCreateFunction={createClusterCustomIcon}
             spiderfyOnMaxZoom={true}
+            polygonOptions={{
+              fillColor: 'none',
+              color: 'none',
+              weight: 1,
+              opacity: 1,
+              fillOpacity: 0.8,
+            }}
           >
             {graves_coordinates.map(
               (
