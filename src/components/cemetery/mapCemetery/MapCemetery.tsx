@@ -11,7 +11,11 @@ import {
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Grave } from '@/openapi';
-import { currentSoldierIcon, davidStarIcon } from './mapCemetery.constants';
+import {
+  createClusterCustomIcon,
+  currentSoldierIcon,
+  davidStarIcon,
+} from './mapCemetery.constants';
 import { calculateDistance } from './mapCemetery.utils';
 import { MAP_ACCESS_TOKEN } from '@/components/constants/constants';
 import { useRouter } from 'next/navigation';
@@ -19,6 +23,7 @@ import { PATH } from '@/components/constants/path.constants';
 import urlJoin from 'url-join';
 import { useAppStore } from '@/lib/slices/store';
 import L from 'leaflet';
+import MarkerClusterGroup from 'react-leaflet-cluster';
 
 interface DeviceOrientationEventiOS extends DeviceOrientationEvent {
   requestPermission?: () => Promise<'granted' | 'denied'>;
@@ -139,41 +144,47 @@ export default function MapCemetery({
               url={`https://{s}.tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token=${MAP_ACCESS_TOKEN}`}
             />
           )}
-          {graves_coordinates.map(
-            (
-              { uuid, burialLocationLatitude, burialLocationLongitude },
-              index
-            ) => {
-              const eventHandlers = {
-                click: () => {
-                  setCurrentMapPosition({
-                    zoom: zoom,
-                    latlng: currentMapPosition?.latlng ?? {
-                      lat: burialLocationLatitude ?? 0,
-                      lng: burialLocationLongitude ?? 0,
-                    },
-                    isTerrian: isTerrian,
-                  });
-                  router.push(
-                    urlJoin(PATH.cemetery, cemeteryUuid, PATH.soldier, uuid)
-                  );
-                },
-              };
-              return (
-                <Marker
-                  position={[
-                    burialLocationLatitude ?? 0,
-                    burialLocationLongitude ?? 0,
-                  ]}
-                  icon={
-                    soldierUuid == uuid ? currentSoldierIcon : davidStarIcon
-                  }
-                  key={index}
-                  eventHandlers={eventHandlers}
-                ></Marker>
-              );
-            }
-          )}
+          <MarkerClusterGroup
+            chunkedLoading
+            iconCreateFunction={createClusterCustomIcon}
+            spiderfyOnMaxZoom={true}
+          >
+            {graves_coordinates.map(
+              (
+                { uuid, burialLocationLatitude, burialLocationLongitude },
+                index
+              ) => {
+                const eventHandlers = {
+                  click: () => {
+                    setCurrentMapPosition({
+                      zoom: zoom,
+                      latlng: currentMapPosition?.latlng ?? {
+                        lat: burialLocationLatitude ?? 0,
+                        lng: burialLocationLongitude ?? 0,
+                      },
+                      isTerrian: isTerrian,
+                    });
+                    router.push(
+                      urlJoin(PATH.cemetery, cemeteryUuid, PATH.soldier, uuid)
+                    );
+                  },
+                };
+                return (
+                  <Marker
+                    position={[
+                      burialLocationLatitude ?? 0,
+                      burialLocationLongitude ?? 0,
+                    ]}
+                    icon={
+                      soldierUuid == uuid ? currentSoldierIcon : davidStarIcon
+                    }
+                    key={index}
+                    eventHandlers={eventHandlers}
+                  ></Marker>
+                );
+              }
+            )}
+          </MarkerClusterGroup>
           <CurrentLocationMarker
             center={center}
             compass={compass}

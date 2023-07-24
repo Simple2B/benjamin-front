@@ -13,7 +13,7 @@ export const StoneUploadPhoto = ({ photoSrc }: IStoneUploadPhotoProps) => {
           <img
             src={photoSrc}
             alt="stone"
-            className="w-[200px] h-[262px] object-cover rounded-2xl"
+            className="w-[240px] h-[320px] object-cover rounded-2xl"
           />
         )}
       </div>
