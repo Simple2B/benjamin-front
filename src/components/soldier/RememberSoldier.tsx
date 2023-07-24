@@ -29,7 +29,7 @@ const REMEMBERING = [
   },
 ];
 
-const RememberSoldier = ({
+export const RememberSoldier = ({
   soldierFirstName,
   soldierLastName,
   soldierSufix,
@@ -64,5 +64,3 @@ const RememberSoldier = ({
     </div>
   );
 };
-
-export default RememberSoldier;

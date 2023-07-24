@@ -14,18 +14,22 @@ import {
   SOLDIER_LIFE_HEADERS,
   SOLDIER_SERVICE_HEADERS,
   SOLDIER_DEATH_HEADERS,
+  SOLDIER_MAIN_INFO_HEADERS,
 } from '../soldier/PreviewerSoldier/PreviewerSoldier.constants';
 import { formatDate } from '../soldier/PreviewerSoldier/PreviewerSoldier.utils';
-import RememberSoldier from '../soldier/RememberSoldier';
-import SoldierAdditionalVideo from '../soldier/SoldierAdditionaVideo';
-import SoldierAdditionalImage from '../soldier/SoldierAdditionalImage';
-import SoldierCardBlockInfo from '../soldier/SoldierCardBlockInfo';
-import { SoldierCoordinates } from '../soldier/SoldierCoordinates';
-import { SoldierHeadstonePhoto } from '../soldier/SoldierHeadstonePhoto';
-import SoldierMainInfoCard from '../soldier/SoldierMainInfoCard';
+
 import { SoldierMessages } from '../soldier/SoldierMessages';
-import { Ilife, IService, IDeath } from '../soldier/soldier.types';
+import { Ilife, IService, IDeath, IMainInfo } from '../soldier/soldier.types';
 import { isIOS } from '../utils/isIphone';
+import {
+  RememberSoldier,
+  SoldierAdditionalImage,
+  SoldierAdditionalVideo,
+  SoldierCardBlockInfo,
+  SoldierCoordinates,
+  SoldierHeadstonePhoto,
+  SoldierMainInfoCard,
+} from '../soldier';
 
 interface IPreviewerSoldierProps {
   soldier: SoldierOut;
@@ -132,6 +136,17 @@ export default function SoldierInfo({ soldier }: IPreviewerSoldierProps) {
 
   let awardsInPreview = '';
 
+  const mainInfo: IMainInfo = {
+    dateOfDeath: {
+      header: SOLDIER_MAIN_INFO_HEADERS.dateOfDeath,
+      value: formatDate(soldier?.deathDate),
+    },
+    status: {
+      header: SOLDIER_MAIN_INFO_HEADERS.status,
+      value: 'STATUS',
+    },
+  };
+
   if (soldier?.soldierAwards.length) {
     awardsInPreview =
       soldier?.soldierAwards.length >= 1
@@ -179,6 +194,10 @@ export default function SoldierInfo({ soldier }: IPreviewerSoldierProps) {
       header: SOLDIER_SERVICE_HEADERS.awards,
       value: soldier?.soldierAwards.join(', '),
     },
+    rank: {
+      header: SOLDIER_SERVICE_HEADERS.rank,
+      value: soldier?.soldierAwards.join(', '),
+    },
   };
 
   const death: IDeath = {
@@ -222,9 +241,7 @@ export default function SoldierInfo({ soldier }: IPreviewerSoldierProps) {
           sufix={soldier?.suffix}
           firstName={soldier?.firstName}
           lastName={soldier?.lastName}
-          serviceNumber={soldier?.serviceNumber}
-          branchOfService={soldier?.serviceBranch}
-          awards={awardsInPreview}
+          mainInfo={mainInfo}
         />
         <div ref={additionalInfoRef} className="flex flex-col gap-4">
           {soldier?.soldierAudioTour && (

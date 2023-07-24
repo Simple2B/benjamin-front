@@ -12,12 +12,13 @@ import {
 import 'leaflet/dist/leaflet.css';
 import { Grave } from '@/openapi';
 import { currentSoldierIcon, davidStarIcon } from './mapCemetery.constants';
-import { calculateDistance, createIcon } from './mapCemetery.utils';
+import { calculateDistance } from './mapCemetery.utils';
 import { MAP_ACCESS_TOKEN } from '@/components/constants/constants';
 import { useRouter } from 'next/navigation';
 import { PATH } from '@/components/constants/path.constants';
 import urlJoin from 'url-join';
 import { useAppStore } from '@/lib/slices/store';
+import L from 'leaflet';
 
 interface DeviceOrientationEventiOS extends DeviceOrientationEvent {
   requestPermission?: () => Promise<'granted' | 'denied'>;
@@ -34,6 +35,7 @@ type IMapCemeteryProps = {
   cemeteryUuid: string;
   zoom: number;
   soldierUuid?: string;
+  isTerrianView: boolean;
 };
 
 export default function MapCemetery({
@@ -42,9 +44,10 @@ export default function MapCemetery({
   cemeteryUuid,
   zoom,
   soldierUuid,
+  isTerrianView,
 }: IMapCemeteryProps) {
   const [hasPermition, setHasPermition] = useState<boolean>(false);
-  const [isTerrian, setIsTerrian] = useState<boolean>(true);
+  const [isTerrian, setIsTerrian] = useState<boolean>(isTerrianView);
   const [compass, setCompass] = useState<number>(0);
 
   const router = useRouter();
@@ -149,6 +152,7 @@ export default function MapCemetery({
                       lat: burialLocationLatitude ?? 0,
                       lng: burialLocationLongitude ?? 0,
                     },
+                    isTerrian: isTerrian,
                   });
                   router.push(
                     urlJoin(PATH.cemetery, cemeteryUuid, PATH.soldier, uuid)
@@ -170,7 +174,11 @@ export default function MapCemetery({
               );
             }
           )}
-          <CurrentLocationMarker center={center} compass={compass} />
+          <CurrentLocationMarker
+            center={center}
+            compass={compass}
+            isTerrian={isTerrian}
+          />
         </MapContainer>
         <>
           <div
@@ -204,14 +212,15 @@ export default function MapCemetery({
 type ICurrentLocationMarkerProps = {
   center: ICoordinates;
   compass: number;
+  isTerrian: boolean;
 };
 
 const CurrentLocationMarker = ({
   center,
   compass,
+  isTerrian,
 }: ICurrentLocationMarkerProps) => {
   const [position, setPosition] = useState<ICoordinates | null>(null);
-  const [iconUrl, setIconURL] = useState<string>('/images/icons/399308.png');
 
   const { setCurrentMapPosition, currentMapPosition } = useAppStore();
 
@@ -226,6 +235,7 @@ const CurrentLocationMarker = ({
       setCurrentMapPosition({
         zoom: currentZoom,
         latlng: currentLocation,
+        isTerrian: isTerrian,
       });
     },
     dragend(e) {
@@ -235,6 +245,7 @@ const CurrentLocationMarker = ({
       setCurrentMapPosition({
         zoom: currentZoom,
         latlng: currentLocation,
+        isTerrian: isTerrian,
       });
     },
     click(e) {
@@ -244,6 +255,7 @@ const CurrentLocationMarker = ({
       setCurrentMapPosition({
         zoom: currentZoom,
         latlng: currentLocation,
+        isTerrian: isTerrian,
       });
     },
   });
@@ -266,28 +278,27 @@ const CurrentLocationMarker = ({
     map.on('locationfound', onLocationFound);
   });
 
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-
-  const image = new Image();
-  image.src = '/images/icons/399308.png';
-
-  image.onload = () => {
-    canvas.width = 25;
-    canvas.height = 25;
-
-    ctx.save();
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.translate(canvas.width / 2, canvas.height / 2);
-    ctx.rotate(compass * (Math.PI / 180));
-    ctx.translate(-(canvas.width / 2), -(canvas.height / 2));
-    ctx.drawImage(image, 0, 0, 25, 25);
-    ctx?.restore();
-
-    setIconURL(canvas.toDataURL());
+  const iconSettings = {
+    mapIconUrl: `<svg
+      width="40px"
+      height="40px"
+      viewBox="0 0 40 40"
+      xmlns="http://www.w3.org/2000/svg"
+      id="navigator"
+      transform="rotate(${compass})"
+    >     
+      <image href="/images/icons/group4.svg" width="40" height="40" />
+    </svg>`,
   };
 
+  const svgIcon = L.divIcon({
+    html: L.Util.template(iconSettings.mapIconUrl, iconSettings),
+    className: '',
+    iconSize: [40, 40],
+    iconAnchor: [40, 40],
+  });
+
   return position === null ? null : (
-    <Marker position={position} icon={createIcon(iconUrl)}></Marker>
+    <Marker position={position} icon={svgIcon}></Marker>
   );
 };

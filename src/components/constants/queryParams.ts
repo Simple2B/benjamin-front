@@ -8,4 +8,6 @@ export const QUERY_PARAMS = {
   isHeadstoneChanged: 'isHeadstoneChanged',
   statesEnteredFrom: 'statesEnteredFrom',
   birthLocation: 'birthLocation',
+  rank: 'rank',
+  unit: 'unit',
 };

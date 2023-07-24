@@ -5,7 +5,7 @@ type ISoldierAdditionalVideoProps = {
   videoDescription: string;
 };
 
-const SoldierAdditionalVideo = ({
+export const SoldierAdditionalVideo = ({
   videoUrl,
   videoDescription,
 }: ISoldierAdditionalVideoProps) => {
@@ -21,5 +21,3 @@ const SoldierAdditionalVideo = ({
     </div>
   );
 };
-
-export default SoldierAdditionalVideo;

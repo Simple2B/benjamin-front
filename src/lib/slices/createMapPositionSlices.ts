@@ -4,6 +4,7 @@ import { StateCreator } from 'zustand';
 export interface IMapPosition {
   zoom: number;
   latlng: ICoordinates;
+  isTerrian: boolean;
 }
 
 export interface MapPositionSlice {

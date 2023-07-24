@@ -58,6 +58,8 @@ export class CemeteriesService {
      * @param isHeadstoneChanged
      * @param statesEnteredFrom
      * @param birthLocation
+     * @param rank
+     * @param unit
      * @param page
      * @param perPage
      * @returns Soldiers Successful Response
@@ -75,6 +77,8 @@ export class CemeteriesService {
         isHeadstoneChanged?: boolean,
         statesEnteredFrom?: string,
         birthLocation?: string,
+        rank?: string,
+        unit?: string,
         page: number = 1,
         perPage: number = 10,
     ): CancelablePromise<Soldiers> {
@@ -95,6 +99,8 @@ export class CemeteriesService {
                 'is_headstone_changed': isHeadstoneChanged,
                 'states_entered_from': statesEnteredFrom,
                 'birth_location': birthLocation,
+                'rank': rank,
+                'unit': unit,
                 'page': page,
                 'per_page': perPage,
             },

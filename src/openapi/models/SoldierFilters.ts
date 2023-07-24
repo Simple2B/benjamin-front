@@ -8,6 +8,8 @@ export type SoldierFilters = {
     deathYearFilters: Array<number>;
     deathMonthFilters: Array<number>;
     stateFilters: Array<string>;
+    rankFilters: Array<string>;
+    unitsFilters: Array<string>;
     todayBirthdaySoldiers: boolean;
     todayDeathdaySoldiers: boolean;
 };

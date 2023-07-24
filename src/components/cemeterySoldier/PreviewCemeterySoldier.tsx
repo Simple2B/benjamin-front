@@ -62,6 +62,7 @@ export default function PreviewCemeterySoldier({
             cemeteryUuid={cemetery?.uuid}
             zoom={currentMapPosition ? currentMapPosition.zoom : 13}
             soldierUuid={soldier.uuid}
+            isTerrianView={currentMapPosition?.isTerrian ?? false}
           />
           <div className="flex flex-col items-center">
             <SearchBar
@@ -73,7 +74,7 @@ export default function PreviewCemeterySoldier({
       </div>
 
       <SoldierInfo soldier={soldier} />
-      <div className="fixed bottom-0 h-[220px] w-full white-gradient-cemetery z-[9]"></div>
+      <div className="fixed bottom-0 h-[180px] w-full white-gradient-cemetery z-[9]"></div>
     </div>
   );
 }

@@ -34,7 +34,10 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
   const { currentCemetery, setCurrentCemetery } = useAppStore();
   const [isFilter, setFilter] = useState<boolean>(false);
   const [gravesCoordinates, setGravesCoordinates] = useState<Grave[]>([]);
+
   const searchParams = useSearchParams();
+
+  const { currentMapPosition } = useAppStore();
 
   const birthDay = searchParams.get('birthDay');
   const birthMonth = searchParams.get('birthMonth');
@@ -45,6 +48,8 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
   const birthLocation = searchParams.get('birthLocation');
   const isHeadstoneChanged = searchParams.get('isHeadstoneChanged');
   const statesEnteredFrom = searchParams.get('statesEnteredFrom');
+  const rank = searchParams.get('rank');
+  const unit = searchParams.get('unit');
 
   const values: (string | null)[] = [
     birthDay,
@@ -56,6 +61,8 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
     birthLocation,
     isHeadstoneChanged,
     statesEnteredFrom,
+    rank,
+    unit,
   ];
 
   useEffect(() => {
@@ -73,7 +80,9 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
       !deathYear &&
       !birthLocation &&
       !isHeadstoneChanged &&
-      !statesEnteredFrom
+      !statesEnteredFrom &&
+      !rank &&
+      !unit
     ) {
       setFilter(false);
     } else {
@@ -92,6 +101,8 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
       deathYear,
       isHeadstoneChanged,
       statesEnteredFrom,
+      rank,
+      unit,
     ],
     () =>
       CemeteriesService.getCemeterySoldiers(
@@ -105,7 +116,9 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
         deathDay ? parseInt(deathDay) : undefined,
         isHeadstoneChanged ? !!isHeadstoneChanged : undefined,
         statesEnteredFrom ? statesEnteredFrom : undefined,
-        birthLocation ? birthLocation : undefined
+        birthLocation ? birthLocation : undefined,
+        rank ? rank : undefined,
+        unit ? unit : undefined
       ),
     {
       enabled: !!cemetery,
@@ -159,6 +172,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
               cemeteryUuid={cemetery?.uuid}
               zoom={13}
               soldierUuid=""
+              isTerrianView={currentMapPosition?.isTerrian ?? false}
             />
             <div className="flex flex-col items-center">
               {soldiersQuery.isFetched && isFilter ? (
@@ -186,7 +200,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
           <CemeteryInfo cemetery={cemetery} />
         )}
       </div>
-      <div className="fixed bottom-0 h-[220px] w-full white-gradient-cemetery z-[9]"></div>
+      <div className="fixed bottom-0 h-[180px] w-full white-gradient-cemetery z-[9]"></div>
     </>
   );
 }

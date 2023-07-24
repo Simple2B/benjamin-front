@@ -48,6 +48,9 @@ export async function GET(request: Request, context: IContext) {
   const statesEnteredFrom =
     searchParams.get('states_entered_from') ?? undefined;
 
+  const rank = searchParams.get('rank') ?? undefined;
+  const unit = searchParams.get('unit') ?? undefined;
+
   const { params } = context;
   if (!params.cemeteryUuid) {
     return NextResponse.json({ msg: 'specify cemetery uuid' });
@@ -66,7 +69,9 @@ export async function GET(request: Request, context: IContext) {
     deathDate,
     isHeadstoneChanged,
     statesEnteredFrom,
-    birthLocation ? birthLocation : undefined
+    birthLocation ? birthLocation : undefined,
+    rank,
+    unit
   );
 
   return NextResponse.json(response);

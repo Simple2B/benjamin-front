@@ -1,11 +1,13 @@
 import React from 'react';
-import { IDeath, Ilife, IService } from './soldier.types';
+import { IDeath, Ilife, IMainInfo, IService } from './soldier.types';
 
 type ISoldierCardBlockInfoProps = {
-  solderInfo: IDeath | Ilife | IService;
+  solderInfo: IDeath | Ilife | IService | IMainInfo;
 };
 
-const SoldierCardBlockInfo = ({ solderInfo }: ISoldierCardBlockInfoProps) => {
+export const SoldierCardBlockInfo = ({
+  solderInfo,
+}: ISoldierCardBlockInfoProps) => {
   return (
     <>
       {Object.values(solderInfo).map(({ header, value }) => (
@@ -21,5 +23,3 @@ const SoldierCardBlockInfo = ({ solderInfo }: ISoldierCardBlockInfoProps) => {
     </>
   );
 };
-
-export default SoldierCardBlockInfo;
