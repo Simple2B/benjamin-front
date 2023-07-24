@@ -1,5 +1,5 @@
 'use client';
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import IconButton from '../IconButton';
 import { ICONS_NAME } from '../constants/iconName';
 import { SendPhotoForm } from './SendPhotoForm';
@@ -34,7 +34,7 @@ export const StoneUploadWindow = ({
 
   return (
     <div
-      className={`fixed z-[101] h-[90%] w-full bg-white flex flex-col items-center bottom-0 rounded-t-xl
+      className={`fixed z-[101] h-[90%] w-full bg-white flex flex-col items-center bottom-0 rounded-t-xl text-indigo-100
       ${isPreviewSending && 'h-4/5'}
       ${isClosing ? 'upload-window-disappear' : 'upload-window-appear'}`}
     >

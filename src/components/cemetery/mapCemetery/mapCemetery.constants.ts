@@ -1,4 +1,5 @@
 import L from 'leaflet';
+import { MarkerCluster } from 'leaflet';
 
 export const davidStarIcon = L.icon({
   iconUrl: '/images/icons/location-pin-davig-star.svg',
@@ -29,3 +30,18 @@ export const currentSoldierIcon = L.icon({
   shadowAnchor: [4, 62],
   popupAnchor: [-3, -76],
 });
+
+export const createClusterCustomIcon = function (cluster: MarkerCluster) {
+  return L.divIcon({
+    html: `<svg
+    width="80px"
+    height="80px"
+    viewBox="0 0 80 80"
+    xmlns="http://www.w3.org/2000/svg"  
+  >
+    <image href="/images/icons/location-pin-davig-star.svg" width="80" height="80" />
+  </svg>`,
+    className: '',
+    iconSize: L.point(60, 60, true),
+  });
+};
