@@ -200,7 +200,6 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
           <CemeteryInfo cemetery={cemetery} />
         )}
       </div>
-      <div className="fixed bottom-0 h-[180px] w-full white-gradient-cemetery z-[9]"></div>
     </>
   );
 }
