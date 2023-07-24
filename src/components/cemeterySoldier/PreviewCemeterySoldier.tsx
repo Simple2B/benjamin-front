@@ -33,8 +33,25 @@ export default function PreviewCemeterySoldier({
   soldier,
 }: ICemeterySoldier) {
   const [inputSoldier, setInputSoldier] = useState<string>('');
-  const { currentCemetery, setCurrentCemetery, currentMapPosition } =
-    useAppStore();
+  const {
+    currentCemetery,
+    setCurrentCemetery,
+    currentMapPosition,
+    currenSoldierScroll,
+    setCurrentSoldierScroll,
+  } = useAppStore();
+
+  useEffect(() => {
+    if (currenSoldierScroll) {
+      const mainPage = document.getElementById('page') as HTMLElement;
+      mainPage.scrollTo({
+        top: window.innerHeight,
+        left: 0,
+        behavior: 'smooth',
+      });
+      setCurrentSoldierScroll(false);
+    }
+  }, []);
 
   useEffect(() => {
     setCurrentCemetery(cemetery);

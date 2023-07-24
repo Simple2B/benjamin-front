@@ -31,7 +31,7 @@ import {
 import { useAppStore } from '@/lib/slices/store';
 import { SoldierOut } from '@/openapi';
 import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import urlJoin from 'url-join';
 
 interface IPreviewerSoldierProps {
@@ -42,7 +42,20 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
   const router = useRouter();
   const [isSent, setSent] = useState<boolean>(false);
 
-  const { currentMessage } = useAppStore();
+  const { currentMessage, currenSoldierScroll, setCurrentSoldierScroll } =
+    useAppStore();
+
+  useEffect(() => {
+    if (currenSoldierScroll) {
+      const mainPage = document.getElementById('page') as HTMLElement;
+      mainPage.scrollTo({
+        top: window.innerHeight,
+        left: 0,
+        behavior: 'smooth',
+      });
+      setCurrentSoldierScroll(false);
+    }
+  }, []);
 
   useEffect(() => {
     if (currentMessage?.createdAt) {

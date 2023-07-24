@@ -1,5 +1,5 @@
 'use client';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, use, useEffect, useState } from 'react';
 import IconButton from '../../IconButton';
 import { ICONS_NAME } from '../../constants/iconName';
 import { useRouter } from 'next/navigation';
@@ -17,6 +17,12 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
   const [message, setMessage] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [isEmailValid, setEmailValid] = useState<boolean>(true);
+
+  const { setCurrentSoldierScroll } = useAppStore();
+
+  useEffect(() => {
+    setCurrentSoldierScroll(true);
+  }, []);
 
   const router = useRouter();
 
