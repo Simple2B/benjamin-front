@@ -80,7 +80,7 @@ export const PreviewerMessage = ({ soldierUuid }: IPreviewerSoldierProps) => {
               maxLength={500}
               rows={10}
               onChange={handleMessage}
-              className=" resize-none p-3 text-sm rounded-lg border border-gray-300 w-full h-[323px] z-0 outline-none"
+              className=" resize-none p-3 rounded-lg border border-gray-300 w-full h-[323px] z-0 outline-none text-base"
               placeholder="Type your message"
               value={message}
             ></textarea>
