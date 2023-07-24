@@ -21,20 +21,22 @@ export const StoneUploadWindow = ({
 }: IStoneUploadWindowProps) => {
   const [isClosing, setClosing] = useState<boolean>(false);
   const [isPreviewSending, setPreviewSending] = useState<boolean>(false);
-  const [windowHeight, setWindowHeight] = useState<number>(800);
-
-  useEffect(() => {
-    setWindowHeight(window.innerHeight);
-  }, []);
+  const [isNext, setNext] = useState<boolean>(false);
 
   const handleClose = () => {
     handleUploadWindowClose();
     setClosing(true);
   };
 
+  const handleThankingInfo = () => {
+    setNext(true);
+  };
+
   return (
     <div
-      className={`fixed z-[101] h-[90%] w-full bg-white flex flex-col items-center bottom-0 rounded-t-xl text-indigo-100
+      className={`fixed z-[101] ${
+        isNext ? 'h-[600px]' : 'h-[93%]'
+      } w-full bg-white flex flex-col items-center bottom-0 rounded-t-xl text-indigo-100 max-h-[93%]
       ${isPreviewSending && 'h-4/5'}
       ${isClosing ? 'upload-window-disappear' : 'upload-window-appear'}`}
     >
@@ -52,6 +54,7 @@ export const StoneUploadWindow = ({
         setGallaryUpdating={setGallaryUpdating}
         photoSrc={photoSrc}
         uploadedPhotoForm={uploadedPhotoForm}
+        handleThankingInfo={handleThankingInfo}
       />
     </div>
   );

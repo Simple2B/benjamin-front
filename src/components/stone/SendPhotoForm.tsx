@@ -6,6 +6,7 @@ import IconButton from '../IconButton';
 import { ICONS_NAME } from '../constants/iconName';
 import { useAppStore } from '@/lib/slices/store';
 import { uploadStonePhoto } from '@/app/actions';
+import { StoneSendingInfo } from './StoneSendingInfo';
 
 type ISendPhotoFormProps = {
   setClosing: (ard: boolean) => void;
@@ -15,6 +16,7 @@ type ISendPhotoFormProps = {
   setGallaryUpdating: (value: boolean) => void;
   photoSrc?: string;
   uploadedPhotoForm?: Blob;
+  handleThankingInfo: () => void;
 };
 
 const formInitialValues = {
@@ -30,6 +32,7 @@ export const SendPhotoForm = ({
   setGallaryUpdating,
   photoSrc,
   uploadedPhotoForm,
+  handleThankingInfo,
 }: ISendPhotoFormProps) => {
   const { currentStones, setCurrentStone } = useAppStore();
   const [isNext, setNext] = useState<boolean>(false);
@@ -85,6 +88,7 @@ export const SendPhotoForm = ({
     };
 
     setNext(true);
+    handleThankingInfo();
     setPreviewSending(true);
   };
 
@@ -104,7 +108,7 @@ export const SendPhotoForm = ({
       <StoneUploadPhoto photoSrc={photoSrc} />
       {!isNext ? (
         <Formik initialValues={formInitialValues} onSubmit={handleSubmit}>
-          <Form className="w-full px-8 mt-2 flex flex-col gap-4 items-center">
+          <Form className="w-full px-8 mt-2 flex flex-col gap-4 items-center h-full">
             <div className="flex flex-col w-full gap-2">
               <h3 className="font-semibold leading-6">NAME</h3>
               <Field
@@ -134,7 +138,7 @@ export const SendPhotoForm = ({
                 className="text-xs text-red-600"
               />
             </div>
-            <div className="w-full mt-6 justify-end flex px-8 mb-2">
+            <div className="w-full mt-6 justify-end flex mb-6">
               <button
                 type="submit"
                 className={`inline-flex items-center gap-x-2 p-3 rounded-lg justify-center font-semibold bg-turquoise-100 w-36 text-white`}
@@ -149,20 +153,7 @@ export const SendPhotoForm = ({
           </Form>
         </Formik>
       ) : (
-        <>
-          <p className="text-grey-20 w-[244px] text-center mt-2">
-            Thank you for adding a photo. Your photo is under review by
-            Operation Benjamin.
-          </p>
-          <div className="w-full mt-[51px] justify-end flex px-8">
-            <button
-              onClick={handleNext}
-              className={`inline-flex items-center gap-x-2 p-3 rounded-lg justify-center font-semibold bg-turquoise-100 w-[120px] text-white`}
-            >
-              <p className={`leading-6 font-semibold font-noto`}>OK</p>
-            </button>
-          </div>
-        </>
+        <StoneSendingInfo handleNext={handleNext} />
       )}
     </div>
   );
