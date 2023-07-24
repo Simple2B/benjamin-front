@@ -1,4 +1,4 @@
-import { CategoryPreview } from '@/components/categories/сategoryPreview/CategoryPreview';
+import { CategoryPreview } from '@/components/categories/CategoryPreview';
 import { SoldiersService } from '@/openapi';
 import React from 'react';
 

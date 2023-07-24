@@ -8,4 +8,6 @@ export const filterTitle: Record<string, string> = {
   birthLocation: 'Born in',
   isHeadstoneChanged: 'With headstone changes',
   statesEnteredFrom: 'Enlisted from',
+  rank: 'Rank',
+  unit: 'Unit',
 };

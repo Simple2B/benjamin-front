@@ -76,9 +76,11 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
       header: SOLDIER_MAIN_INFO_HEADERS.dateOfDeath,
       value: formatDate(soldier?.deathDate),
     },
+
+    //! TODO: reflesh fith soldierOut
     status: {
       header: SOLDIER_MAIN_INFO_HEADERS.status,
-      value: 'STATUS',
+      value: 'STATUS' ? 'STATUS' : undefined,
     },
   };
 

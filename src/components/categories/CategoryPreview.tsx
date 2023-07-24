@@ -4,13 +4,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import urlJoin from 'url-join';
-import IconButton from '../../IconButton';
-import { MONTH, MONTHS_BY_NUMBER } from '../../constants/constants';
-import { ICONS_NAME } from '../../constants/iconName';
-import { PATH } from '../../constants/path.constants';
-import { QUERY_PARAMS } from '../../constants/queryParams';
-import { CategoryBlock } from '../CategoryBlock';
-import { FilteredCategoryExample } from '../FilteredCategoryExample';
+import IconButton from '../IconButton';
+import { MONTH, MONTHS_BY_NUMBER } from '../constants/constants';
+import { ICONS_NAME } from '../constants/iconName';
+import { PATH } from '../constants/path.constants';
+import { QUERY_PARAMS } from '../constants/queryParams';
+import { CategoryBlock } from './CategoryBlock';
+import { FilteredCategoryExample } from './FilteredCategoryExample';
 
 type ICategoryPreviewProps = {
   categoriesValues: SoldierFilters;
@@ -110,6 +110,18 @@ export const CategoryPreview = ({
           categoryHeader={'Year died'}
           categoryText={categoriesValues.deathYearFilters}
           queryParam={QUERY_PARAMS.deathYear}
+          cemeteryUuid={cemeteryUuid}
+        />
+        <CategoryBlock
+          categoryHeader={'Rank'}
+          categoryText={categoriesValues.rankFilters}
+          queryParam={QUERY_PARAMS.rank}
+          cemeteryUuid={cemeteryUuid}
+        />
+        <CategoryBlock
+          categoryHeader={'Unit'}
+          categoryText={categoriesValues.unitsFilters}
+          queryParam={QUERY_PARAMS.unit}
           cemeteryUuid={cemeteryUuid}
         />
       </div>
