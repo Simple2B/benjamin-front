@@ -148,14 +148,14 @@ const PreviewProjectInfo = ({
           </div>
         )}
         <div
-          className="flex flex-col items-center justify-between gap-4 h-full"
+          className="flex flex-col items-center gap-6 h-full"
           style={projectInfoStyle}
         >
           <ProjectInfo
             text={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].text}
             heading={PROJECT_INFO_TO_DISPLAY[currentInfoIndex].heading}
           />
-          <div className="flex flex-col w-full justify-evenly h-full">
+          <div className="flex flex-col w-full gap-10">
             <div className={`flex flex-col items-end justify-end px-6 w-full`}>
               <Link href={isLastPage ? PATH.location : PATH.home}>
                 <NavigationButton
