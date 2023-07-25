@@ -24,9 +24,13 @@ const HorizontalPhotoGallery = ({
           </p>
           <div className="flex gap-3 overflow-x-auto pb-4  text-indigo-100 px-6">
             {solders.map(
-              ({ mainPhoto, firstName, lastName, suffix, uuid }, index) => (
+              (
+                { mainPhoto, firstName, lastName, suffix, uuid, ranks },
+                index
+              ) => (
                 <SoldierProfile
                   photoUrl={mainPhoto}
+                  rank={ranks.map((rank) => rank.abbreviation).join(' ')}
                   firstName={firstName}
                   lastName={lastName}
                   suffix={suffix}

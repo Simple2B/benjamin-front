@@ -40,7 +40,7 @@ export const PreviewerSearch = () => {
         undefined,
         undefined,
         1,
-        10
+        50
       ),
     {
       enabled: !!currentCemetery,

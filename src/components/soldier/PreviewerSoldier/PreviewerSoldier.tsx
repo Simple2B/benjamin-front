@@ -75,21 +75,12 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
     }
   }, [soldier, router]);
 
-  let awardsInPreview = '';
-
   const soldierRanksNames = soldier?.ranks.map((rank) => rank.name).join(', ');
   const sodlierRanksAbbreviations = soldier?.ranks
-    .map((rank) => rank.name)
+    .map((rank) => rank.abbreviation)
     .join(' ');
 
   const soldierFullName = `${sodlierRanksAbbreviations} ${soldier.firstName} ${soldier.lastName} ${soldier?.suffix}`;
-
-  if (soldier?.soldierAwards.length) {
-    awardsInPreview =
-      soldier?.soldierAwards.length >= 1
-        ? `${soldier?.soldierAwards[0]}, other awards`
-        : soldier?.soldierAwards[0];
-  }
 
   const mainInfo: IMainInfo = {
     dateOfDeath: {

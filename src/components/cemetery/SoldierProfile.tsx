@@ -10,6 +10,7 @@ export type ISoldierProfileProps = {
   lastName: string;
   suffix: string | undefined;
   uuid: string;
+  rank?: string;
 };
 
 const SoldierProfile = ({
@@ -18,7 +19,9 @@ const SoldierProfile = ({
   lastName,
   suffix,
   uuid,
+  rank,
 }: ISoldierProfileProps) => {
+  const soldierFullName = `${rank} ${firstName} ${lastName} ${suffix}`;
   return (
     <Link href={urlJoin(PATH.soldier, uuid)}>
       <div className={`w-[140px] flex-shrink-0`}>
@@ -33,7 +36,7 @@ const SoldierProfile = ({
         />
 
         <p className="text-base text-center leading-5 mt-2">
-          {suffix} {firstName} {lastName}
+          {soldierFullName}
         </p>
       </div>
     </Link>
