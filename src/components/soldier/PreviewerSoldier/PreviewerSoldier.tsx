@@ -214,7 +214,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
 
         <ClosebleInfo
           heading="LIFE"
-          isOpened={soldier?.replacementCeremonyVideo ? false : true}
+          isOpened={soldier?.ceremonyVideoLink ? false : true}
         >
           <SoldierCardBlockInfo solderInfo={life} />
           <PhotoCarrousel photos={soldier.photoPaths} />
@@ -265,13 +265,10 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
           ) : null}
         </ClosebleInfo>
 
-        {soldier?.replacementCeremonyVideo && (
+        {soldier?.ceremonyVideoLink && (
           <ClosebleInfo heading="CHANGE CEREMONY" isOpened={true}>
             <SoldierAdditionalVideo
-              videoUrl={urlJoin(
-                AWS_BASE_URL || '',
-                soldier.replacementCeremonyVideo
-              )}
+              videoUrl={soldier.ceremonyVideoLink}
               videoDescription="Replacement ceremony video"
             />
           </ClosebleInfo>
