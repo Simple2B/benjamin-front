@@ -221,7 +221,7 @@ export default function SoldierInfo({ soldier }: IPreviewerSoldierProps) {
 
   return (
     <div
-      id="soldier-page"
+      id="scrollable-content"
       ref={scrollRef}
       className="absolute w-full z-10 bg-white rounded-t-xl mt-[calc(100vh-230px)] min-h-screen"
     >

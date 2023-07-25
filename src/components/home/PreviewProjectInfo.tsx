@@ -110,7 +110,7 @@ const PreviewProjectInfo = ({
 
   return (
     <>
-      <div className="flex flex-col items-center bg-white">
+      <div className="flex flex-col items-center bg-white mb-2">
         {currentInfoIndex == 0 && (
           <div
             style={videoStyle}
