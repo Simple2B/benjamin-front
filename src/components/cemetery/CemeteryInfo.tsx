@@ -118,7 +118,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
   return (
     <div
       className="absolute w-full z-10 bg-white rounded-t-xl mt-[calc(100vh-230px)]"
-      id="cemetery-scrollable"
+      id="scrollable-content"
       ref={scrollRef}
     >
       <div ref={cemeteryMainInfoRef}>
