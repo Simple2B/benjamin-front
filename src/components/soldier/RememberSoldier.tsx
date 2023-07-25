@@ -5,9 +5,7 @@ import { PATH } from '../constants/path.constants';
 import IconButton from '../IconButton';
 
 type IRememberSoldierProps = {
-  soldierFirstName: string;
-  soldierLastName: string;
-  soldierSufix: string | undefined;
+  soldierFullName: string;
   soldierUuid: string;
 };
 
@@ -30,9 +28,7 @@ const REMEMBERING = [
 ];
 
 export const RememberSoldier = ({
-  soldierFirstName,
-  soldierLastName,
-  soldierSufix,
+  soldierFullName,
   soldierUuid,
 }: IRememberSoldierProps) => {
   return (
@@ -40,7 +36,7 @@ export const RememberSoldier = ({
       className={`w-full px-8 pt-3 z-10 text-black text-center bottom-0 h-40 bg-white`}
     >
       <h2 className=" mb-6 leading-6 font-semibold">
-        Remember {soldierSufix} {soldierFirstName} {soldierLastName}
+        Remember {soldierFullName}
       </h2>
       <div className="flex justify-center pb-12 gap-4">
         {REMEMBERING.map(({ image, text, link }, index) => {

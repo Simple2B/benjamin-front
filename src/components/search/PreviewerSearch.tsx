@@ -61,6 +61,9 @@ export const PreviewerSearch = () => {
                   firstName={soldier.firstName}
                   lastName={soldier.lastName}
                   suffix={soldier.suffix}
+                  rank={soldier.ranks
+                    .map((rank) => rank.abbreviation)
+                    .join(' ')}
                   number={soldier.serviceNumber}
                   city={soldier.birthLocation}
                   soldierUuid={soldier.uuid}

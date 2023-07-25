@@ -157,6 +157,7 @@ export const FilteredSoldiers = ({
                   />
 
                   <p className="leading-5 text-center">
+                    {soldier?.ranks.map((rank) => rank.name).join(' ')}
                     {soldier.suffix} {soldier.firstName} {soldier.lastName}
                   </p>
                 </div>
