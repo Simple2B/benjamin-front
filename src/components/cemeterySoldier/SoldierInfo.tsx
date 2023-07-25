@@ -136,16 +136,12 @@ export default function SoldierInfo({ soldier }: IPreviewerSoldierProps) {
 
   let awardsInPreview = '';
 
-  const mainInfo: IMainInfo = {
-    dateOfDeath: {
-      header: SOLDIER_MAIN_INFO_HEADERS.dateOfDeath,
-      value: formatDate(soldier?.deathDate),
-    },
-    status: {
-      header: SOLDIER_MAIN_INFO_HEADERS.status,
-      value: 'STATUS',
-    },
-  };
+  const soldierRanksNames = soldier?.ranks.map((rank) => rank.name).join(', ');
+  const sodlierRanksAbbreviations = soldier?.ranks
+    .map((rank) => rank.name)
+    .join(' ');
+
+  const soldierFullName = `${sodlierRanksAbbreviations} ${soldier.firstName} ${soldier.lastName} ${soldier?.suffix}`;
 
   if (soldier?.soldierAwards.length) {
     awardsInPreview =
@@ -153,6 +149,18 @@ export default function SoldierInfo({ soldier }: IPreviewerSoldierProps) {
         ? `${soldier?.soldierAwards[0]}, other awards`
         : soldier?.soldierAwards[0];
   }
+
+  const mainInfo: IMainInfo = {
+    dateOfDeath: {
+      header: SOLDIER_MAIN_INFO_HEADERS.dateOfDeath,
+      value: formatDate(soldier?.deathDate),
+    },
+
+    status: {
+      header: SOLDIER_MAIN_INFO_HEADERS.status,
+      value: soldier.isStatusPow ? 'P.O.W.' : undefined,
+    },
+  };
 
   const life: Ilife = {
     birthDate: {
@@ -182,6 +190,10 @@ export default function SoldierInfo({ soldier }: IPreviewerSoldierProps) {
       header: SOLDIER_SERVICE_HEADERS.branchOfService,
       value: soldier?.serviceBranch,
     },
+    rank: {
+      header: SOLDIER_SERVICE_HEADERS.rank,
+      value: soldierRanksNames,
+    },
     unit: {
       header: SOLDIER_SERVICE_HEADERS.unit,
       value: soldier?.soldierMilitaryUnits.join(', '),
@@ -192,10 +204,6 @@ export default function SoldierInfo({ soldier }: IPreviewerSoldierProps) {
     },
     awards: {
       header: SOLDIER_SERVICE_HEADERS.awards,
-      value: soldier?.soldierAwards.join(', '),
-    },
-    rank: {
-      header: SOLDIER_SERVICE_HEADERS.rank,
       value: soldier?.soldierAwards.join(', '),
     },
   };
@@ -238,9 +246,7 @@ export default function SoldierInfo({ soldier }: IPreviewerSoldierProps) {
               ? urlJoin(AWS_BASE_URL || '', soldier.mainPhoto)
               : ''
           }
-          sufix={soldier?.suffix}
-          firstName={soldier?.firstName}
-          lastName={soldier?.lastName}
+          fullName={soldierFullName}
           mainInfo={mainInfo}
         />
         <div ref={additionalInfoRef} className="flex flex-col gap-4">
@@ -266,7 +272,7 @@ export default function SoldierInfo({ soldier }: IPreviewerSoldierProps) {
 
           <ClosebleInfo
             heading="LIFE"
-            isOpened={soldier?.replacementCeremonyVideo ? false : true}
+            isOpened={soldier?.ceremonyVideoLink ? false : true}
           >
             <SoldierCardBlockInfo solderInfo={life} />
             <PhotoCarrousel photos={soldier.photoPaths} />
@@ -317,13 +323,10 @@ export default function SoldierInfo({ soldier }: IPreviewerSoldierProps) {
             ) : null}
           </ClosebleInfo>
 
-          {soldier?.replacementCeremonyVideo && (
+          {soldier?.ceremonyVideoLink && (
             <ClosebleInfo heading="CHANGE CEREMONY" isOpened={true}>
               <SoldierAdditionalVideo
-                videoUrl={urlJoin(
-                  AWS_BASE_URL || '',
-                  soldier.replacementCeremonyVideo
-                )}
+                videoUrl={soldier.ceremonyVideoLink}
                 videoDescription="Replacement ceremony video"
               />
             </ClosebleInfo>
@@ -333,17 +336,13 @@ export default function SoldierInfo({ soldier }: IPreviewerSoldierProps) {
             <ClosebleInfo heading="ADDITIONAL INFO" isOpened={false}>
               <SoldierMessages
                 messages={soldier.verifiedMessages}
-                soldierFirstName={soldier.firstName}
-                soldierLastName={soldier.lastName}
-                soldierSufix={soldier?.suffix}
+                soldierFullName={soldierFullName}
               />
             </ClosebleInfo>
           ) : null}
         </div>
         <RememberSoldier
-          soldierFirstName={soldier.firstName}
-          soldierLastName={soldier.lastName}
-          soldierSufix={soldier?.suffix}
+          soldierFullName={soldierFullName}
           soldierUuid={soldier.uuid}
         />
       </div>

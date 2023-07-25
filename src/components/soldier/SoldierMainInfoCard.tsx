@@ -4,17 +4,13 @@ import { SoldierCardBlockInfo } from '.';
 
 type ISoldierMainInfoProps = {
   photoUrl: string | undefined;
-  sufix: string | undefined;
-  firstName: string;
-  lastName: string;
+  fullName: string;
   mainInfo: IMainInfo;
 };
 
 export const SoldierMainInfoCard = ({
   photoUrl,
-  sufix,
-  firstName,
-  lastName,
+  fullName,
   mainInfo,
 }: ISoldierMainInfoProps) => {
   return (
@@ -26,9 +22,7 @@ export const SoldierMainInfoCard = ({
       />
 
       <div className="flex flex-col">
-        <p className="text-xl font-semibold leading-7">
-          {sufix} {firstName} {lastName}
-        </p>
+        <p className="text-xl font-semibold leading-7">{fullName}</p>
         <div className="-mt-1">
           <SoldierCardBlockInfo solderInfo={mainInfo} />
         </div>

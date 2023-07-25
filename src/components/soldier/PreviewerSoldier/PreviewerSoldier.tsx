@@ -77,6 +77,13 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
 
   let awardsInPreview = '';
 
+  const soldierRanksNames = soldier?.ranks.map((rank) => rank.name).join(', ');
+  const sodlierRanksAbbreviations = soldier?.ranks
+    .map((rank) => rank.name)
+    .join(' ');
+
+  const soldierFullName = `${sodlierRanksAbbreviations} ${soldier.firstName} ${soldier.lastName} ${soldier?.suffix}`;
+
   if (soldier?.soldierAwards.length) {
     awardsInPreview =
       soldier?.soldierAwards.length >= 1
@@ -90,10 +97,9 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
       value: formatDate(soldier?.deathDate),
     },
 
-    //! TODO: reflesh fith soldierOut
     status: {
       header: SOLDIER_MAIN_INFO_HEADERS.status,
-      value: 'STATUS' ? 'STATUS' : undefined,
+      value: soldier.isStatusPow ? 'P.O.W.' : undefined,
     },
   };
 
@@ -127,7 +133,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
     },
     rank: {
       header: SOLDIER_SERVICE_HEADERS.rank,
-      value: soldier?.soldierRanks.join(', '),
+      value: soldierRanksNames,
     },
     unit: {
       header: SOLDIER_SERVICE_HEADERS.unit,
@@ -182,9 +188,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
                 ? urlJoin(AWS_BASE_URL || '', soldier.mainPhoto)
                 : ''
             }
-            sufix={soldier?.suffix}
-            firstName={soldier?.firstName}
-            lastName={soldier?.lastName}
+            fullName={soldierFullName}
             mainInfo={mainInfo}
           />
         )}
@@ -210,7 +214,7 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
 
         <ClosebleInfo
           heading="LIFE"
-          isOpened={soldier?.replacementCeremonyVideo ? false : true}
+          isOpened={soldier?.ceremonyVideoLink ? false : true}
         >
           <SoldierCardBlockInfo solderInfo={life} />
           <PhotoCarrousel photos={soldier.photoPaths} />
@@ -261,13 +265,10 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
           ) : null}
         </ClosebleInfo>
 
-        {soldier?.replacementCeremonyVideo && (
+        {soldier?.ceremonyVideoLink && (
           <ClosebleInfo heading="CHANGE CEREMONY" isOpened={true}>
             <SoldierAdditionalVideo
-              videoUrl={urlJoin(
-                AWS_BASE_URL || '',
-                soldier.replacementCeremonyVideo
-              )}
+              videoUrl={soldier.ceremonyVideoLink}
               videoDescription="Replacement ceremony video"
             />
           </ClosebleInfo>
@@ -277,17 +278,13 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
           <ClosebleInfo heading="ADDITIONAL INFO" isOpened={false}>
             <SoldierMessages
               messages={soldier.verifiedMessages}
-              soldierFirstName={soldier.firstName}
-              soldierLastName={soldier.lastName}
-              soldierSufix={soldier?.suffix}
+              soldierFullName={soldierFullName}
             />
           </ClosebleInfo>
         ) : null}
       </div>
       <RememberSoldier
-        soldierFirstName={soldier.firstName}
-        soldierLastName={soldier.lastName}
-        soldierSufix={soldier?.suffix}
+        soldierFullName={soldierFullName}
         soldierUuid={soldier.uuid}
       />
     </div>

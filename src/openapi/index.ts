@@ -11,6 +11,7 @@ export type { CemeteryOut } from './models/CemeteryOut';
 export type { Grave } from './models/Grave';
 export type { HTTPValidationError } from './models/HTTPValidationError';
 export type { Metadata } from './models/Metadata';
+export type { Rank } from './models/Rank';
 export type { SoldierCard } from './models/SoldierCard';
 export type { SoldierCardWithPhoto } from './models/SoldierCardWithPhoto';
 export type { SoldierFilters } from './models/SoldierFilters';

@@ -11,6 +11,7 @@ type ISoldierSearchingCard = {
   number: string;
   city?: string;
   soldierUuid: string;
+  rank?: string;
 };
 export const SoldierSearchingCard = ({
   firstName,
@@ -19,12 +20,13 @@ export const SoldierSearchingCard = ({
   number,
   city,
   soldierUuid,
+  rank,
 }: ISoldierSearchingCard) => {
   return (
     <Link href={urlJoin(PATH.soldier, soldierUuid)}>
       <div className="w-[350px] rounded-lg text-indigo-100 p-3 shadow-box">
         <h2 className="font-semibold">
-          {suffix} {firstName} {lastName}
+          {rank} {firstName} {lastName} {suffix}
         </h2>
         <div className="inline-flex gap-2 text-sm">
           <p>#{number}</p>

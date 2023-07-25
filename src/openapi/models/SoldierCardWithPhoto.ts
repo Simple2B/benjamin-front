@@ -2,9 +2,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { Rank } from './Rank';
+
 export type SoldierCardWithPhoto = {
     uuid: string;
     suffix?: string;
+    ranks: Array<Rank>;
     serviceNumber: string;
     firstName: string;
     lastName: string;
