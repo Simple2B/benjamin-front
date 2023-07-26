@@ -205,7 +205,7 @@ export default function MapCemetery({
                       permanent
                     >
                       <p className="font-noto map-text-shadow ">
-                        {ranks.map((rank) => rank.abbreviation).join(' ')}
+                        {ranks.map((rank) => rank.abbreviation).join(' ')}{' '}
                         {firstName} {lastName} {suffix}
                       </p>
                     </Tooltip>

@@ -14,6 +14,7 @@ import SearchFilterBar from '../../SearchFilterBar';
 import { MONTHS_BY_NUMBER } from '../../constants/constants';
 import { getFilterTitle } from './PreviewCementery.utils';
 import dynamic from 'next/dynamic';
+import { TipsController } from '../tips/TipsController';
 
 export type ISolderPhotoGallery = {
   uuid: string;
@@ -189,6 +190,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
                 />
               )}
             </div>
+            <TipsController />
           </div>
         </div>
         {isFilter ? (
