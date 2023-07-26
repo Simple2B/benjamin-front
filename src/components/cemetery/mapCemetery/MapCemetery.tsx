@@ -166,6 +166,7 @@ export default function MapCemetery({
                   suffix,
                   firstName,
                   lastName,
+                  ranks,
                 },
                 index
               ) => {
@@ -204,7 +205,8 @@ export default function MapCemetery({
                       permanent
                     >
                       <p className="font-noto map-text-shadow ">
-                        {suffix} {firstName} {lastName}
+                        {ranks.map((rank) => rank.abbreviation).join(' ')}
+                        {firstName} {lastName} {suffix}
                       </p>
                     </Tooltip>
                   </Marker>

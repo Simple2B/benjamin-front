@@ -137,6 +137,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
           suffix,
           firstName,
           lastName,
+          ranks,
           burialLocationLatitude,
           burialLocationLongitude,
         }) => {
@@ -145,6 +146,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
             suffix,
             firstName,
             lastName,
+            ranks,
             burialLocationLatitude,
             burialLocationLongitude,
           };
