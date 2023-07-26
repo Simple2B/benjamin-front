@@ -71,7 +71,9 @@ export async function GET(request: Request, context: IContext) {
     statesEnteredFrom,
     birthLocation ? birthLocation : undefined,
     rank,
-    unit
+    unit,
+    undefined,
+    100
   );
 
   return NextResponse.json(response);

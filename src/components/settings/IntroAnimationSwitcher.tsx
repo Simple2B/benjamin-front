@@ -21,7 +21,7 @@ export const IntroAnimationSwitcher = () => {
 
   return (
     <div className="w-[350px] flex gap-9">
-      <div>
+      <div className="flex flex-col w-[250px]">
         <p className="leading-6 font-semibold">View intro animations</p>
         <p className="leading-5 text-sm text-[#999999]">
           If enabled, onboarding animations will be shown each time the app is

@@ -226,3 +226,33 @@ select:focus,
 textarea {
   font-size: 16px;
 }
+
+#scrollable-content {
+  min-height: 100vh;
+  background-color: white;
+}
+
+.myCSSClass {
+  background: transparent;
+  border: none;
+}
+
+.leaflet-tooltip.myCSSClass {
+  border: 0px;
+  background-color: transparent;
+  box-shadow: none;
+  font-size: 11px;
+  color: white;
+  font-weight: 600;
+}
+
+.leaflet-tooltip-left.myCSSClass::before {
+  border-left-color: transparent;
+}
+.leaflet-tooltip-right.myCSSClass::before {
+  border-right-color: transparent;
+}
+
+.map-text-shadow {
+  text-shadow: 1px 1px 2px #000000;
+}
