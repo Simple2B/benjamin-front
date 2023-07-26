@@ -8,6 +8,7 @@ import {
   TileLayer,
   useMap,
   useMapEvents,
+  Tooltip,
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Grave } from '@/openapi';
@@ -158,7 +159,14 @@ export default function MapCemetery({
           >
             {graves_coordinates.map(
               (
-                { uuid, burialLocationLatitude, burialLocationLongitude },
+                {
+                  uuid,
+                  burialLocationLatitude,
+                  burialLocationLongitude,
+                  suffix,
+                  firstName,
+                  lastName,
+                },
                 index
               ) => {
                 const eventHandlers = {
@@ -187,7 +195,19 @@ export default function MapCemetery({
                     }
                     key={index}
                     eventHandlers={eventHandlers}
-                  ></Marker>
+                  >
+                    <Tooltip
+                      direction="right"
+                      opacity={1}
+                      offset={[20, -20]}
+                      className="myCSSClass"
+                      permanent
+                    >
+                      <p className="font-noto map-text-shadow ">
+                        {suffix} {firstName} {lastName}
+                      </p>
+                    </Tooltip>
+                  </Marker>
                 );
               }
             )}

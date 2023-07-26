@@ -59,7 +59,7 @@ export default function PreviewerSettings({
   );
 
   return (
-    <div className="bg-white all-height flex flex-col justify-between w-full ">
+    <div className="bg-white flex flex-col justify-between w-full ">
       <div className="flex flex-col items-start m-6 gap-8 ">
         <div
           className="w-full flex items-center justify-between"
@@ -87,7 +87,7 @@ export default function PreviewerSettings({
         <div className="w-[350px] h-px bg-indigo-100 bg-opacity-10"></div>
         <IntroAnimationSwitcher />
       </div>
-      <div className="mb-12 w-full flex justify-center">
+      <div className="mb-12 w-full flex justify-center mt-[120px]">
         <Image
           src="/images/icons/logo.jpg"
           width={143}
