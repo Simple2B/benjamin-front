@@ -20,8 +20,6 @@ export const TipWindow = ({
 
   useEffect(() => {
     setOpened(true);
-    console.log(isLastTip);
-
     const timerId = setTimeout(() => {
       if (isLastTip) {
         setOpened(false);
@@ -45,10 +43,10 @@ export const TipWindow = ({
     <>
       {isOpened && (
         <>
-          {!locateDown && <div className={` ${className}`}></div>}
+          {!locateDown && <div className={`z-10 ${className}`}></div>}
 
           <div
-            className={`w-[350px] flex flex-col px-5 py-3 bg-white rounded-lg gap-0.5`}
+            className={`w-[350px] flex flex-col px-5 py-3 bg-white rounded-lg gap-0.5 toolkid-shadow `}
           >
             <p className="leading-6">{tipText}</p>
             <p
@@ -58,7 +56,7 @@ export const TipWindow = ({
               Got it
             </p>
           </div>
-          {locateDown && <div className={` ${className}`}></div>}
+          {locateDown && <div className={`z-10 ${className}`}></div>}
         </>
       )}
     </>
