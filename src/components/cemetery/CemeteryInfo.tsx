@@ -122,7 +122,6 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
       ref={scrollRef}
     >
       <div ref={cemeteryMainInfoRef}>
-        <p className="text-center">{isSafary().toString()}</p>
         <CemeteryMainInfo
           name={cemetery.name}
           location={cemetery.location ? cemetery.location : ''}
