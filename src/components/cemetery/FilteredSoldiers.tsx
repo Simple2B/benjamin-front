@@ -48,7 +48,7 @@ export const FilteredSoldiers = ({
           return;
         }
 
-        let heigth = isIOS() ? 325 : 230;
+        let heigth = isIOS() ? 325 : 250;
         if (isIOS()) {
           heigth = isSafary() ? 325 : 295;
         }
