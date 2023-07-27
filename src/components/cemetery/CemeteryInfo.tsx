@@ -41,7 +41,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
 
         // ! for Safary 325, for android 230, for chrom+ios 295
 
-        let heigth = isIOS() ? 325 : 230;
+        let heigth = isIOS() ? 325 : 250;
 
         if (isIOS()) {
           heigth = isSafary() ? 325 : 295;
