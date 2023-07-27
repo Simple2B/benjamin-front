@@ -20,7 +20,7 @@ import { formatDate } from '../soldier/PreviewerSoldier/PreviewerSoldier.utils';
 
 import { SoldierMessages } from '../soldier/SoldierMessages';
 import { Ilife, IService, IDeath, IMainInfo } from '../soldier/soldier.types';
-import { isSafary } from '../utils/isIphone';
+import { isIOS, isSafary } from '../utils/isIphone';
 import {
   RememberSoldier,
   SoldierAdditionalImage,
@@ -63,8 +63,14 @@ export default function SoldierInfo({ soldier }: IPreviewerSoldierProps) {
         if (!isScrolableArea) {
           return;
         }
+
+        let heigth = isIOS() ? 325 : 230;
+        if (isIOS()) {
+          heigth = isSafary() ? 325 : 295;
+        }
+
         if (isUp) {
-          const scrollToTopValue = isSafary() ? 325 : 230;
+          const scrollToTopValue = heigth;
           if (posY < 0) {
             return;
           }

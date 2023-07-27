@@ -7,7 +7,7 @@ import Link from 'next/link';
 import urlJoin from 'url-join';
 import Spinner from '../Spinner';
 import { AWS_BASE_URL } from '../constants/constants';
-import { isSafary } from '../utils/isIphone';
+import { isIOS, isSafary } from '../utils/isIphone';
 
 type IFilteredSoldiersProps = {
   filterResult: SoldierCard[];
@@ -47,12 +47,17 @@ export const FilteredSoldiers = ({
         if (!isScrolableArea) {
           return;
         }
+
+        let heigth = isIOS() ? 325 : 230;
+        if (isIOS()) {
+          heigth = isSafary() ? 325 : 295;
+        }
+
         if (isUp) {
-          const scrollToTopValue = isSafary() ? 325 : 230;
+          const scrollToTopValue = heigth;
           if (posY < 0) {
             return;
           }
-
           mainPage.scrollTo({
             top: screen.height - scrollToTopValue,
             left: 0,
