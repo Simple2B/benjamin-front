@@ -7,7 +7,7 @@ import Link from 'next/link';
 import urlJoin from 'url-join';
 import Spinner from '../Spinner';
 import { AWS_BASE_URL } from '../constants/constants';
-import { isIOS } from '../utils/isIphone';
+import { isSafary } from '../utils/isIphone';
 
 type IFilteredSoldiersProps = {
   filterResult: SoldierCard[];
@@ -48,7 +48,7 @@ export const FilteredSoldiers = ({
           return;
         }
         if (isUp) {
-          const scrollToTopValue = isIOS() ? 325 : 230;
+          const scrollToTopValue = isSafary() ? 325 : 230;
           if (posY < 0) {
             return;
           }

@@ -6,7 +6,7 @@ import CemeteryMainInfo from './cemeteryMainInfo/CemeteryMainInfo';
 import { CemeteryOut } from '@/openapi';
 import { redirect } from 'next/navigation';
 import { PATH } from '../constants/path.constants';
-import { isIOS } from '../utils/isIphone';
+import { isSafary } from '../utils/isIphone';
 import { CemeteryAbmc } from './cemeteryAbmc/CemeteryAbmc';
 
 interface ICemeteryInfoProps {
@@ -39,7 +39,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
           return;
         }
         if (isUp) {
-          const scrollToTopValue = isIOS() ? 325 : 230;
+          const scrollToTopValue = isSafary() ? 325 : 230;
           if (posY < 0) {
             return;
           }
@@ -122,6 +122,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
       ref={scrollRef}
     >
       <div ref={cemeteryMainInfoRef}>
+        <p className="text-center">{isSafary().toString()}</p>
         <CemeteryMainInfo
           name={cemetery.name}
           location={cemetery.location ? cemetery.location : ''}
