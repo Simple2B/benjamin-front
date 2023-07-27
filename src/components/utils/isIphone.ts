@@ -13,5 +13,5 @@ export const isIOS = () => {
 };
 
 export const isSafary = () => {
-  return isIOS() && /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  return isIOS() && navigator.userAgent.match('CriOS') == null;
 };

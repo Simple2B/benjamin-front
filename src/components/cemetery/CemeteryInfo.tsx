@@ -6,7 +6,7 @@ import CemeteryMainInfo from './cemeteryMainInfo/CemeteryMainInfo';
 import { CemeteryOut } from '@/openapi';
 import { redirect } from 'next/navigation';
 import { PATH } from '../constants/path.constants';
-import { isSafary } from '../utils/isIphone';
+import { isIOS, isSafary } from '../utils/isIphone';
 import { CemeteryAbmc } from './cemeteryAbmc/CemeteryAbmc';
 
 interface ICemeteryInfoProps {
@@ -38,8 +38,17 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
         if (!isScrolableArea) {
           return;
         }
+
+        // ! for Safary 325, for android 230, for chrom+ios 295
+
+        let heigth = isIOS() ? 325 : 230;
+
+        if (isIOS()) {
+          heigth = isSafary() ? 325 : 295;
+        }
+
         if (isUp) {
-          const scrollToTopValue = isSafary() ? 325 : 230;
+          const scrollToTopValue = heigth;
           if (posY < 0) {
             return;
           }
@@ -94,7 +103,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
         setScrollableArea(true);
       });
 
-      // // Additional container events
+      // Additional container events
       additionalInfoConteiner.addEventListener('touchstart', () => {
         setScrollableArea(false);
       });
@@ -129,7 +138,6 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
           email={cemetery.email}
           webUrl={cemetery.webUrl}
         />
-
         {cemetery.audio_tours.length ? (
           <CemeteryAudioBox audio_tours={cemetery.audio_tours} />
         ) : null}
