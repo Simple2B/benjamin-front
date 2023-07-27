@@ -138,9 +138,6 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
           email={cemetery.email}
           webUrl={cemetery.webUrl}
         />
-        <p className="text-center"> is IOS{isIOS().toString()}</p>
-        <p className="text-center"> is Safari {isSafary().toString()}</p>
-
         {cemetery.audio_tours.length ? (
           <CemeteryAudioBox audio_tours={cemetery.audio_tours} />
         ) : null}
