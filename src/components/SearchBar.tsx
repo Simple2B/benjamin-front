@@ -25,7 +25,7 @@ const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
   };
 
   return (
-    <div className="mt-10">
+    <div className="mt-10 z-20">
       <div
         className={`rounded-lg bg-white relative flex items-center h-12  pl-1.5 shadow-lg gap-3 w-[350px] `}
         style={{

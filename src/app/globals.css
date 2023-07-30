@@ -24,7 +24,7 @@ html {
 
 body {
   color: black;
-  height: 100dvh;
+  height: 100vh;
   height: 100%;
   position: fixed;
   overflow: auto;
@@ -276,4 +276,23 @@ textarea {
 
 .toolkid-shadow {
   box-shadow: 0 1px 15px 1px rgba(0, 0, 0, 0.3);
+}
+
+body {
+  -webkit-overflow-scrolling: auto;
+}
+
+.scroll-container {
+  overflow: auto;
+  -webkit-scroll-snap-type: y mandatory;
+  -ms-scroll-snap-type: y mandatory;
+  scroll-snap-type: y mandatory;
+}
+
+.scroll-area {
+  scroll-snap-align: start;
+}
+
+.scrollable-content-cemetery {
+  pointer-events: all;
 }

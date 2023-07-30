@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect } from 'react';
-import { redirect } from 'next/navigation';
 import { PATH } from '../constants/path.constants';
 import { useAppStore } from '@/lib/slices/store';
 import { CemeteryOut, SoldierCard } from '@/openapi';
@@ -162,7 +161,7 @@ export const FilteredSoldiers = ({
                   />
 
                   <p className="leading-5 text-center">
-                    {soldier?.ranks.map((rank) => rank.abbreviation).join(' ')}
+                    {soldier?.ranks.map((rank) => rank.abbreviation).join(' ')}{' '}
                     {soldier.suffix} {soldier.firstName} {soldier.lastName}
                   </p>
                 </div>

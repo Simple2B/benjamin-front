@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SECOND } from '../../constants/constants';
 
 type ITipWindowProps = {
@@ -43,7 +43,7 @@ export const TipWindow = ({
     <>
       {isOpened && (
         <>
-          {!locateDown && <div className={`z-10 ${className}`}></div>}
+          {!locateDown && <div className={`z-[11] ${className}`}></div>}
 
           <div
             className={`w-[350px] flex flex-col px-5 py-3 bg-white rounded-lg gap-0.5 toolkid-shadow `}
@@ -56,7 +56,7 @@ export const TipWindow = ({
               Got it
             </p>
           </div>
-          {locateDown && <div className={`z-10 ${className}`}></div>}
+          {locateDown && <div className={`z-[11] ${className}`}></div>}
         </>
       )}
     </>

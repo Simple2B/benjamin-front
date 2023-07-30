@@ -30,6 +30,7 @@ const MapCemetery = dynamic(() => import('../mapCemetery/MapCemetery'), {
   ssr: false,
 });
 
+//! TODO add scroll to other pages
 export default function PreviewCemetery({ cemetery }: ISoldier) {
   const [inputSoldier, setInputSoldier] = useState<string>('');
   const { currentCemetery, setCurrentCemetery } = useAppStore();

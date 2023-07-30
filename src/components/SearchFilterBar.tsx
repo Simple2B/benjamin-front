@@ -14,7 +14,7 @@ const SearchFilterBar = ({ filterText, setFilter }: ISearchBarProps) => {
   return (
     <div className="mt-10">
       <div
-        className={`rounded-lg bg-white relative flex items-center h-12 justify-between px-4 w-[350px] shadow-lg gap-3 `}
+        className={`rounded-lg bg-white relative flex items-center h-12 justify-between px-4 w-[350px] shadow-lg gap-3 z-20`}
         style={{
           boxShadow: '0 2px 24px 0 rgba(0, 0, 0, 0.2)',
         }}
