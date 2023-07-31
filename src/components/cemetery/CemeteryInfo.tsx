@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 import HorizontalPhotoGallery from './HorizontalPhotoGallery';
 import CemeteryAdditionalInfo from './cemeteryAdditionalInfo/CemeteryAdditionalInfo';
 import { CemeteryAudioBox } from './cemeteryMainInfo/CemeteryAudioBox';
@@ -15,56 +15,18 @@ interface ICemeteryInfoProps {
 export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
   const cemeteryMainInfoRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [isDragEnd, setIsDragEnd] = useState(false);
 
-  const startDragging = () => {
-    setIsDragging(true);
-    setIsDragEnd(false);
-  };
-
-  const stopDragging = () => {
-    if (!isDragging) return;
-    setIsDragEnd(true);
-  };
-
-  useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-    if (isDragEnd) {
-      if (isDragging) {
-        timeoutId = setTimeout(() => {
-          setIsDragging(false);
-        }, 700);
-      }
-    }
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [isDragEnd]);
-
-  if (!cemetery) {
-    redirect(PATH.location);
-  }
-
+  //! works only with position absolute
   return (
-    <div
-      className={`absolute inset-0 scroll-container h-full z-20 ${
-        !isDragging && 'pointer-events-none'
-      }`}
-    >
+    <div className={`relative scroll-container inset-0 h-full `}>
       <div
-        className="relative z-50 scroll-area pointer-events-none"
+        className="relative scroll-area h-[calc(100vh-230px)] w-screen  border-4 border-rose-600 bg-transparent pointer-events-none z-0"
         ref={mapRef}
-      >
-        <p className="h-[calc(100vh-230px)] w-screen  border-4 border-rose-600"></p>{' '}
-      </div>
+      ></div>
       <div
-        className="absolute top-0 w-screen z-50 bg-white rounded-t-xl scroll-area min-h-screen scrollable-content-cemetery mt-[calc(100vh-230px)]"
+        className="relative w-screen z-50 bg-white rounded-t-xl scroll-area min-h-screen scrollable-content-cemetery"
         ref={cemeteryMainInfoRef}
         id="scrollable-content"
-        onTouchStart={startDragging}
-        onTouchEnd={stopDragging}
       >
         <CemeteryMainInfo
           name={cemetery.name}

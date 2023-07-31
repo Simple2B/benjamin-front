@@ -284,6 +284,7 @@ body {
 
 .scroll-container {
   overflow: auto;
+  overflow-y: scroll;
   -webkit-scroll-snap-type: y mandatory;
   -ms-scroll-snap-type: y mandatory;
   scroll-snap-type: y mandatory;

@@ -167,9 +167,9 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
 
   return (
     <>
-      <div>
+      <div className="w-screen relative">
         <div className={`flex flex-col items-baseline w-full bg-white h-full`}>
-          <div className="fixed w-screen">
+          <div className="absolute">
             <MapCemetery
               center={center}
               graves_coordinates={gravesCoordinates}
@@ -178,7 +178,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
               soldierUuid=""
               isTerrianView={currentMapPosition?.isTerrian ?? true}
             />
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center w-full fixed z-20">
               {soldiersQuery.isFetched && isFilter ? (
                 <SearchFilterBar
                   filterText={getFilterTitle(values)}
