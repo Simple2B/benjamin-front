@@ -67,13 +67,14 @@ export default function MapCemetery({
   }
 
   useEffect(() => {
-    if (currentZoom <= 5) {
+    if (currentZoom <= 7) {
       setCurrentZoomLevelMarkers(minimumLevelMarkers);
-    } else if (currentZoom <= 8) {
+    } else if (currentZoom <= 11) {
       setCurrentZoomLevelMarkers(mediumLevelMarkers);
     } else {
       setCurrentZoomLevelMarkers(maximumLevelMarkers);
     }
+    console.log(currentZoom);
   }, [currentZoom]);
 
   useEffect(() => {
