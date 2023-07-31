@@ -70,23 +70,18 @@ export default function PreviewCemeterySoldier({
   };
 
   return (
-    <div>
-      <div className={`flex flex-col items-baseline w-full bg-white h-full`}>
-        <div className="fixed w-screen">
-          <MapCemetery
-            center={currentMapPosition ? currentMapPosition.latlng : center}
-            graves_coordinates={cemetery?.graves_coordinates}
-            cemeteryUuid={cemetery?.uuid}
-            zoom={currentMapPosition ? currentMapPosition.zoom : 13}
-            soldierUuid={soldier.uuid}
-            isTerrianView={currentMapPosition?.isTerrian ?? false}
-          />
-          <div className="flex flex-col items-center">
-            <SearchBar
-              setInputSoldier={setInputSoldier}
-              displaySettings={true}
-            />
-          </div>
+    <div className="w-screen">
+      <div className="absolute">
+        <MapCemetery
+          center={currentMapPosition ? currentMapPosition.latlng : center}
+          graves_coordinates={cemetery?.graves_coordinates}
+          cemeteryUuid={cemetery?.uuid}
+          zoom={currentMapPosition ? currentMapPosition.zoom : 13}
+          soldierUuid={soldier.uuid}
+          isTerrianView={currentMapPosition?.isTerrian ?? true}
+        />
+        <div className="flex flex-col items-center w-full fixed z-20">
+          <SearchBar setInputSoldier={setInputSoldier} displaySettings={true} />
         </div>
       </div>
 
