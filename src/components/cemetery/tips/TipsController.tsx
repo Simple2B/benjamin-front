@@ -53,7 +53,7 @@ export const TipsController = () => {
   };
 
   return (
-    <div className="absolute w-full flex flex-col justify-center mt-2 items-center z-10">
+    <div className="relative w-full flex flex-col justify-center mt-2 items-center z-10">
       {isSeen && (
         <TipWindow
           tipText={currentTipText}

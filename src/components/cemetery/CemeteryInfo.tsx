@@ -18,7 +18,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
 
   //! works only with position absolute
   return (
-    <div className={`relative scroll-container inset-0 h-full `}>
+    <div className={`absolute scroll-container inset-0 h-full `}>
       <div
         className="relative scroll-area h-[calc(100vh-230px)] w-screen  border-4 border-rose-600 bg-transparent pointer-events-none z-0"
         ref={mapRef}
