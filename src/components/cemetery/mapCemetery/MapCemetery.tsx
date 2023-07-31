@@ -12,19 +12,14 @@ import {
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Grave } from '@/openapi';
-import {
-  createClusterCustomIcon,
-  currentSoldierIcon,
-  davidStarIcon,
-} from './mapCemetery.constants';
-import { calculateDistance } from './mapCemetery.utils';
+import { currentSoldierIcon, davidStarIcon } from './mapCemetery.constants';
+import { calculateDistance, getMarksGroup } from './mapCemetery.utils';
 import { MAP_ACCESS_TOKEN } from '@/components/constants/constants';
 import { useRouter } from 'next/navigation';
 import { PATH } from '@/components/constants/path.constants';
 import urlJoin from 'url-join';
 import { useAppStore } from '@/lib/slices/store';
 import L from 'leaflet';
-import MarkerClusterGroup from 'react-leaflet-cluster';
 
 interface DeviceOrientationEventiOS extends DeviceOrientationEvent {
   requestPermission?: () => Promise<'granted' | 'denied'>;
@@ -55,15 +50,31 @@ export default function MapCemetery({
   const [hasPermition, setHasPermition] = useState<boolean>(false);
   const [isTerrian, setIsTerrian] = useState<boolean>(isTerrianView);
   const [compass, setCompass] = useState<number>(0);
+  const [currentZoom, setCurrentZoom] = useState<number>(zoom);
+  const [currentZoomLevelMarkers, setCurrentZoomLevelMarkers] =
+    useState<Grave[]>(graves_coordinates);
 
   const router = useRouter();
 
   const { setCurrentMapPosition, currentMapPosition } = useAppStore();
 
+  const [mediumLevelMarkers, minimumLevelMarkers, maximumLevelMarkers] =
+    getMarksGroup(graves_coordinates);
+
   function handler(e: any) {
     const compass = e.webkitCompassHeading || Math.abs(e.alpha - 360);
     setCompass(compass);
   }
+
+  useEffect(() => {
+    if (currentZoom <= 5) {
+      setCurrentZoomLevelMarkers(minimumLevelMarkers);
+    } else if (currentZoom <= 8) {
+      setCurrentZoomLevelMarkers(mediumLevelMarkers);
+    } else {
+      setCurrentZoomLevelMarkers(maximumLevelMarkers);
+    }
+  }, [currentZoom]);
 
   useEffect(() => {
     if (
@@ -145,58 +156,47 @@ export default function MapCemetery({
               url={`https://{s}.tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token=${MAP_ACCESS_TOKEN}`}
             />
           )}
-          <MarkerClusterGroup
-            chunkedLoading
-            iconCreateFunction={createClusterCustomIcon}
-            spiderfyOnMaxZoom={true}
-            polygonOptions={{
-              fillColor: 'none',
-              color: 'none',
-              weight: 1,
-              opacity: 1,
-              fillOpacity: 0.8,
-            }}
-          >
-            {graves_coordinates.map(
-              (
-                {
-                  uuid,
-                  burialLocationLatitude,
-                  burialLocationLongitude,
-                  suffix,
-                  firstName,
-                  lastName,
-                  ranks,
+          {currentZoomLevelMarkers.map(
+            (
+              {
+                uuid,
+                burialLocationLatitude,
+                burialLocationLongitude,
+                suffix,
+                firstName,
+                lastName,
+                ranks,
+              },
+              index
+            ) => {
+              const eventHandlers = {
+                click: () => {
+                  setCurrentMapPosition({
+                    zoom: currentMapPosition?.zoom ?? 13,
+                    latlng: currentMapPosition?.latlng ?? {
+                      lat: burialLocationLatitude ?? 0,
+                      lng: burialLocationLongitude ?? 0,
+                    },
+                    isTerrian: isTerrian,
+                  });
+                  router.push(
+                    urlJoin(PATH.cemetery, cemeteryUuid, PATH.soldier, uuid)
+                  );
                 },
-                index
-              ) => {
-                const eventHandlers = {
-                  click: () => {
-                    setCurrentMapPosition({
-                      zoom: currentMapPosition?.zoom ?? 13,
-                      latlng: currentMapPosition?.latlng ?? {
-                        lat: burialLocationLatitude ?? 0,
-                        lng: burialLocationLongitude ?? 0,
-                      },
-                      isTerrian: isTerrian,
-                    });
-                    router.push(
-                      urlJoin(PATH.cemetery, cemeteryUuid, PATH.soldier, uuid)
-                    );
-                  },
-                };
-                return (
-                  <Marker
-                    position={[
-                      burialLocationLatitude ?? 0,
-                      burialLocationLongitude ?? 0,
-                    ]}
-                    icon={
-                      soldierUuid == uuid ? currentSoldierIcon : davidStarIcon
-                    }
-                    key={index}
-                    eventHandlers={eventHandlers}
-                  >
+              };
+              return (
+                <Marker
+                  position={[
+                    burialLocationLatitude ?? 0,
+                    burialLocationLongitude ?? 0,
+                  ]}
+                  icon={
+                    soldierUuid == uuid ? currentSoldierIcon : davidStarIcon
+                  }
+                  key={index}
+                  eventHandlers={eventHandlers}
+                >
+                  {currentZoom > 8 && index < 5 && (
                     <Tooltip
                       direction="right"
                       opacity={1}
@@ -204,20 +204,21 @@ export default function MapCemetery({
                       className="myCSSClass"
                       permanent
                     >
-                      <p className="font-noto map-text-shadow ">
+                      <p className="font-noto map-text-shadow">
                         {ranks.map((rank) => rank.abbreviation).join(' ')}{' '}
                         {firstName} {lastName} {suffix}
                       </p>
                     </Tooltip>
-                  </Marker>
-                );
-              }
-            )}
-          </MarkerClusterGroup>
+                  )}
+                </Marker>
+              );
+            }
+          )}
           <CurrentLocationMarker
             center={center}
             compass={compass}
             isTerrian={isTerrian}
+            setCurrentZoom={setCurrentZoom}
           />
         </MapContainer>
         <>
@@ -253,12 +254,14 @@ type ICurrentLocationMarkerProps = {
   center: ICoordinates;
   compass: number;
   isTerrian: boolean;
+  setCurrentZoom: (zoom: number) => void;
 };
 
 const CurrentLocationMarker = ({
   center,
   compass,
   isTerrian,
+  setCurrentZoom,
 }: ICurrentLocationMarkerProps) => {
   const [position, setPosition] = useState<ICoordinates | null>(null);
 
@@ -272,6 +275,7 @@ const CurrentLocationMarker = ({
     zoomend(e) {
       const currentZoom = map.getZoom();
       const currentLocation = e.target.getCenter();
+      setCurrentZoom(currentZoom);
       setCurrentMapPosition({
         zoom: currentZoom,
         latlng: currentLocation,

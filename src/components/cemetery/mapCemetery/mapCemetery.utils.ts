@@ -1,4 +1,4 @@
-import L from 'leaflet';
+import { Grave } from '@/openapi';
 
 export interface ICoordinates {
   lat: number;
@@ -22,4 +22,50 @@ export const calculateDistance = (from: ICoordinates, to: ICoordinates) => {
   let r = 6371;
 
   return c * r;
+};
+
+export const getMarksGroup = (graveCoordinates: Grave[]) => {
+  const mediumLevelMarkers: Grave[] = getMediumLevelMarkers(graveCoordinates);
+
+  const minimumLevelMarkers = mediumLevelMarkers.slice(0, 5);
+  return [mediumLevelMarkers, minimumLevelMarkers, graveCoordinates];
+};
+
+const getMediumLevelMarkers = (graveCoordinates: Grave[]) => {
+  const currentMonth = new Date().getMonth() + 1;
+
+  const mediumLevelMarkers: Grave[] = graveCoordinates.reduce(
+    (acc: Grave[], grave) => {
+      if (acc.length < 20) {
+        if (grave.isHeadstoneChanged === true) {
+          acc.push(grave);
+        }
+      }
+      return acc;
+    },
+    []
+  );
+
+  if (mediumLevelMarkers.length < 20) {
+    graveCoordinates.forEach((grave) => {
+      if (mediumLevelMarkers.length < 20) {
+        const month = grave.deathDate
+          ? parseInt(grave.deathDate.split('-')[1])
+          : 0;
+        if (grave.isHeadstoneChanged === false && month == currentMonth) {
+          mediumLevelMarkers.push(grave);
+        }
+      }
+    });
+  }
+
+  while (mediumLevelMarkers.length < 20) {
+    const nextGrave = graveCoordinates[mediumLevelMarkers.length];
+    if (nextGrave) {
+      mediumLevelMarkers.push(nextGrave);
+    } else {
+      break;
+    }
+  }
+  return mediumLevelMarkers;
 };
