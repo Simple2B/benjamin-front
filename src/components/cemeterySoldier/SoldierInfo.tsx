@@ -130,7 +130,7 @@ export default function SoldierInfo({ soldier }: IPreviewerSoldierProps) {
 
   return (
     <div className={`absolute scroll-container inset-0 h-full `}>
-      <div className="relative scroll-area h-[calc(100vh-230px)] w-screen  border-4 border-rose-600 bg-transparent pointer-events-none z-0"></div>
+      <div className="relative scroll-area h-[calc(100vh-230px)] w-screen bg-transparent pointer-events-none z-0"></div>
       <div
         className="relative w-screen z-50 bg-white rounded-t-xl scroll-area min-h-screen scrollable-content-cemetery"
         id="scrollable-content"
