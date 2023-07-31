@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TipWindow } from './TipsWindow';
 
 const TIPS = [
@@ -53,7 +53,7 @@ export const TipsController = () => {
   };
 
   return (
-    <div className="absolute w-full flex flex-col justify-center mt-2 items-center">
+    <div className="relative w-full flex flex-col justify-center mt-2 items-center z-10">
       {isSeen && (
         <TipWindow
           tipText={currentTipText}

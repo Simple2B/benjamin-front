@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, use } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 import HorizontalPhotoGallery from './HorizontalPhotoGallery';
 import CemeteryAdditionalInfo from './cemeteryAdditionalInfo/CemeteryAdditionalInfo';
 import { CemeteryAudioBox } from './cemeteryMainInfo/CemeteryAudioBox';
@@ -6,7 +6,6 @@ import CemeteryMainInfo from './cemeteryMainInfo/CemeteryMainInfo';
 import { CemeteryOut } from '@/openapi';
 import { redirect } from 'next/navigation';
 import { PATH } from '../constants/path.constants';
-import { isIOS, isSafary } from '../utils/isIphone';
 import { CemeteryAbmc } from './cemeteryAbmc/CemeteryAbmc';
 
 interface ICemeteryInfoProps {
@@ -14,123 +13,14 @@ interface ICemeteryInfoProps {
 }
 
 export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const cemeteryMainInfoRef = useRef<HTMLDivElement>(null);
-  const additionalInfoRef = useRef<HTMLDivElement>(null);
-
-  const [isUp, setIsUp] = useState<boolean>(false);
-
-  const [isScrolableArea, setScrollableArea] = useState<boolean>(false);
-  const [previousMainInfoPosition, setPreviousMainInfoPosition] =
-    useState<number>(0);
-
-  if (!cemetery) {
-    redirect(PATH.location);
-  }
-
-  useEffect(() => {
-    if (additionalInfoRef && cemeteryMainInfoRef) {
-      const mainInfoContainer = cemeteryMainInfoRef.current as HTMLDivElement;
-
-      const mainPage = document.getElementById('page') as HTMLElement;
-      const intervalId = setInterval(() => {
-        const posY = mainInfoContainer.getBoundingClientRect().top;
-        if (!isScrolableArea) {
-          return;
-        }
-
-        // ! for Safary 325, for android 230, for chrom+ios 295
-
-        let heigth = isIOS() ? 325 : 250;
-
-        if (isIOS()) {
-          heigth = isSafary() ? 325 : 295;
-        }
-
-        if (isUp) {
-          const scrollToTopValue = heigth;
-          if (posY < 0) {
-            return;
-          }
-          mainPage.scrollTo({
-            top: screen.height - scrollToTopValue,
-            left: 0,
-            behavior: 'smooth',
-          });
-        } else {
-          mainPage.scrollTo({
-            top: 5,
-            left: 0,
-            behavior: 'smooth',
-          });
-        }
-      }, 100);
-      return () => {
-        clearInterval(intervalId);
-      };
-    }
-  }, [isUp, isScrolableArea, cemeteryMainInfoRef]);
-
-  useEffect(() => {
-    if (additionalInfoRef && cemeteryMainInfoRef) {
-      const mainInfoContainer = cemeteryMainInfoRef.current as HTMLDivElement;
-      // mainInfoContainer.setAttribute('style', 'touch-action: none;');
-
-      const additionalInfoConteiner =
-        additionalInfoRef.current as HTMLDivElement;
-
-      let previousValue = 0;
-
-      // Main container events
-      mainInfoContainer.addEventListener('touchstart', (e: TouchEvent) => {
-        setScrollableArea(false);
-        if (e.touches.length) {
-          setPreviousMainInfoPosition(e.touches[0].clientY);
-          previousValue = e.touches[0].clientY;
-        }
-      });
-
-      mainInfoContainer.addEventListener('touchmove', (e) => {});
-
-      mainInfoContainer.addEventListener('touchend', (e) => {
-        const posY = e.changedTouches[0].clientY;
-        if (previousValue < posY) {
-          setIsUp(false);
-        } else {
-          setIsUp(true);
-        }
-        previousValue = posY;
-        setScrollableArea(true);
-      });
-
-      // Additional container events
-      additionalInfoConteiner.addEventListener('touchstart', () => {
-        setScrollableArea(false);
-      });
-
-      additionalInfoConteiner.addEventListener('click', () => {
-        setScrollableArea(false);
-      });
-
-      additionalInfoConteiner.addEventListener('touchend', () => {
-        const posY = mainInfoContainer.getBoundingClientRect().top;
-        if (posY < 0) {
-          setIsUp(true);
-        } else {
-          setIsUp(false);
-        }
-        setScrollableArea(true);
-      });
-    }
-  }, []);
-
+  //! works only with position absolute
   return (
-    <div
-      className="absolute w-full z-10 bg-white rounded-t-xl mt-[calc(100vh-230px)]"
-      id="scrollable-content"
-      ref={scrollRef}
-    >
-      <div ref={cemeteryMainInfoRef}>
+    <div className={`absolute scroll-container inset-0 h-full `}>
+      <div className="relative scroll-area h-[calc(100vh-230px)] w-screen bg-transparent pointer-events-none z-0"></div>
+      <div
+        className="relative w-screen z-50 bg-white rounded-t-xl scroll-area min-h-screen scrollable-content-cemetery"
+        id="scrollable-content"
+      >
         <CemeteryMainInfo
           name={cemetery.name}
           location={cemetery.location ? cemetery.location : ''}
@@ -141,8 +31,7 @@ export const CemeteryInfo = ({ cemetery }: ICemeteryInfoProps) => {
         {cemetery.audio_tours.length ? (
           <CemeteryAudioBox audio_tours={cemetery.audio_tours} />
         ) : null}
-      </div>
-      <div ref={additionalInfoRef}>
+
         <div className="flex flex-col gap-6 items-center w-full px-6 z-10 bg-white pt-5 relative">
           <CemeteryAdditionalInfo
             superintendent={cemetery.superintendent}

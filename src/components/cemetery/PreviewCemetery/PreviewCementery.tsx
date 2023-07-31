@@ -30,6 +30,7 @@ const MapCemetery = dynamic(() => import('../mapCemetery/MapCemetery'), {
   ssr: false,
 });
 
+//! TODO add scroll to other pages
 export default function PreviewCemetery({ cemetery }: ISoldier) {
   const [inputSoldier, setInputSoldier] = useState<string>('');
   const { currentCemetery, setCurrentCemetery } = useAppStore();
@@ -165,10 +166,35 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
   };
 
   return (
-    <>
-      <div>
-        <div className={`flex flex-col items-baseline w-full bg-white h-full`}>
-          <div className="fixed w-screen">
+    <div className="w-screen">
+      <div className="absolute">
+        <MapCemetery
+          center={center}
+          graves_coordinates={gravesCoordinates}
+          cemeteryUuid={cemetery?.uuid}
+          zoom={13}
+          soldierUuid=""
+          isTerrianView={currentMapPosition?.isTerrian ?? true}
+        />
+        <div className="flex flex-col items-center w-full fixed z-20">
+          {soldiersQuery.isFetched && isFilter ? (
+            <SearchFilterBar
+              filterText={getFilterTitle(values)}
+              setFilter={setFilter}
+            />
+          ) : (
+            <>
+              <SearchBar
+                setInputSoldier={setInputSoldier}
+                displaySettings={true}
+              />
+              <TipsController />
+            </>
+          )}
+        </div>
+      </div>
+      {/*<div className={`flex flex-col items-baseline w-full bg-white h-full`}>
+           <div className="absolute">
             <MapCemetery
               center={center}
               graves_coordinates={gravesCoordinates}
@@ -177,7 +203,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
               soldierUuid=""
               isTerrianView={currentMapPosition?.isTerrian ?? true}
             />
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center w-full fixed z-20">
               {soldiersQuery.isFetched && isFilter ? (
                 <SearchFilterBar
                   filterText={getFilterTitle(values)}
@@ -191,19 +217,18 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
               )}
             </div>
             <TipsController />
-          </div>
-        </div>
-        {isFilter ? (
-          <FilteredSoldiers
-            filterResult={soldiersQuery.data ? soldiersQuery.data.items : []}
-            isFetched={soldiersQuery.isFetched}
-            filterText={getFilterTitle(values)}
-            cemetery={cemetery}
-          />
-        ) : (
-          <CemeteryInfo cemetery={cemetery} />
-        )}
-      </div>
-    </>
+          </div> 
+        </div>*/}
+      {isFilter ? (
+        <FilteredSoldiers
+          filterResult={soldiersQuery.data ? soldiersQuery.data.items : []}
+          isFetched={soldiersQuery.isFetched}
+          filterText={getFilterTitle(values)}
+          cemetery={cemetery}
+        />
+      ) : (
+        <CemeteryInfo cemetery={cemetery} />
+      )}
+    </div>
   );
 }

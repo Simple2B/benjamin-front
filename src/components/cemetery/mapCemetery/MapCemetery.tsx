@@ -121,11 +121,11 @@ export default function MapCemetery({
   return (
     <>
       <div
-        className={`w-full absolute flex justify-end items-end t-0 l-0 h-screen`}
+        className={`w-full fixed flex justify-end items-end t-0 l-0 h-screen z-10`}
       >
         <MapContainer
           center={[center.lat, center.lng]}
-          zoom={zoom}
+          zoom={currentMapPosition?.zoom ?? 13}
           scrollWheelZoom={true}
           zoomControl={false}
           style={{ height: '100%', width: '100%', zIndex: 0 }}
@@ -173,7 +173,7 @@ export default function MapCemetery({
                 const eventHandlers = {
                   click: () => {
                     setCurrentMapPosition({
-                      zoom: zoom,
+                      zoom: currentMapPosition?.zoom ?? 13,
                       latlng: currentMapPosition?.latlng ?? {
                         lat: burialLocationLatitude ?? 0,
                         lng: burialLocationLongitude ?? 0,
