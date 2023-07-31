@@ -30,12 +30,11 @@ const MapCemetery = dynamic(() => import('../mapCemetery/MapCemetery'), {
   ssr: false,
 });
 
-//! TODO add scroll to other pages
 export default function PreviewCemetery({ cemetery }: ISoldier) {
   const [inputSoldier, setInputSoldier] = useState<string>('');
   const { currentCemetery, setCurrentCemetery } = useAppStore();
   const [isFilter, setFilter] = useState<boolean>(false);
-  const [gravesCoordinates, setGravesCoordinates] = useState<Grave[]>([]);
+  // const [gravesCoordinates, setGravesCoordinates] = useState<Grave[]>([]);
 
   const searchParams = useSearchParams();
 
@@ -131,34 +130,34 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
     redirect(PATH.location);
   }
 
-  useEffect(() => {
-    if (soldiersQuery.data?.items.length && isFilter) {
-      const graveMarkers: Grave[] = soldiersQuery.data?.items.map(
-        ({
-          uuid,
-          suffix,
-          firstName,
-          lastName,
-          ranks,
-          burialLocationLatitude,
-          burialLocationLongitude,
-        }) => {
-          return {
-            uuid,
-            suffix,
-            firstName,
-            lastName,
-            ranks,
-            burialLocationLatitude,
-            burialLocationLongitude,
-          };
-        }
-      );
-      setGravesCoordinates(graveMarkers);
-    } else {
-      setGravesCoordinates(cemetery?.graves_coordinates);
-    }
-  }, [isFilter]);
+  // useEffect(() => {
+  //   if (soldiersQuery.data?.items.length && isFilter) {
+  //     const graveMarkers: Grave[] = soldiersQuery.data?.items.map(
+  //       ({
+  //         uuid,
+  //         suffix,
+  //         firstName,
+  //         lastName,
+  //         ranks,
+  //         burialLocationLatitude,
+  //         burialLocationLongitude,
+  //       }) => {
+  //         return {
+  //           uuid,
+  //           suffix,
+  //           firstName,
+  //           lastName,
+  //           ranks,
+  //           burialLocationLatitude,
+  //           burialLocationLongitude,
+  //         };
+  //       }
+  //     );
+  //     setGravesCoordinates(graveMarkers);
+  //   } else {
+  //     setGravesCoordinates(cemetery?.graves_coordinates);
+  //   }
+  // }, [isFilter]);
 
   const center: ICoordinates = {
     lat: currentCemetery?.latitude ?? 45,
@@ -170,7 +169,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
       <div className="absolute">
         <MapCemetery
           center={center}
-          graves_coordinates={gravesCoordinates}
+          graves_coordinates={cemetery?.graves_coordinates}
           cemeteryUuid={cemetery?.uuid}
           zoom={13}
           soldierUuid=""

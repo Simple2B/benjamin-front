@@ -12,5 +12,7 @@ export type Grave = {
     lastName: string;
     burialLocationLatitude?: number;
     burialLocationLongitude?: number;
+    isHeadstoneChanged: boolean;
+    deathDate?: string;
 };
 

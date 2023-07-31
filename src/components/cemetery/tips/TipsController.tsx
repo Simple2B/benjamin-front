@@ -43,7 +43,6 @@ export const TipsController = () => {
   const handleNextTip = () => {
     const nextIndex = currentIndex + 1;
 
-    console.log(currentIndex);
     if (nextIndex === TIPS.length - 1) {
       setIsLastTip(true);
     }
