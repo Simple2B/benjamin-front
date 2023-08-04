@@ -175,10 +175,7 @@ export default function MapCemetery({
                 click: () => {
                   setCurrentMapPosition({
                     zoom: currentMapPosition?.zoom ?? zoom,
-                    latlng: currentMapPosition?.latlng ?? {
-                      lat: burialLocationLatitude ?? 0,
-                      lng: burialLocationLongitude ?? 0,
-                    },
+                    latlng: currentMapPosition?.latlng ?? center,
                     isTerrian: isTerrian,
                   });
                   router.push(
