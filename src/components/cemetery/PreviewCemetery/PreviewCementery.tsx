@@ -42,7 +42,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
   useEffect(() => {
     if (currentMapPosition) {
       const mapPosition = {
-        zoom: currentMapPosition.zoom,
+        zoom: getZoomLevel(cemetery?.graves_coordinates),
         latlng: undefined,
         isTerrian: true,
       };
