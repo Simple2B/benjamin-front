@@ -78,7 +78,9 @@ export default function PreviewCemeterySoldier({
     <div className="w-screen">
       <div className="absolute">
         <MapCemetery
-          center={currentMapPosition ? currentMapPosition.latlng : center}
+          center={
+            currentMapPosition?.latlng ? currentMapPosition.latlng : center
+          }
           graves_coordinates={cemetery?.graves_coordinates}
           cemeteryUuid={cemetery?.uuid}
           zoom={currentMapPosition ? currentMapPosition.zoom : suitabbleZoom}
