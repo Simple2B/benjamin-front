@@ -3,7 +3,7 @@ import { StateCreator } from 'zustand';
 
 export interface IMapPosition {
   zoom: number;
-  latlng: ICoordinates;
+  latlng: ICoordinates | undefined;
   isTerrian: boolean;
 }
 
