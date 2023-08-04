@@ -68,7 +68,7 @@ export default function MapCemetery({
   }
 
   useEffect(() => {
-    if (currentZoom <= 7) {
+    if (currentZoom <= 11) {
       setCurrentZoomLevelMarkers(minimumLevelMarkers);
     } else if (currentZoom <= 14) {
       setCurrentZoomLevelMarkers(mediumLevelMarkers);
@@ -221,6 +221,7 @@ export default function MapCemetery({
             compass={compass}
             isTerrian={isTerrian}
             setCurrentZoom={setCurrentZoom}
+            zoom={zoom}
           />
         </MapContainer>
         <>
@@ -257,6 +258,7 @@ type ICurrentLocationMarkerProps = {
   compass: number;
   isTerrian: boolean;
   setCurrentZoom: (zoom: number) => void;
+  zoom: number;
 };
 
 const CurrentLocationMarker = ({
@@ -264,6 +266,7 @@ const CurrentLocationMarker = ({
   compass,
   isTerrian,
   setCurrentZoom,
+  zoom,
 }: ICurrentLocationMarkerProps) => {
   const [position, setPosition] = useState<ICoordinates | null>(null);
 
@@ -286,7 +289,7 @@ const CurrentLocationMarker = ({
     },
     dragend(e) {
       const currentLocation = e.target.getCenter();
-      const currentZoom = currentMapPosition?.zoom ?? 13;
+      const currentZoom = currentMapPosition?.zoom ?? zoom;
 
       setCurrentMapPosition({
         zoom: currentZoom,
@@ -296,7 +299,7 @@ const CurrentLocationMarker = ({
     },
     click(e) {
       const currentLocation = e.target.getCenter();
-      const currentZoom = currentMapPosition?.zoom ?? 13;
+      const currentZoom = currentMapPosition?.zoom ?? zoom;
 
       setCurrentMapPosition({
         zoom: currentZoom,
