@@ -6,7 +6,10 @@ import dynamic from 'next/dynamic';
 import { redirect } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import SearchBar from '../SearchBar';
-import { ICoordinates } from '../cemetery/mapCemetery/mapCemetery.utils';
+import {
+  ICoordinates,
+  getZoomLevel,
+} from '../cemetery/mapCemetery/mapCemetery.utils';
 import { PATH } from '../constants/path.constants';
 import SoldierInfo from './SoldierInfo';
 
@@ -69,6 +72,8 @@ export default function PreviewCemeterySoldier({
     lng: currentCemetery?.longitude ?? 45,
   };
 
+  const suitabbleZoom = getZoomLevel(cemetery?.graves_coordinates);
+
   return (
     <div className="w-screen">
       <div className="absolute">
@@ -76,7 +81,7 @@ export default function PreviewCemeterySoldier({
           center={currentMapPosition ? currentMapPosition.latlng : center}
           graves_coordinates={cemetery?.graves_coordinates}
           cemeteryUuid={cemetery?.uuid}
-          zoom={currentMapPosition ? currentMapPosition.zoom : 13}
+          zoom={currentMapPosition ? currentMapPosition.zoom : suitabbleZoom}
           soldierUuid={soldier.uuid}
           isTerrianView={currentMapPosition?.isTerrian ?? true}
         />

@@ -15,6 +15,7 @@ import { MONTHS_BY_NUMBER } from '../../constants/constants';
 import { getFilterTitle } from './PreviewCementery.utils';
 import dynamic from 'next/dynamic';
 import { TipsController } from '../tips/TipsController';
+import { getZoomLevel } from '../mapCemetery/mapCemetery.utils';
 
 export type ISolderPhotoGallery = {
   uuid: string;
@@ -164,6 +165,8 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
     lng: currentCemetery?.longitude ?? 45,
   };
 
+  const suitabbleZoom = getZoomLevel(cemetery?.graves_coordinates);
+
   return (
     <div className="w-screen">
       <div className="absolute">
@@ -171,7 +174,7 @@ export default function PreviewCemetery({ cemetery }: ISoldier) {
           center={center}
           graves_coordinates={cemetery?.graves_coordinates}
           cemeteryUuid={cemetery?.uuid}
-          zoom={13}
+          zoom={suitabbleZoom}
           soldierUuid=""
           isTerrianView={currentMapPosition?.isTerrian ?? true}
         />
