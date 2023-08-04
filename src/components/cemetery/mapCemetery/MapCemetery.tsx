@@ -53,6 +53,7 @@ export default function MapCemetery({
   const [currentZoom, setCurrentZoom] = useState<number>(zoom);
   const [currentZoomLevelMarkers, setCurrentZoomLevelMarkers] =
     useState<Grave[]>(graves_coordinates);
+  console.log({ zoom });
 
   const router = useRouter();
 
@@ -69,7 +70,7 @@ export default function MapCemetery({
   useEffect(() => {
     if (currentZoom <= 7) {
       setCurrentZoomLevelMarkers(minimumLevelMarkers);
-    } else if (currentZoom <= 11) {
+    } else if (currentZoom <= 14) {
       setCurrentZoomLevelMarkers(mediumLevelMarkers);
     } else {
       setCurrentZoomLevelMarkers(maximumLevelMarkers);
@@ -137,7 +138,7 @@ export default function MapCemetery({
       >
         <MapContainer
           center={[center.lat, center.lng]}
-          zoom={currentMapPosition?.zoom ?? 13}
+          zoom={zoom}
           scrollWheelZoom={true}
           zoomControl={false}
           style={{ height: '100%', width: '100%', zIndex: 0 }}
@@ -173,7 +174,7 @@ export default function MapCemetery({
               const eventHandlers = {
                 click: () => {
                   setCurrentMapPosition({
-                    zoom: currentMapPosition?.zoom ?? 13,
+                    zoom: currentMapPosition?.zoom ?? zoom,
                     latlng: currentMapPosition?.latlng ?? {
                       lat: burialLocationLatitude ?? 0,
                       lng: burialLocationLongitude ?? 0,
@@ -197,7 +198,7 @@ export default function MapCemetery({
                   key={index}
                   eventHandlers={eventHandlers}
                 >
-                  {currentZoom > 8 && index < 5 && (
+                  {currentZoom > 15 && index < 5 && (
                     <Tooltip
                       direction="right"
                       opacity={1}

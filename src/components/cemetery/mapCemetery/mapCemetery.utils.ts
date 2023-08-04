@@ -69,3 +69,35 @@ const getMediumLevelMarkers = (graveCoordinates: Grave[]) => {
   }
   return mediumLevelMarkers;
 };
+
+export const getZoomLevel = (graveCoordinates: Grave[]) => {
+  let longestDistance = 0;
+  for (let i = 0; i < graveCoordinates.length; i++) {
+    for (let j = i + 1; j < graveCoordinates.length; j++) {
+      const distance = calculateDistance(
+        {
+          lat: graveCoordinates[i].burialLocationLatitude ?? 0,
+          lng: graveCoordinates[i].burialLocationLongitude ?? 0,
+        },
+        {
+          lat: graveCoordinates[j].burialLocationLatitude ?? 0,
+          lng: graveCoordinates[j].burialLocationLongitude ?? 0,
+        }
+      );
+      if (distance > longestDistance) {
+        longestDistance = distance;
+      }
+    }
+  }
+
+  const referenceZoom = 18;
+
+  const earthCircumference = 40075016.686;
+
+  const pixelsPerMeter = Math.pow(2, referenceZoom) / earthCircumference;
+  const distanceInMeters = longestDistance * 1000;
+  const pixelsInDistance = distanceInMeters * pixelsPerMeter;
+
+  const zoomLevel = referenceZoom - Math.log2(pixelsInDistance);
+  return Math.round(zoomLevel);
+};
