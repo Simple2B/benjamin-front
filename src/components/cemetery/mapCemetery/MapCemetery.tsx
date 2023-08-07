@@ -53,6 +53,7 @@ export default function MapCemetery({
   const [currentZoom, setCurrentZoom] = useState<number>(zoom);
   const [currentZoomLevelMarkers, setCurrentZoomLevelMarkers] =
     useState<Grave[]>(graves_coordinates);
+  const [focuseMarkerCounter, setFocuseMarkerCounter] = useState<number>(0);
   console.log({ zoom });
 
   const router = useRouter();
@@ -195,38 +196,59 @@ export default function MapCemetery({
                   key={index}
                   eventHandlers={eventHandlers}
                 >
-                  {currentZoom > 15 ? (
-                    <>
-                      {index < 5 && (
-                        <Tooltip
-                          direction="right"
-                          opacity={1}
-                          offset={[20, -20]}
-                          className="myCSSClass"
-                          permanent
-                        >
-                          <p className="font-noto map-text-shadow">
-                            {ranks.map((rank) => rank.abbreviation).join(' ')}{' '}
-                            {firstName} {lastName} {suffix}
-                          </p>
-                        </Tooltip>
-                      )}
-                    </>
+                  {focuseMarkerCounter === 1 ? (
+                    <Tooltip
+                      direction="right"
+                      opacity={1}
+                      offset={[20, -20]}
+                      className="myCSSClass"
+                      permanent
+                    >
+                      <p className="font-noto map-text-shadow">
+                        {ranks.map((rank) => rank.abbreviation).join(' ')}{' '}
+                        {firstName} {lastName} {suffix}
+                      </p>
+                    </Tooltip>
                   ) : (
                     <>
-                      {index < 3 && (
-                        <Tooltip
-                          direction="right"
-                          opacity={1}
-                          offset={[20, -20]}
-                          className="myCSSClass"
-                          permanent
-                        >
-                          <p className="font-noto map-text-shadow">
-                            {ranks.map((rank) => rank.abbreviation).join(' ')}{' '}
-                            {firstName} {lastName} {suffix}
-                          </p>
-                        </Tooltip>
+                      {currentZoom > 15 ? (
+                        <>
+                          {index < 5 && (
+                            <Tooltip
+                              direction="right"
+                              opacity={1}
+                              offset={[20, -20]}
+                              className="myCSSClass"
+                              permanent
+                            >
+                              <p className="font-noto map-text-shadow">
+                                {ranks
+                                  .map((rank) => rank.abbreviation)
+                                  .join(' ')}{' '}
+                                {firstName} {lastName} {suffix}
+                              </p>
+                            </Tooltip>
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          {index < 3 && (
+                            <Tooltip
+                              direction="right"
+                              opacity={1}
+                              offset={[20, -20]}
+                              className="myCSSClass"
+                              permanent
+                            >
+                              <p className="font-noto map-text-shadow">
+                                {ranks
+                                  .map((rank) => rank.abbreviation)
+                                  .join(' ')}{' '}
+                                {firstName} {lastName} {suffix}
+                              </p>
+                            </Tooltip>
+                          )}
+                        </>
                       )}
                     </>
                   )}
@@ -240,6 +262,7 @@ export default function MapCemetery({
             isTerrian={isTerrian}
             setCurrentZoom={setCurrentZoom}
             zoom={zoom}
+            setFocuseMarkerCounter={setFocuseMarkerCounter}
           />
         </MapContainer>
         <>
@@ -277,6 +300,7 @@ type ICurrentLocationMarkerProps = {
   isTerrian: boolean;
   setCurrentZoom: (zoom: number) => void;
   zoom: number;
+  setFocuseMarkerCounter: (counter: number) => void;
 };
 
 const CurrentLocationMarker = ({
@@ -285,6 +309,7 @@ const CurrentLocationMarker = ({
   isTerrian,
   setCurrentZoom,
   zoom,
+  setFocuseMarkerCounter,
 }: ICurrentLocationMarkerProps) => {
   const [position, setPosition] = useState<ICoordinates | null>(null);
 
@@ -296,6 +321,17 @@ const CurrentLocationMarker = ({
 
   useMapEvents({
     zoomend(e) {
+      let markerCount = 0;
+      map.eachLayer((layer) => {
+        if (
+          layer instanceof L.Marker &&
+          map.getBounds().contains(layer.getLatLng())
+        ) {
+          markerCount++;
+        }
+      });
+      setFocuseMarkerCounter(markerCount);
+
       const currentZoom = map.getZoom();
       const currentLocation = e.target.getCenter();
       setCurrentZoom(currentZoom);
