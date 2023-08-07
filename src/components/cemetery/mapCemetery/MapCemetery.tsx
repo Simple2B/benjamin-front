@@ -195,19 +195,40 @@ export default function MapCemetery({
                   key={index}
                   eventHandlers={eventHandlers}
                 >
-                  {currentZoom > 15 && index < 5 && (
-                    <Tooltip
-                      direction="right"
-                      opacity={1}
-                      offset={[20, -20]}
-                      className="myCSSClass"
-                      permanent
-                    >
-                      <p className="font-noto map-text-shadow">
-                        {ranks.map((rank) => rank.abbreviation).join(' ')}{' '}
-                        {firstName} {lastName} {suffix}
-                      </p>
-                    </Tooltip>
+                  {currentZoom > 15 ? (
+                    <>
+                      {index < 5 && (
+                        <Tooltip
+                          direction="right"
+                          opacity={1}
+                          offset={[20, -20]}
+                          className="myCSSClass"
+                          permanent
+                        >
+                          <p className="font-noto map-text-shadow">
+                            {ranks.map((rank) => rank.abbreviation).join(' ')}{' '}
+                            {firstName} {lastName} {suffix}
+                          </p>
+                        </Tooltip>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {index < 3 && (
+                        <Tooltip
+                          direction="right"
+                          opacity={1}
+                          offset={[20, -20]}
+                          className="myCSSClass"
+                          permanent
+                        >
+                          <p className="font-noto map-text-shadow">
+                            {ranks.map((rank) => rank.abbreviation).join(' ')}{' '}
+                            {firstName} {lastName} {suffix}
+                          </p>
+                        </Tooltip>
+                      )}
+                    </>
                   )}
                 </Marker>
               );
