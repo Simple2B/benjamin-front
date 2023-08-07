@@ -331,6 +331,7 @@ const CurrentLocationMarker = ({
         }
       });
       setFocuseMarkerCounter(markerCount);
+      console.log('MarkerCount', markerCount);
 
       const currentZoom = map.getZoom();
       const currentLocation = e.target.getCenter();
@@ -344,6 +345,18 @@ const CurrentLocationMarker = ({
     dragend(e) {
       const currentLocation = e.target.getCenter();
       const currentZoom = currentMapPosition?.zoom ?? zoom;
+
+      let markerCount = 0;
+      map.eachLayer((layer) => {
+        if (
+          layer instanceof L.Marker &&
+          map.getBounds().contains(layer.getLatLng())
+        ) {
+          markerCount++;
+        }
+      });
+      setFocuseMarkerCounter(markerCount);
+      console.log('MarkerCount', markerCount);
 
       setCurrentMapPosition({
         zoom: currentZoom,
