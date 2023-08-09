@@ -11,13 +11,27 @@ import Spinner from '../Spinner';
 import { SeachErrorMessage } from './SeachErrorMessage';
 import { TipWindow } from '../cemetery/tips/TipsWindow';
 
-export const PreviewerSearch = () => {
+interface IPreviewerSearchProps {
+  cemetery: CemeteryOut;
+}
+
+export const PreviewerSearch = ({ cemetery }: IPreviewerSearchProps) => {
   const [inputSoldier, setInputSoldier] = useState<string>('');
   const [showTip, setShowTip] = useState<boolean>(false);
 
   const router = useRouter();
 
-  const { currentCemetery } = useAppStore();
+  const { currentCemetery, setCurrentCemetery } = useAppStore();
+
+  useEffect(() => {
+    if (!cemetery) {
+      router.push(PATH.location);
+    }
+  }, []);
+
+  useEffect(() => {
+    setCurrentCemetery(cemetery);
+  }, [cemetery]);
 
   useEffect(() => {
     const isWatched = localStorage.getItem('searchTipWatched');
@@ -28,12 +42,6 @@ export const PreviewerSearch = () => {
       setShowTip(false);
     }
   }, []);
-
-  useEffect(() => {
-    if (!currentCemetery) {
-      router.push(PATH.location);
-    }
-  }, [currentCemetery, router]);
 
   const soldiersQuery = useQuery(
     ['soldiersQuery', inputSoldier],
