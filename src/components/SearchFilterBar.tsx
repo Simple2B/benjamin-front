@@ -4,6 +4,8 @@ import IconButton from './IconButton';
 import { ICONS_NAME } from './constants/iconName';
 import Link from 'next/link';
 import { PATH } from './constants/path.constants';
+import urlJoin from 'url-join';
+import { useAppStore } from '@/lib/slices/store';
 
 type ISearchBarProps = {
   filterText: string;
@@ -11,6 +13,7 @@ type ISearchBarProps = {
 };
 
 const SearchFilterBar = ({ filterText, setFilter }: ISearchBarProps) => {
+  const { currentCemetery } = useAppStore();
   return (
     <div className="mt-10">
       <div
@@ -20,7 +23,13 @@ const SearchFilterBar = ({ filterText, setFilter }: ISearchBarProps) => {
         }}
       >
         <p className="leading-6">{filterText}</p>
-        <Link href={PATH.search}>
+        <Link
+          href={
+            currentCemetery
+              ? urlJoin(PATH.search, currentCemetery?.uuid)
+              : PATH.location
+          }
+        >
           <div
             className="flex justify-center items-center"
             onClick={() => setFilter(false)}

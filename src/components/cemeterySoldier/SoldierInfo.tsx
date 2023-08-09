@@ -30,6 +30,7 @@ import {
   SoldierHeadstonePhoto,
   SoldierMainInfoCard,
 } from '../soldier';
+import { useAppStore } from '@/lib/slices/store';
 
 interface IPreviewerSoldierProps {
   soldier: SoldierOut;
@@ -38,9 +39,13 @@ interface IPreviewerSoldierProps {
 export default function SoldierInfo({ soldier }: IPreviewerSoldierProps) {
   const router = useRouter();
 
+  const { currentCemetery } = useAppStore();
+
   useEffect(() => {
     if (!soldier) {
-      router.push(PATH.search);
+      currentCemetery
+        ? router.push(urlJoin(PATH.search, currentCemetery?.uuid))
+        : router.push(PATH.location);
     }
   }, [soldier, router]);
 
@@ -139,111 +144,126 @@ export default function SoldierInfo({ soldier }: IPreviewerSoldierProps) {
           <div className="flex w-full justify-center mb-4">
             <div className="h-[3px] w-16 bg-grey-50 mt-2 rounded-3xl"></div>
           </div>
-          <SoldierMainInfoCard
-            photoUrl={
-              soldier.mainPhoto
-                ? urlJoin(AWS_BASE_URL || '', soldier.mainPhoto)
-                : ''
-            }
-            fullName={soldierFullName}
-            mainInfo={mainInfo}
-          />
-          <div className="flex flex-col gap-4">
-            {soldier?.soldierAudioTour && (
-              <div className=" bg-grey-10 rounded-lg py-4 px-5 w-[350px]">
-                <p className="text-sm text-grey-20 pb-1.5">Audio Tour</p>
-                <AudioPlayer
-                  audioSourse={urlJoin(
-                    AWS_BASE_URL || '',
-                    soldier.soldierAudioTour
-                  )}
+          <div className="flex flex-col justify-between">
+            <div className="flex flex-col items-center">
+              <SoldierMainInfoCard
+                photoUrl={
+                  soldier.mainPhoto
+                    ? urlJoin(AWS_BASE_URL || '', soldier.mainPhoto)
+                    : ''
+                }
+                fullName={soldierFullName}
+                mainInfo={mainInfo}
+              />
+              <div className="flex flex-col gap-4">
+                {soldier?.soldierAudioTour && (
+                  <div className=" bg-grey-10 rounded-lg py-4 px-5 w-[350px]">
+                    <p className="text-sm text-grey-20 pb-1.5">Audio Tour</p>
+                    <AudioPlayer
+                      audioSourse={urlJoin(
+                        AWS_BASE_URL || '',
+                        soldier.soldierAudioTour
+                      )}
+                    />
+                  </div>
+                )}
+
+                <SoldierCoordinates
+                  finalBurialCoordinates={[
+                    soldier?.burialLocationLatitude,
+                    soldier?.burialLocationLongitude,
+                  ]}
+                  finalBurialLocation={soldier?.burialLocationName}
                 />
+
+                <ClosebleInfo
+                  heading="LIFE"
+                  isOpened={soldier?.ceremonyVideoLink ? false : true}
+                >
+                  <SoldierCardBlockInfo solderInfo={life} />
+                  <PhotoCarrousel photos={soldier.photoPaths} />
+                </ClosebleInfo>
+
+                <ClosebleInfo heading="SERVICE" isOpened={false}>
+                  <SoldierCardBlockInfo solderInfo={service} />
+                  {soldier?.wwDraftCard && (
+                    <SoldierAdditionalImage
+                      imageUrl={urlJoin(
+                        AWS_BASE_URL || '',
+                        soldier.wwDraftCard
+                      )}
+                      imageDescription={'WWII Draft Card'}
+                    />
+                  )}
+                  {soldier?.jewishServicemansCard && (
+                    <SoldierAdditionalImage
+                      imageUrl={urlJoin(
+                        AWS_BASE_URL || '',
+                        soldier.jewishServicemansCard
+                      )}
+                      imageDescription={'Jewish Serviceman’s card'}
+                    />
+                  )}
+                </ClosebleInfo>
+
+                <ClosebleInfo heading="DEATH" isOpened={false}>
+                  <SoldierCardBlockInfo solderInfo={death} />
+                  {soldier?.kiaTelegram && (
+                    <SoldierAdditionalImage
+                      imageUrl={urlJoin(
+                        AWS_BASE_URL || '',
+                        soldier.kiaTelegram
+                      )}
+                      imageDescription={'Killed In Action (KIA) Telegram'}
+                    />
+                  )}
+                  {soldier?.hirImage && (
+                    <SoldierAdditionalImage
+                      imageUrl={urlJoin(AWS_BASE_URL || '', soldier.hirImage)}
+                      imageDescription={
+                        'HIR (Headstone Interment Record) for Military Cemeteries on Foreign Soil '
+                      }
+                    />
+                  )}
+                  {soldier?.headstonePhoto ? (
+                    <SoldierHeadstonePhoto
+                      imageUrl={urlJoin(
+                        AWS_BASE_URL || '',
+                        soldier.headstonePhoto
+                      )}
+                    />
+                  ) : null}
+                  {soldier?.guardians.length ? (
+                    <GuardiansOfHeroes guardiansOfHeroes={soldier.guardians} />
+                  ) : null}
+                </ClosebleInfo>
+
+                {soldier?.ceremonyVideoLink && (
+                  <ClosebleInfo heading="CHANGE CEREMONY" isOpened={true}>
+                    <SoldierAdditionalVideo
+                      videoUrl={soldier.ceremonyVideoLink}
+                      videoDescription="Replacement ceremony video"
+                    />
+                  </ClosebleInfo>
+                )}
+
+                {soldier.verifiedMessages.length ? (
+                  <ClosebleInfo heading="ADDITIONAL INFO" isOpened={false}>
+                    <SoldierMessages
+                      messages={soldier.verifiedMessages}
+                      soldierFullName={soldierFullName}
+                    />
+                  </ClosebleInfo>
+                ) : null}
               </div>
-            )}
-
-            <SoldierCoordinates
-              finalBurialCoordinates={[
-                soldier?.burialLocationLatitude,
-                soldier?.burialLocationLongitude,
-              ]}
-              finalBurialLocation={soldier?.burialLocationName}
-            />
-
-            <ClosebleInfo
-              heading="LIFE"
-              isOpened={soldier?.ceremonyVideoLink ? false : true}
-            >
-              <SoldierCardBlockInfo solderInfo={life} />
-              <PhotoCarrousel photos={soldier.photoPaths} />
-            </ClosebleInfo>
-
-            <ClosebleInfo heading="SERVICE" isOpened={false}>
-              <SoldierCardBlockInfo solderInfo={service} />
-              {soldier?.wwDraftCard && (
-                <SoldierAdditionalImage
-                  imageUrl={urlJoin(AWS_BASE_URL || '', soldier.wwDraftCard)}
-                  imageDescription={'WWII Draft Card'}
-                />
-              )}
-              {soldier?.jewishServicemansCard && (
-                <SoldierAdditionalImage
-                  imageUrl={urlJoin(
-                    AWS_BASE_URL || '',
-                    soldier.jewishServicemansCard
-                  )}
-                  imageDescription={'Jewish Serviceman’s card'}
-                />
-              )}
-            </ClosebleInfo>
-
-            <ClosebleInfo heading="DEATH" isOpened={false}>
-              <SoldierCardBlockInfo solderInfo={death} />
-              {soldier?.kiaTelegram && (
-                <SoldierAdditionalImage
-                  imageUrl={urlJoin(AWS_BASE_URL || '', soldier.kiaTelegram)}
-                  imageDescription={'Killed In Action (KIA) Telegram'}
-                />
-              )}
-              {soldier?.hirImage && (
-                <SoldierAdditionalImage
-                  imageUrl={urlJoin(AWS_BASE_URL || '', soldier.hirImage)}
-                  imageDescription={
-                    'HIR (Headstone Interment Record) for Military Cemeteries on Foreign Soil '
-                  }
-                />
-              )}
-              {soldier?.headstonePhoto ? (
-                <SoldierHeadstonePhoto
-                  imageUrl={urlJoin(AWS_BASE_URL || '', soldier.headstonePhoto)}
-                />
-              ) : null}
-              {soldier?.guardians.length ? (
-                <GuardiansOfHeroes guardiansOfHeroes={soldier.guardians} />
-              ) : null}
-            </ClosebleInfo>
-
-            {soldier?.ceremonyVideoLink && (
-              <ClosebleInfo heading="CHANGE CEREMONY" isOpened={true}>
-                <SoldierAdditionalVideo
-                  videoUrl={soldier.ceremonyVideoLink}
-                  videoDescription="Replacement ceremony video"
-                />
-              </ClosebleInfo>
-            )}
-
-            {soldier.verifiedMessages.length ? (
-              <ClosebleInfo heading="ADDITIONAL INFO" isOpened={false}>
-                <SoldierMessages
-                  messages={soldier.verifiedMessages}
-                  soldierFullName={soldierFullName}
-                />
-              </ClosebleInfo>
-            ) : null}
+            </div>
+            <div className="mt-4">
+              <RememberSoldier
+                soldierFullName={soldierFullName}
+                soldierUuid={soldier.uuid}
+              />
+            </div>
           </div>
-          <RememberSoldier
-            soldierFullName={soldierFullName}
-            soldierUuid={soldier.uuid}
-          />
         </div>
       </div>
     </div>

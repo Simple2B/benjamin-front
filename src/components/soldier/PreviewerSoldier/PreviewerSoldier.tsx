@@ -42,8 +42,12 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
   const router = useRouter();
   const [isSent, setSent] = useState<boolean>(false);
 
-  const { currentMessage, currenSoldierScroll, setCurrentSoldierScroll } =
-    useAppStore();
+  const {
+    currentMessage,
+    currenSoldierScroll,
+    setCurrentSoldierScroll,
+    currentCemetery,
+  } = useAppStore();
 
   useEffect(() => {
     if (currenSoldierScroll) {
@@ -71,7 +75,9 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
 
   useEffect(() => {
     if (!soldier) {
-      router.push(PATH.search);
+      currentCemetery
+        ? router.push(urlJoin(PATH.search, currentCemetery?.uuid))
+        : router.push(PATH.location);
     }
   }, [soldier, router]);
 
@@ -160,7 +166,10 @@ export default function PreviewerSoldier({ soldier }: IPreviewerSoldierProps) {
   };
 
   return (
-    <div id="soldier-page">
+    <div
+      id="soldier-page"
+      className="min-h-screen flex flex-col justify-between"
+    >
       {isSent && <MessageSendPopUp />}
       <div className="flex flex-col justify-center items-center mx-7 gap-4 my-4 text-indigo-100 leading-7 mb-8">
         <div

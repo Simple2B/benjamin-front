@@ -15,7 +15,6 @@ type ISearchBarProps = {
 
 const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
   const [userInput, setUserInput] = useState<string>('');
-  const router = useRouter();
 
   const { currentCemetery } = useAppStore();
 
@@ -55,7 +54,13 @@ const SearchBar = ({ setInputSoldier, displaySettings }: ISearchBarProps) => {
           </Link>
         )}
         {displaySettings ? (
-          <Link href={PATH.search}>
+          <Link
+            href={
+              currentCemetery?.uuid
+                ? urlJoin(PATH.search, currentCemetery?.uuid)
+                : PATH.location
+            }
+          >
             <input
               type="text"
               placeholder="Search for a soldier"
