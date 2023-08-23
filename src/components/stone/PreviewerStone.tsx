@@ -8,6 +8,7 @@ import { StoneUploadWindow } from './StoneUploadWindow';
 import { useAppStore } from '@/lib/slices/store';
 import Spinner from '../Spinner';
 import { PREVIEWER_STONE_TEXT } from './previewerStone.constants';
+import { UploadPhotoPopUpError } from './UploadPhotoPopUpError';
 
 export interface IStone {
   uuid: string;
@@ -37,6 +38,17 @@ export const PreviewerStone = ({
 
   const router = useRouter();
   const { currentStones, setCurrentSoldierScroll } = useAppStore();
+  const [isPhotoError, setPhotoError] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isPhotoError) {
+      setPhotoError(true);
+      const timer = setTimeout(() => {
+        setPhotoError(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [isPhotoError]);
 
   useEffect(() => {
     setCurrentSoldierScroll(true);
@@ -67,17 +79,27 @@ export const PreviewerStone = ({
       return;
     }
     const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const image = new Image();
-        image.src = reader.result as string;
-        setPhotoSrc(image.src);
-        setUploadedPhotoForm(file);
-      };
-      reader.readAsDataURL(file);
-      setUploadWindowOpen(true);
+
+    if (!file) {
+      return;
     }
+
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+
+    if (!allowedTypes.includes(file.type)) {
+      setPhotoError(true);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const image = new Image();
+      image.src = reader.result as string;
+      setPhotoSrc(image.src);
+      setUploadedPhotoForm(file);
+    };
+    reader.readAsDataURL(file);
+    setUploadWindowOpen(true);
   };
 
   const handleChooseFile = () => {
@@ -94,6 +116,7 @@ export const PreviewerStone = ({
     <>
       <div className="text-indigo-100 pb-4 flex flex-col gap-8 mb-32">
         {isUploadWindowOpen && <div className="filter-indigo z-[100]" />}
+        {isPhotoError && <UploadPhotoPopUpError />}
         <div className="top-0 w-full flex justify-between px-[18px] fixed bg-white py-3 pt-4">
           <div onClick={router.back}>
             <IconButton iconName={ICONS_NAME.arrow} className="w-4 h-4" />
