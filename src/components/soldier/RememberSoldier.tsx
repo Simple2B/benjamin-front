@@ -32,9 +32,7 @@ export const RememberSoldier = ({
   soldierUuid,
 }: IRememberSoldierProps) => {
   return (
-    <div
-      className={`w-full px-8 pt-3 z-10 text-black text-center bottom-0 h-40 bg-white`}
-    >
+    <div className={`w-full px-8 pt-3 z-10 text-black text-center bg-white`}>
       <h2 className=" mb-6 leading-6 font-semibold">
         Remember {soldierFullName}
       </h2>
